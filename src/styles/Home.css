@@ -1,0 +1,12 @@
+.page-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.home-text {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    height: 100%;
+    font-size: 3rem;
+}
