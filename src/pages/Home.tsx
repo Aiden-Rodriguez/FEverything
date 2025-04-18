@@ -1,5 +1,6 @@
 import "../styles/Home.css";
-import { NavLink, Link } from "react-router-dom";
+import "../styles/Common.css";
+import { NavLink } from "react-router-dom";
 import FatesImage from "../assets/images/fates.webp";
 import InProg from "../assets/images/inprog.jpg";
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
                 <div className="home-page-container">
                     <div className="home-page-grid">
                         <div className="grid-content-home">
-                            <NavLink to="/Login" className="home-image-container">
+                            <NavLink to="/game/Fire Emblem Fates" className="home-image-container">
                                 <img src={FatesImage} alt="Fire Emblem Fates" />
                                 <div className="image-overlay-text">Fire Emblem Fates</div>
                             </NavLink>

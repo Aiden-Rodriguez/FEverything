@@ -1,0 +1,33 @@
+.page-container {
+    width: 100%;
+    min-height: 80vh;
+    padding: 0 0px;
+    overflow-y: hidden;
+}
+
+.button-link {
+    height: 4rem;
+    background: radial-gradient(circle at center, #b01818, #b06418);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    color: var(--color-text-component);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button-link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+/* button {
+    height: 4rem;
+    background-color: var(--color-main-red);
+} */

@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar.tsx";
 import Averages from "./pages/Averages.tsx";
 import Units from "./pages/Units.tsx";
 import CombatSimulator from "./pages/CombatSimulator.tsx";
+import GamePage from "./pages/GamePage.tsx";
 
 function App() {
 
@@ -14,9 +15,10 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Averages" element={<Averages />} />
-        <Route path="/Units" element={<Units />} />
-        <Route path="/CombatSimulator" element={<CombatSimulator />} />
+        <Route path="/:gameId/Averages" element={<Averages />} />
+        <Route path="/:gameId/Units" element={<Units />} />
+        <Route path="/:gameId/CombatSimulator" element={<CombatSimulator />} />
+        <Route path="/game/:gameId" element={<GamePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

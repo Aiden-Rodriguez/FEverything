@@ -1,0 +1,27 @@
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.features-grid-contents {
+    display: grid;
+    grid-template-rows: 0.2fr 1fr;
+    margin: 1rem;
+}
+
+@media (min-width: 768px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1400px) {
+    .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
