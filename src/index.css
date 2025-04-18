@@ -4,13 +4,21 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(36, 35, 35, 0.87);
   background-color: #ddd6cc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* tokens and shid */
+  --color-background: #ddd6cc;
+  --color-text-basic: rgba(36, 35, 35, 0.87);
+  --color-text-sub: rgb(31, 45, 46);
+  --color-main-red: #b01818;
+  --color-main-orange: #b06418;
+  --color-text-navbar: White;
+  --color-accent: #18b0b0;
 }
 
 a {
@@ -24,15 +32,38 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow-y: auto;
+}
+
+html {
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--color-text-basic);
+  margin: 0;
+  margin-bottom: 4rem;
+
+}
+
+h2 {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--color-text-sub);
+  margin: 0;
+  margin-bottom: 1rem;
 }
 
 button {
@@ -64,4 +95,8 @@ main {
   width: 100%;
   max-width: 100%;
   height: 100%;
+}
+
+* {
+  padding: 0;
 }

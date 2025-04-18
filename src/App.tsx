@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound.tsx";
 import Home from "./pages/Home.tsx";
 import NavBar from "./components/NavBar.tsx";
+import Averages from "./pages/Averages.tsx";
+import Units from "./pages/Units.tsx";
+import CombatSimulator from "./pages/CombatSimulator.tsx";
 
 function App() {
 
@@ -11,9 +14,9 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/game" element={<GodotGame />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/projects" element={<Projects />} /> */}
+        <Route path="/Averages" element={<Averages />} />
+        <Route path="/Units" element={<Units />} />
+        <Route path="/CombatSimulator" element={<CombatSimulator />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
