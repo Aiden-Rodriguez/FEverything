@@ -20,6 +20,7 @@
   --color-text-navbar: White;
   --color-text-component: White;
   --color-accent: #18b0b0;
+  --color-background-transparent: rgba(0, 0, 0, 0.308);
 }
 
 a {

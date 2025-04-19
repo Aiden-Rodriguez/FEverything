@@ -1,0 +1,34 @@
+.units-page-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.units-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 6px solid black;
+}
+
+.units-grid-left {
+    display: grid;
+    grid-template-rows: 0.5fr 1.5fr;
+    border: 6px solid black;
+}
+
+.units-grid-middle {
+    display: grid;
+    grid-template-rows: 0.5fr 1.5fr;
+    border: 6px solid black;
+}
+
+.units-grid-right {
+    display: grid;
+    grid-template-rows: 0.5fr 1.5fr;
+    border: 6px solid black;
+}
+
+.units-grid-top-content {
+    color: black;
+    border: 6px solid black;
+}
