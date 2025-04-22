@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound.tsx";
 import Home from "./pages/Home.tsx";
@@ -9,7 +9,6 @@ import CombatSimulator from "./pages/CombatSimulator.tsx";
 import GamePage from "./pages/GamePage.tsx";
 
 function App() {
-
   return (
     <Router>
       <NavBar />
@@ -22,7 +21,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
