@@ -20,16 +20,12 @@
   color: var(--color-accent);
 }
 
-/* Add to Common.css */
-.content-main {
-  padding-top: 1rem;
-}
-
 .page-container {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .page-title {
@@ -40,4 +36,8 @@
 
 .page-subtitle {
   text-align: center;
+}
+
+.top-margin {
+  margin-top: 6rem;
 }

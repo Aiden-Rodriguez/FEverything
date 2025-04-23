@@ -74,7 +74,7 @@ h3 {
   font-size: 1.15rem;
   color: var(--color-text-basic);
   margin: 0;
-  margin-bottom: 4rem;
+  margin-bottom: 0rem;
 }
 
 p {
@@ -84,7 +84,7 @@ p {
   font-size: 1rem;
   color: var(--color-text-basic);
   margin: 0;
-  margin-bottom: 4rem;
+  margin-bottom: 0rem;
 }
 
 button {

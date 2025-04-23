@@ -40,7 +40,6 @@ export interface Character {
     friendship_seal_partners: Character[];
     partner_seal_partners: Character[];
   };
-  image: string;
 }
 
 // THINGS THAT UNITS SHOULD HAVE

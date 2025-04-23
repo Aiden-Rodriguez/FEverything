@@ -1,5 +1,4 @@
 import { Character } from "../types/UnitStruct.tsx";
-import defaultUnit from "../assets/characters/defaultCharacter.png";
 
 export const defaultCharacters: Character[] = [
   {
@@ -43,7 +42,6 @@ export const defaultCharacters: Character[] = [
       friendship_seal_partners: [],
       partner_seal_partners: [],
     },
-    image: defaultUnit,
   },
   {
     name: "Camilla",
@@ -86,6 +84,5 @@ export const defaultCharacters: Character[] = [
       friendship_seal_partners: [],
       partner_seal_partners: [],
     },
-    image: defaultUnit,
   },
 ];
