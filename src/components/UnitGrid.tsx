@@ -35,7 +35,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({
       <div className="grid-cell top-middle">
         {stats || (
           <>
-            <h3>{unit.class}</h3>
+            <h3>{unit.class.className}</h3>
           </>
         )}
       </div>

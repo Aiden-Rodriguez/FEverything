@@ -1,4 +1,13 @@
 import { Character } from "../../types/UnitStruct.tsx";
+import { defaultClassData } from "./defaultClassData.tsx";
+import { Class } from "../../types/ClassStruct.tsx"
+
+const getClass = (name: string): Class => {
+  const cls = defaultClassData.find(c => c.className === name);
+  if (!cls) throw new Error(`Class ${name} not found`);
+  return cls;
+};
+
 //Base stat modifiers based upon boon/bane
 //HP, Magic, Skill or Luck picked as Boon/Bane: +3/-2
 //Strength or Speed picked as Boon/Bane: +2/-1
@@ -30,8 +39,7 @@ export const defaultCharacters: Character[] = [
   {
     name: "Corrin (M)",
     gender: "M",
-    class: "Nohr Prince",
-    defaultPromotionStatus: false,
+    class: getClass("Nohr Prince"),
     baseInternalLevel: 1,
     royalty_status: true,
     level: 1,
@@ -101,8 +109,7 @@ export const defaultCharacters: Character[] = [
   {
     name: "Corrin (F)",
     gender: "F",
-    class: "Nohr Princess",
-    defaultPromotionStatus: false,
+    class: getClass("Nohr Princess"),
     baseInternalLevel: 1,
     royalty_status: true,
     level: 1,
@@ -174,8 +181,7 @@ export const defaultCharacters: Character[] = [
     name: "Camilla",
     gender: "F",
     royalty_status: true,
-    class: "Malig Knight",
-    defaultPromotionStatus: true,
+    class: getClass("Malig Knight"),
     baseInternalLevel: 15,
     level: 1,
     stats: {

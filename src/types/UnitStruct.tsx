@@ -1,12 +1,12 @@
 export type WeaponRank = 'n' | 'E' | 'D' | 'C' | 'B' | 'A' | 'S';
+import { Class } from "./ClassStruct.tsx";
 
 export interface Character {
   name: string;
   nickname?: string;
   gender: string;
   royalty_status: boolean;
-  class: string;
-  defaultPromotionStatus: boolean;
+  class: Class;
   baseInternalLevel: number;
   level: number;
   stats: {

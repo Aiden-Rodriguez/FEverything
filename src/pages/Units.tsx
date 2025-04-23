@@ -7,6 +7,7 @@ import UnitGrid from "../components/UnitGrid";
 const Units = () => {
   const unitOne = defaultCharacters[0];
   const unitTwo = defaultCharacters[1];
+  const unitThree = defaultCharacters[2];
 
   const { gameId } = useParams<{ gameId: string }>();
 
@@ -16,10 +17,10 @@ const Units = () => {
       <div className="grids-container">
         <UnitGrid unit={unitOne} gameId={gameId} />
         <UnitGrid unit={unitTwo} gameId={gameId} />
+        <UnitGrid unit={unitThree} gameId={gameId} />
         <UnitGrid unit={unitOne} gameId={gameId} />
         <UnitGrid unit={unitTwo} gameId={gameId} />
-        <UnitGrid unit={unitOne} gameId={gameId} />
-        <UnitGrid unit={unitTwo} gameId={gameId} />
+        <UnitGrid unit={unitThree} gameId={gameId} />
         <UnitGrid unit={unitOne} gameId={gameId} />
         <UnitGrid unit={unitTwo} gameId={gameId} />
       </div>
