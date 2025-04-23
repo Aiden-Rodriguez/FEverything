@@ -1,5 +1,5 @@
 import React from "react";
-import { defaultCharacters } from "../defaultData/defaultCharacters";
+import { defaultCharacters } from "../defaultData/Fire Emblem Fates/defaultCharacters";
 import { useParams } from "react-router-dom";
 import "../styles/Units.css";
 import UnitGrid from "../components/UnitGrid";

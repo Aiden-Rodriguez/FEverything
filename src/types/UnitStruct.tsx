@@ -1,9 +1,13 @@
+export type WeaponRank = 'n' | 'E' | 'D' | 'C' | 'B' | 'A' | 'S';
+
 export interface Character {
   name: string;
   nickname?: string;
   gender: string;
   royalty_status: boolean;
   class: string;
+  defaultPromotionStatus: boolean;
+  baseInternalLevel: number;
   level: number;
   stats: {
     hp: number;
@@ -14,6 +18,7 @@ export interface Character {
     luck: number;
     defense: number;
     resistance: number;
+    move: number;
   };
   base_growths: {
     hp: number;
@@ -40,6 +45,34 @@ export interface Character {
     friendship_seal_partners: Character[];
     partner_seal_partners: Character[];
   };
+  boon?: string;
+  bane?: string;
+
+  RouteAvailabilityBR: string;
+  RouteAvailabilityCQ: string;
+  RouteAvailabilityRV: string;
+
+  weapon_ranks: {
+    WeaponRankSwordKatana: WeaponRank;
+    WeaponRankLanceNaginata: WeaponRank;
+    WeaponRankAxeClub: WeaponRank;
+    WeaponRankTomeScroll: WeaponRank;
+    WeaponRankKnifeShuriken: WeaponRank;
+    WeaponRankBowYumi: WeaponRank;
+    WeaponRankStaffRod: WeaponRank;
+    WeaponRankStone: WeaponRank;
+  }
+
+  maxStatModifiers: {
+    strength: number;
+    magic: number;
+    skill: number;
+    speed: number;
+    luck: number;
+    defense: number;
+    resistance: number;
+  };
+
 }
 
 // THINGS THAT UNITS SHOULD HAVE
