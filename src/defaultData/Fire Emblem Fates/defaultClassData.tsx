@@ -545,7 +545,7 @@ export const defaultClassData: Class[] = [
     },
   },
   {
-    className: "Oni Cheiftain",
+    className: "Oni Chieftain",
     classTree: [],
     promotionStatus: false,
     TypeProperty: [],
@@ -2653,7 +2653,7 @@ export const defaultClassData: Class[] = [
     },
   },
   {
-    className: "Beserker",
+    className: "Berserker",
     classTree: [],
     promotionStatus: false,
     TypeProperty: [],
@@ -4446,16 +4446,63 @@ function setClassTree(targetClassName: string, treeClassNames: string[]): void {
   //Base classes show their own class and what they can promote to.
   setClassTree("Nohr Prince", ["Nohr Prince", "Nohr Noble", "Hoshido Noble"]);
   setClassTree("Nohr Princess", ["Nohr Princess", "Nohr Noble", "Hoshido Noble"]);
-  setClassTree("Samurai", ["Samurai", "Swordsmaster", "Master of Arms"]);
+
+  setClassTree("Samurai", ["Samurai", "Swordmaster", "Master of Arms"]);
   setClassTree("Villager", ["Villager", "Master of Arms", "Merchant"]);
+  setClassTree("Ninja", ["Ninja", "Master Ninja", "Mechanist"]);
+  setClassTree("Oni Savage", ["Oni Savage", "Oni Chieftain", "Blacksmith"]);
+  setClassTree("Spear Fighter", ["Spear Fighter", "Spear Master", "Basara"]);
+  setClassTree("Diviner", ["Diviner", "Basara", "Onmyoji"]);
+  setClassTree("Monk", ["Monk", "Great Master", "Onmyoji"]);
+  setClassTree("Shrine Maiden", ["Shrine Maiden", "Priestess", "Onmyoji"]);
+  setClassTree("Sky Knight", ["Sky Knight", "Falcon Knight", "Kinshi Knight"]);
+  setClassTree("Archer", ["Archer", "Kinshi Knight", "Sniper"]);
+  setClassTree("Kitsune", ["Kitsune", "Nine-Tails"]);
+
+  setClassTree("Cavalier", ["Cavalier", "Paladin", "Great Knight"]);
+  setClassTree("Knight", ["Knight", "General", "Great Knight"]);
+  setClassTree("Fighter", ["Fighter", "Berserker", "Hero"]);
+  setClassTree("Mercenary", ["Mercenary", "Hero", "Bow Knight"]);
+  setClassTree("Outlaw", ["Outlaw", "Adventurer", "Bow Knight"]);
+  setClassTree("Wyvern Rider", ["Wyvern Rider", "Wyvern Lord", "Malig Knight"]);
+  setClassTree("Dark Mage", ["Dark Mage", "Sorcerer", "Dark Knight"]);
+  setClassTree("Troubadour", ["Troubadour", "Strategist", "Butler", "Maid"]);
+  setClassTree("Wolfskin", ["Wolfskin", "Wolfssegner"]);
 
   //Promoted classes show which classes could have promoted to them, as well as themselves. Does not show adjacent classes as overlap between classes can cause issues
-  setClassTree("Swordsmaster", ["Samurai", "Swordsmaster"]);
+  setClassTree("Hoshido Noble", ["Nohr Prince", "Nohr Princess", "Hoshido Noble"]);
+  setClassTree("Nohr Noble", ["Nohr Prince", "Nohr Princess", "Nohr Noble"]);
+
+  setClassTree("Swordmaster", ["Samurai", "Swordmaster"]);
   setClassTree("Master of Arms", ["Samurai", "Villager", "Master of Arms"]);
   setClassTree("Merchant", ["Villager", "Apothecary", "Merchant"]);
-  setClassTree("Wyvern Rider", ["Wyvern Rider", "Wyvern Lord", "Malig Knight"]);
+  setClassTree("Mechanist", ["Apothecary", "Ninja", "Mechanist"]);
+  setClassTree("Master Ninja", ["Ninja", "Master Ninja"]);
+  setClassTree("Oni Chieftain", ["Oni Savage", "Oni Chieftain"]);
+  setClassTree("Blacksmith", ["Oni Savage", "Blacksmith"]);
+  setClassTree("Spear Master", ["Spear Fighter", "Spear Master"]);
+  setClassTree("Basara", ["Spear Fighter", "Diviner", "Basara"]);
+  setClassTree("Onmyoji", ["Onmyoji", "Diviner", "Monk", "Shrine Maiden"]);
+  setClassTree("Falcon Knight", ["Sky Knight", "Falcon Knight"]);
+  setClassTree("Kinshi Knight", ["Sky Knight", "Archer", "Kinshi Knight"]);
+  setClassTree("Sniper", ["Archer", "Sniper"]);
+  setClassTree("Nine-Tails", ["Kitsune", "Nine-Tails"]);
+
+  setClassTree("Paladin", ["Cavalier", "Paladin"]);
+  setClassTree("Great Knight", ["Cavalier", "Knight", "Great Knight"]);
+  setClassTree("General", ["Knight", "General"]);
+  setClassTree("Berserker", ["Fighter", "Berserker"]);
+  setClassTree("Hero", ["Fighter", "Mercenary", "Hero"]);
+  setClassTree("Bow Knight", ["Mercenary", "Outlaw", "Bow Knight"]);
+  setClassTree("Adventurer", ["Outlaw", "Adventurer"]);
   setClassTree("Wyvern Lord", ["Wyvern Rider", "Wyvern Lord"]);
   setClassTree("Malig Knight", ["Wyvern Rider", "Malig Knight"]);
+  setClassTree("Sorcerer", ["Dark Mage", "Sorcerer"]);
+  setClassTree("Dark Knight", ["Dark Mage", "Dark Knight"]);
+  setClassTree("Strategist", ["Troubadour", "Strategist"]);
+  setClassTree("Butler", ["Troubadour", "Butler"]);
+  setClassTree("Maid", ["Troubadour", "Maid"]);
+  setClassTree("Wolfssegner", ["Wolfskin", "Wolfssegner"]);
 
 export const getClass = (name: string): Class => {
   const cls = defaultClassData.find((c) => c.className === name);
