@@ -5,6 +5,7 @@ export interface Character {
   name: string;
   nickname?: string;
   gender: string;
+  title: string;
   royalty_status: boolean;
   class: Class;
   baseInternalLevel: number;
@@ -44,6 +45,8 @@ export interface Character {
     heart_seal_classes: Class[];
     friendship_seal_partners: Character[];
     partner_seal_partners: Character[];
+    friendship_seal_base_class: Class | null;
+    partner_seal_base_class: Class | null;
   };
   boon?: string;
   bane?: string;

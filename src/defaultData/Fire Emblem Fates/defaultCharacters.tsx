@@ -39,6 +39,7 @@ export const defaultCharacters: Character[] = [
   {
     name: "Corrin (M)",
     gender: "M",
+    title: "Crux of Fate",
     class: getClass("Nohr Prince"),
     baseInternalLevel: 1,
     royalty_status: true,
@@ -78,6 +79,8 @@ export const defaultCharacters: Character[] = [
       heart_seal_classes: [],
       friendship_seal_partners: [],
       partner_seal_partners: [],
+      friendship_seal_base_class: null,
+      partner_seal_base_class: null,
     },
     boon: "None selected yet",
     bane: "None selected yet",
@@ -109,6 +112,7 @@ export const defaultCharacters: Character[] = [
   {
     name: "Corrin (F)",
     gender: "F",
+    title: "Crux of Fate",
     class: getClass("Nohr Princess"),
     baseInternalLevel: 1,
     royalty_status: true,
@@ -180,6 +184,7 @@ export const defaultCharacters: Character[] = [
   {
     name: "Camilla",
     gender: "F",
+    title: "Bewitching Beauty",
     royalty_status: true,
     class: getClass("Malig Knight"),
     baseInternalLevel: 15,
