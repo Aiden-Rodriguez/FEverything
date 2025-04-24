@@ -1,9 +1,9 @@
 import { Character } from "../../types/UnitStruct.tsx";
 import { defaultClassData } from "./defaultClassData.tsx";
-import { Class } from "../../types/ClassStruct.tsx"
+import { Class } from "../../types/ClassStruct.tsx";
 
 const getClass = (name: string): Class => {
-  const cls = defaultClassData.find(c => c.className === name);
+  const cls = defaultClassData.find((c) => c.className === name);
   if (!cls) throw new Error(`Class ${name} not found`);
   return cls;
 };
@@ -16,22 +16,22 @@ const getClass = (name: string): Class => {
 //Growth rate modifier based on boon/bane
 //Boon/Bane	HP	Str	Mag	Skl	Spd	Lck	Def	Res
 //HP	      +15/-10						      +/-5+/-5
-//Strength		  +15/-10		  +/-5	  +/-5	
+//Strength		  +15/-10		  +/-5	  +/-5
 //Magic			        +20/-15	+/-5			   +/-5
-//Skill		      +/-5	  +25/-20			+/-5	
-//Speed				          +/-5+15/-10+/-5		
-//Luck		      +/-5+/-5			   +25/-20		
+//Skill		      +/-5	  +25/-20			+/-5
+//Speed				          +/-5+15/-10+/-5
+//Luck		      +/-5+/-5			   +25/-20
 //Defence						             +/-5+10/-10+/-5
 //Resistance			   +/-5		   +/-5			  +10/-10
 
 //Max stat modifiers based on boon/bane
 // Boon/Bane	Str	Mag	Skl	Spd	Lck	Def	Res
 // HP	1 / -1	1 / -1			2 / -1	2 / -1	2 / -1
-// Strength	4 / -3		2 / -1			2 / -1	
+// Strength	4 / -3		2 / -1			2 / -1
 // Magic		4 / -3		2 / -1			2 / -1
-// Skill	2 / -1		4 / -3			2 / -1	
-// Speed			2 / -1	4 / -3	2 / -1		
-// Luck	2 / -1	2 / -1			4 / -3		
+// Skill	2 / -1		4 / -3			2 / -1
+// Speed			2 / -1	4 / -3	2 / -1
+// Luck	2 / -1	2 / -1			4 / -3
 // Defence					2 / -1	4 / -3	2 / -1
 // Resistance		2 / -1		2 / -1			4 / -3
 
@@ -55,14 +55,14 @@ export const defaultCharacters: Character[] = [
       move: 5,
     },
     base_growths: {
-      hp: 0.45,
-      strength: 0.45,
-      magic: 0.30,
-      skill: 0.40,
-      speed: 0.45,
-      luck: 0.45,
-      defense: 0.35,
-      resistance: 0.25,
+      hp: 45,
+      strength: 45,
+      magic: 30,
+      skill: 40,
+      speed: 45,
+      luck: 45,
+      defense: 35,
+      resistance: 25,
     },
     personal_skill: "Supportive",
     basic_skills: {
@@ -73,9 +73,9 @@ export const defaultCharacters: Character[] = [
       skill5: "N/A",
     },
     base_class_set: {
-      starting_class: "Nohr Prince",
-      starting_class_tree: "Nohr Prince",
-      heart_seal_classes: ["Depends"],
+      starting_class: getClass("Nohr Prince"),
+      starting_class_tree: getClass("Nohr Prince"),
+      heart_seal_classes: [],
       friendship_seal_partners: [],
       partner_seal_partners: [],
     },
@@ -125,14 +125,14 @@ export const defaultCharacters: Character[] = [
       move: 5,
     },
     base_growths: {
-      hp: 0.45,
-      strength: 0.45,
-      magic: 0.30,
-      skill: 0.40,
-      speed: 0.45,
-      luck: 0.45,
-      defense: 0.35,
-      resistance: 0.25,
+      hp: 45,
+      strength: 45,
+      magic: 30,
+      skill: 40,
+      speed: 45,
+      luck: 45,
+      defense: 35,
+      resistance: 25,
     },
     personal_skill: "Supportive",
     basic_skills: {
@@ -143,9 +143,9 @@ export const defaultCharacters: Character[] = [
       skill5: "N/A",
     },
     base_class_set: {
-      starting_class: "Nohr Princess",
-      starting_class_tree: "Nohr Princess",
-      heart_seal_classes: ["Depends"],
+      starting_class: getClass("Nohr Princess"),
+      starting_class_tree: getClass("Nohr Princess"),
+      heart_seal_classes: [],
       friendship_seal_partners: [],
       partner_seal_partners: [],
     },
@@ -196,14 +196,14 @@ export const defaultCharacters: Character[] = [
       move: 8,
     },
     base_growths: {
-      hp: 0.40,
-      strength: 0.50,
-      magic: 0.25,
-      skill: 0.50,
-      speed: 0.55,
-      luck: 0.25,
-      defense: 0.35,
-      resistance: 0.45,
+      hp: 40,
+      strength: 50,
+      magic: 25,
+      skill: 50,
+      speed: 55,
+      luck: 25,
+      defense: 35,
+      resistance: 45,
     },
     personal_skill: "Rose's Thorns",
     basic_skills: {
@@ -214,9 +214,9 @@ export const defaultCharacters: Character[] = [
       skill5: "N/A",
     },
     base_class_set: {
-      starting_class: "Malig Knight",
-      starting_class_tree: "Wyvern Rider",
-      heart_seal_classes: ["Dark Mage"],
+      starting_class: getClass("Malig Knight"),
+      starting_class_tree: getClass("Wyvern Rider"),
+      heart_seal_classes: [getClass("Dark Mage")],
       friendship_seal_partners: [],
       partner_seal_partners: [],
     },
@@ -236,7 +236,6 @@ export const defaultCharacters: Character[] = [
       WeaponRankStone: "n",
     },
 
-    
     maxStatModifiers: {
       strength: 0,
       magic: 0,

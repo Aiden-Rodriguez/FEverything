@@ -1,4 +1,4 @@
-export type WeaponRank = 'n' | 'E' | 'D' | 'C' | 'B' | 'A' | 'S';
+export type WeaponRank = "n" | "E" | "D" | "C" | "B" | "A" | "S";
 import { Class } from "./ClassStruct.tsx";
 
 export interface Character {
@@ -39,9 +39,9 @@ export interface Character {
     skill5: string;
   };
   base_class_set: {
-    starting_class: string;
-    starting_class_tree: string;
-    heart_seal_classes: string[];
+    starting_class: Class;
+    starting_class_tree: Class;
+    heart_seal_classes: Class[];
     friendship_seal_partners: Character[];
     partner_seal_partners: Character[];
   };
@@ -61,7 +61,7 @@ export interface Character {
     WeaponRankBowYumi: WeaponRank;
     WeaponRankStaffRod: WeaponRank;
     WeaponRankStone: WeaponRank;
-  }
+  };
 
   maxStatModifiers: {
     strength: number;
@@ -72,7 +72,6 @@ export interface Character {
     defense: number;
     resistance: number;
   };
-
 }
 
 // THINGS THAT UNITS SHOULD HAVE
