@@ -30,7 +30,7 @@ export interface Class {
     resistance: number;
   };
 
-  classTree: string[];
+  classTree: Class[];
   promotionStatus: boolean;
 
   classSkills: {
@@ -61,6 +61,18 @@ export interface Class {
     luck: number;
     defense: number;
     resistance: number;
+  };
+
+  //before considering personal pair up modifiers
+  classPairUpBonuses: {
+    strength: number;
+    magic: number;
+    skill: number;
+    speed: number;
+    luck: number;
+    defense: number;
+    resistance: number;
+    move: number;
   };
 
   TypeProperty: string[];

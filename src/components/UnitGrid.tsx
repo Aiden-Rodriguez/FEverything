@@ -69,12 +69,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
         </motion.div>
       )}
 
-      <div
-        className="grid-cell bottom-left"
-        role="button"
-        tabIndex={0}
-        aria-label={`Toggle between ${unit.name}'s stats and growth rates`}
-      >
+      <div className="grid-cell bottom-left">
         <h3>Stats</h3>
         <div className="bottom-row-grid">
           <p> HP: {unit.stats.hp} </p>
@@ -119,7 +114,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
             animate="visible"
             exit="exit"
           >
-                        <h3>Unit Stat Caps</h3>
+            <h3>Unit Stat Caps</h3>
             <div className="bottom-row-grid">
               <p> HP: {unit.class.MaxStatCaps.hp} </p>
               <p>
@@ -262,23 +257,26 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
           >
             <h3>Class Sets</h3>
             <div className="class-sets-content">
-            <div className="class-sets-classes">
-            {unit.base_class_set.starting_class_tree.classTree.length > 0 ? (
-                unit.base_class_set.starting_class_tree.classTree.map((cls, index) => (
-                  <p key={index}>{cls}</p>
-                ))
-              ) : (
-                <p>No Base Classes..? This is a bug</p>
-              )}
+              <div className="class-sets-content">
+                {unit.base_class_set.starting_class_tree.classTree.length >
+                0 ? (
+                  unit.base_class_set.starting_class_tree.classTree.map(
+                    (cls, index) => <p key={index}>{cls.className}</p>,
+                  )
+                ) : (
+                  <p>No Base Classes..? This is a bug</p>
+                )}
               </div>
               <div className="class-sets-classes">
-              {unit.base_class_set.heart_seal_classes.length > 0 ? (
-                unit.base_class_set.heart_seal_classes.map((cls, index) => (
-                  <p className="class-sets-classes" key={index}>{cls.className}</p>
-                ))
-              ) : (
-                <p className="class-sets-classes">No Heart Seal Classes</p>
-              )}
+                {unit.base_class_set.heart_seal_classes.length > 0 ? (
+                  unit.base_class_set.heart_seal_classes.map((cls, index) => (
+                    <p className="class-sets-classes" key={index}>
+                      {cls.className}
+                    </p>
+                  ))
+                ) : (
+                  <p className="class-sets-classes">No Heart Seal Classes</p>
+                )}
               </div>
               <p className="class-sets-classes">
                 Partner Seal:{" "}

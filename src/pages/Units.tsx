@@ -23,6 +23,7 @@ const Units = () => {
         <UnitGrid unit={unitThree} gameId={gameId} />
         <UnitGrid unit={unitOne} gameId={gameId} />
         <UnitGrid unit={unitTwo} gameId={gameId} />
+        <div className="add-character-grid">Add New Unit? </div>
       </div>
     </div>
   );

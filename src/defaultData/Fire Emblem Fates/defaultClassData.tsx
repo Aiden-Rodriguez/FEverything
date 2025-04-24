@@ -1,8 +1,10 @@
 import { Class } from "../../types/ClassStruct.tsx";
-
 export const defaultClassData: Class[] = [
   {
     className: "Nohr Prince",
+    classTree: [], //Init empty and populate later so no crashes
+    promotionStatus: false,
+    TypeProperty: ["Dragon"],
     classBaseStats: {
       hp: 17,
       strength: 7,
@@ -29,17 +31,12 @@ export const defaultClassData: Class[] = [
       defense: 10,
       resistance: 5,
     },
-
-    classTree: ["Nohr Prince", "Nohr Noble", "Hoshido Noble"],
-    promotionStatus: false,
-
     classSkills: {
       Skill1: "Nobility",
       Skill1Level: 1,
       Skill2: "Dragon Fang",
       Skill2Level: 10,
     },
-
     MaxWeaponRank: {
       WeaponRankSwordKatana: "B",
       WeaponRankLanceNaginata: "n",
@@ -60,12 +57,22 @@ export const defaultClassData: Class[] = [
       defense: 21,
       resistance: 19,
     },
-
-    TypeProperty: ["Dragon"],
+    classPairUpBonuses: {
+      strength: 2,
+      magic: 0,
+      skill: 1,
+      speed: 1,
+      luck: 2,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+    },
   },
-
   {
     className: "Nohr Princess",
+    classTree: [],
+    promotionStatus: false,
+    TypeProperty: ["Dragon"],
     classBaseStats: {
       hp: 17,
       strength: 7,
@@ -92,17 +99,12 @@ export const defaultClassData: Class[] = [
       defense: 10,
       resistance: 5,
     },
-
-    classTree: ["Nohr Princess", "Nohr Noble", "Hoshido Noble"],
-    promotionStatus: false,
-
     classSkills: {
       Skill1: "Nobility",
       Skill1Level: 1,
       Skill2: "Dragon Fang",
       Skill2Level: 10,
     },
-
     MaxWeaponRank: {
       WeaponRankSwordKatana: "B",
       WeaponRankLanceNaginata: "n",
@@ -123,135 +125,22 @@ export const defaultClassData: Class[] = [
       defense: 21,
       resistance: 19,
     },
-
-    TypeProperty: ["Dragon"],
-  },
-  {
-    className: "Wyvern Rider",
-    classBaseStats: {
-      hp: 18,
-      strength: 7,
-      magic: 6,
-      skill: 6,
-      speed: 5,
-      luck: 0,
-      defense: 8,
-      resistance: 6,
-      move: 8,
-
-      BonusCrit: 0,
-      BonusCritAvoid: 0,
-      BonusHit: 0,
-      BonusAvoid: 0,
+    classPairUpBonuses: {
+      strength: 2,
+      magic: 0,
+      skill: 1,
+      speed: 1,
+      luck: 2,
+      defense: 0,
+      resistance: 0,
+      move: 0,
     },
-    classGrowths: {
-      hp: 0,
-      strength: 15,
-      magic: 15,
-      skill: 10,
-      speed: 5,
-      luck: 0,
-      defense: 10,
-      resistance: 15,
-    },
-
-    classTree: ["Wyvern Knight", "Wyvern Lord", "Malig Knight"],
-    promotionStatus: true,
-
-    classSkills: {
-      Skill1: "Savage Blow",
-      Skill1Level: 5,
-      Skill2: "Trample",
-      Skill2Level: 15,
-    },
-
-    MaxWeaponRank: {
-      WeaponRankSwordKatana: "n",
-      WeaponRankLanceNaginata: "n",
-      WeaponRankAxeClub: "A",
-      WeaponRankTomeScroll: "B",
-      WeaponRankKnifeShuriken: "n",
-      WeaponRankBowYumi: "n",
-      WeaponRankStaffRod: "n",
-      WeaponRankStone: "n",
-    },
-    MaxStatCaps: {
-      hp: 55,
-      strength: 31,
-      magic: 30,
-      skill: 28,
-      speed: 27,
-      luck: 25,
-      defense: 31,
-      resistance: 31,
-    },
-
-    TypeProperty: ["Dragon", "Flying"],
-  },
-  {
-    className: "Dark Mage",
-    classBaseStats: {
-      hp: 18,
-      strength: 7,
-      magic: 6,
-      skill: 6,
-      speed: 5,
-      luck: 0,
-      defense: 8,
-      resistance: 6,
-      move: 8,
-
-      BonusCrit: 0,
-      BonusCritAvoid: 0,
-      BonusHit: 0,
-      BonusAvoid: 0,
-    },
-    classGrowths: {
-      hp: 0,
-      strength: 15,
-      magic: 15,
-      skill: 10,
-      speed: 5,
-      luck: 0,
-      defense: 10,
-      resistance: 15,
-    },
-
-    classTree: ["Wyvern Knight", "Wyvern Lord", "Malig Knight"],
-    promotionStatus: true,
-
-    classSkills: {
-      Skill1: "Savage Blow",
-      Skill1Level: 5,
-      Skill2: "Trample",
-      Skill2Level: 15,
-    },
-
-    MaxWeaponRank: {
-      WeaponRankSwordKatana: "n",
-      WeaponRankLanceNaginata: "n",
-      WeaponRankAxeClub: "A",
-      WeaponRankTomeScroll: "B",
-      WeaponRankKnifeShuriken: "n",
-      WeaponRankBowYumi: "n",
-      WeaponRankStaffRod: "n",
-      WeaponRankStone: "n",
-    },
-    MaxStatCaps: {
-      hp: 55,
-      strength: 31,
-      magic: 30,
-      skill: 28,
-      speed: 27,
-      luck: 25,
-      defense: 31,
-      resistance: 31,
-    },
-
-    TypeProperty: ["Dragon", "Flying"],
   },
   {
     className: "Malig Knight",
+    classTree: [],
+    promotionStatus: true,
+    TypeProperty: ["Dragon", "Flying"],
     classBaseStats: {
       hp: 18,
       strength: 7,
@@ -278,17 +167,12 @@ export const defaultClassData: Class[] = [
       defense: 10,
       resistance: 15,
     },
-
-    classTree: ["Wyvern Knight", "Wyvern Lord", "Malig Knight"],
-    promotionStatus: true,
-
     classSkills: {
       Skill1: "Savage Blow",
       Skill1Level: 5,
       Skill2: "Trample",
       Skill2Level: 15,
     },
-
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -309,7 +193,532 @@ export const defaultClassData: Class[] = [
       defense: 31,
       resistance: 31,
     },
+    classPairUpBonuses: {
+      strength: 0,
+      magic: 2,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 2,
+      resistance: 2,
+      move: 1,
+    },
+  },
+  {
+    className: "Dark Mage",
+    classTree: [],
+    promotionStatus: false,
+    TypeProperty: [],
+    classBaseStats: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
 
-    TypeProperty: ["Dragon", "Flying"],
+      BonusCrit: 0,
+      BonusCritAvoid: 0,
+      BonusHit: 0,
+      BonusAvoid: 0,
+    },
+    classGrowths: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classSkills: {
+      Skill1: "BLANK",
+      Skill1Level: 1,
+      Skill2: "BLANK",
+      Skill2Level: 10,
+    },
+    MaxWeaponRank: {
+      WeaponRankSwordKatana: "n",
+      WeaponRankLanceNaginata: "n",
+      WeaponRankAxeClub: "n",
+      WeaponRankTomeScroll: "n",
+      WeaponRankKnifeShuriken: "n",
+      WeaponRankBowYumi: "n",
+      WeaponRankStaffRod: "n",
+      WeaponRankStone: "n",
+    },
+    MaxStatCaps: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classPairUpBonuses: {
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+    },
+  },
+  {
+    className: "Dark Mage",
+    classTree: [],
+    promotionStatus: false,
+    TypeProperty: [],
+    classBaseStats: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+
+      BonusCrit: 0,
+      BonusCritAvoid: 0,
+      BonusHit: 0,
+      BonusAvoid: 0,
+    },
+    classGrowths: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classSkills: {
+      Skill1: "BLANK",
+      Skill1Level: 1,
+      Skill2: "BLANK",
+      Skill2Level: 10,
+    },
+    MaxWeaponRank: {
+      WeaponRankSwordKatana: "n",
+      WeaponRankLanceNaginata: "n",
+      WeaponRankAxeClub: "n",
+      WeaponRankTomeScroll: "n",
+      WeaponRankKnifeShuriken: "n",
+      WeaponRankBowYumi: "n",
+      WeaponRankStaffRod: "n",
+      WeaponRankStone: "n",
+    },
+    MaxStatCaps: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classPairUpBonuses: {
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+    },
+  },
+  {
+    className: "Hoshido Noble",
+    classTree: [],
+    promotionStatus: false,
+    TypeProperty: [],
+    classBaseStats: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+
+      BonusCrit: 0,
+      BonusCritAvoid: 0,
+      BonusHit: 0,
+      BonusAvoid: 0,
+    },
+    classGrowths: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classSkills: {
+      Skill1: "BLANK",
+      Skill1Level: 1,
+      Skill2: "BLANK",
+      Skill2Level: 10,
+    },
+    MaxWeaponRank: {
+      WeaponRankSwordKatana: "n",
+      WeaponRankLanceNaginata: "n",
+      WeaponRankAxeClub: "n",
+      WeaponRankTomeScroll: "n",
+      WeaponRankKnifeShuriken: "n",
+      WeaponRankBowYumi: "n",
+      WeaponRankStaffRod: "n",
+      WeaponRankStone: "n",
+    },
+    MaxStatCaps: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classPairUpBonuses: {
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+    },
+  },
+  {
+    className: "Nohr Noble",
+    classTree: [],
+    promotionStatus: false,
+    TypeProperty: [],
+    classBaseStats: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+
+      BonusCrit: 0,
+      BonusCritAvoid: 0,
+      BonusHit: 0,
+      BonusAvoid: 0,
+    },
+    classGrowths: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classSkills: {
+      Skill1: "BLANK",
+      Skill1Level: 1,
+      Skill2: "BLANK",
+      Skill2Level: 10,
+    },
+    MaxWeaponRank: {
+      WeaponRankSwordKatana: "n",
+      WeaponRankLanceNaginata: "n",
+      WeaponRankAxeClub: "n",
+      WeaponRankTomeScroll: "n",
+      WeaponRankKnifeShuriken: "n",
+      WeaponRankBowYumi: "n",
+      WeaponRankStaffRod: "n",
+      WeaponRankStone: "n",
+    },
+    MaxStatCaps: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classPairUpBonuses: {
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+    },
+  },
+  {
+    className: "Wyvern Rider",
+    classTree: [],
+    promotionStatus: false,
+    TypeProperty: [],
+    classBaseStats: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+
+      BonusCrit: 0,
+      BonusCritAvoid: 0,
+      BonusHit: 0,
+      BonusAvoid: 0,
+    },
+    classGrowths: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classSkills: {
+      Skill1: "BLANK",
+      Skill1Level: 1,
+      Skill2: "BLANK",
+      Skill2Level: 10,
+    },
+    MaxWeaponRank: {
+      WeaponRankSwordKatana: "n",
+      WeaponRankLanceNaginata: "n",
+      WeaponRankAxeClub: "n",
+      WeaponRankTomeScroll: "n",
+      WeaponRankKnifeShuriken: "n",
+      WeaponRankBowYumi: "n",
+      WeaponRankStaffRod: "n",
+      WeaponRankStone: "n",
+    },
+    MaxStatCaps: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classPairUpBonuses: {
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+    },
+  },
+  {
+    className: "Wyvern Lord",
+    classTree: [],
+    promotionStatus: false,
+    TypeProperty: [],
+    classBaseStats: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+
+      BonusCrit: 0,
+      BonusCritAvoid: 0,
+      BonusHit: 0,
+      BonusAvoid: 0,
+    },
+    classGrowths: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classSkills: {
+      Skill1: "BLANK",
+      Skill1Level: 1,
+      Skill2: "BLANK",
+      Skill2Level: 10,
+    },
+    MaxWeaponRank: {
+      WeaponRankSwordKatana: "n",
+      WeaponRankLanceNaginata: "n",
+      WeaponRankAxeClub: "n",
+      WeaponRankTomeScroll: "n",
+      WeaponRankKnifeShuriken: "n",
+      WeaponRankBowYumi: "n",
+      WeaponRankStaffRod: "n",
+      WeaponRankStone: "n",
+    },
+    MaxStatCaps: {
+      hp: 0,
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+    },
+    classPairUpBonuses: {
+      strength: 0,
+      magic: 0,
+      skill: 0,
+      speed: 0,
+      luck: 0,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+    },
   },
 ];
+
+// Function to set classTree for a target class
+function setClassTree(targetClassName: string, treeClassNames: string[]): void {
+  const targetClass = defaultClassData.find(
+    (c) => c.className === targetClassName,
+  );
+  if (!targetClass) {
+    console.warn(
+      `Target class ${targetClassName} not found in defaultClassData`,
+    );
+    return;
+  }
+
+  const classTree: Class[] = treeClassNames
+    .map((name) => {
+      const cls = defaultClassData.find((c) => c.className === name);
+      if (!cls) {
+        console.warn(
+          `Class ${name} not found for classTree of ${targetClassName}`,
+        );
+      }
+      return cls;
+    })
+    .filter((cls): cls is Class => cls !== undefined); // Remove undefined entries
+
+  targetClass.classTree = classTree;
+}
+
+// Populate classTree using setClassTree
+setClassTree("Nohr Prince", ["Nohr Prince", "Nohr Noble", "Hoshido Noble"]);
+setClassTree("Nohr Princess", ["Nohr Princess", "Nohr Noble", "Hoshido Noble"]);
+setClassTree("Wyvern Rider", ["Wyvern Rider", "Wyvern Lord", "Malig Knight"]);
+setClassTree("Wyvern Lord", ["Wyvern Rider", "Wyvern Lord", "Malig Knight"]);
+setClassTree("Malig Knight", ["Wyvern Rider", "Wyvern Lord", "Malig Knight"]);
+
+export const getClass = (name: string): Class => {
+  const cls = defaultClassData.find((c) => c.className === name);
+  if (!cls) {
+    console.warn(`Class ${name} not found`);
+    return {
+      className: "Unknown",
+      classTree: [],
+      promotionStatus: false,
+      TypeProperty: [],
+      classBaseStats: {
+        hp: 0,
+        strength: 0,
+        magic: 0,
+        skill: 0,
+        speed: 0,
+        luck: 0,
+        defense: 0,
+        resistance: 0,
+        move: 0,
+        BonusCrit: 0,
+        BonusCritAvoid: 0,
+        BonusHit: 0,
+        BonusAvoid: 0,
+      },
+      classGrowths: {
+        hp: 0,
+        strength: 0,
+        magic: 0,
+        skill: 0,
+        speed: 0,
+        luck: 0,
+        defense: 0,
+        resistance: 0,
+      },
+      classSkills: {
+        Skill1: "None",
+        Skill1Level: 0,
+        Skill2: "None",
+        Skill2Level: 0,
+      },
+      MaxWeaponRank: {
+        WeaponRankSwordKatana: "n",
+        WeaponRankLanceNaginata: "n",
+        WeaponRankAxeClub: "n",
+        WeaponRankTomeScroll: "n",
+        WeaponRankKnifeShuriken: "n",
+        WeaponRankBowYumi: "n",
+        WeaponRankStaffRod: "n",
+        WeaponRankStone: "n",
+      },
+      MaxStatCaps: {
+        hp: 0,
+        strength: 0,
+        magic: 0,
+        skill: 0,
+        speed: 0,
+        luck: 0,
+        defense: 0,
+        resistance: 0,
+      },
+      classPairUpBonuses: {
+        strength: 0,
+        magic: 0,
+        skill: 0,
+        speed: 0,
+        luck: 0,
+        defense: 0,
+        resistance: 0,
+        move: 0,
+      },
+    };
+  }
+  return cls;
+};

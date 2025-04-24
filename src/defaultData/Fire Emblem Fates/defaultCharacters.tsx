@@ -152,6 +152,8 @@ export const defaultCharacters: Character[] = [
       heart_seal_classes: [],
       friendship_seal_partners: [],
       partner_seal_partners: [],
+      friendship_seal_base_class: null,
+      partner_seal_base_class: null,
     },
     boon: "None selected yet",
     bane: "None selected yet",
@@ -224,6 +226,8 @@ export const defaultCharacters: Character[] = [
       heart_seal_classes: [getClass("Dark Mage")],
       friendship_seal_partners: [],
       partner_seal_partners: [],
+      friendship_seal_base_class: null,
+      partner_seal_base_class: null,
     },
 
     RouteAvailabilityBR: "",
