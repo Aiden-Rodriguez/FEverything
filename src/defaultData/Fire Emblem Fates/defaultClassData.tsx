@@ -1,9 +1,12 @@
 import { Class } from "../../types/ClassStruct.tsx";
+import { getSkill } from "./defaultSkills.tsx";
 export const defaultClassData: Class[] = [
   {
     className: "Nohr Prince",
     classTree: [], //Init empty and populate later so no crashes
     promotionStatus: false,
+    description:
+      "A Nohrian royal fitted with their kingdom's equipment. Their body conceals the power of dragons.",
     TypeProperty: ["Dragon"],
     classBaseStats: {
       hp: 17,
@@ -31,12 +34,7 @@ export const defaultClassData: Class[] = [
       defense: 10,
       resistance: 5,
     },
-    classSkills: {
-      Skill1: "Nobility",
-      Skill1Level: 1,
-      Skill2: "Dragon Fang",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "B",
       WeaponRankLanceNaginata: "n",
@@ -72,6 +70,8 @@ export const defaultClassData: Class[] = [
     className: "Nohr Princess",
     classTree: [],
     promotionStatus: false,
+    description:
+      "A Nohrian royal fitted with their kingdom's equipment. Their body conceals the power of dragons.",
     TypeProperty: ["Dragon"],
     classBaseStats: {
       hp: 17,
@@ -99,12 +99,7 @@ export const defaultClassData: Class[] = [
       defense: 10,
       resistance: 5,
     },
-    classSkills: {
-      Skill1: "Nobility",
-      Skill1Level: 1,
-      Skill2: "Dragon Fang",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "B",
       WeaponRankLanceNaginata: "n",
@@ -139,8 +134,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Hoshido Noble",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "Royals whose heart aligns with Hoshido. Wields rods in addition to katanas and dragonstones.",
+    TypeProperty: ["Dragon"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -167,12 +164,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -207,8 +199,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Nohr Noble",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "Royals whose heart aligns with Nohr. Wields magic in addition to swords and dragonstones.",
+    TypeProperty: ["Dragon"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -235,12 +229,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -276,7 +265,10 @@ export const defaultClassData: Class[] = [
     className: "Samurai",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Those who follow the path of the katana. Excels in battle by taking advantage of its speed.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -303,12 +295,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -343,7 +330,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Swordmaster",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Those who have reached the pinnacle of the katana. Has exceptional speed and evasion.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -371,12 +360,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -411,7 +395,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Master of Arms",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Those who can handle any type of enemy. Adept with katanas, naginatas and clubs.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -439,12 +425,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -480,7 +461,10 @@ export const defaultClassData: Class[] = [
     className: "Oni Savage",
     classTree: [],
     promotionStatus: false,
+    description:
+      "A demon-like warrior who wields clubs. Boasts high offence and defence.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -507,12 +491,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -547,7 +526,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Oni Chieftain",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Those who have transcended to become a demon-god. They pulverise enemies with their clubs and spells.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -575,12 +556,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -615,7 +591,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Blacksmith",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Artisans who craft weapons. Wields katanas and clubs and boasts superior skill.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -643,12 +621,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -684,7 +657,10 @@ export const defaultClassData: Class[] = [
     className: "Spear Fighter",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Those who follow the path of the naginata. Excels in battle by dropping the enemy’s defence.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -711,12 +687,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -751,7 +722,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Spear Master",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Those who have reached the pinnacle of the naginata. Has stable abilities.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -779,12 +752,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -819,7 +787,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Basara",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Those who prefer a quirky and free-spirited life. Disrupts enemies with their naginatas and scrolls.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -847,12 +817,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -888,7 +853,10 @@ export const defaultClassData: Class[] = [
     className: "Diviner",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Those who study the art of spell-casting. They fight using Hoshidan scrolls.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -915,12 +883,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -955,7 +918,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Onmyoji",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Those who have learned myriad spells. Well-versed with both scrolls and rods.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -983,12 +948,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1024,6 +984,8 @@ export const defaultClassData: Class[] = [
     className: "Monk",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Men who study to attain enlightenment. They can heal allies with rods.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -1051,12 +1013,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1092,6 +1049,8 @@ export const defaultClassData: Class[] = [
     className: "Shrine Maiden",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Maidens dedicated to serving the gods. They can heal allies with rods.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -1119,12 +1078,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1159,7 +1113,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Great Master",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Men who have journeyed to enlightenment. They heal with rods and vanquish foes with naginatas.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -1187,12 +1143,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1227,7 +1178,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Priestess",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Maidens who fight for the gods and the people. They heal with rods and vanquish foes with yumi.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -1255,12 +1208,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1296,7 +1244,10 @@ export const defaultClassData: Class[] = [
     className: "Sky Knight",
     classTree: [],
     promotionStatus: false,
-    TypeProperty: [],
+    description:
+      "Warriors who soar the skies astride a pegasus. Has excellent speed and resistance.",
+    TypeProperty: ["Beast", "Flying"],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -1323,12 +1274,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1363,8 +1309,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Falcon Knight",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "High-ranking Sky Knights. In addition to naginatas, they can guard allies with rods.",
+    TypeProperty: ["Beast", "Flying"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -1391,12 +1339,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1431,8 +1374,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Kinshi Knight",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "Those who fight astride the fabled golden kite. With their naginatas and yumi, they dominate the skies.",
+    TypeProperty: ["Beast", "Flying"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -1459,12 +1404,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1500,7 +1440,9 @@ export const defaultClassData: Class[] = [
     className: "Archer",
     classTree: [],
     promotionStatus: false,
+    description: "Those who follow the path of the yumi. Has superior skill.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -1527,12 +1469,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1567,7 +1504,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Sniper",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Those who have reached the pinnacle of the yumi. Has exceptional accuracy and critical rate.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -1595,12 +1534,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1636,7 +1570,10 @@ export const defaultClassData: Class[] = [
     className: "Ninja",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Those who freely operate in the shadows. They use shurikens to attack and weaken enemies.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -1663,12 +1600,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1703,7 +1635,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Master Ninja",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Ninja leaders. They execute targets with their shurikens and katanas.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -1731,12 +1665,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1771,8 +1700,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Mechanist",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "Artisans who craft puppets. They wield shurikens and yumi with great dexterity.",
+    TypeProperty: ["Automaton"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -1799,12 +1730,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1840,6 +1766,8 @@ export const defaultClassData: Class[] = [
     className: "Apothecary",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Herb-sellers with extensive knowledge of herbs. They protect themselves with yumi.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -1867,12 +1795,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1907,7 +1830,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Merchant",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Merchants with excellent business acumen. They protect their fortune with naginatas and yumi.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -1935,12 +1860,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -1976,7 +1896,10 @@ export const defaultClassData: Class[] = [
     className: "Kitsune",
     classTree: [],
     promotionStatus: false,
-    TypeProperty: [],
+    description:
+      "A long-living fox who bewitches humans. Boasts high speed and resistance.",
+    TypeProperty: ["Beast"],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2003,12 +1926,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2043,8 +1961,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Nine-Tails",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "A high-ranking fox with great spiritual power. Has better abilities than a Kitsune.",
+    TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2071,12 +1991,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2111,8 +2026,11 @@ export const defaultClassData: Class[] = [
   {
     className: "Songstress",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: null,
+    description:
+      "A female who calms minds with her beautiful songs. Can sing to allow allies another action.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2139,12 +2057,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2180,7 +2093,10 @@ export const defaultClassData: Class[] = [
     className: "Villager",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Common folk who live in villages. During battles, they fight wielding naginatas.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2207,12 +2123,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2248,7 +2159,10 @@ export const defaultClassData: Class[] = [
     className: "Cavalier",
     classTree: [],
     promotionStatus: false,
-    TypeProperty: [],
+    description:
+      "Knights who fights on horseback. Can use both swords and lances.",
+    TypeProperty: ["Beast"],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2275,12 +2189,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2315,8 +2224,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Paladin",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "High-ranking knights praised for their bravery. They have better capabilities than a Cavalier.",
+    TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2343,12 +2254,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2383,8 +2289,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Great Knight",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "Armoured riders. Capable of wielding swords, lances and axes.",
+    TypeProperty: ["Armor", "Beast"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2411,12 +2319,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2452,7 +2355,10 @@ export const defaultClassData: Class[] = [
     className: "Knight",
     classTree: [],
     promotionStatus: false,
-    TypeProperty: [],
+    description:
+      "Foot-soldiers encased in heavy armour. Slow but has high defence",
+    TypeProperty: ["Armor"],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2479,12 +2385,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2519,8 +2420,10 @@ export const defaultClassData: Class[] = [
   {
     className: "General",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "Generals fortified from head to foot with heavy armour. They possess exceptional defence.",
+    TypeProperty: ["Armor"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2547,12 +2450,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2588,7 +2486,10 @@ export const defaultClassData: Class[] = [
     className: "Fighter",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Axe-fighters with a superior body. Has high attack power, but weak defences.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2615,12 +2516,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2655,7 +2551,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Berserker",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Crazed fighters who fight with axes. They excel in performing critical hits.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -2683,12 +2581,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2724,7 +2617,10 @@ export const defaultClassData: Class[] = [
     className: "Mercenary",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Sell-swords who can handle any mission. They have well-balanced abilities and superior skill.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2751,12 +2647,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2791,7 +2682,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Hero",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Heroes renown for their bravery. They wield swords and axes and can adapt to any battlefield.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -2819,12 +2712,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2859,8 +2747,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Bow Knight",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "Knights who rain arrows from horseback. In addition to bows, they can wield swords.",
+    TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2887,12 +2777,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2928,7 +2813,10 @@ export const defaultClassData: Class[] = [
     className: "Outlaw",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Crooks who are skilled at picking locks. Wields bows and boasts high speed and resistance.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -2955,12 +2843,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -2995,7 +2878,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Adventurer",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Glory-seekers who investigate ruins for treasure. With their bows and staves, they're capable of many things.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -3023,12 +2908,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3064,7 +2944,10 @@ export const defaultClassData: Class[] = [
     className: "Wyvern Rider",
     classTree: [],
     promotionStatus: false,
-    TypeProperty: [],
+    description:
+      "Knights who fight astride a wyvern. Has superior strength and defence.",
+    TypeProperty: ["Dragon", "Flying"],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -3091,12 +2974,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3131,8 +3009,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Wyvern Lord",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "High-ranking wyvern riders. With their axes and lances, they demolish enemy forces.",
+    TypeProperty: ["Dragon", "Flying"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -3159,12 +3039,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3200,6 +3075,8 @@ export const defaultClassData: Class[] = [
     className: "Malig Knight",
     classTree: [],
     promotionStatus: true,
+    description:
+      "Knights who command a mage dragon. With their axes and magic, they trample over enemy forces.",
     TypeProperty: ["Dragon", "Flying"],
     classBaseStats: {
       hp: 18,
@@ -3227,12 +3104,7 @@ export const defaultClassData: Class[] = [
       defense: 10,
       resistance: 15,
     },
-    classSkills: {
-      Skill1: "Savage Blow",
-      Skill1Level: 5,
-      Skill2: "Trample",
-      Skill2Level: 15,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3268,7 +3140,10 @@ export const defaultClassData: Class[] = [
     className: "Dark Mage",
     classTree: [],
     promotionStatus: false,
+    description:
+      "Sorcerers who have learned Nohrian magic. They attack enemies with magic.",
     TypeProperty: [],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -3295,12 +3170,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3335,7 +3205,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Sorcerer",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "High-ranking sorcerers who have reached the esoteric pinnacle. They possess exceptional magic.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -3363,12 +3235,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3403,8 +3270,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Dark Knight",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "Magic knights whose bodies are infused with sorcery. They're capable of harnessing swords and magic.",
+    TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -3431,12 +3300,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3472,7 +3336,9 @@ export const defaultClassData: Class[] = [
     className: "Troubadour",
     classTree: [],
     promotionStatus: false,
-    TypeProperty: [],
+    description:
+      "Staff-wielding knights who are incapable of fighting. Instead, they heal allies with staves.",
+    TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -3499,12 +3365,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3539,8 +3400,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Strategist",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "Tacticians who command the battlefield from horseback. With their magic and staves, they turn the tide of battle.",
+    TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -3567,12 +3430,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3607,7 +3465,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Maid",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Female vassals who serve a master. They heal their master with staves and protect them with daggers.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -3635,12 +3495,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3675,7 +3530,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Butler",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: true,
+    description:
+      "Male vassals who serve a master. They heal their master with staves and protect them with daggers.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -3703,12 +3560,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3744,7 +3596,10 @@ export const defaultClassData: Class[] = [
     className: "Wolfskin",
     classTree: [],
     promotionStatus: false,
-    TypeProperty: [],
+    description:
+      "A werewolf said to feast on the flesh of humans. Has excellent strength and speed.",
+    TypeProperty: ["Beast"],
+    parallelClass: null,
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -3771,12 +3626,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3811,8 +3661,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Wolfssegner",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: true,
+    description:
+      "A high-ranking werewolf with a more resilient body. Has better abilities than a Wolfskin.",
+    TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -3839,12 +3691,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3879,7 +3726,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Dread Fighter",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: null,
+    description:
+      "Those who have learned elusive battle arts. They disorientate foes with katanas, clubs and shurikens.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -3907,12 +3756,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -3947,8 +3791,10 @@ export const defaultClassData: Class[] = [
   {
     className: "Dark Falcon",
     classTree: [],
-    promotionStatus: false,
-    TypeProperty: [],
+    promotionStatus: null,
+    description:
+      "Knights who ride astride a pitch-black pegasus. They rush the battlefield armed with lances and tomes.",
+    TypeProperty: ["Beast", "Flying"],
     classBaseStats: {
       hp: 0,
       strength: 0,
@@ -3975,12 +3821,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -4015,7 +3856,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Ballistician",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: null,
+    description:
+      "An Outrealm class. Rides a mobile cannon. In addition to bows, it can use cannons to inflict wide damage to enemy troops.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -4043,12 +3886,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -4083,7 +3921,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Witch",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: null,
+    description:
+      "An Outrealm class. Has the ability to manipulate space. Can teleport great distances in the blink of an eye.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -4111,12 +3951,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -4151,7 +3986,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Lodestar",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: null,
+    description:
+      "An Outrealm class. A legendary hero spoken of in sagas. Fights wielding swords.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -4179,12 +4016,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -4219,7 +4051,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Vanguard",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: null,
+    description:
+      "An Outrealm class. A commander who fights at the front-lines. Can wield both swords and axes.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -4247,12 +4081,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -4287,7 +4116,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Great Lord",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: null,
+    description:
+      "An Outrealm class. A powerful royal who leads armies. Can wield lances, in addition to swords.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -4315,12 +4146,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -4355,7 +4181,9 @@ export const defaultClassData: Class[] = [
   {
     className: "Grandmaster",
     classTree: [],
-    promotionStatus: false,
+    promotionStatus: null,
+    description:
+      "An Outrealm class. A tactician with a gift for commanding troops. Can fight with swords and tomes.",
     TypeProperty: [],
     classBaseStats: {
       hp: 0,
@@ -4383,12 +4211,7 @@ export const defaultClassData: Class[] = [
       defense: 0,
       resistance: 0,
     },
-    classSkills: {
-      Skill1: "BLANK",
-      Skill1Level: 1,
-      Skill2: "BLANK",
-      Skill2Level: 10,
-    },
+    classSkills: [],
     MaxWeaponRank: {
       WeaponRankSwordKatana: "n",
       WeaponRankLanceNaginata: "n",
@@ -4424,85 +4247,173 @@ export const defaultClassData: Class[] = [
 
 // Populates the class tree so that classes know what classes they are related to aka which classes they can directly class change to.
 function setClassTree(targetClassName: string, treeClassNames: string[]): void {
-    const targetClass = defaultClassData.find(c => c.className === targetClassName);
-    if (!targetClass) {
-      console.warn(`Target class ${targetClassName} not found in defaultClassData`);
-      return;
-    }
-  
-    const classTree: Class[] = treeClassNames
-      .map(name => {
-        const cls = defaultClassData.find(c => c.className === name);
-        if (!cls) {
-          console.warn(`Class ${name} not found for classTree of ${targetClassName}`);
-        }
-        return cls;
-      })
-      .filter((cls): cls is Class => cls !== undefined); // Remove undefined entries
-  
-    targetClass.classTree = classTree;
+  const targetClass = defaultClassData.find(
+    (c) => c.className === targetClassName,
+  );
+  if (!targetClass) {
+    console.warn(
+      `Target class ${targetClassName} not found in defaultClassData`,
+    );
+    return;
   }
-  
-  //Base classes show their own class and what they can promote to.
-  setClassTree("Nohr Prince", ["Nohr Prince", "Nohr Noble", "Hoshido Noble"]);
-  setClassTree("Nohr Princess", ["Nohr Princess", "Nohr Noble", "Hoshido Noble"]);
 
-  setClassTree("Samurai", ["Samurai", "Swordmaster", "Master of Arms"]);
-  setClassTree("Villager", ["Villager", "Master of Arms", "Merchant"]);
-  setClassTree("Ninja", ["Ninja", "Master Ninja", "Mechanist"]);
-  setClassTree("Oni Savage", ["Oni Savage", "Oni Chieftain", "Blacksmith"]);
-  setClassTree("Spear Fighter", ["Spear Fighter", "Spear Master", "Basara"]);
-  setClassTree("Diviner", ["Diviner", "Basara", "Onmyoji"]);
-  setClassTree("Monk", ["Monk", "Great Master", "Onmyoji"]);
-  setClassTree("Shrine Maiden", ["Shrine Maiden", "Priestess", "Onmyoji"]);
-  setClassTree("Sky Knight", ["Sky Knight", "Falcon Knight", "Kinshi Knight"]);
-  setClassTree("Archer", ["Archer", "Kinshi Knight", "Sniper"]);
-  setClassTree("Kitsune", ["Kitsune", "Nine-Tails"]);
+  const classTree: Class[] = treeClassNames
+    .map((name) => {
+      const cls = defaultClassData.find((c) => c.className === name);
+      if (!cls) {
+        console.warn(
+          `Class ${name} not found for classTree of ${targetClassName}`,
+        );
+      }
+      return cls;
+    })
+    .filter((cls): cls is Class => cls !== undefined); // Remove undefined entries
 
-  setClassTree("Cavalier", ["Cavalier", "Paladin", "Great Knight"]);
-  setClassTree("Knight", ["Knight", "General", "Great Knight"]);
-  setClassTree("Fighter", ["Fighter", "Berserker", "Hero"]);
-  setClassTree("Mercenary", ["Mercenary", "Hero", "Bow Knight"]);
-  setClassTree("Outlaw", ["Outlaw", "Adventurer", "Bow Knight"]);
-  setClassTree("Wyvern Rider", ["Wyvern Rider", "Wyvern Lord", "Malig Knight"]);
-  setClassTree("Dark Mage", ["Dark Mage", "Sorcerer", "Dark Knight"]);
-  setClassTree("Troubadour", ["Troubadour", "Strategist", "Butler", "Maid"]);
-  setClassTree("Wolfskin", ["Wolfskin", "Wolfssegner"]);
+  targetClass.classTree = classTree;
+}
 
-  //Promoted classes show which classes could have promoted to them, as well as themselves. Does not show adjacent classes as overlap between classes can cause issues
-  setClassTree("Hoshido Noble", ["Nohr Prince", "Nohr Princess", "Hoshido Noble"]);
-  setClassTree("Nohr Noble", ["Nohr Prince", "Nohr Princess", "Nohr Noble"]);
+export function initializeClassTree(): void {
+//Base classes show their own class and what they can promote to.
+setClassTree("Nohr Prince", ["Nohr Prince", "Nohr Noble", "Hoshido Noble"]);
+setClassTree("Nohr Princess", ["Nohr Princess", "Nohr Noble", "Hoshido Noble"]);
 
-  setClassTree("Swordmaster", ["Samurai", "Swordmaster"]);
-  setClassTree("Master of Arms", ["Samurai", "Villager", "Master of Arms"]);
-  setClassTree("Merchant", ["Villager", "Apothecary", "Merchant"]);
-  setClassTree("Mechanist", ["Apothecary", "Ninja", "Mechanist"]);
-  setClassTree("Master Ninja", ["Ninja", "Master Ninja"]);
-  setClassTree("Oni Chieftain", ["Oni Savage", "Oni Chieftain"]);
-  setClassTree("Blacksmith", ["Oni Savage", "Blacksmith"]);
-  setClassTree("Spear Master", ["Spear Fighter", "Spear Master"]);
-  setClassTree("Basara", ["Spear Fighter", "Diviner", "Basara"]);
-  setClassTree("Onmyoji", ["Onmyoji", "Diviner", "Monk", "Shrine Maiden"]);
-  setClassTree("Falcon Knight", ["Sky Knight", "Falcon Knight"]);
-  setClassTree("Kinshi Knight", ["Sky Knight", "Archer", "Kinshi Knight"]);
-  setClassTree("Sniper", ["Archer", "Sniper"]);
-  setClassTree("Nine-Tails", ["Kitsune", "Nine-Tails"]);
+setClassTree("Samurai", ["Samurai", "Swordmaster", "Master of Arms"]);
+setClassTree("Villager", ["Villager", "Master of Arms", "Merchant"]);
+setClassTree("Ninja", ["Ninja", "Master Ninja", "Mechanist"]);
+setClassTree("Oni Savage", ["Oni Savage", "Oni Chieftain", "Blacksmith"]);
+setClassTree("Spear Fighter", ["Spear Fighter", "Spear Master", "Basara"]);
+setClassTree("Diviner", ["Diviner", "Basara", "Onmyoji"]);
+setClassTree("Monk", ["Monk", "Great Master", "Onmyoji"]);
+setClassTree("Shrine Maiden", ["Shrine Maiden", "Priestess", "Onmyoji"]);
+setClassTree("Sky Knight", ["Sky Knight", "Falcon Knight", "Kinshi Knight"]);
+setClassTree("Archer", ["Archer", "Kinshi Knight", "Sniper"]);
+setClassTree("Kitsune", ["Kitsune", "Nine-Tails"]);
 
-  setClassTree("Paladin", ["Cavalier", "Paladin"]);
-  setClassTree("Great Knight", ["Cavalier", "Knight", "Great Knight"]);
-  setClassTree("General", ["Knight", "General"]);
-  setClassTree("Berserker", ["Fighter", "Berserker"]);
-  setClassTree("Hero", ["Fighter", "Mercenary", "Hero"]);
-  setClassTree("Bow Knight", ["Mercenary", "Outlaw", "Bow Knight"]);
-  setClassTree("Adventurer", ["Outlaw", "Adventurer"]);
-  setClassTree("Wyvern Lord", ["Wyvern Rider", "Wyvern Lord"]);
-  setClassTree("Malig Knight", ["Wyvern Rider", "Malig Knight"]);
-  setClassTree("Sorcerer", ["Dark Mage", "Sorcerer"]);
-  setClassTree("Dark Knight", ["Dark Mage", "Dark Knight"]);
-  setClassTree("Strategist", ["Troubadour", "Strategist"]);
-  setClassTree("Butler", ["Troubadour", "Butler"]);
-  setClassTree("Maid", ["Troubadour", "Maid"]);
-  setClassTree("Wolfssegner", ["Wolfskin", "Wolfssegner"]);
+setClassTree("Cavalier", ["Cavalier", "Paladin", "Great Knight"]);
+setClassTree("Knight", ["Knight", "General", "Great Knight"]);
+setClassTree("Fighter", ["Fighter", "Berserker", "Hero"]);
+setClassTree("Mercenary", ["Mercenary", "Hero", "Bow Knight"]);
+setClassTree("Outlaw", ["Outlaw", "Adventurer", "Bow Knight"]);
+setClassTree("Wyvern Rider", ["Wyvern Rider", "Wyvern Lord", "Malig Knight"]);
+setClassTree("Dark Mage", ["Dark Mage", "Sorcerer", "Dark Knight"]);
+setClassTree("Troubadour", ["Troubadour", "Strategist", "Butler", "Maid"]);
+setClassTree("Wolfskin", ["Wolfskin", "Wolfssegner"]);
+
+//Promoted classes show which classes could have promoted to them, as well as themselves. Does not show adjacent classes as overlap between classes can cause issues
+setClassTree("Hoshido Noble", [
+  "Nohr Prince",
+  "Nohr Princess",
+  "Hoshido Noble",
+]);
+setClassTree("Nohr Noble", ["Nohr Prince", "Nohr Princess", "Nohr Noble"]);
+
+setClassTree("Swordmaster", ["Samurai", "Swordmaster"]);
+setClassTree("Master of Arms", ["Samurai", "Villager", "Master of Arms"]);
+setClassTree("Merchant", ["Villager", "Apothecary", "Merchant"]);
+setClassTree("Mechanist", ["Apothecary", "Ninja", "Mechanist"]);
+setClassTree("Master Ninja", ["Ninja", "Master Ninja"]);
+setClassTree("Oni Chieftain", ["Oni Savage", "Oni Chieftain"]);
+setClassTree("Blacksmith", ["Oni Savage", "Blacksmith"]);
+setClassTree("Spear Master", ["Spear Fighter", "Spear Master"]);
+setClassTree("Basara", ["Spear Fighter", "Diviner", "Basara"]);
+setClassTree("Onmyoji", ["Onmyoji", "Diviner", "Monk", "Shrine Maiden"]);
+setClassTree("Falcon Knight", ["Sky Knight", "Falcon Knight"]);
+setClassTree("Kinshi Knight", ["Sky Knight", "Archer", "Kinshi Knight"]);
+setClassTree("Sniper", ["Archer", "Sniper"]);
+setClassTree("Nine-Tails", ["Kitsune", "Nine-Tails"]);
+
+setClassTree("Paladin", ["Cavalier", "Paladin"]);
+setClassTree("Great Knight", ["Cavalier", "Knight", "Great Knight"]);
+setClassTree("General", ["Knight", "General"]);
+setClassTree("Berserker", ["Fighter", "Berserker"]);
+setClassTree("Hero", ["Fighter", "Mercenary", "Hero"]);
+setClassTree("Bow Knight", ["Mercenary", "Outlaw", "Bow Knight"]);
+setClassTree("Adventurer", ["Outlaw", "Adventurer"]);
+setClassTree("Wyvern Lord", ["Wyvern Rider", "Wyvern Lord"]);
+setClassTree("Malig Knight", ["Wyvern Rider", "Malig Knight"]);
+setClassTree("Sorcerer", ["Dark Mage", "Sorcerer"]);
+setClassTree("Dark Knight", ["Dark Mage", "Dark Knight"]);
+setClassTree("Strategist", ["Troubadour", "Strategist"]);
+setClassTree("Butler", ["Troubadour", "Butler"]);
+setClassTree("Maid", ["Troubadour", "Maid"]);
+setClassTree("Wolfssegner", ["Wolfskin", "Wolfssegner"]);
+}
+
+//Similar as above. Parallel classes are obtained rarely through a unit gaining nothing from a partner/friendship/parent class set
+function setParallelClass(
+  targetClassName: string,
+  parallelClassName: string,
+): void {
+  const targetClass = defaultClassData.find(
+    (c) => c.className === targetClassName,
+  );
+  if (!targetClass) {
+    console.warn(
+      `Target class ${targetClassName} not found in defaultClassData`,
+    );
+    return;
+  }
+
+  const parallelClass = defaultClassData.find(
+    (c) => c.className === parallelClassName,
+  );
+  if (!parallelClass) {
+    console.warn(
+      `Parallel class ${parallelClassName} not found for ${targetClassName}`,
+    );
+    return;
+  }
+
+  targetClass.parallelClass = parallelClass;
+}
+
+export function initializeParallelClasses(): void {
+setParallelClass("Cavalier", "Ninja");
+setParallelClass("Knight", "Spear Fighter");
+setParallelClass("Fighter", "Oni Savage");
+setParallelClass("Mercenary", "Samurai");
+setParallelClass("Outlaw", "Archer");
+setParallelClass("Samurai", "Mercenary");
+setParallelClass("Oni Savage", "Fighter");
+setParallelClass("Spear Fighter", "Knight");
+setParallelClass("Diviner", "Dark Mage");
+setParallelClass("Sky Knight", "Wyvern Rider");
+setParallelClass("Archer", "Outlaw");
+setParallelClass("Wyvern Rider", "Sky Knight");
+setParallelClass("Ninja", "Cavalier");
+setParallelClass("Dark Mage", "Diviner");
+setParallelClass("Wolfskin", "Outlaw");
+setParallelClass("Kitsune", "Apothecary");
+setParallelClass("Songstress", "Troubadour");
+setParallelClass("Villager", "Apothecary");
+}
+
+// Set classSkills for a specific class. Does through function after, as circular reference causes issues.
+export function setClassSkills(className: string, skillNames: string[]): void {
+  const targetClass = defaultClassData.find((c) => c.className === className);
+  if (!targetClass) {
+    console.warn(`Class ${className} not found in defaultClassData`);
+    return;
+  }
+
+  const skills = skillNames
+    .map((name) => {
+      const skill = getSkill(name);
+      if (skill.name === "Unknown") {
+        console.warn(`Skill ${name} not found for class ${className}`);
+      }
+      return skill;
+    })
+    .filter((skill) => skill.name !== "Unknown"); // Optional: exclude unknown skills
+
+  targetClass.classSkills = skills;
+}
+
+export function initializeClassSkills(): void {
+    setClassSkills("Nohr Prince", ["Nobility", "Dragon Fang"]);
+    setClassSkills("Nohr Princess", ["Nobility", "Dragon Fang"]);
+    setClassSkills("Samurai", ["Duelist's Blow", "Vantage"]);
+} // NEEDS TO BE FINISHED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 export const getClass = (name: string): Class => {
   const cls = defaultClassData.find((c) => c.className === name);
@@ -4511,7 +4422,8 @@ export const getClass = (name: string): Class => {
     return {
       className: "Unknown",
       classTree: [],
-      promotionStatus: false,
+      promotionStatus: null,
+      description: "",
       TypeProperty: [],
       classBaseStats: {
         hp: 0,
@@ -4538,12 +4450,7 @@ export const getClass = (name: string): Class => {
         defense: 0,
         resistance: 0,
       },
-      classSkills: {
-        Skill1: "None",
-        Skill1Level: 0,
-        Skill2: "None",
-        Skill2Level: 0,
-      },
+      classSkills: [],
       MaxWeaponRank: {
         WeaponRankSwordKatana: "n",
         WeaponRankLanceNaginata: "n",

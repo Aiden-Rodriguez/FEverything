@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Character } from "../types/UnitStruct.tsx";
 
+import { useEffect } from "react";
+import { initializeData } from "../defaultData/Fire Emblem Fates/init.tsx"; // CHANGE LATER HARD SET TO FE FATES NOW
+
 interface UnitGridProps {
   unit: Character;
   gameId?: string;
 }
 
 const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
+  useEffect(() => {
+    initializeData();
+  }, []);
+
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const handleToggleExpand = () => {

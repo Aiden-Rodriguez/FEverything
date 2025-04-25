@@ -1,5 +1,6 @@
 import React from "react";
 import { defaultCharacters } from "../defaultData/Fire Emblem Fates/defaultCharacters";
+import { defaultSkills } from "../defaultData/Fire Emblem Fates/defaultSkills";
 import { useParams } from "react-router-dom";
 import "../styles/Units.css";
 import UnitGrid from "../components/UnitGrid";
@@ -23,7 +24,7 @@ const Units = () => {
         <UnitGrid unit={unitThree} gameId={gameId} />
         <UnitGrid unit={unitOne} gameId={gameId} />
         <UnitGrid unit={unitTwo} gameId={gameId} />
-        <div className="add-character-grid">Add New Unit? </div>
+        <div className="add-character-grid">Add Unit?</div>
       </div>
     </div>
   );

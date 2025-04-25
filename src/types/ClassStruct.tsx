@@ -1,7 +1,10 @@
 export type WeaponRank = "n" | "E" | "D" | "C" | "B" | "A" | "S";
+import { Skill } from "./SkillStruct";
 
 export interface Class {
   className: string;
+  parallelClass?: Class | null;
+  description: string;
   classBaseStats: {
     hp: number;
     strength: number;
@@ -31,14 +34,9 @@ export interface Class {
   };
 
   classTree: Class[];
-  promotionStatus: boolean;
+  promotionStatus: boolean | null;
 
-  classSkills: {
-    Skill1: string;
-    Skill1Level: number;
-    Skill2: string;
-    Skill2Level: number;
-  };
+  classSkills: Skill[];
 
   MaxWeaponRank: {
     WeaponRankSwordKatana: WeaponRank;
