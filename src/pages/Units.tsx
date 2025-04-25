@@ -1,9 +1,9 @@
 import React from "react";
-import { defaultCharacters } from "../defaultData/Fire Emblem Fates/defaultCharacters";
-import { defaultSkills } from "../defaultData/Fire Emblem Fates/defaultSkills";
 import { useParams } from "react-router-dom";
 import "../styles/Units.css";
 import UnitGrid from "../components/UnitGrid";
+
+import { defaultCharacters } from "../defaultData/Fire Emblem Fates/defaultCharacters";
 
 const Units = () => {
   const unitOne = defaultCharacters[0];

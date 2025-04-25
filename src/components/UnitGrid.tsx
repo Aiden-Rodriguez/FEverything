@@ -1,21 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Character } from "../types/UnitStruct.tsx";
-
-import { useEffect } from "react";
-import { initializeData } from "../defaultData/Fire Emblem Fates/init.tsx"; // CHANGE LATER HARD SET TO FE FATES NOW
+import { Class } from "../types/ClassStruct.tsx";
+import { Skill } from "../types/SkillStruct.tsx";
 
 interface UnitGridProps {
   unit: Character;
   gameId?: string;
 }
 
-const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
-  useEffect(() => {
-    initializeData();
-  }, []);
+// Define interfaces for dynamically imported modules
+// Since planned to scale down the line I am dynamically importing the initiation module. This prevents unneccisary importation of data.
+interface InitModule {
+  initializeData: () => void;
+}
 
+interface ClassDataModule {
+  getClass: (className: string) => Class;
+}
+
+interface SkillsModule {
+  getSkill: (skillName: string) => Skill;
+}
+
+const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
+  const [getClassFn, setGetClassFn] = useState<((className: string) => Class) | null>(null);
+  const [getSkillFn, setGetSkillFn] = useState<((skillName: string) => Skill) | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!gameId) {
+      console.warn("No gameId provided; skipping data initialization");
+      setIsLoading(false);
+      return;
+    }
+
+    const loadData = async () => {
+      try {
+        const initModule = (await import(`../defaultData/${gameId}/init.tsx`)) as InitModule;
+        initModule.initializeData();
+
+        const classModule = (await import(`../defaultData/${gameId}/defaultClassData.tsx`)) as ClassDataModule;
+        const skillModule = (await import(`../defaultData/${gameId}/defaultSkills.tsx`)) as SkillsModule;
+
+        setGetClassFn(() => classModule.getClass);
+        setGetSkillFn(() => skillModule.getSkill);
+      } catch (error) {
+        console.error(`Failed to load modules for gameId: ${gameId}`, error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, [gameId]);
+
+  if (isLoading || !getClassFn || !getSkillFn) {
+    return <h3>Loading... <br /> If this takes more than a few seconds the gameID is incorrect.</h3>;
+  }
 
   const handleToggleExpand = () => {
     setIsExpanded((prev: boolean) => !prev);
