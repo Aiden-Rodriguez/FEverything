@@ -788,7 +788,8 @@ export const defaultClassData: Class[] = [
     className: "Basara",
     classTree: [],
     promotionStatus: true,
-    description: "Those who prefer a quirky and free-spirited life. Disrupts enemies with their naginatas and scrolls.",
+    description:
+      "Those who prefer a quirky and free-spirited life. Disrupts enemies with their naginatas and scrolls.",
     TypeProperty: [],
     classBaseStats: {
       hp: 20,
@@ -803,7 +804,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -813,7 +814,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 15,
       defense: 5,
-      resistance: 10
+      resistance: 10,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -824,7 +825,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 65,
@@ -834,7 +835,7 @@ export const defaultClassData: Class[] = [
       speed: 31,
       luck: 35,
       defense: 30,
-      resistance: 32
+      resistance: 32,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -844,14 +845,15 @@ export const defaultClassData: Class[] = [
       luck: 5,
       defense: 0,
       resistance: 3,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Diviner",
     classTree: [],
     promotionStatus: false,
-    description: "Those who study the art of spell-casting. They fight using Hoshidan scrolls.",
+    description:
+      "Those who study the art of spell-casting. They fight using Hoshidan scrolls.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -867,7 +869,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -877,7 +879,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 5,
       defense: 0,
-      resistance: 10
+      resistance: 10,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -888,7 +890,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 35,
@@ -898,7 +900,7 @@ export const defaultClassData: Class[] = [
       speed: 23,
       luck: 19,
       defense: 16,
-      resistance: 20
+      resistance: 20,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -908,14 +910,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Onmyoji",
     classTree: [],
     promotionStatus: true,
-    description: "Those who have learned myriad spells. Well-versed with both scrolls and rods.",
+    description:
+      "Those who have learned myriad spells. Well-versed with both scrolls and rods.",
     TypeProperty: [],
     classBaseStats: {
       hp: 16,
@@ -930,7 +933,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -940,7 +943,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 0,
       defense: 0,
-      resistance: 15
+      resistance: 15,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -951,7 +954,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "B",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 45,
@@ -961,7 +964,7 @@ export const defaultClassData: Class[] = [
       speed: 32,
       luck: 27,
       defense: 25,
-      resistance: 31
+      resistance: 31,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -971,14 +974,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Monk",
     classTree: [],
     promotionStatus: false,
-    description: "Men who study to attain enlightenment. They can heal allies with rods.",
+    description:
+      "Men who study to attain enlightenment. They can heal allies with rods.",
     TypeProperty: [],
     classBaseStats: {
       hp: 16,
@@ -993,7 +997,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 10,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -1003,7 +1007,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 15,
       defense: 0,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1014,7 +1018,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "B",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 35,
@@ -1024,7 +1028,7 @@ export const defaultClassData: Class[] = [
       speed: 22,
       luck: 23,
       defense: 17,
-      resistance: 24
+      resistance: 24,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1034,77 +1038,79 @@ export const defaultClassData: Class[] = [
       luck: 2,
       defense: 0,
       resistance: 2,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Shrine Maiden",
     classTree: [],
     promotionStatus: false,
-    description: "Maidens dedicated to serving the gods. They can heal allies with rods.",
+    description:
+      "Maidens dedicated to serving the gods. They can heal allies with rods.",
     TypeProperty: [],
     classBaseStats: {
-        hp: 16,
-        strength: 0,
-        magic: 3,
-        skill: 5,
-        speed: 5,
-        luck: 4,
-        defense: 2,
-        resistance: 5,
-        move: 5,
-        BonusCrit: 0,
-        BonusCritAvoid: 10,
-        BonusHit: 0,
-        BonusAvoid: 0
-      },
-      classGrowths: {
-        hp: 0,
-        strength: 5,
-        magic: 10,
-        skill: 10,
-        speed: 15,
-        luck: 15,
-        defense: 0,
-        resistance: 20
-      },
-      classSkills: [],
-      MaxWeaponRank: {
-        WeaponRankSwordKatana: "n",
-        WeaponRankLanceNaginata: "n",
-        WeaponRankAxeClub: "n",
-        WeaponRankTomeScroll: "n",
-        WeaponRankKnifeShuriken: "n",
-        WeaponRankBowYumi: "n",
-        WeaponRankStaffRod: "B",
-        WeaponRankStone: "n"
-      },
-      MaxStatCaps: {
-        hp: 35,
-        strength: 18,
-        magic: 21,
-        skill: 20,
-        speed: 22,
-        luck: 23,
-        defense: 17,
-        resistance: 24
-      },
-      classPairUpBonuses: {
-        strength: 0,
-        magic: 2,
-        skill: 0,
-        speed: 0,
-        luck: 2,
-        defense: 0,
-        resistance: 2,
-        move: 0
-      }
+      hp: 16,
+      strength: 0,
+      magic: 3,
+      skill: 5,
+      speed: 5,
+      luck: 4,
+      defense: 2,
+      resistance: 5,
+      move: 5,
+      BonusCrit: 0,
+      BonusCritAvoid: 10,
+      BonusHit: 0,
+      BonusAvoid: 0,
+    },
+    classGrowths: {
+      hp: 0,
+      strength: 5,
+      magic: 10,
+      skill: 10,
+      speed: 15,
+      luck: 15,
+      defense: 0,
+      resistance: 20,
+    },
+    classSkills: [],
+    MaxWeaponRank: {
+      WeaponRankSwordKatana: "n",
+      WeaponRankLanceNaginata: "n",
+      WeaponRankAxeClub: "n",
+      WeaponRankTomeScroll: "n",
+      WeaponRankKnifeShuriken: "n",
+      WeaponRankBowYumi: "n",
+      WeaponRankStaffRod: "B",
+      WeaponRankStone: "n",
+    },
+    MaxStatCaps: {
+      hp: 35,
+      strength: 18,
+      magic: 21,
+      skill: 20,
+      speed: 22,
+      luck: 23,
+      defense: 17,
+      resistance: 24,
+    },
+    classPairUpBonuses: {
+      strength: 0,
+      magic: 2,
+      skill: 0,
+      speed: 0,
+      luck: 2,
+      defense: 0,
+      resistance: 2,
+      move: 0,
+    },
   },
   {
     className: "Great Master",
     classTree: [],
     promotionStatus: true,
-    description: "Men who have journeyed to enlightenment. They heal with rods and vanquish foes with naginatas.",
+    description:
+      "Men who have journeyed to enlightenment. They heal with rods and vanquish foes with naginatas.",
     TypeProperty: [],
     classBaseStats: {
       hp: 19,
@@ -1119,7 +1125,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -1129,7 +1135,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 15,
       defense: 10,
-      resistance: 10
+      resistance: 10,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1140,7 +1146,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "A",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 55,
@@ -1150,7 +1156,7 @@ export const defaultClassData: Class[] = [
       speed: 33,
       luck: 32,
       defense: 28,
-      resistance: 32
+      resistance: 32,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1160,14 +1166,15 @@ export const defaultClassData: Class[] = [
       luck: 2,
       defense: 0,
       resistance: 3,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Priestess",
     classTree: [],
     promotionStatus: true,
-    description: "Maidens who fight for the gods and the people. They heal with rods and vanquish foes with yumi.",
+    description:
+      "Maidens who fight for the gods and the people. They heal with rods and vanquish foes with yumi.",
     TypeProperty: [],
     classBaseStats: {
       hp: 19,
@@ -1182,7 +1189,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -1192,7 +1199,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 15,
       defense: 0,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1203,7 +1210,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "B",
       WeaponRankStaffRod: "A",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 50,
@@ -1213,7 +1220,7 @@ export const defaultClassData: Class[] = [
       speed: 33,
       luck: 34,
       defense: 26,
-      resistance: 34
+      resistance: 34,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1223,14 +1230,15 @@ export const defaultClassData: Class[] = [
       luck: 2,
       defense: 0,
       resistance: 3,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Sky Knight",
     classTree: [],
     promotionStatus: false,
-    description: "Warriors who soar the skies astride a pegasus. Has excellent speed and resistance.",
+    description:
+      "Warriors who soar the skies astride a pegasus. Has excellent speed and resistance.",
     TypeProperty: ["Beast", "Flying"],
     parallelClass: null,
     classBaseStats: {
@@ -1246,7 +1254,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -1256,7 +1264,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 20,
       defense: 0,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1267,7 +1275,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 35,
@@ -1277,7 +1285,7 @@ export const defaultClassData: Class[] = [
       speed: 23,
       luck: 25,
       defense: 18,
-      resistance: 25
+      resistance: 25,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1287,14 +1295,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 3,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Falcon Knight",
     classTree: [],
     promotionStatus: true,
-    description: "High-ranking Sky Knights. In addition to naginatas, they can guard allies with rods.",
+    description:
+      "High-ranking Sky Knights. In addition to naginatas, they can guard allies with rods.",
     TypeProperty: ["Beast", "Flying"],
     classBaseStats: {
       hp: 18,
@@ -1309,7 +1318,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -1319,7 +1328,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 20,
       defense: 0,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1330,7 +1339,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "B",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 55,
@@ -1340,7 +1349,7 @@ export const defaultClassData: Class[] = [
       speed: 34,
       luck: 35,
       defense: 27,
-      resistance: 35
+      resistance: 35,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1350,14 +1359,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 3,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Kinshi Knight",
     classTree: [],
     promotionStatus: true,
-    description: "Those who fight astride the fabled golden kite. With their naginatas and yumi, they dominate the skies.",
+    description:
+      "Those who fight astride the fabled golden kite. With their naginatas and yumi, they dominate the skies.",
     TypeProperty: ["Beast", "Flying"],
     classBaseStats: {
       hp: 17,
@@ -1372,7 +1382,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -1382,7 +1392,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 15,
       defense: 0,
-      resistance: 15
+      resistance: 15,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1393,7 +1403,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "A",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 50,
@@ -1403,7 +1413,7 @@ export const defaultClassData: Class[] = [
       speed: 31,
       luck: 34,
       defense: 25,
-      resistance: 31
+      resistance: 31,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1413,8 +1423,8 @@ export const defaultClassData: Class[] = [
       luck: 2,
       defense: 0,
       resistance: 0,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Archer",
@@ -1436,7 +1446,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -1446,7 +1456,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 5,
       defense: 10,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1457,7 +1467,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "B",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 40,
@@ -1467,7 +1477,7 @@ export const defaultClassData: Class[] = [
       speed: 21,
       luck: 20,
       defense: 20,
-      resistance: 17
+      resistance: 17,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -1477,14 +1487,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Sniper",
     classTree: [],
     promotionStatus: true,
-    description: "Those who have reached the pinnacle of the yumi. Has exceptional accuracy and critical rate.",
+    description:
+      "Those who have reached the pinnacle of the yumi. Has exceptional accuracy and critical rate.",
     TypeProperty: [],
     classBaseStats: {
       hp: 19,
@@ -1499,7 +1510,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 10,
       BonusCritAvoid: 0,
       BonusHit: 10,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -1509,7 +1520,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 5,
       defense: 10,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1520,7 +1531,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "S",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 55,
@@ -1530,7 +1541,7 @@ export const defaultClassData: Class[] = [
       speed: 33,
       luck: 30,
       defense: 31,
-      resistance: 28
+      resistance: 28,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -1540,14 +1551,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Ninja",
     classTree: [],
     promotionStatus: false,
-    description: "Those who freely operate in the shadows. They use shurikens to attack and weaken enemies.",
+    description:
+      "Those who freely operate in the shadows. They use shurikens to attack and weaken enemies.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -1563,7 +1575,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 5,
@@ -1573,7 +1585,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 0,
       defense: 5,
-      resistance: 15
+      resistance: 15,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1584,7 +1596,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "B",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 35,
@@ -1594,7 +1606,7 @@ export const defaultClassData: Class[] = [
       speed: 25,
       luck: 18,
       defense: 19,
-      resistance: 20
+      resistance: 20,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1604,14 +1616,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Master Ninja",
     classTree: [],
     promotionStatus: true,
-    description: "Ninja leaders. They execute targets with their shurikens and katanas.",
+    description:
+      "Ninja leaders. They execute targets with their shurikens and katanas.",
     TypeProperty: [],
     classBaseStats: {
       hp: 17,
@@ -1626,7 +1639,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 5,
       BonusCritAvoid: 5,
       BonusHit: 5,
-      BonusAvoid: 5
+      BonusAvoid: 5,
     },
     classGrowths: {
       hp: 5,
@@ -1636,7 +1649,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 0,
       defense: 5,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1647,7 +1660,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "S",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 55,
@@ -1657,7 +1670,7 @@ export const defaultClassData: Class[] = [
       speed: 35,
       luck: 28,
       defense: 26,
-      resistance: 34
+      resistance: 34,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1667,14 +1680,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Mechanist",
     classTree: [],
     promotionStatus: true,
-    description: "Artisans who craft puppets. They wield shurikens and yumi with great dexterity.",
+    description:
+      "Artisans who craft puppets. They wield shurikens and yumi with great dexterity.",
     TypeProperty: ["Automaton"],
     classBaseStats: {
       hp: 18,
@@ -1689,7 +1703,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -1699,7 +1713,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 5,
       defense: 5,
-      resistance: 15
+      resistance: 15,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1710,7 +1724,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "A",
       WeaponRankBowYumi: "B",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 60,
@@ -1720,7 +1734,7 @@ export const defaultClassData: Class[] = [
       speed: 30,
       luck: 30,
       defense: 31,
-      resistance: 31
+      resistance: 31,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -1730,14 +1744,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 2,
       resistance: 2,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Apothecary",
     classTree: [],
     promotionStatus: false,
-    description: "Herb-sellers with extensive knowledge of herbs. They protect themselves with yumi.",
+    description:
+      "Herb-sellers with extensive knowledge of herbs. They protect themselves with yumi.",
     TypeProperty: [],
     classBaseStats: {
       hp: 18,
@@ -1752,7 +1767,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -1762,7 +1777,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 5,
       defense: 10,
-      resistance: 5
+      resistance: 5,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1773,7 +1788,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "B",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 45,
@@ -1783,7 +1798,7 @@ export const defaultClassData: Class[] = [
       speed: 19,
       luck: 21,
       defense: 23,
-      resistance: 20
+      resistance: 20,
     },
     classPairUpBonuses: {
       strength: 3,
@@ -1793,14 +1808,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 2,
       resistance: 1,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Merchant",
     classTree: [],
     promotionStatus: true,
-    description: "Merchants with excellent business acumen. They protect their fortune with naginatas and yumi.",
+    description:
+      "Merchants with excellent business acumen. They protect their fortune with naginatas and yumi.",
     TypeProperty: [],
     classBaseStats: {
       hp: 20,
@@ -1815,7 +1831,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -1825,7 +1841,7 @@ export const defaultClassData: Class[] = [
       speed: 5,
       luck: 15,
       defense: 10,
-      resistance: 5
+      resistance: 5,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1836,7 +1852,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "A",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 65,
@@ -1846,7 +1862,7 @@ export const defaultClassData: Class[] = [
       speed: 28,
       luck: 32,
       defense: 33,
-      resistance: 30
+      resistance: 30,
     },
     classPairUpBonuses: {
       strength: 3,
@@ -1856,14 +1872,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 3,
       resistance: 2,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Kitsune",
     classTree: [],
     promotionStatus: false,
-    description: "A long-living fox who bewitches humans. Boasts high speed and resistance.",
+    description:
+      "A long-living fox who bewitches humans. Boasts high speed and resistance.",
     TypeProperty: ["Beast"],
     parallelClass: null,
     classBaseStats: {
@@ -1879,7 +1896,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -1889,7 +1906,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 10,
       defense: 0,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1900,7 +1917,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "B"
+      WeaponRankStone: "B",
     },
     MaxStatCaps: {
       hp: 40,
@@ -1910,7 +1927,7 @@ export const defaultClassData: Class[] = [
       speed: 24,
       luck: 24,
       defense: 18,
-      resistance: 23
+      resistance: 23,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1920,14 +1937,15 @@ export const defaultClassData: Class[] = [
       luck: 2,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Nine-Tails",
     classTree: [],
     promotionStatus: true,
-    description: "A high-ranking fox with great spiritual power. Has better abilities than a Kitsune.",
+    description:
+      "A high-ranking fox with great spiritual power. Has better abilities than a Kitsune.",
     TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 19,
@@ -1942,7 +1960,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 5,
       BonusCritAvoid: 10,
       BonusHit: 0,
-      BonusAvoid: 10
+      BonusAvoid: 10,
     },
     classGrowths: {
       hp: 10,
@@ -1952,7 +1970,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 10,
       defense: 0,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -1963,7 +1981,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "S"
+      WeaponRankStone: "S",
     },
     MaxStatCaps: {
       hp: 55,
@@ -1973,7 +1991,7 @@ export const defaultClassData: Class[] = [
       speed: 34,
       luck: 33,
       defense: 27,
-      resistance: 34
+      resistance: 34,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -1983,14 +2001,15 @@ export const defaultClassData: Class[] = [
       luck: 3,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Songstress",
     classTree: [],
     promotionStatus: null,
-    description: "A female who calms minds with her beautiful songs. Can sing to allow allies another action.",
+    description:
+      "A female who calms minds with her beautiful songs. Can sing to allow allies another action.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -2006,7 +2025,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -2016,7 +2035,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 20,
       defense: 0,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2027,7 +2046,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 45,
@@ -2037,7 +2056,7 @@ export const defaultClassData: Class[] = [
       speed: 31,
       luck: 35,
       defense: 27,
-      resistance: 28
+      resistance: 28,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -2047,14 +2066,15 @@ export const defaultClassData: Class[] = [
       luck: 4,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Villager",
     classTree: [],
     promotionStatus: false,
-    description: "Common folk who live in villages. During battles, they fight wielding naginatas.",
+    description:
+      "Common folk who live in villages. During battles, they fight wielding naginatas.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -2070,7 +2090,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -2080,7 +2100,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 20,
       defense: 10,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2091,7 +2111,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 35,
@@ -2101,7 +2121,7 @@ export const defaultClassData: Class[] = [
       speed: 19,
       luck: 22,
       defense: 18,
-      resistance: 15
+      resistance: 15,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -2111,14 +2131,15 @@ export const defaultClassData: Class[] = [
       luck: 3,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Cavalier",
     classTree: [],
     promotionStatus: false,
-    description: "Knights who fight on horseback. Can use both swords and lances.",
+    description:
+      "Knights who fight on horseback. Can use both swords and lances.",
     TypeProperty: ["Beast"],
     parallelClass: null,
     classBaseStats: {
@@ -2134,7 +2155,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -2144,7 +2165,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 15,
       defense: 10,
-      resistance: 5
+      resistance: 5,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2155,7 +2176,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 40,
@@ -2165,7 +2186,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 24,
       defense: 22,
-      resistance: 21
+      resistance: 21,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -2175,14 +2196,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 2,
       resistance: 2,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Paladin",
     classTree: [],
     promotionStatus: true,
-    description: "High-ranking knights praised for their bravery. They have better capabilities than a Cavalier.",
+    description:
+      "High-ranking knights praised for their bravery. They have better capabilities than a Cavalier.",
     TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 19,
@@ -2197,7 +2219,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -2207,7 +2229,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 15,
       defense: 10,
-      resistance: 10
+      resistance: 10,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2218,7 +2240,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 60,
@@ -2228,7 +2250,7 @@ export const defaultClassData: Class[] = [
       speed: 30,
       luck: 32,
       defense: 32,
-      resistance: 32
+      resistance: 32,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -2238,14 +2260,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 2,
       resistance: 2,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Great Knight",
     classTree: [],
     promotionStatus: true,
-    description: "Armoured riders. Capable of wielding swords, lances and axes.",
+    description:
+      "Armoured riders. Capable of wielding swords, lances and axes.",
     TypeProperty: ["Armor", "Beast"],
     classBaseStats: {
       hp: 21,
@@ -2260,7 +2283,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -2270,7 +2293,7 @@ export const defaultClassData: Class[] = [
       speed: 5,
       luck: 5,
       defense: 20,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2281,7 +2304,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 65,
@@ -2291,7 +2314,7 @@ export const defaultClassData: Class[] = [
       speed: 27,
       luck: 28,
       defense: 37,
-      resistance: 28
+      resistance: 28,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -2301,14 +2324,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 4,
       resistance: 1,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Knight",
     classTree: [],
     promotionStatus: false,
-    description: "Foot-soldiers encased in heavy armour. Slow but has high defence.",
+    description:
+      "Foot-soldiers encased in heavy armour. Slow but has high defence.",
     TypeProperty: ["Armor"],
     parallelClass: null,
     classBaseStats: {
@@ -2324,7 +2348,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -2334,7 +2358,7 @@ export const defaultClassData: Class[] = [
       speed: 5,
       luck: 10,
       defense: 20,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2345,7 +2369,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 45,
@@ -2355,7 +2379,7 @@ export const defaultClassData: Class[] = [
       speed: 17,
       luck: 22,
       defense: 26,
-      resistance: 18
+      resistance: 18,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -2365,14 +2389,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 4,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "General",
     classTree: [],
     promotionStatus: true,
-    description: "Generals fortified from head to foot with heavy armour. They possess exceptional defence.",
+    description:
+      "Generals fortified from head to foot with heavy armour. They possess exceptional defence.",
     TypeProperty: ["Armor"],
     classBaseStats: {
       hp: 22,
@@ -2387,7 +2412,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 25,
@@ -2397,7 +2422,7 @@ export const defaultClassData: Class[] = [
       speed: 0,
       luck: 10,
       defense: 20,
-      resistance: 5
+      resistance: 5,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2408,7 +2433,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 70,
@@ -2418,7 +2443,7 @@ export const defaultClassData: Class[] = [
       speed: 25,
       luck: 32,
       defense: 40,
-      resistance: 30
+      resistance: 30,
     },
     classPairUpBonuses: {
       strength: 3,
@@ -2428,14 +2453,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 5,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Fighter",
     classTree: [],
     promotionStatus: false,
-    description: "Axe-fighters with a superior body. Has high attack power, but weak defences.",
+    description:
+      "Axe-fighters with a superior body. Has high attack power, but weak defences.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -2451,7 +2477,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -2461,7 +2487,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 5,
       defense: 5,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2472,7 +2498,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 45,
@@ -2482,7 +2508,7 @@ export const defaultClassData: Class[] = [
       speed: 22,
       luck: 21,
       defense: 19,
-      resistance: 18
+      resistance: 18,
     },
     classPairUpBonuses: {
       strength: 4,
@@ -2492,14 +2518,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Berserker",
     classTree: [],
     promotionStatus: true,
-    description: "Crazed fighters who fight with axes. They excel in performing critical hits.",
+    description:
+      "Crazed fighters who fight with axes. They excel in performing critical hits.",
     TypeProperty: [],
     classBaseStats: {
       hp: 24,
@@ -2514,7 +2541,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 20,
       BonusCritAvoid: -5,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 30,
@@ -2524,7 +2551,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 0,
       defense: 0,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2535,7 +2562,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 70,
@@ -2545,7 +2572,7 @@ export const defaultClassData: Class[] = [
       speed: 33,
       luck: 25,
       defense: 27,
-      resistance: 25
+      resistance: 25,
     },
     classPairUpBonuses: {
       strength: 5,
@@ -2555,14 +2582,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Mercenary",
     classTree: [],
     promotionStatus: false,
-    description: "Sell-swords who can handle any mission. They have well-balanced abilities and superior skill.",
+    description:
+      "Sell-swords who can handle any mission. They have well-balanced abilities and superior skill.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -2578,7 +2606,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -2588,7 +2616,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 5,
       defense: 10,
-      resistance: 5
+      resistance: 5,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2599,7 +2627,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 40,
@@ -2609,7 +2637,7 @@ export const defaultClassData: Class[] = [
       speed: 22,
       luck: 20,
       defense: 21,
-      resistance: 19
+      resistance: 19,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -2619,14 +2647,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 1,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Hero",
     classTree: [],
     promotionStatus: true,
-    description: "Heroes renowned for their bravery. They wield swords and axes and can adapt to any battlefield.",
+    description:
+      "Heroes renowned for their bravery. They wield swords and axes and can adapt to any battlefield.",
     TypeProperty: [],
     classBaseStats: {
       hp: 20,
@@ -2641,7 +2670,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -2651,7 +2680,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 5,
       defense: 10,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2662,7 +2691,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 60,
@@ -2672,7 +2701,7 @@ export const defaultClassData: Class[] = [
       speed: 32,
       luck: 31,
       defense: 30,
-      resistance: 27
+      resistance: 27,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -2682,14 +2711,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 2,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Bow Knight",
     classTree: [],
     promotionStatus: true,
-    description: "Knights who rain arrows from horseback. In addition to bows, they can wield swords.",
+    description:
+      "Knights who rain arrows from horseback. In addition to bows, they can wield swords.",
     TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 18,
@@ -2704,7 +2734,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -2714,7 +2744,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 10,
       defense: 0,
-      resistance: 10
+      resistance: 10,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2725,7 +2755,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "A",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 55,
@@ -2735,7 +2765,7 @@ export const defaultClassData: Class[] = [
       speed: 33,
       luck: 30,
       defense: 27,
-      resistance: 32
+      resistance: 32,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -2745,14 +2775,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Outlaw",
     classTree: [],
     promotionStatus: false,
-    description: "Crooks who are skilled at picking locks. Wield bows and boast high speed and resistance.",
+    description:
+      "Crooks who are skilled at picking locks. Wield bows and boast high speed and resistance.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -2768,7 +2799,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -2778,7 +2809,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 0,
       defense: 0,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2789,7 +2820,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "B",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 35,
@@ -2799,7 +2830,7 @@ export const defaultClassData: Class[] = [
       speed: 24,
       luck: 18,
       defense: 17,
-      resistance: 22
+      resistance: 22,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -2809,14 +2840,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 2,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Adventurer",
     classTree: [],
     promotionStatus: true,
-    description: "Glory-seekers who investigate ruins for treasure. With their bows and staves, they're capable of many things.",
+    description:
+      "Glory-seekers who investigate ruins for treasure. With their bows and staves, they're capable of many things.",
     TypeProperty: [],
     classBaseStats: {
       hp: 17,
@@ -2831,7 +2863,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -2841,7 +2873,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 0,
       defense: 0,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2852,7 +2884,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "A",
       WeaponRankStaffRod: "B",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 50,
@@ -2862,7 +2894,7 @@ export const defaultClassData: Class[] = [
       speed: 34,
       luck: 27,
       defense: 25,
-      resistance: 34
+      resistance: 34,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -2872,14 +2904,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 2,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Wyvern Rider",
     classTree: [],
     promotionStatus: false,
-    description: "Knights who fight astride a wyvern. Has superior strength and defence.",
+    description:
+      "Knights who fight astride a wyvern. Has superior strength and defence.",
     TypeProperty: ["Dragon", "Flying"],
     parallelClass: null,
     classBaseStats: {
@@ -2895,7 +2928,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -2905,7 +2938,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 5,
       defense: 20,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2916,7 +2949,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 40,
@@ -2926,7 +2959,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 19,
       defense: 24,
-      resistance: 15
+      resistance: 15,
     },
     classPairUpBonuses: {
       strength: 3,
@@ -2936,14 +2969,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 3,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Wyvern Lord",
     classTree: [],
     promotionStatus: true,
-    description: "High-ranking wyvern riders. With their axes and lances, they demolish enemy forces.",
+    description:
+      "High-ranking wyvern riders. With their axes and lances, they demolish enemy forces.",
     TypeProperty: ["Dragon", "Flying"],
     classBaseStats: {
       hp: 19,
@@ -2958,7 +2992,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -2968,7 +3002,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 5,
       defense: 20,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -2979,7 +3013,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 60,
@@ -2989,7 +3023,7 @@ export const defaultClassData: Class[] = [
       speed: 29,
       luck: 28,
       defense: 35,
-      resistance: 26
+      resistance: 26,
     },
     classPairUpBonuses: {
       strength: 3,
@@ -2999,14 +3033,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 3,
       resistance: 0,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Malig Knight",
     classTree: [],
     promotionStatus: true,
-    description: "Knights who command a mage dragon. With their axes and magic, they trample over enemy forces.",
+    description:
+      "Knights who command a mage dragon. With their axes and magic, they trample over enemy forces.",
     TypeProperty: ["Dragon", "Flying"],
     classBaseStats: {
       hp: 18,
@@ -3021,7 +3056,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -3031,7 +3066,7 @@ export const defaultClassData: Class[] = [
       speed: 5,
       luck: 0,
       defense: 10,
-      resistance: 15
+      resistance: 15,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3042,7 +3077,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 55,
@@ -3052,7 +3087,7 @@ export const defaultClassData: Class[] = [
       speed: 27,
       luck: 25,
       defense: 31,
-      resistance: 31
+      resistance: 31,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -3062,14 +3097,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 2,
       resistance: 2,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Dark Mage",
     classTree: [],
     promotionStatus: false,
-    description: "Sorcerers who have learned Nohrian magic. They attack enemies with magic.",
+    description:
+      "Sorcerers who have learned Nohrian magic. They attack enemies with magic.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -3085,7 +3121,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -3095,7 +3131,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 0,
       defense: 5,
-      resistance: 10
+      resistance: 10,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3106,7 +3142,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 35,
@@ -3116,7 +3152,7 @@ export const defaultClassData: Class[] = [
       speed: 19,
       luck: 18,
       defense: 19,
-      resistance: 22
+      resistance: 22,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -3126,14 +3162,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 3,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Sorcerer",
     classTree: [],
     promotionStatus: true,
-    description: "High-ranking sorcerers who have reached the esoteric pinnacle. They possess exceptional magic.",
+    description:
+      "High-ranking sorcerers who have reached the esoteric pinnacle. They possess exceptional magic.",
     TypeProperty: [],
     classBaseStats: {
       hp: 17,
@@ -3148,7 +3185,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 10,
       BonusCritAvoid: 5,
       BonusHit: 5,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -3158,7 +3195,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 0,
       defense: 5,
-      resistance: 15
+      resistance: 15,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3169,7 +3206,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 50,
@@ -3179,7 +3216,7 @@ export const defaultClassData: Class[] = [
       speed: 29,
       luck: 26,
       defense: 29,
-      resistance: 33
+      resistance: 33,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -3189,14 +3226,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 3,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Dark Knight",
     classTree: [],
     promotionStatus: true,
-    description: "Magic knights whose bodies are infused with sorcery. They're capable of harnessing swords and magic.",
+    description:
+      "Magic knights whose bodies are infused with sorcery. They're capable of harnessing swords and magic.",
     TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 19,
@@ -3211,7 +3249,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 15,
@@ -3221,7 +3259,7 @@ export const defaultClassData: Class[] = [
       speed: 5,
       luck: 5,
       defense: 15,
-      resistance: 5
+      resistance: 5,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3232,7 +3270,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 55,
@@ -3242,7 +3280,7 @@ export const defaultClassData: Class[] = [
       speed: 27,
       luck: 31,
       defense: 34,
-      resistance: 30
+      resistance: 30,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -3252,14 +3290,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 3,
       resistance: 0,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Troubadour",
     classTree: [],
     promotionStatus: false,
-    description: "Staff-wielding knights who are incapable of fighting. Instead, they heal allies with staves.",
+    description:
+      "Staff-wielding knights who are incapable of fighting. Instead, they heal allies with staves.",
     TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 15,
@@ -3274,7 +3313,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 10,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -3284,7 +3323,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 15,
       defense: 0,
-      resistance: 15
+      resistance: 15,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3295,7 +3334,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "B",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 35,
@@ -3305,7 +3344,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 23,
       defense: 16,
-      resistance: 21
+      resistance: 21,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -3315,14 +3354,15 @@ export const defaultClassData: Class[] = [
       luck: 2,
       defense: 0,
       resistance: 2,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Strategist",
     classTree: [],
     promotionStatus: true,
-    description: "Tacticians who command the battlefield from horseback. With their magic and staves, they turn the tide of battle.",
+    description:
+      "Tacticians who command the battlefield from horseback. With their magic and staves, they turn the tide of battle.",
     TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 16,
@@ -3337,7 +3377,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -3347,7 +3387,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 20,
       defense: 0,
-      resistance: 15
+      resistance: 15,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3358,7 +3398,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "A",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 45,
@@ -3368,7 +3408,7 @@ export const defaultClassData: Class[] = [
       speed: 31,
       luck: 33,
       defense: 25,
-      resistance: 32
+      resistance: 32,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -3378,14 +3418,15 @@ export const defaultClassData: Class[] = [
       luck: 2,
       defense: 0,
       resistance: 2,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Maid",
     classTree: [],
     promotionStatus: true,
-    description: "Female vassals who serve a master. They heal their master with staves and protect them with daggers.",
+    description:
+      "Female vassals who serve a master. They heal their master with staves and protect them with daggers.",
     TypeProperty: [],
     classBaseStats: {
       hp: 18,
@@ -3400,7 +3441,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -3410,7 +3451,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 10,
       defense: 5,
-      resistance: 10
+      resistance: 10,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3421,7 +3462,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "B",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "S",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 50,
@@ -3431,7 +3472,7 @@ export const defaultClassData: Class[] = [
       speed: 33,
       luck: 32,
       defense: 29,
-      resistance: 29
+      resistance: 29,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -3441,77 +3482,79 @@ export const defaultClassData: Class[] = [
       luck: 3,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Butler",
     classTree: [],
     promotionStatus: true,
-    description: "Male vassals who serve a master. They heal their master with staves and protect them with daggers.",
+    description:
+      "Male vassals who serve a master. They heal their master with staves and protect them with daggers.",
     TypeProperty: [],
     classBaseStats: {
-        hp: 18,
-        strength: 4,
-        magic: 5,
-        skill: 9,
-        speed: 8,
-        luck: 4,
-        defense: 5,
-        resistance: 4,
-        move: 6,
-        BonusCrit: 0,
-        BonusCritAvoid: 0,
-        BonusHit: 0,
-        BonusAvoid: 0
-      },
-      classGrowths: {
-        hp: 0,
-        strength: 10,
-        magic: 10,
-        skill: 15,
-        speed: 15,
-        luck: 10,
-        defense: 5,
-        resistance: 10
-      },
-      classSkills: [],
-      MaxWeaponRank: {
-        WeaponRankSwordKatana: "n",
-        WeaponRankLanceNaginata: "n",
-        WeaponRankAxeClub: "n",
-        WeaponRankTomeScroll: "n",
-        WeaponRankKnifeShuriken: "B",
-        WeaponRankBowYumi: "n",
-        WeaponRankStaffRod: "S",
-        WeaponRankStone: "n"
-      },
-      MaxStatCaps: {
-        hp: 50,
-        strength: 28,
-        magic: 31,
-        skill: 33,
-        speed: 33,
-        luck: 32,
-        defense: 29,
-        resistance: 29
-      },
-      classPairUpBonuses: {
-        strength: 0,
-        magic: 2,
-        skill: 0,
-        speed: 3,
-        luck: 3,
-        defense: 0,
-        resistance: 0,
-        move: 0
-      }
+      hp: 18,
+      strength: 4,
+      magic: 5,
+      skill: 9,
+      speed: 8,
+      luck: 4,
+      defense: 5,
+      resistance: 4,
+      move: 6,
+      BonusCrit: 0,
+      BonusCritAvoid: 0,
+      BonusHit: 0,
+      BonusAvoid: 0,
+    },
+    classGrowths: {
+      hp: 0,
+      strength: 10,
+      magic: 10,
+      skill: 15,
+      speed: 15,
+      luck: 10,
+      defense: 5,
+      resistance: 10,
+    },
+    classSkills: [],
+    MaxWeaponRank: {
+      WeaponRankSwordKatana: "n",
+      WeaponRankLanceNaginata: "n",
+      WeaponRankAxeClub: "n",
+      WeaponRankTomeScroll: "n",
+      WeaponRankKnifeShuriken: "B",
+      WeaponRankBowYumi: "n",
+      WeaponRankStaffRod: "S",
+      WeaponRankStone: "n",
+    },
+    MaxStatCaps: {
+      hp: 50,
+      strength: 28,
+      magic: 31,
+      skill: 33,
+      speed: 33,
+      luck: 32,
+      defense: 29,
+      resistance: 29,
+    },
+    classPairUpBonuses: {
+      strength: 0,
+      magic: 2,
+      skill: 0,
+      speed: 3,
+      luck: 3,
+      defense: 0,
+      resistance: 0,
+      move: 0,
+    },
   },
   {
     className: "Wolfskin",
     classTree: [],
     promotionStatus: false,
-    description: "A werewolf said to feast on the flesh of humans. Has excellent strength and speed.",
+    description:
+      "A werewolf said to feast on the flesh of humans. Has excellent strength and speed.",
     TypeProperty: ["Beast"],
     parallelClass: null,
     classBaseStats: {
@@ -3527,7 +3570,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -3537,7 +3580,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 5,
       defense: 10,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3548,7 +3591,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "B"
+      WeaponRankStone: "B",
     },
     MaxStatCaps: {
       hp: 45,
@@ -3558,7 +3601,7 @@ export const defaultClassData: Class[] = [
       speed: 22,
       luck: 17,
       defense: 21,
-      resistance: 15
+      resistance: 15,
     },
     classPairUpBonuses: {
       strength: 3,
@@ -3568,14 +3611,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Wolfssegner",
     classTree: [],
     promotionStatus: true,
-    description: "A high-ranking werewolf with a more resilient body. Has better abilities than a Wolfskin.",
+    description:
+      "A high-ranking werewolf with a more resilient body. Has better abilities than a Wolfskin.",
     TypeProperty: ["Beast"],
     classBaseStats: {
       hp: 22,
@@ -3590,7 +3634,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 5,
       BonusCritAvoid: 10,
       BonusHit: 10,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -3600,7 +3644,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 5,
       defense: 10,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3611,7 +3655,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "S"
+      WeaponRankStone: "S",
     },
     MaxStatCaps: {
       hp: 65,
@@ -3621,7 +3665,7 @@ export const defaultClassData: Class[] = [
       speed: 31,
       luck: 26,
       defense: 32,
-      resistance: 26
+      resistance: 26,
     },
     classPairUpBonuses: {
       strength: 4,
@@ -3631,14 +3675,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Dread Fighter",
     classTree: [],
     promotionStatus: null,
-    description: "Those who have learned elusive battle arts. They disorientate foes with katanas, clubs and shurikens.",
+    description:
+      "Those who have learned elusive battle arts. They disorientate foes with katanas, clubs and shurikens.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -3654,7 +3699,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 15,
@@ -3664,7 +3709,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 0,
       defense: 5,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3675,7 +3720,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "B",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 55,
@@ -3685,7 +3730,7 @@ export const defaultClassData: Class[] = [
       speed: 31,
       luck: 26,
       defense: 29,
-      resistance: 34
+      resistance: 34,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -3695,14 +3740,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 4,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Dark Falcon",
     classTree: [],
     promotionStatus: null,
-    description: "Knights who ride astride a pitch-black pegasus. They rush the battlefield armed with lances and tomes.",
+    description:
+      "Knights who ride astride a pitch-black pegasus. They rush the battlefield armed with lances and tomes.",
     TypeProperty: ["Beast", "Flying"],
     parallelClass: null,
     classBaseStats: {
@@ -3718,7 +3764,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 0,
@@ -3728,7 +3774,7 @@ export const defaultClassData: Class[] = [
       speed: 15,
       luck: 15,
       defense: 0,
-      resistance: 20
+      resistance: 20,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3739,7 +3785,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 45,
@@ -3749,7 +3795,7 @@ export const defaultClassData: Class[] = [
       speed: 33,
       luck: 32,
       defense: 26,
-      resistance: 34
+      resistance: 34,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -3759,14 +3805,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 1
-    }
+      move: 1,
+    },
   },
   {
     className: "Ballistician",
     classTree: [],
     promotionStatus: null,
-    description: "An Outrealm class. Rides a mobile cannon. In addition to bows, it can use cannons to inflict wide damage to enemy troops.",
+    description:
+      "An Outrealm class. Rides a mobile cannon. In addition to bows, it can use cannons to inflict wide damage to enemy troops.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -3782,7 +3829,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 5,
@@ -3792,7 +3839,7 @@ export const defaultClassData: Class[] = [
       speed: 0,
       luck: 10,
       defense: 5,
-      resistance: 5
+      resistance: 5,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3803,7 +3850,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "B",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 50,
@@ -3813,7 +3860,7 @@ export const defaultClassData: Class[] = [
       speed: 25,
       luck: 32,
       defense: 27,
-      resistance: 26
+      resistance: 26,
     },
     classPairUpBonuses: {
       strength: 3,
@@ -3823,14 +3870,15 @@ export const defaultClassData: Class[] = [
       luck: 2,
       defense: 1,
       resistance: 1,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Witch",
     classTree: [],
     promotionStatus: null,
-    description: "An Outrealm class. Has the ability to manipulate space. Can teleport great distances in the blink of an eye.",
+    description:
+      "An Outrealm class. Has the ability to manipulate space. Can teleport great distances in the blink of an eye.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -3846,7 +3894,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 10,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 10
+      BonusAvoid: 10,
     },
     classGrowths: {
       hp: 5,
@@ -3856,7 +3904,7 @@ export const defaultClassData: Class[] = [
       speed: 20,
       luck: 5,
       defense: 0,
-      resistance: 10
+      resistance: 10,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3867,7 +3915,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 50,
@@ -3877,7 +3925,7 @@ export const defaultClassData: Class[] = [
       speed: 34,
       luck: 28,
       defense: 26,
-      resistance: 29
+      resistance: 29,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -3887,14 +3935,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Lodestar",
     classTree: [],
     promotionStatus: null,
-    description: "An Outrealm class. A legendary hero spoken of in sagas. Fights wielding swords.",
+    description:
+      "An Outrealm class. A legendary hero spoken of in sagas. Fights wielding swords.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -3910,7 +3959,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 5,
       BonusCritAvoid: 0,
       BonusHit: 10,
-      BonusAvoid: 10
+      BonusAvoid: 10,
     },
     classGrowths: {
       hp: 15,
@@ -3920,7 +3969,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 25,
       defense: 5,
-      resistance: 5
+      resistance: 5,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3931,7 +3980,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 60,
@@ -3941,7 +3990,7 @@ export const defaultClassData: Class[] = [
       speed: 33,
       luck: 40,
       defense: 30,
-      resistance: 29
+      resistance: 29,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -3951,14 +4000,15 @@ export const defaultClassData: Class[] = [
       luck: 3,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Vanguard",
     classTree: [],
     promotionStatus: null,
-    description: "An Outrealm class. A commander who fights at the front-lines. Can wield both swords and axes.",
+    description:
+      "An Outrealm class. A commander who fights at the front-lines. Can wield both swords and axes.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -3974,7 +4024,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 20,
@@ -3984,7 +4034,7 @@ export const defaultClassData: Class[] = [
       speed: 5,
       luck: 10,
       defense: 15,
-      resistance: 0
+      resistance: 0,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -3995,7 +4045,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 65,
@@ -4005,7 +4055,7 @@ export const defaultClassData: Class[] = [
       speed: 30,
       luck: 30,
       defense: 32,
-      resistance: 27
+      resistance: 27,
     },
     classPairUpBonuses: {
       strength: 5,
@@ -4015,14 +4065,15 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 3,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Great Lord",
     classTree: [],
     promotionStatus: null,
-    description: "An Outrealm class. A powerful royal who leads armies. Can wield lances, in addition to swords.",
+    description:
+      "An Outrealm class. A powerful royal who leads armies. Can wield lances, in addition to swords.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -4038,7 +4089,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 15,
@@ -4048,7 +4099,7 @@ export const defaultClassData: Class[] = [
       speed: 10,
       luck: 15,
       defense: 10,
-      resistance: 5
+      resistance: 5,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -4059,7 +4110,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 60,
@@ -4069,7 +4120,7 @@ export const defaultClassData: Class[] = [
       speed: 34,
       luck: 35,
       defense: 29,
-      resistance: 31
+      resistance: 31,
     },
     classPairUpBonuses: {
       strength: 0,
@@ -4079,14 +4130,15 @@ export const defaultClassData: Class[] = [
       luck: 4,
       defense: 0,
       resistance: 0,
-      move: 0
-    }
+      move: 0,
+    },
   },
   {
     className: "Grandmaster",
     classTree: [],
     promotionStatus: null,
-    description: "An Outrealm class. A tactician with a gift for commanding troops. Can fight with swords and tomes.",
+    description:
+      "An Outrealm class. A tactician with a gift for commanding troops. Can fight with swords and tomes.",
     TypeProperty: [],
     parallelClass: null,
     classBaseStats: {
@@ -4102,7 +4154,7 @@ export const defaultClassData: Class[] = [
       BonusCrit: 0,
       BonusCritAvoid: 0,
       BonusHit: 0,
-      BonusAvoid: 0
+      BonusAvoid: 0,
     },
     classGrowths: {
       hp: 10,
@@ -4112,7 +4164,7 @@ export const defaultClassData: Class[] = [
       speed: 5,
       luck: 0,
       defense: 5,
-      resistance: 15
+      resistance: 15,
     },
     classSkills: [],
     MaxWeaponRank: {
@@ -4123,7 +4175,7 @@ export const defaultClassData: Class[] = [
       WeaponRankKnifeShuriken: "n",
       WeaponRankBowYumi: "n",
       WeaponRankStaffRod: "n",
-      WeaponRankStone: "n"
+      WeaponRankStone: "n",
     },
     MaxStatCaps: {
       hp: 55,
@@ -4133,7 +4185,7 @@ export const defaultClassData: Class[] = [
       speed: 29,
       luck: 26,
       defense: 28,
-      resistance: 33
+      resistance: 33,
     },
     classPairUpBonuses: {
       strength: 2,
@@ -4143,8 +4195,8 @@ export const defaultClassData: Class[] = [
       luck: 0,
       defense: 0,
       resistance: 2,
-      move: 0
-    }
+      move: 0,
+    },
   },
 ];
 
@@ -4176,70 +4228,74 @@ function setClassTree(targetClassName: string, treeClassNames: string[]): void {
 }
 
 export function initializeClassTree(): void {
-//Base classes show their own class and what they can promote to.
-setClassTree("Nohr Prince", ["Nohr Prince", "Nohr Noble", "Hoshido Noble"]);
-setClassTree("Nohr Princess", ["Nohr Princess", "Nohr Noble", "Hoshido Noble"]);
+  //Base classes show their own class and what they can promote to.
+  setClassTree("Nohr Prince", ["Nohr Prince", "Nohr Noble", "Hoshido Noble"]);
+  setClassTree("Nohr Princess", [
+    "Nohr Princess",
+    "Nohr Noble",
+    "Hoshido Noble",
+  ]);
 
-setClassTree("Samurai", ["Samurai", "Swordmaster", "Master of Arms"]);
-setClassTree("Villager", ["Villager", "Master of Arms", "Merchant"]);
-setClassTree("Ninja", ["Ninja", "Master Ninja", "Mechanist"]);
-setClassTree("Oni Savage", ["Oni Savage", "Oni Chieftain", "Blacksmith"]);
-setClassTree("Spear Fighter", ["Spear Fighter", "Spear Master", "Basara"]);
-setClassTree("Diviner", ["Diviner", "Basara", "Onmyoji"]);
-setClassTree("Monk", ["Monk", "Great Master", "Onmyoji"]);
-setClassTree("Shrine Maiden", ["Shrine Maiden", "Priestess", "Onmyoji"]);
-setClassTree("Sky Knight", ["Sky Knight", "Falcon Knight", "Kinshi Knight"]);
-setClassTree("Archer", ["Archer", "Kinshi Knight", "Sniper"]);
-setClassTree("Kitsune", ["Kitsune", "Nine-Tails"]);
+  setClassTree("Samurai", ["Samurai", "Swordmaster", "Master of Arms"]);
+  setClassTree("Villager", ["Villager", "Master of Arms", "Merchant"]);
+  setClassTree("Ninja", ["Ninja", "Master Ninja", "Mechanist"]);
+  setClassTree("Oni Savage", ["Oni Savage", "Oni Chieftain", "Blacksmith"]);
+  setClassTree("Spear Fighter", ["Spear Fighter", "Spear Master", "Basara"]);
+  setClassTree("Diviner", ["Diviner", "Basara", "Onmyoji"]);
+  setClassTree("Monk", ["Monk", "Great Master", "Onmyoji"]);
+  setClassTree("Shrine Maiden", ["Shrine Maiden", "Priestess", "Onmyoji"]);
+  setClassTree("Sky Knight", ["Sky Knight", "Falcon Knight", "Kinshi Knight"]);
+  setClassTree("Archer", ["Archer", "Kinshi Knight", "Sniper"]);
+  setClassTree("Kitsune", ["Kitsune", "Nine-Tails"]);
 
-setClassTree("Cavalier", ["Cavalier", "Paladin", "Great Knight"]);
-setClassTree("Knight", ["Knight", "General", "Great Knight"]);
-setClassTree("Fighter", ["Fighter", "Berserker", "Hero"]);
-setClassTree("Mercenary", ["Mercenary", "Hero", "Bow Knight"]);
-setClassTree("Outlaw", ["Outlaw", "Adventurer", "Bow Knight"]);
-setClassTree("Wyvern Rider", ["Wyvern Rider", "Wyvern Lord", "Malig Knight"]);
-setClassTree("Dark Mage", ["Dark Mage", "Sorcerer", "Dark Knight"]);
-setClassTree("Troubadour", ["Troubadour", "Strategist", "Butler", "Maid"]);
-setClassTree("Wolfskin", ["Wolfskin", "Wolfssegner"]);
+  setClassTree("Cavalier", ["Cavalier", "Paladin", "Great Knight"]);
+  setClassTree("Knight", ["Knight", "General", "Great Knight"]);
+  setClassTree("Fighter", ["Fighter", "Berserker", "Hero"]);
+  setClassTree("Mercenary", ["Mercenary", "Hero", "Bow Knight"]);
+  setClassTree("Outlaw", ["Outlaw", "Adventurer", "Bow Knight"]);
+  setClassTree("Wyvern Rider", ["Wyvern Rider", "Wyvern Lord", "Malig Knight"]);
+  setClassTree("Dark Mage", ["Dark Mage", "Sorcerer", "Dark Knight"]);
+  setClassTree("Troubadour", ["Troubadour", "Strategist", "Butler", "Maid"]);
+  setClassTree("Wolfskin", ["Wolfskin", "Wolfssegner"]);
 
-//Promoted classes show which classes could have promoted to them, as well as themselves. Does not show adjacent classes as overlap between classes can cause issues
-setClassTree("Hoshido Noble", [
-  "Nohr Prince",
-  "Nohr Princess",
-  "Hoshido Noble",
-]);
-setClassTree("Nohr Noble", ["Nohr Prince", "Nohr Princess", "Nohr Noble"]);
+  //Promoted classes show which classes could have promoted to them, as well as themselves. Does not show adjacent classes as overlap between classes can cause issues
+  setClassTree("Hoshido Noble", [
+    "Nohr Prince",
+    "Nohr Princess",
+    "Hoshido Noble",
+  ]);
+  setClassTree("Nohr Noble", ["Nohr Prince", "Nohr Princess", "Nohr Noble"]);
 
-setClassTree("Swordmaster", ["Samurai", "Swordmaster"]);
-setClassTree("Master of Arms", ["Samurai", "Villager", "Master of Arms"]);
-setClassTree("Merchant", ["Villager", "Apothecary", "Merchant"]);
-setClassTree("Mechanist", ["Apothecary", "Ninja", "Mechanist"]);
-setClassTree("Master Ninja", ["Ninja", "Master Ninja"]);
-setClassTree("Oni Chieftain", ["Oni Savage", "Oni Chieftain"]);
-setClassTree("Blacksmith", ["Oni Savage", "Blacksmith"]);
-setClassTree("Spear Master", ["Spear Fighter", "Spear Master"]);
-setClassTree("Basara", ["Spear Fighter", "Diviner", "Basara"]);
-setClassTree("Onmyoji", ["Onmyoji", "Diviner", "Monk", "Shrine Maiden"]);
-setClassTree("Falcon Knight", ["Sky Knight", "Falcon Knight"]);
-setClassTree("Kinshi Knight", ["Sky Knight", "Archer", "Kinshi Knight"]);
-setClassTree("Sniper", ["Archer", "Sniper"]);
-setClassTree("Nine-Tails", ["Kitsune", "Nine-Tails"]);
+  setClassTree("Swordmaster", ["Samurai", "Swordmaster"]);
+  setClassTree("Master of Arms", ["Samurai", "Villager", "Master of Arms"]);
+  setClassTree("Merchant", ["Villager", "Apothecary", "Merchant"]);
+  setClassTree("Mechanist", ["Apothecary", "Ninja", "Mechanist"]);
+  setClassTree("Master Ninja", ["Ninja", "Master Ninja"]);
+  setClassTree("Oni Chieftain", ["Oni Savage", "Oni Chieftain"]);
+  setClassTree("Blacksmith", ["Oni Savage", "Blacksmith"]);
+  setClassTree("Spear Master", ["Spear Fighter", "Spear Master"]);
+  setClassTree("Basara", ["Spear Fighter", "Diviner", "Basara"]);
+  setClassTree("Onmyoji", ["Onmyoji", "Diviner", "Monk", "Shrine Maiden"]);
+  setClassTree("Falcon Knight", ["Sky Knight", "Falcon Knight"]);
+  setClassTree("Kinshi Knight", ["Sky Knight", "Archer", "Kinshi Knight"]);
+  setClassTree("Sniper", ["Archer", "Sniper"]);
+  setClassTree("Nine-Tails", ["Kitsune", "Nine-Tails"]);
 
-setClassTree("Paladin", ["Cavalier", "Paladin"]);
-setClassTree("Great Knight", ["Cavalier", "Knight", "Great Knight"]);
-setClassTree("General", ["Knight", "General"]);
-setClassTree("Berserker", ["Fighter", "Berserker"]);
-setClassTree("Hero", ["Fighter", "Mercenary", "Hero"]);
-setClassTree("Bow Knight", ["Mercenary", "Outlaw", "Bow Knight"]);
-setClassTree("Adventurer", ["Outlaw", "Adventurer"]);
-setClassTree("Wyvern Lord", ["Wyvern Rider", "Wyvern Lord"]);
-setClassTree("Malig Knight", ["Wyvern Rider", "Malig Knight"]);
-setClassTree("Sorcerer", ["Dark Mage", "Sorcerer"]);
-setClassTree("Dark Knight", ["Dark Mage", "Dark Knight"]);
-setClassTree("Strategist", ["Troubadour", "Strategist"]);
-setClassTree("Butler", ["Troubadour", "Butler"]);
-setClassTree("Maid", ["Troubadour", "Maid"]);
-setClassTree("Wolfssegner", ["Wolfskin", "Wolfssegner"]);
+  setClassTree("Paladin", ["Cavalier", "Paladin"]);
+  setClassTree("Great Knight", ["Cavalier", "Knight", "Great Knight"]);
+  setClassTree("General", ["Knight", "General"]);
+  setClassTree("Berserker", ["Fighter", "Berserker"]);
+  setClassTree("Hero", ["Fighter", "Mercenary", "Hero"]);
+  setClassTree("Bow Knight", ["Mercenary", "Outlaw", "Bow Knight"]);
+  setClassTree("Adventurer", ["Outlaw", "Adventurer"]);
+  setClassTree("Wyvern Lord", ["Wyvern Rider", "Wyvern Lord"]);
+  setClassTree("Malig Knight", ["Wyvern Rider", "Malig Knight"]);
+  setClassTree("Sorcerer", ["Dark Mage", "Sorcerer"]);
+  setClassTree("Dark Knight", ["Dark Mage", "Dark Knight"]);
+  setClassTree("Strategist", ["Troubadour", "Strategist"]);
+  setClassTree("Butler", ["Troubadour", "Butler"]);
+  setClassTree("Maid", ["Troubadour", "Maid"]);
+  setClassTree("Wolfssegner", ["Wolfskin", "Wolfssegner"]);
 }
 
 //Similar as above. Parallel classes are obtained rarely through a unit gaining nothing from a partner/friendship/parent class set
@@ -4271,24 +4327,24 @@ function setParallelClass(
 }
 
 export function initializeParallelClasses(): void {
-setParallelClass("Cavalier", "Ninja");
-setParallelClass("Knight", "Spear Fighter");
-setParallelClass("Fighter", "Oni Savage");
-setParallelClass("Mercenary", "Samurai");
-setParallelClass("Outlaw", "Archer");
-setParallelClass("Samurai", "Mercenary");
-setParallelClass("Oni Savage", "Fighter");
-setParallelClass("Spear Fighter", "Knight");
-setParallelClass("Diviner", "Dark Mage");
-setParallelClass("Sky Knight", "Wyvern Rider");
-setParallelClass("Archer", "Outlaw");
-setParallelClass("Wyvern Rider", "Sky Knight");
-setParallelClass("Ninja", "Cavalier");
-setParallelClass("Dark Mage", "Diviner");
-setParallelClass("Wolfskin", "Outlaw");
-setParallelClass("Kitsune", "Apothecary");
-setParallelClass("Songstress", "Troubadour");
-setParallelClass("Villager", "Apothecary");
+  setParallelClass("Cavalier", "Ninja");
+  setParallelClass("Knight", "Spear Fighter");
+  setParallelClass("Fighter", "Oni Savage");
+  setParallelClass("Mercenary", "Samurai");
+  setParallelClass("Outlaw", "Archer");
+  setParallelClass("Samurai", "Mercenary");
+  setParallelClass("Oni Savage", "Fighter");
+  setParallelClass("Spear Fighter", "Knight");
+  setParallelClass("Diviner", "Dark Mage");
+  setParallelClass("Sky Knight", "Wyvern Rider");
+  setParallelClass("Archer", "Outlaw");
+  setParallelClass("Wyvern Rider", "Sky Knight");
+  setParallelClass("Ninja", "Cavalier");
+  setParallelClass("Dark Mage", "Diviner");
+  setParallelClass("Wolfskin", "Outlaw");
+  setParallelClass("Kitsune", "Apothecary");
+  setParallelClass("Songstress", "Troubadour");
+  setParallelClass("Villager", "Apothecary");
 }
 
 // Set classSkills for a specific class. Does through function after, as circular reference causes issues.
@@ -4313,73 +4369,103 @@ export function setClassSkills(className: string, skillNames: string[]): void {
 }
 
 export function initializeClassSkills(): void {
-    setClassSkills("Nohr Prince", ["Nobility", "Dragon Fang"]);
-    setClassSkills("Nohr Princess", ["Nobility", "Dragon Fang"]);
-    setClassSkills("Hoshido Noble", ["Dragon Ward", "Hoshidan Unity"]);
-    setClassSkills("Samurai", ["Duelist's Blow", "Vantage"]);
-    setClassSkills("Swordmaster", ["Astra", "Swordfaire"]);
-    setClassSkills("Master of Arms", ["Seal Strength", "Life and Death"]);
-    setClassSkills("Oni Savage", ["Seal Resistance", "Shove"]);
-    setClassSkills("Oni Chieftain", ["Death Blow", "Counter"]);
-    setClassSkills("Blacksmith", ["Salvage Blow", "Lancebreaker"]);
-    setClassSkills("Spear Fighter", ["Seal Defence", "Swap"]);
-    setClassSkills("Spear Master", ["Seal Speed", "Lancefaire"]);
-    setClassSkills("Basara", ["Rend Heaven", "Quixotic"]);
-    setClassSkills("Diviner", ["Magic +2", "Future Sight"]);
-    setClassSkills("Onmyoji", ["Rally Magic", "Tomefaire"]);
-    setClassSkills("Shrine Maiden", ["Miracle", "Rally Luck"]);
-    setClassSkills("Monk", ["Miracle", "Rally Luck"]);
-    setClassSkills("Priestess", ["Renewal", "Countermagic"]);
-    setClassSkills("Great Master", ["Renewal", "Countermagic"]);
-    setClassSkills("Sky Knight", ["Darting Blow", "Camaraderie"]);
-    setClassSkills("Falcon Knight", ["Rally Speed", "Warding Blow"]);
-    setClassSkills("Kinshi Knight", ["Air Superiority", "Amaterasu"]);
-    setClassSkills("Archer", ["Skill +2", "Quick Draw"]);
-    setClassSkills("Sniper", ["Certain Blow", "Bowfaire"]);
-    setClassSkills("Ninja", ["Locktouch", "Poison Strike"]);
-    setClassSkills("Master Ninja", ["Lethality", "Shurikenfaire"]);
-    setClassSkills("Mechanist", ["Golembane", "Replicate"]);
-    setClassSkills("Apothecary", ["Potent Potion", "Quick Salve"]);
-    setClassSkills("Merchant", ["Profiteer", "Spendthrift"]);
-    setClassSkills("Kitsune", ["Evenhanded", "Beastbane"]);
-    setClassSkills("Nine-Tails", ["Even Better", "Grisly Wound"]);
-    setClassSkills("Songstress", ["Luck +4", "Inspiring Song", "Voice of Peace", "Foreign Princess"]);
-    setClassSkills("Villager", ["Aptitude", "Underdog"]);
-    setClassSkills("Nohr Noble", ["Draconic Hex", "Nohrian Trust"]);
-    setClassSkills("Cavalier", ["Elbow Room", "Shelter"]);
-    setClassSkills("Paladin", ["Defender", "Aegis"]);
-    setClassSkills("Great Knight", ["Luna", "Armored Blow"]);
-    setClassSkills("Knight", ["Defence +2", "Natural Cover"]);
-    setClassSkills("General", ["Wary Fighter", "Pavise"]);
-    setClassSkills("Fighter", ["HP +5", "Gamble"]);
-    setClassSkills("Berserker", ["Rally Strength", "Axefaire"]);
-    setClassSkills("Mercenary", ["Good Fortune", "Strong Riposte"]);
-    setClassSkills("Hero", ["Sol", "Axebreaker"]);
-    setClassSkills("Bow Knight", ["Rally Skill", "Shurikenbreaker"]);
-    setClassSkills("Outlaw", ["Movement +1", "Lucky Seven"]);
-    setClassSkills("Adventurer", ["Pass"]);
-    setClassSkills("Wyvern Rider", ["Strength +2", "Lunge"]);
-    setClassSkills("Wyvern Lord", ["Rally Defence", "Swordbreaker"]);
-    setClassSkills("Malig Knight", ["Savage Blow", "Trample"]);
-    setClassSkills("Dark Mage", ["Heartseeker", "Malefic Aura"]);
-    setClassSkills("Sorcerer", ["Vengeance", "Bowbreaker"]);
-    setClassSkills("Dark Knight", ["Seal Magic", "Lifetaker"]);
-    setClassSkills("Troubadour", ["Resistance +2", "Gentilhomme", "Demoiselle"]);
-    setClassSkills("Strategist", ["Rally Resistance", "Inspiration"]);
-    setClassSkills("Maid", ["Live to Serve", "Tomebreaker"]);
-    setClassSkills("Butler", ["Live to Serve", "Tomebreaker"]);
-    setClassSkills("Wolfskin", ["Odd Shaped", "Beastbane"]);
-    setClassSkills("Wolfssegner", ["Better Odds", "Grisly Wound"]);
-    setClassSkills("Dread Fighter", ["Even Keel", "Iron Will", "Clarity", "Aggressor"]);
-    setClassSkills("Sky Knight", ["Speed +2", "Relief"]);
-    setClassSkills("Dark Falcon", ["Rally Movement", "Galeforce"]);
-    setClassSkills("Ballistician", ["Survey", "Opportunity Shot", "Rifled Barrel", "Surefooted"]);
-    setClassSkills("Witch", ["Shadowgift", "Witch's Brew", "Warp", "Toxic Brew"]);
-    setClassSkills("Lodestar", ["Dancing Blade", "Charm", "Dual Guarder", "Speedtaker"]);
-    setClassSkills("Vanguard", ["Heavy Blade", "Veteran Intuition", "Aether", "Strengthtaker"]);
-    setClassSkills("Great Lord", ["Dual Striker", "Awakening"]);
-    setClassSkills("Grandmaster", ["Tactical Advice", "Solidarity", "Ignis", "Rally Spectrum"]);
-  }
+  setClassSkills("Nohr Prince", ["Nobility", "Dragon Fang"]);
+  setClassSkills("Nohr Princess", ["Nobility", "Dragon Fang"]);
+  setClassSkills("Hoshido Noble", ["Dragon Ward", "Hoshidan Unity"]);
+  setClassSkills("Samurai", ["Duelist's Blow", "Vantage"]);
+  setClassSkills("Swordmaster", ["Astra", "Swordfaire"]);
+  setClassSkills("Master of Arms", ["Seal Strength", "Life and Death"]);
+  setClassSkills("Oni Savage", ["Seal Resistance", "Shove"]);
+  setClassSkills("Oni Chieftain", ["Death Blow", "Counter"]);
+  setClassSkills("Blacksmith", ["Salvage Blow", "Lancebreaker"]);
+  setClassSkills("Spear Fighter", ["Seal Defence", "Swap"]);
+  setClassSkills("Spear Master", ["Seal Speed", "Lancefaire"]);
+  setClassSkills("Basara", ["Rend Heaven", "Quixotic"]);
+  setClassSkills("Diviner", ["Magic +2", "Future Sight"]);
+  setClassSkills("Onmyoji", ["Rally Magic", "Tomefaire"]);
+  setClassSkills("Shrine Maiden", ["Miracle", "Rally Luck"]);
+  setClassSkills("Monk", ["Miracle", "Rally Luck"]);
+  setClassSkills("Priestess", ["Renewal", "Countermagic"]);
+  setClassSkills("Great Master", ["Renewal", "Countermagic"]);
+  setClassSkills("Sky Knight", ["Darting Blow", "Camaraderie"]);
+  setClassSkills("Falcon Knight", ["Rally Speed", "Warding Blow"]);
+  setClassSkills("Kinshi Knight", ["Air Superiority", "Amaterasu"]);
+  setClassSkills("Archer", ["Skill +2", "Quick Draw"]);
+  setClassSkills("Sniper", ["Certain Blow", "Bowfaire"]);
+  setClassSkills("Ninja", ["Locktouch", "Poison Strike"]);
+  setClassSkills("Master Ninja", ["Lethality", "Shurikenfaire"]);
+  setClassSkills("Mechanist", ["Golembane", "Replicate"]);
+  setClassSkills("Apothecary", ["Potent Potion", "Quick Salve"]);
+  setClassSkills("Merchant", ["Profiteer", "Spendthrift"]);
+  setClassSkills("Kitsune", ["Evenhanded", "Beastbane"]);
+  setClassSkills("Nine-Tails", ["Even Better", "Grisly Wound"]);
+  setClassSkills("Songstress", [
+    "Luck +4",
+    "Inspiring Song",
+    "Voice of Peace",
+    "Foreign Princess",
+  ]);
+  setClassSkills("Villager", ["Aptitude", "Underdog"]);
+  setClassSkills("Nohr Noble", ["Draconic Hex", "Nohrian Trust"]);
+  setClassSkills("Cavalier", ["Elbow Room", "Shelter"]);
+  setClassSkills("Paladin", ["Defender", "Aegis"]);
+  setClassSkills("Great Knight", ["Luna", "Armored Blow"]);
+  setClassSkills("Knight", ["Defence +2", "Natural Cover"]);
+  setClassSkills("General", ["Wary Fighter", "Pavise"]);
+  setClassSkills("Fighter", ["HP +5", "Gamble"]);
+  setClassSkills("Berserker", ["Rally Strength", "Axefaire"]);
+  setClassSkills("Mercenary", ["Good Fortune", "Strong Riposte"]);
+  setClassSkills("Hero", ["Sol", "Axebreaker"]);
+  setClassSkills("Bow Knight", ["Rally Skill", "Shurikenbreaker"]);
+  setClassSkills("Outlaw", ["Movement +1", "Lucky Seven"]);
+  setClassSkills("Adventurer", ["Pass"]);
+  setClassSkills("Wyvern Rider", ["Strength +2", "Lunge"]);
+  setClassSkills("Wyvern Lord", ["Rally Defence", "Swordbreaker"]);
+  setClassSkills("Malig Knight", ["Savage Blow", "Trample"]);
+  setClassSkills("Dark Mage", ["Heartseeker", "Malefic Aura"]);
+  setClassSkills("Sorcerer", ["Vengeance", "Bowbreaker"]);
+  setClassSkills("Dark Knight", ["Seal Magic", "Lifetaker"]);
+  setClassSkills("Troubadour", ["Resistance +2", "Gentilhomme", "Demoiselle"]);
+  setClassSkills("Strategist", ["Rally Resistance", "Inspiration"]);
+  setClassSkills("Maid", ["Live to Serve", "Tomebreaker"]);
+  setClassSkills("Butler", ["Live to Serve", "Tomebreaker"]);
+  setClassSkills("Wolfskin", ["Odd Shaped", "Beastbane"]);
+  setClassSkills("Wolfssegner", ["Better Odds", "Grisly Wound"]);
+  setClassSkills("Dread Fighter", [
+    "Even Keel",
+    "Iron Will",
+    "Clarity",
+    "Aggressor",
+  ]);
+  setClassSkills("Sky Knight", ["Speed +2", "Relief"]);
+  setClassSkills("Dark Falcon", ["Rally Movement", "Galeforce"]);
+  setClassSkills("Ballistician", [
+    "Survey",
+    "Opportunity Shot",
+    "Rifled Barrel",
+    "Surefooted",
+  ]);
+  setClassSkills("Witch", ["Shadowgift", "Witch's Brew", "Warp", "Toxic Brew"]);
+  setClassSkills("Lodestar", [
+    "Dancing Blade",
+    "Charm",
+    "Dual Guarder",
+    "Speedtaker",
+  ]);
+  setClassSkills("Vanguard", [
+    "Heavy Blade",
+    "Veteran Intuition",
+    "Aether",
+    "Strengthtaker",
+  ]);
+  setClassSkills("Great Lord", ["Dual Striker", "Awakening"]);
+  setClassSkills("Grandmaster", [
+    "Tactical Advice",
+    "Solidarity",
+    "Ignis",
+    "Rally Spectrum",
+  ]);
+}
 
 export const getClass = (name: string): Class => {
   const cls = defaultClassData.find((c) => c.className === name);

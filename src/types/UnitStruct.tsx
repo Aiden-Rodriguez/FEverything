@@ -75,18 +75,79 @@ export interface Character {
     defense: number;
     resistance: number;
   };
+
+  // w/ no supports 5 crit avoid is always given
+  personal_pair_up_bonuses_base: {
+    dodge: 5;
+  };
+  personal_pair_up_bonuses_C: {
+    strength: number;
+    magic: number;
+    skill: number;
+    speed: number;
+    luck: number;
+    defense: number;
+    resistance: number;
+  };
+  personal_pair_up_bonuses_B: {
+    strength: number;
+    magic: number;
+    skill: number;
+    speed: number;
+    luck: number;
+    defense: number;
+    resistance: number;
+  };
+  personal_pair_up_bonuses_A: {
+    strength: number;
+    magic: number;
+    skill: number;
+    speed: number;
+    luck: number;
+    defense: number;
+    resistance: number;
+  };
+  personal_pair_up_bonuses_S: {
+    strength: number;
+    magic: number;
+    skill: number;
+    speed: number;
+    luck: number;
+    defense: number;
+    resistance: number;
+  };
+  //Always 10 hit as base w/ no supports
+  support_bonus_base: {
+    Crit: 0;
+    CritAvoid: 0;
+    Hit: 10;
+    Avoid: 0;
+  };
+  support_bonus_C: {
+    Crit: number;
+    CritAvoid: number;
+    Hit: number;
+    Avoid: number;
+  };
+  support_bonus_B: {
+    Crit: number;
+    CritAvoid: number;
+    Hit: number;
+    Avoid: number;
+  };
+  support_bonus_A: {
+    Crit: number;
+    CritAvoid: number;
+    Hit: number;
+    Avoid: number;
+  };
+  support_bonus_S: {
+    Crit: number;
+    CritAvoid: number;
+    Hit: number;
+    Avoid: number;
+  };
 }
 
-// THINGS THAT UNITS SHOULD HAVE
-// At base
 // Starting Equipment ..?
-//Stats @ Start
-//Growths rate + mod for classes
-//Weapon Rank
-//Pers. skill
-//Skills
-//Base class sets
-//Inheritable class sets (partner/friendship seals), Paralel classes ..?
-//Personal Pair up bonuses
-//Personal support bonuses
-// Time(s) of reclassing / promoting
+//Inheritable class sets (partner/friendship seals)

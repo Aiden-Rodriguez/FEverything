@@ -12,7 +12,7 @@
   gap: 5px;
   border: 2px solid var(--color-accent);
   padding: 20px;
-  background-color: #f8f8f8;
+  background-color: var(--color-background-units-grid);
   border-radius: 8px;
   margin-bottom: 30px;
 }
@@ -23,7 +23,7 @@
   align-items: center;
   border: 2px solid var(--color-accent);
   padding: 20px;
-  background-color: #f8f8f8;
+  background-color: var(--color-background-units-grid);
   border-radius: 8px;
   margin-bottom: 30px;
   color: var(--color-text-basic);
@@ -31,7 +31,7 @@
 }
 
 .add-character-grid:hover {
-  background-color: #cebaba;
+  background-color: var(--color-background-cell);
   cursor: pointer;
 }
 
@@ -39,7 +39,7 @@
   padding: 5px;
   border: 1px solid var(--color-accent);
   border-radius: 5px;
-  background-color: white;
+  background-color: var(--color-background-cell);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-width: 0;
 }
@@ -115,6 +115,103 @@ span {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content {
+  background-color: var(--color-background-cell);
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text-basic);
+}
+
+.close-button:hover {
+  color: var(--color-accent);
+}
+
+.corrin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field label {
+  font-weight: bold;
+  color: var(--color-text-basic);
+}
+
+.form-field select {
+  padding: 5px;
+  border: 1px solid var(--color-accent);
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.create-corrin-button {
+  padding: 10px;
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.create-corrin-button:hover {
+  background-color: #0056b3;
+}
+
+.add-unit-options {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.add-unit-options button {
+  padding: 10px 20px;
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-unit-options button:hover {
+  background-color: #0056b3;
 }
 
 @media (min-width: 768px) {

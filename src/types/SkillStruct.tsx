@@ -17,15 +17,15 @@ export enum SkillType {
   RECOVERY = "recovery",
   MOVEMENT = "movement",
   MONETARY = "monetary",
-  PERSONAL = "personal"
+  PERSONAL = "personal",
 }
 
 export interface Skill {
-    name: string;
-    associatedClass?: Class[];
-    associatedCharacterName?: string;
-    levelAcquired?: number;
-    description: string;
-    effect: null;
-    type: SkillType[];
-  }
+  name: string;
+  associatedClass?: Class[];
+  associatedCharacterName?: string;
+  levelAcquired?: number;
+  description: string;
+  effect: null;
+  type: SkillType[];
+}

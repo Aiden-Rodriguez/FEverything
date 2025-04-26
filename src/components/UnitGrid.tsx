@@ -24,8 +24,12 @@ interface SkillsModule {
 }
 
 const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
-  const [getClassFn, setGetClassFn] = useState<((className: string) => Class) | null>(null);
-  const [getSkillFn, setGetSkillFn] = useState<((skillName: string) => Skill) | null>(null);
+  const [getClassFn, setGetClassFn] = useState<
+    ((className: string) => Class) | null
+  >(null);
+  const [getSkillFn, setGetSkillFn] = useState<
+    ((skillName: string) => Skill) | null
+  >(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
@@ -38,11 +42,17 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
 
     const loadData = async () => {
       try {
-        const initModule = (await import(`../defaultData/${gameId}/init.tsx`)) as InitModule;
+        const initModule = (await import(
+          `../defaultData/${gameId}/init.tsx`
+        )) as InitModule;
         initModule.initializeData();
 
-        const classModule = (await import(`../defaultData/${gameId}/defaultClassData.tsx`)) as ClassDataModule;
-        const skillModule = (await import(`../defaultData/${gameId}/defaultSkills.tsx`)) as SkillsModule;
+        const classModule = (await import(
+          `../defaultData/${gameId}/defaultClassData.tsx`
+        )) as ClassDataModule;
+        const skillModule = (await import(
+          `../defaultData/${gameId}/defaultSkills.tsx`
+        )) as SkillsModule;
 
         setGetClassFn(() => classModule.getClass);
         setGetSkillFn(() => skillModule.getSkill);
@@ -57,7 +67,12 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
   }, [gameId]);
 
   if (isLoading || !getClassFn || !getSkillFn) {
-    return <h3>Loading... <br /> If this takes more than a few seconds the gameID is incorrect.</h3>;
+    return (
+      <h3>
+        Loading... <br /> If this takes more than a few seconds the gameID is
+        incorrect.
+      </h3>
+    );
   }
 
   const handleToggleExpand = () => {
@@ -318,20 +333,24 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                 )}
               </div>
               <div className="class-sets-classes">
-  {unit.base_class_set.heart_seal_classes && unit.base_class_set.heart_seal_classes.length > 0 ? (
-    unit.base_class_set.heart_seal_classes.map((cls, clsIndex) =>
-      cls.classTree && cls.classTree.length > 0 ? (
-        cls.classTree.map((promotedClass, treeIndex) => (
-          <p key={`${clsIndex}-${treeIndex}`} className="class-sets-classes">
-            {promotedClass.className}
-          </p>
-        ))
-      ) : null
-    )
-  ) : (
-    <p className="class-sets-classes">No Heart Seal Classes</p>
-  )}
-</div>
+                {unit.base_class_set.heart_seal_classes &&
+                unit.base_class_set.heart_seal_classes.length > 0 ? (
+                  unit.base_class_set.heart_seal_classes.map((cls, clsIndex) =>
+                    cls.classTree && cls.classTree.length > 0
+                      ? cls.classTree.map((promotedClass, treeIndex) => (
+                          <p
+                            key={`${clsIndex}-${treeIndex}`}
+                            className="class-sets-classes"
+                          >
+                            {promotedClass.className}
+                          </p>
+                        ))
+                      : null,
+                  )
+                ) : (
+                  <p className="class-sets-classes">No Heart Seal Classes</p>
+                )}
+              </div>
               <p className="class-sets-classes">
                 Partner Seal:{" "}
                 {unit.base_class_set.partner_seal_base_class?.className ||
