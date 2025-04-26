@@ -1189,6 +1189,489 @@ export const defaultSkills: Skill[] = [
     effect: null,
     type: [SkillType.SUPPORT, SkillType.STATS],
   },
+  {
+    name: "Supportive",
+    associatedCharacterName: "Corrin",
+    description: "When user is the support unit, if the lead unit has a C Support or higher, the lead unit's Hit Rate +10, damage +2 and damage received -2",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.SUPPORT, SkillType.OFFENSIVE, SkillType.DEFENSIVE],
+  },
+  {
+    name: "Devoted Partner",
+    associatedCharacterName: "Felicia",
+    description: "If the Avatar is the lead unit, Avatar's damage +2, damage received -2",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.SUPPORT, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Evasive Partner",
+    associatedCharacterName: "Jakob",
+    description: "If the Avatar is the lead unit, Avatar's Avoid +15, damage received -3",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.SUPPORT, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Miraculous Save",
+    associatedCharacterName: "Kaze",
+    description: "When user is the support unit, the lead unit has a Luck% chance of surviving a fatal attack with 1 HP",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.SUPPORT, SkillType.PROC, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Healing Descant",
+    associatedCharacterName: "Azura",
+    description: "Allies within a 2 tile radius recover 10% HP at the start of the user's Turn",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.AURA, SkillType.RECOVERY, SkillType.SUPPORT, SkillType.PASSIVE]
+  },
+  {
+    name: "Vow of Friendship",
+    associatedCharacterName: "Silas",
+    description: "If the Avatar is an ally, when the Avatar is under half HP, user's damage +3 and damage received -3",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Highwayman",
+    associatedCharacterName: "Shura",
+    description: "When user triggers the battle, if the enemy cannot counter-attack, enemy's Strength and Speed -3 after the battle (stats recover by 1 each Turn)",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PLAYER_PHASE, SkillType.DEBUFF]
+  },
+  {
+    name: "Peacebringer",
+    associatedCharacterName: "Izana",
+    description: "Allies and enemies within a 2 tile radius deal 2 less damage",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.AURA, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Forager",
+    associatedCharacterName: "Mozu",
+    description: "When standing on Mountain, Woods, Waste or Field terrain, the user recovers 20% HP at the start of the Turn",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.RECOVERY, SkillType.PASSIVE]
+  },
+  {
+    name: "Forceful Partner",
+    associatedCharacterName: "Gunter",
+    description: "If the Avatar is the lead unit, Avatar's Hit rate +15, damage +3",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.OFFENSIVE, SkillType.SUPPORT]
+  },
+  {
+    name: "Lily's Poise",
+    associatedCharacterName: "Elise",
+    description: "Adjacent allies deal 1 extra damage and receive 3 less damage",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.AURA, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Misfortunate",
+    associatedCharacterName: "Arthur",
+    description: "Enemies within a 2 tile radius have their Critical Evade reduced by 15, while the user's Critical Evade is reduced by 5",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.AURA, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Puissance",
+    associatedCharacterName: "Effie",
+    description: "When user's Strength is 5 or more points higher than the enemy's Strength, damage +3 during battle",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.OFFENSIVE, SkillType.PASSIVE]
+  },
+  {
+    name: "Aching Blood",
+    associatedCharacterName: "Odin",
+    description: "When equipped with a forged weapon whose name is at least 12 characters, Critical rate +10",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Kidnap",
+    associatedCharacterName: "Niles",
+    description: "When there is a Prison in My Castle, the user can select the “Capture” command. If a generic enemy is defeated, they will be sent to the Prison",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.UTILITY, SkillType.GROWTH]
+  },
+  {
+    name: "Countercurse",
+    associatedCharacterName: "Nyx",
+    description: "When enemy triggers the battle and inflicts magical damage, the enemy receives half the same damage",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.ENEMY_PHASE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Rose's Thorn",
+    associatedCharacterName: "Camilla",
+    description: "Adjacent allies deal 3 extra damage and receive 1 less damage",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.AURA, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Fierce Rival",
+    associatedCharacterName: "Selena",
+    description: "When user is the support unit, if the lead unit triggers a critical hit, the user is guaranteed a critical hit (if their attack connects)",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Opportunist",
+    associatedCharacterName: "Beruka",
+    description: "When user triggers the battle, if the enemy cannot counter-attack, damage +4",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.OFFENSIVE, SkillType.PLAYER_PHASE]
+  },
+  {
+    name: "Fancy Footwork",
+    associatedCharacterName: "Laslow",
+    description: "Strength and Speed +1 to all allies within a 2 tile radius for one Turn when the “Rally” command is used",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.SUPPORT, SkillType.STATS]
+  },
+  {
+    name: "Bloodthirst",
+    associatedCharacterName: "Peri",
+    description: "When user triggers the battle and defeats the enemy, Strength, Magic, Skill and Speed +4 for one turn",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.STATS, SkillType.OFFENSIVE, SkillType.PLAYER_PHASE]
+  },
+  {
+    name: "Fierce Mien",
+    associatedCharacterName: "Benny",
+    description: "Enemies within a 2 tile radius have their Avoid reduced by 10",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.AURA, SkillType.DEBUFF]
+  },
+  {
+    name: "Unmask",
+    associatedCharacterName: "Charlotte",
+    description: "When engaging a female enemy, Damage +4 and Critical rate +20",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Pragmatic",
+    associatedCharacterName: "Leo",
+    description: "When enemy's HP is not full, damage +3 and damage received -1 during the battle",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Collector",
+    associatedCharacterName: "Keaton",
+    description: "Luck% chance of obtaining 3 Minerals or Foodstuffs after moving up to the 7th Turn",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PROC, SkillType.GROWTH]
+  },
+  {
+    name: "Chivalry",
+    associatedCharacterName: "Xander",
+    description: "When enemy's HP is at maximum, damage +2 and damage received -2 during the battle",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Icy Blood",
+    associatedCharacterName: "Flora",
+    description: "When user's HP is not full and they sustain damage, the enemy receives the same damage and the enemy's Skill and Speed is reduced by 3",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.DEBUFF, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Draconic Heir",
+    associatedCharacterName: "Kana",
+    description: "When user is equipped with a Dragonstone, they recover 15% HP at the start of their Turn",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.RECOVERY]
+  },
+  {
+    name: "Born Steward",
+    associatedCharacterName: "Dwyer",
+    description: "When fighting in My Castle, Hit rate and Avoid +20, damage +2 and damage received -2",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Perfect Pitch",
+    associatedCharacterName: "Shigure",
+    description: "Allies within a 2 tile radius who have lower HP than the user recover 10% HP when the “Rally” command is used",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.SUPPORT, SkillType.RECOVERY, SkillType.AURA]
+  },
+  {
+    name: "Mischievous",
+    associatedCharacterName: "Sophie",
+    description: "When user triggers the battle and their attack connects with the enemy, enemy's Defence -3 and enemy is stripped",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PLAYER_PHASE, SkillType.DEBUFF]
+  },
+  {
+    name: "Lucky Charm",
+    associatedCharacterName: "Midori",
+    description: "Skills with an activation rate dependent on the Luck stat have their rate increased by 20%",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.PROC]
+  },
+  {
+    name: "Gallant",
+    associatedCharacterName: "Siegbert",
+    description: "When user is the support unit, if the lead unit is female, the lead unit's damage +2",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.SUPPORT, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Fierce Counter",
+    associatedCharacterName: "Forrest",
+    description: "When a male enemy triggers the battle, damage +2",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.ENEMY_PHASE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Guarded Bravery",
+    associatedCharacterName: "Ignatius",
+    description: "When user is the lead unit, damage received -2. If no support unit available, damage received +2",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Goody Basket",
+    associatedCharacterName: "Velouria",
+    description: "At the start of the Turn, Luck% chance of recovering 10% HP",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.RECOVERY, SkillType.PROC]
+  },
+  {
+    name: "Fortunate Son",
+    associatedCharacterName: "Percy",
+    description: "Allies within a 2 tile radius have their Critical Evade increased by 15, while the user's Critical Evade is increased by 5",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.DEFENSIVE, SkillType.AURA]
+  },
+  {
+    name: "Bibliophile",
+    associatedCharacterName: "Ophelia",
+    description: "When user is carrying 3 or more Tomes, Critical rate +10",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Sisterhood",
+    associatedCharacterName: "Soleil",
+    description: "When user is the lead unit, if their support unit is female, damage +2 and damage received -2",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Daydream",
+    associatedCharacterName: "Nina",
+    description: "When user is adjacent to two male units paired up, damage +2 and damage received -2",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Fiery Blood",
+    associatedCharacterName: "Rinkah",
+    description: "When user's HP is not full, damage +4",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Quiet Strength",
+    associatedCharacterName: "Sakura",
+    description: "Allies within a 2 tile radius receive 2 less damage",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.DEFENSIVE, SkillType.AURA]
+  },
+  {
+    name: "Fearsome Blow",
+    associatedCharacterName: "Hana",
+    description: "When user triggers the battle and defeats an enemy, enemies adjacent to the user have their HP reduced by 20%",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PLAYER_PHASE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Perfectionist",
+    associatedCharacterName: "Subaki",
+    description: "When user's HP is at maximum, Hit rate and Avoid +15",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE]
+  },
+  {
+    name: "Pyrotechnics",
+    associatedCharacterName: "Saizo",
+    description: "When user triggers the battle at under half HP, the user and enemies within a 2 tile radius have their HP reduced by 20%",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PLAYER_PHASE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Capture",
+    associatedCharacterName: "Orochi",
+    description: "When there is a Prison in My Castle, the user can select the “Capture” command. If a generic enemy is defeated, they will be sent to the Prison",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.UTILITY, SkillType.GROWTH]
+  },
+  {
+    name: "Rallying Cry",
+    associatedCharacterName: "Hinoka",
+    description: "Allies within a 2 tile radius deal 2 extra damage",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.AURA]
+  },
+  {
+    name: "Divine Retribution",
+    associatedCharacterName: "Azama",
+    description: "When user doesn't have a weapon equipped and they sustain damage from an adjacent enemy, the enemy receives half the same damage",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.ENEMY_PHASE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Optimist",
+    associatedCharacterName: "Setsuna",
+    description: "When user is healed by a staff, they recover 1.5 times the normal HP",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.RECOVERY]
+  },
+  {
+    name: "Pride",
+    associatedCharacterName: "Hayato",
+    description: "When user's Level is lower than the enemy's (promoted units count as Level +20), damage +3",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.GROWTH]
+  },
+  {
+    name: "Nohr Enmity",
+    associatedCharacterName: "Oboro",
+    description: "When engaging a Nohr-related enemy, damage +3",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Triple Threat",
+    associatedCharacterName: "Hinata",
+    description: "When user is under half HP, half the damage received by Swords, Lances or Axes is also dealt to the enemy",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Competitive",
+    associatedCharacterName: "Takumi",
+    description: "When user is the lead unit and their Level is lower than their support unit's Level, Critical rate +10, damage +3 and damage received -1",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Shuriken Mastery",
+    associatedCharacterName: "Kagero",
+    description: "When user receives damage from a Dagger attack, the enemy receives half the same damage and the Dagger's stat reduction effect",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Morbid Celebration",
+    associatedCharacterName: "Reina",
+    description: "When user triggers the battle, recover 20% HP after defeating the enemy",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PLAYER_PHASE, SkillType.RECOVERY]
+  },
+  {
+    name: "Reciprocity",
+    associatedCharacterName: "Kaden",
+    description: "When a unit uses a healing staff on the user, that unit has their HP recovered by half the same amount",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.RECOVERY]
+  },
+  {
+    name: "Bushido",
+    associatedCharacterName: "Ryoma",
+    description: "When user is the lead unit, if their Level is higher than their support unit's Level, Critical rate +10, damage +2 and damage received -2",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "In Extremis",
+    associatedCharacterName: "Scarlet",
+    description: "When user's HP is under a quarter, Critical rate +30",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Perspicacious",
+    associatedCharacterName: "Yukimura",
+    description: "Hit rate +5 for all allies",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.SUPPORT, SkillType.AURA]
+  },
+  {
+    name: "Noble Cause",
+    associatedCharacterName: "Shiro",
+    description: "When user is the lead unit, if their support unit doesn't have full HP, damage +3 and damage received +1",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE, SkillType.DEFENSIVE]
+  },
+  {
+    name: "Optimistic",
+    associatedCharacterName: "Kiragi",
+    description: "After choosing to Wait, Speed +4 and Luck +8 for one Turn",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.STATS]
+  },
+  {
+    name: "Sweet Tooth",
+    associatedCharacterName: "Asugi",
+    description: "After choosing to Wait, user recovers 4 HP by eating hidden treats",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.RECOVERY]
+  },
+  {
+    name: "Playthings",
+    associatedCharacterName: "Selkie",
+    description: "After the start of the user's Turn, all enemies that are adjacent to the user have their HP reduced by 5",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Calm",
+    associatedCharacterName: "Hisame",
+    description: "After choosing to Wait, Skill and Resistance +4 for one Turn",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.STATS]
+  },
+  {
+    name: "Haiku",
+    associatedCharacterName: "Mitama",
+    description: "At the start of the Turn, when two allies are directly above and below Mitama, Mitama recovers 7 HP, while the two allies recover 5 HP",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.RECOVERY]
+  },
+  {
+    name: "Prodigy",
+    associatedCharacterName: "Caeldori",
+    description: "At the start of the battle, if the enemy's Strength or Magic (whichever is highest) is higher than Caeldori's corresponding stat, damage +4",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Vendetta",
+    associatedCharacterName: "Rhajat",
+    description: "When user triggers the battle, if they've already fought the enemy in the same map, damage +4",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PLAYER_PHASE, SkillType.OFFENSIVE]
+  },
+  {
+    name: "Wind Disciple",
+    associatedCharacterName: "Fuga",
+    description: "When user's HP is not full, Hit rate and Avoid +10",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PASSIVE]
+  },
+  {
+    name: "Vendetta",
+    associatedCharacterName: "Rhajat",
+    description: "When user triggers the battle, if they've already fought the enemy in the same map, damage +4",
+    effect: null,
+    type: [SkillType.PERSONAL, SkillType.PLAYER_PHASE, SkillType.OFFENSIVE]
+  },
 ];
 
 // Fallback "Unknown" skill

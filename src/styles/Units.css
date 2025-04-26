@@ -61,6 +61,14 @@
   min-height: 100px;
 }
 
+.grid-cell.bottom-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 100%;
+  height: 100%; */
+}
+
 .bottom-row-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -318,16 +318,20 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                 )}
               </div>
               <div className="class-sets-classes">
-                {unit.base_class_set.heart_seal_classes.length > 0 ? (
-                  unit.base_class_set.heart_seal_classes.map((cls, index) => (
-                    <p className="class-sets-classes" key={index}>
-                      {cls.className}
-                    </p>
-                  ))
-                ) : (
-                  <p className="class-sets-classes">No Heart Seal Classes</p>
-                )}
-              </div>
+  {unit.base_class_set.heart_seal_classes && unit.base_class_set.heart_seal_classes.length > 0 ? (
+    unit.base_class_set.heart_seal_classes.map((cls, clsIndex) =>
+      cls.classTree && cls.classTree.length > 0 ? (
+        cls.classTree.map((promotedClass, treeIndex) => (
+          <p key={`${clsIndex}-${treeIndex}`} className="class-sets-classes">
+            {promotedClass.className}
+          </p>
+        ))
+      ) : null
+    )
+  ) : (
+    <p className="class-sets-classes">No Heart Seal Classes</p>
+  )}
+</div>
               <p className="class-sets-classes">
                 Partner Seal:{" "}
                 {unit.base_class_set.partner_seal_base_class?.className ||
