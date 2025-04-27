@@ -1830,6 +1830,12 @@ export const defaultSkills: Skill[] = [
     effect: null,
     type: [SkillType.PERSONAL, SkillType.PLAYER_PHASE, SkillType.OFFENSIVE],
   },
+  {
+    name: "N/A",
+    description: "",
+    effect: null,
+    type: [],
+  },
 ];
 
 // Fallback "Unknown" skill

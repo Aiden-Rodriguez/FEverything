@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Character } from "../types/UnitStruct";
-import { getClass } from "../defaultData/Fire Emblem Fates/defaultClassData";
+import { useParams, useLocation } from "react-router-dom";
 import "../styles/Units.css";
-import { applyBoonBaneAdjustments } from "../utils/characterAdjustments";
 import UnitGrid from "../components/UnitGrid";
-import { defaultCharacters } from "../defaultData/Fire Emblem Fates/defaultCharacters";
 
+
+import { Character } from "../types/UnitStruct";
+import { applyBoonBaneAdjustments } from "../utils/characterAdjustments";
+import { getClass } from "../defaultData/Fire Emblem Fates/defaultClassData";
+import { defaultCharactersConquest } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest";
 const Units = () => {
-  const unitOne = defaultCharacters[0];
-  const unitTwo = defaultCharacters[1];
-  const unitThree = defaultCharacters[2];
+  const unitOne = defaultCharactersConquest[0];
+  const unitTwo = defaultCharactersConquest[1];
+  const unitThree = defaultCharactersConquest[2];
+
+  const { state } = useLocation();
+  const selectedRoute = (state as any)?.selectedRoute;
 
   const { gameId } = useParams<{ gameId: string }>();
+
   const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] = useState(false);
   const [units, setUnits] = useState<Character[]>([]);
 
@@ -21,7 +26,6 @@ const Units = () => {
   const [corrinBane, setCorrinBane] = useState<string>("Unlucky");
   const [corrinTalent, setCorrinTalent] = useState<string>("Cavalier");
 
-  // Define conflicting boon/bane pairs
   const conflictingPairs: Record<string, string> = {
     Robust: "Sickly",
     Strong: "Weak",
@@ -33,7 +37,6 @@ const Units = () => {
     Calm: "Excitable",
   };
 
-  // Available options for boons and banes
   const boonOptions = [
     "Robust",
     "Strong",
@@ -55,28 +58,24 @@ const Units = () => {
     "Excitable",
   ];
 
-  // Filter bane options based on selected boon
   const filteredBaneOptions = baneOptions.filter(
     (bane) => conflictingPairs[corrinBoon] !== bane
   );
 
-  // Filter boon options based on selected bane
   const filteredBoonOptions = boonOptions.filter(
     (boon) => conflictingPairs[boon] !== corrinBane
   );
 
-  // Reset bane if it conflicts with the selected boon
   useEffect(() => {
     if (conflictingPairs[corrinBoon] === corrinBane) {
-      const newBane = filteredBaneOptions[0] || baneOptions[0]; // Fallback to first bane if no filtered options
+      const newBane = filteredBaneOptions[0] || baneOptions[0];
       setCorrinBane(newBane);
     }
   }, [corrinBoon]);
 
-  // Reset boon if it conflicts with the selected bane
   useEffect(() => {
     if (boonOptions.some((boon) => conflictingPairs[boon] === corrinBane && boon === corrinBoon)) {
-      const newBoon = filteredBoonOptions[0] || boonOptions[0]; // Fallback to first boon if no filtered options
+      const newBoon = filteredBoonOptions[0] || boonOptions[0];
       setCorrinBoon(newBoon);
     }
   }, [corrinBane]);
@@ -96,7 +95,7 @@ const Units = () => {
 
   const createMainCharacter = () => {
     let corrin: Character =
-      corrinGender === "Male" ? defaultCharacters[0] : defaultCharacters[1];
+      corrinGender === "Male" ? defaultCharactersConquest[0] : defaultCharactersConquest[1];
 
     corrin.base_class_set.heart_seal_classes = [getClass(corrinTalent)];
     corrin = applyBoonBaneAdjustments(corrin, corrinBoon, corrinBane);
@@ -110,7 +109,7 @@ const Units = () => {
 
   return (
     <div className="page-container">
-      <h1 className="top-margin">Unit Manager: {gameId}</h1>
+      <h1 className="top-margin">Unit Manager: {gameId} {selectedRoute}</h1>
       <div className="grids-container">
         {units.length > 0 &&
           units.map((unit, index) => (

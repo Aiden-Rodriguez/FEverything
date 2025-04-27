@@ -1,5 +1,6 @@
 export type WeaponRank = "n" | "E" | "D" | "C" | "B" | "A" | "S";
 import { Class } from "./ClassStruct.tsx";
+import { Skill } from "./SkillStruct.tsx";
 
 export interface Character {
   name: string;
@@ -8,6 +9,9 @@ export interface Character {
   title: string;
   royalty_status: boolean;
   class: Class;
+  RouteAvailabilityBR: string | boolean;
+  RouteAvailabilityCQ: string | boolean;
+  RouteAvailabilityRV: string | boolean;
   baseInternalLevel: number;
   level: number;
   stats: {
@@ -21,6 +25,19 @@ export interface Character {
     resistance: number;
     move: number;
   };
+  basic_skills: Skill[]
+  weapon_ranks: {
+    WeaponRankSwordKatana: WeaponRank;
+    WeaponRankLanceNaginata: WeaponRank;
+    WeaponRankAxeClub: WeaponRank;
+    WeaponRankTomeScroll: WeaponRank;
+    WeaponRankKnifeShuriken: WeaponRank;
+    WeaponRankBowYumi: WeaponRank;
+    WeaponRankStaffRod: WeaponRank;
+    WeaponRankStone: WeaponRank;
+  };
+  starting_weapons: String[]
+  
   base_growths: {
     hp: number;
     strength: number;
@@ -31,14 +48,7 @@ export interface Character {
     defense: number;
     resistance: number;
   };
-  personal_skill: string;
-  basic_skills: {
-    skill1: string;
-    skill2: string;
-    skill3: string;
-    skill4: string;
-    skill5: string;
-  };
+  personal_skill: Skill | null;
   base_class_set: {
     starting_class: Class;
     starting_class_tree: Class;
@@ -50,22 +60,6 @@ export interface Character {
   };
   boon?: string;
   bane?: string;
-
-  RouteAvailabilityBR: string;
-  RouteAvailabilityCQ: string;
-  RouteAvailabilityRV: string;
-
-  weapon_ranks: {
-    WeaponRankSwordKatana: WeaponRank;
-    WeaponRankLanceNaginata: WeaponRank;
-    WeaponRankAxeClub: WeaponRank;
-    WeaponRankTomeScroll: WeaponRank;
-    WeaponRankKnifeShuriken: WeaponRank;
-    WeaponRankBowYumi: WeaponRank;
-    WeaponRankStaffRod: WeaponRank;
-    WeaponRankStone: WeaponRank;
-  };
-
   maxStatModifiers: {
     strength: number;
     magic: number;
@@ -75,7 +69,6 @@ export interface Character {
     defense: number;
     resistance: number;
   };
-
   // w/ no supports 5 crit avoid is always given
   personal_pair_up_bonuses_base: {
     dodge: 5;
@@ -151,3 +144,7 @@ export interface Character {
 
 // Starting Equipment ..?
 //Inheritable class sets (partner/friendship seals)
+
+// Things that change game to game
+// Supports - All characters
+// Starting equipment, level, stats, starting skills, starting weapon rank

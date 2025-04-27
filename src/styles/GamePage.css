@@ -37,6 +37,20 @@
   object-fit: contain;
 }
 
+.button-link.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.route-selector {
+  align-items: column;
+}
+
+.button-group > button {
+  margin: 20px;
+}
+
 @media (min-width: 768px) {
   .features-grid {
     grid-template-columns: repeat(2, 1fr);

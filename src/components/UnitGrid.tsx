@@ -151,12 +151,12 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
       <div className="grid-cell bottom-middle">
         <h3>Skills</h3>
         <div className="bottom-row-grid">
-          <p> {unit.personal_skill} </p>
-          <p> {unit.basic_skills.skill1} </p>
-          <p> {unit.basic_skills.skill2} </p>
-          <p> {unit.basic_skills.skill3} </p>
-          <p> {unit.basic_skills.skill4} </p>
-          <p> {unit.basic_skills.skill5} </p>
+          <p> {unit.personal_skill?.name} </p>
+          <p> {unit.basic_skills[0].name} </p>
+          <p> {unit.basic_skills[1].name} </p>
+          <p> {unit.basic_skills[2].name} </p>
+          <p> {unit.basic_skills[3].name} </p>
+          <p> {unit.basic_skills[4].name} </p>
         </div>
       </div>
 
