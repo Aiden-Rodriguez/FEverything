@@ -1,4 +1,4 @@
-import { Class } from "../../types/ClassStruct.tsx";
+import { Class } from "../../types/Fire Emblem Fates/ClassStruct.tsx";
 import { getSkill } from "./defaultSkills.tsx";
 export const defaultClassData: Class[] = [
   {

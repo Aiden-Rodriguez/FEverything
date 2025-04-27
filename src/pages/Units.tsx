@@ -3,9 +3,8 @@ import { useParams, useLocation } from "react-router-dom";
 import "../styles/Units.css";
 import UnitGrid from "../components/UnitGrid";
 
-
-import { Character } from "../types/UnitStruct";
-import { applyBoonBaneAdjustments } from "../utils/characterAdjustments";
+import { Character } from "../types/Fire Emblem Fates/UnitStruct";
+import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments";
 import { getClass } from "../defaultData/Fire Emblem Fates/defaultClassData";
 import { defaultCharactersConquest } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest";
 const Units = () => {
@@ -18,7 +17,8 @@ const Units = () => {
 
   const { gameId } = useParams<{ gameId: string }>();
 
-  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] = useState(false);
+  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] =
+    useState(false);
   const [units, setUnits] = useState<Character[]>([]);
 
   const [corrinGender, setCorrinGender] = useState<"Male" | "Female">("Male");
@@ -59,11 +59,11 @@ const Units = () => {
   ];
 
   const filteredBaneOptions = baneOptions.filter(
-    (bane) => conflictingPairs[corrinBoon] !== bane
+    (bane) => conflictingPairs[corrinBoon] !== bane,
   );
 
   const filteredBoonOptions = boonOptions.filter(
-    (boon) => conflictingPairs[boon] !== corrinBane
+    (boon) => conflictingPairs[boon] !== corrinBane,
   );
 
   useEffect(() => {
@@ -74,7 +74,11 @@ const Units = () => {
   }, [corrinBoon]);
 
   useEffect(() => {
-    if (boonOptions.some((boon) => conflictingPairs[boon] === corrinBane && boon === corrinBoon)) {
+    if (
+      boonOptions.some(
+        (boon) => conflictingPairs[boon] === corrinBane && boon === corrinBoon,
+      )
+    ) {
       const newBoon = filteredBoonOptions[0] || boonOptions[0];
       setCorrinBoon(newBoon);
     }
@@ -95,7 +99,9 @@ const Units = () => {
 
   const createMainCharacter = () => {
     let corrin: Character =
-      corrinGender === "Male" ? defaultCharactersConquest[0] : defaultCharactersConquest[1];
+      corrinGender === "Male"
+        ? defaultCharactersConquest[0]
+        : defaultCharactersConquest[1];
 
     corrin.base_class_set.heart_seal_classes = [getClass(corrinTalent)];
     corrin = applyBoonBaneAdjustments(corrin, corrinBoon, corrinBane);
@@ -109,7 +115,9 @@ const Units = () => {
 
   return (
     <div className="page-container">
-      <h1 className="top-margin">Unit Manager: {gameId} {selectedRoute}</h1>
+      <h1 className="top-margin">
+        Unit Manager: {gameId} {selectedRoute}
+      </h1>
       <div className="grids-container">
         {units.length > 0 &&
           units.map((unit, index) => (
@@ -139,7 +147,7 @@ const Units = () => {
                       value={corrinGender}
                       onChange={(e) =>
                         handleSetCorrinGender(
-                          e.target.value as "Male" | "Female"
+                          e.target.value as "Male" | "Female",
                         )
                       }
                     >

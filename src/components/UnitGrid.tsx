@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Character } from "../types/UnitStruct.tsx";
-import { Class } from "../types/ClassStruct.tsx";
-import { Skill } from "../types/SkillStruct.tsx";
+
+import { Character } from "../types/Fire Emblem Fates/UnitStruct.tsx";
+import { Class } from "../types/Fire Emblem Fates/ClassStruct.tsx";
+import { Skill } from "../types/Fire Emblem Fates/SkillStruct.tsx";
 
 interface UnitGridProps {
   unit: Character;
@@ -322,46 +323,75 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
           >
             <h3>Class Sets</h3>
             <div className="class-sets-content">
-              <div className="class-sets-content">
-                {unit.base_class_set.starting_class_tree.classTree.length >
-                0 ? (
-                  unit.base_class_set.starting_class_tree.classTree.map(
-                    (cls, index) => <p key={index}>{cls.className}</p>,
-                  )
-                ) : (
-                  <p>No Base Classes..? This is a bug</p>
-                )}
-              </div>
-              <div className="class-sets-classes">
-                {unit.base_class_set.heart_seal_classes &&
-                unit.base_class_set.heart_seal_classes.length > 0 ? (
-                  unit.base_class_set.heart_seal_classes.map((cls, clsIndex) =>
-                    cls.classTree && cls.classTree.length > 0
-                      ? cls.classTree.map((promotedClass, treeIndex) => (
-                          <p
-                            key={`${clsIndex}-${treeIndex}`}
-                            className="class-sets-classes"
-                          >
-                            {promotedClass.className}
-                          </p>
-                        ))
-                      : null,
-                  )
-                ) : (
-                  <p className="class-sets-classes">No Heart Seal Classes</p>
-                )}
-              </div>
-              <p className="class-sets-classes">
-                Partner Seal:{" "}
-                {unit.base_class_set.partner_seal_base_class?.className ||
-                  "Add a partner?"}
-              </p>
-              <p className="class-sets-classes">
-                Friendship Seal:{" "}
-                {unit.base_class_set.friendship_seal_base_class?.className ||
-                  "Add a partner?"}
-              </p>
-            </div>
+  {/* Base Class Tree */}
+  <div className="class-set-column">
+    <div className="class-set-label">Base</div>
+    <div className="class-sets-classes">
+      {unit.base_class_set.starting_class_tree &&
+      unit.base_class_set.starting_class_tree.classTree &&
+      unit.base_class_set.starting_class_tree.classTree.length > 0 ? (
+        unit.base_class_set.starting_class_tree.classTree.map((promotedClass, index) => (
+          <span key={index}>{promotedClass.className}</span>
+        ))
+      ) : (
+        <span>No Base Classes</span>
+      )}
+    </div>
+  </div>
+
+  {/* Heart Seal Class Tree */}
+  <div className="class-set-column">
+    <div className="class-set-label">Heart Seal</div>
+    <div className="class-sets-classes">
+      {unit.base_class_set.heart_seal_classes &&
+      unit.base_class_set.heart_seal_classes.length > 0 ? (
+        unit.base_class_set.heart_seal_classes.map((cls, clsIndex) =>
+          cls.classTree && cls.classTree.length > 0 ? (
+            cls.classTree.map((promotedClass, treeIndex) => (
+              <span key={`${clsIndex}-${treeIndex}`}>{promotedClass.className}</span>
+            ))
+          ) : (
+            <span key={clsIndex}>No Promotions</span>
+          )
+        )
+      ) : (
+        <span>No Heart Seal Classes</span>
+      )}
+    </div>
+  </div>
+
+  {/* Friendship Seal Class Tree */}
+  <div className="class-set-column">
+    <div className="class-set-label">Friendship Seal</div>
+    <div className="class-sets-classes">
+      {unit.base_class_set.friendship_seal_base_class &&
+      unit.base_class_set.friendship_seal_base_class.classTree &&
+      unit.base_class_set.friendship_seal_base_class.classTree.length > 0 ? (
+        unit.base_class_set.friendship_seal_base_class.classTree.map((promotedClass, index) => (
+          <span key={index}>{promotedClass.className}</span>
+        ))
+      ) : (
+        <span>No Friendship Seal Classes</span>
+      )}
+    </div>
+  </div>
+
+  {/* Partner Seal Class Tree */}
+  <div className="class-set-column">
+    <div className="class-set-label">Partner Seal</div>
+    <div className="class-sets-classes">
+      {unit.base_class_set.partner_seal_base_class &&
+      unit.base_class_set.partner_seal_base_class.classTree &&
+      unit.base_class_set.partner_seal_base_class.classTree.length > 0 ? (
+        unit.base_class_set.partner_seal_base_class.classTree.map((promotedClass, index) => (
+          <span key={index}>{promotedClass.className}</span>
+        ))
+      ) : (
+        <span>No Partner Seal Classes</span>
+      )}
+    </div>
+  </div>
+</div>
           </motion.div>
         </>
       )}

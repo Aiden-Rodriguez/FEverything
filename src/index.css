@@ -21,6 +21,7 @@
   --color-text-component: White;
   --color-background-cell: White;
   --color-accent: #18b0b0;
+  --color-accent-focus: #2e72bb;
   --color-background-transparent: rgba(0, 0, 0, 0.308);
   --color-background-units-grid: #f8f8f8;
 }

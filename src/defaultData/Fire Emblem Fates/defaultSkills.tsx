@@ -1,4 +1,4 @@
-import { Skill, SkillType } from "../../types/SkillStruct";
+import { Skill, SkillType } from "../../types/Fire Emblem Fates/SkillStruct";
 import { getClass } from "./defaultClassData";
 
 export const defaultSkills: Skill[] = [

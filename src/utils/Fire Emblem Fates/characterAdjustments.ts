@@ -1,4 +1,4 @@
-import { Character } from "../types/UnitStruct";
+import { Character } from "../../types/Fire Emblem Fates/UnitStruct";
 
 //Still needs boon/bane support and pair up bonuses...
 

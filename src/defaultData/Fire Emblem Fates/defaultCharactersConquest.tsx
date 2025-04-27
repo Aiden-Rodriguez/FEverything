@@ -1,8 +1,8 @@
-import { Character } from "../../types/UnitStruct.tsx";
+import { Character } from "../../types/Fire Emblem Fates/UnitStruct.tsx";
 import { defaultClassData } from "./defaultClassData.tsx";
 import { defaultSkills } from "./defaultSkills.tsx";
-import { Class } from "../../types/ClassStruct.tsx";
-import { Skill } from "../../types/SkillStruct.tsx";
+import { Class } from "../../types/Fire Emblem Fates/ClassStruct.tsx";
+import { Skill } from "../../types/Fire Emblem Fates/SkillStruct.tsx";
 
 const getClass = (name: string): Class => {
   const cls = defaultClassData.find((c) => c.className === name);
@@ -50,8 +50,14 @@ export const defaultCharactersConquest: Character[] = [
       defense: 35,
       resistance: 25,
     },
-    personal_skill: getSkill("Supportive"), 
-    basic_skills: [getSkill("Nobility"), getSkill("N/A"), getSkill("N/A"), getSkill("N/A"), getSkill("N/A")],
+    personal_skill: getSkill("Supportive"),
+    basic_skills: [
+      getSkill("Nobility"),
+      getSkill("N/A"),
+      getSkill("N/A"),
+      getSkill("N/A"),
+      getSkill("N/A"),
+    ],
     base_class_set: {
       starting_class: getClass("Nohr Prince"),
       starting_class_tree: getClass("Nohr Prince"),
@@ -185,8 +191,14 @@ export const defaultCharactersConquest: Character[] = [
       defense: 35,
       resistance: 25,
     },
-    personal_skill: getSkill("Supportive"), 
-    basic_skills: [getSkill("Nobility"), getSkill("N/A"), getSkill("N/A"), getSkill("N/A"), getSkill("N/A")],
+    personal_skill: getSkill("Supportive"),
+    basic_skills: [
+      getSkill("Nobility"),
+      getSkill("N/A"),
+      getSkill("N/A"),
+      getSkill("N/A"),
+      getSkill("N/A"),
+    ],
     base_class_set: {
       starting_class: getClass("Nohr Princess"),
       starting_class_tree: getClass("Nohr Princess"),
@@ -320,8 +332,14 @@ export const defaultCharactersConquest: Character[] = [
       defense: 35,
       resistance: 45,
     },
-    personal_skill: getSkill("Rose's Thorn"), 
-    basic_skills: [getSkill("Strength +2"), getSkill("Lunge"), getSkill("N/A"), getSkill("N/A"), getSkill("N/A")],
+    personal_skill: getSkill("Rose's Thorn"),
+    basic_skills: [
+      getSkill("Strength +2"),
+      getSkill("Lunge"),
+      getSkill("N/A"),
+      getSkill("N/A"),
+      getSkill("N/A"),
+    ],
     base_class_set: {
       starting_class: getClass("Malig Knight"),
       starting_class_tree: getClass("Wyvern Rider"),
@@ -345,12 +363,12 @@ export const defaultCharactersConquest: Character[] = [
       WeaponRankStone: "n",
     },
     maxStatModifiers: {
-      strength: 0,
-      magic: 0,
-      skill: 0,
-      speed: 0,
-      luck: 0,
-      defense: 0,
+      strength: 1,
+      magic: -1,
+      skill: 1,
+      speed: 1,
+      luck: -2,
+      defense: 1,
       resistance: 0,
     },
     personal_pair_up_bonuses_base: {
@@ -423,24 +441,165 @@ export const defaultCharactersConquest: Character[] = [
       Avoid: 0,
     },
   },
+  // {
+  //   name: "",
+  //   gender: "",
+  //   title: "",
+  //   royalty_status: ,
+  //   class: getClass(""),
+  //   baseInternalLevel: ,
+  //   level: ,
+  //   starting_weapons: [],
+  //   stats: {
+  //     hp: 0,
+  //     strength: 0,
+  //     magic: 0,
+  //     skill: 0,
+  //     speed: 0,
+  //     luck: 0,
+  //     defense: 0,
+  //     resistance: 0,
+  //     move: 0,
+  //   },
+  //   base_growths: {
+  //     hp: 0,
+  //     strength: 0,
+  //     magic: 0,
+  //     skill: 0,
+  //     speed: 0,
+  //     luck: 0,
+  //     defense: 0,
+  //     resistance: 0,
+  //   },
+  //   personal_skill: getSkill(""),
+  //   basic_skills: [
+  //     getSkill("N/A"),
+  //     getSkill("N/A"),
+  //     getSkill("N/A"),
+  //     getSkill("N/A"),
+  //     getSkill("N/A"),
+  //   ],
+  //   base_class_set: {
+  //     starting_class: getClass(""),
+  //     starting_class_tree: getClass(""),
+  //     heart_seal_classes: [getClass("")],
+  //     friendship_seal_partners: [],
+  //     partner_seal_partners: [],
+  //     friendship_seal_base_class: null,
+  //     partner_seal_base_class: null,
+  //   },
+  //   RouteAvailabilityBR: false,
+  //   RouteAvailabilityCQ: "Chapter ",
+  //   RouteAvailabilityRV: "Chapter ",
+  //   weapon_ranks: {
+  //     WeaponRankSwordKatana: "n",
+  //     WeaponRankLanceNaginata: "n",
+  //     WeaponRankAxeClub: "n",
+  //     WeaponRankTomeScroll: "n",
+  //     WeaponRankKnifeShuriken: "n",
+  //     WeaponRankBowYumi: "n",
+  //     WeaponRankStaffRod: "n",
+  //     WeaponRankStone: "n",
+  //   },
+  //   maxStatModifiers: {
+  //     strength: 0,
+  //     magic: 0,
+  //     skill: 0,
+  //     speed: 0,
+  //     luck: 0,
+  //     defense: 0,
+  //     resistance: 0,
+  //   },
+  //   personal_pair_up_bonuses_base: {
+  //     dodge: 5,
+  //   },
+  //   personal_pair_up_bonuses_C: {
+  //     strength: 0,
+  //     magic: 0,
+  //     skill: 0,
+  //     speed: 0,
+  //     luck: 0,
+  //     defense: 0,
+  //     resistance: 0,
+  //   },
+  //   personal_pair_up_bonuses_B: {
+  //     strength: 0,
+  //     magic: 0,
+  //     skill: 0,
+  //     speed: 0,
+  //     luck: 0,
+  //     defense: 0,
+  //     resistance: 0,
+  //   },
+  //   personal_pair_up_bonuses_A: {
+  //     strength: 0,
+  //     magic: 0,
+  //     skill: 0,
+  //     speed: 0,
+  //     luck: 0,
+  //     defense: 0,
+  //     resistance: 0,
+  //   },
+  //   personal_pair_up_bonuses_S: {
+  //     strength: 0,
+  //     magic: 0,
+  //     skill: 0,
+  //     speed: 0,
+  //     luck: 0,
+  //     defense: 0,
+  //     resistance: 0,
+  //   },
+  //   support_bonus_base: {
+  //     Crit: 0,
+  //     CritAvoid: 0,
+  //     Hit: 10,
+  //     Avoid: 0,
+  //   },
+  //   support_bonus_C: {
+  //     Crit: 0,
+  //     CritAvoid: 0,
+  //     Hit: 0,
+  //     Avoid: 0,
+  //   },
+  //   support_bonus_B: {
+  //     Crit: 0,
+  //     CritAvoid: 0,
+  //     Hit: 0,
+  //     Avoid: 0,
+  //   },
+  //   support_bonus_A: {
+  //     Crit: 0,
+  //     CritAvoid: 0,
+  //     Hit: 0,
+  //     Avoid: 0,
+  //   },
+  //   support_bonus_S: {
+  //     Crit: 0,
+  //     CritAvoid: 0,
+  //     Hit: 0,
+  //     Avoid: 0,
+  //   },
+  // },
 ];
 
-// Function to insert skills into a character's basic_skills array and optionally set personal_skill
-export const insertSkillsIntoCharacter = (
-  character: Character,
-  basicSkillNames: string[],
-  personalSkillName?: string // Optional parameter for personal_skill
-): Character => {
-  // Insert basic skills
-  const basicSkills = basicSkillNames
-    .map((name) => getSkill(name))
-    .filter((skill) => skill.name !== "Unknown"); // Assuming unknownSkill has name "Unknown"
-  character.basic_skills = basicSkills;
+// // Function to insert skills into a character's basic_skills array and optionally set personal_skill
+// export const insertSkillsIntoCharacter = (
+//   character: Character,
+//   basicSkillNames: string[],
+//   personalSkillName?: string, // Optional parameter for personal_skill
+// ): Character => {
+//   // Insert basic skills
+//   const basicSkills = basicSkillNames
+//     .map((name) => getSkill(name))
+//     .filter((skill) => skill.name !== "Unknown"); // Assuming unknownSkill has name "Unknown"
+//   character.basic_skills = basicSkills;
 
-  // Set personal_skill if provided
-  if (personalSkillName !== undefined) {
-    character.personal_skill = personalSkillName ? getSkill(personalSkillName) : null;
-  }
+//   // Set personal_skill if provided
+//   if (personalSkillName !== undefined) {
+//     character.personal_skill = personalSkillName
+//       ? getSkill(personalSkillName)
+//       : null;
+//   }
 
-  return character;
-};
+//   return character;
+// };

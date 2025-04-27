@@ -25,7 +25,7 @@ export interface Character {
     resistance: number;
     move: number;
   };
-  basic_skills: Skill[]
+  basic_skills: Skill[];
   weapon_ranks: {
     WeaponRankSwordKatana: WeaponRank;
     WeaponRankLanceNaginata: WeaponRank;
@@ -36,8 +36,8 @@ export interface Character {
     WeaponRankStaffRod: WeaponRank;
     WeaponRankStone: WeaponRank;
   };
-  starting_weapons: String[]
-  
+  starting_weapons: String[];
+
   base_growths: {
     hp: number;
     strength: number;
