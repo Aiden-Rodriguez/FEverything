@@ -9,9 +9,7 @@ export interface Character {
   title: string;
   royalty_status: boolean;
   class: Class;
-  RouteAvailabilityBR: string | boolean;
-  RouteAvailabilityCQ: string | boolean;
-  RouteAvailabilityRV: string | boolean;
+  RouteAvailability: string;
   baseInternalLevel: number;
   level: number;
   stats: {
@@ -21,7 +19,7 @@ export interface Character {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
     move: number;
   };
@@ -45,7 +43,7 @@ export interface Character {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
   };
   personal_skill: Skill | null;
@@ -66,7 +64,7 @@ export interface Character {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
   };
   // w/ no supports 5 crit avoid is always given
@@ -79,7 +77,7 @@ export interface Character {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
   };
   personal_pair_up_bonuses_B: {
@@ -88,7 +86,7 @@ export interface Character {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
   };
   personal_pair_up_bonuses_A: {
@@ -97,7 +95,7 @@ export interface Character {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
   };
   personal_pair_up_bonuses_S: {
@@ -106,7 +104,7 @@ export interface Character {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
   };
   //Always 10 hit as base w/ no supports

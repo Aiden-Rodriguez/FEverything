@@ -909,15 +909,6 @@ export const defaultSkills: Skill[] = [
     type: [SkillType.PASSIVE, SkillType.OFFENSIVE],
   },
   {
-    name: "Beastbane",
-    associatedClass: [],
-    levelAcquired: 10,
-    description:
-      "When user is a Wolfskin or Kitsune, their attacks are effective against Beast units",
-    effect: null,
-    type: [SkillType.PASSIVE, SkillType.OFFENSIVE],
-  },
-  {
     name: "Better Odds",
     associatedClass: [],
     levelAcquired: 5,

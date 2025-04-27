@@ -12,7 +12,7 @@ export interface Class {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
     move: number;
 
@@ -29,7 +29,7 @@ export interface Class {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
   };
 
@@ -57,7 +57,7 @@ export interface Class {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
   };
 
@@ -68,7 +68,7 @@ export interface Class {
     skill: number;
     speed: number;
     luck: number;
-    defense: number;
+    defence: number;
     resistance: number;
     move: number;
   };
