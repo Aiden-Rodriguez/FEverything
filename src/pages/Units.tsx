@@ -7,11 +7,8 @@ import { Character } from "../types/Fire Emblem Fates/UnitStruct";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments";
 import { getClass } from "../defaultData/Fire Emblem Fates/defaultClassData";
 import { defaultCharactersConquest } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest";
-const Units = () => {
-  const unitOne = defaultCharactersConquest[0];
-  const unitTwo = defaultCharactersConquest[1];
-  const unitThree = defaultCharactersConquest[2];
 
+const Units = () => {
   const { state } = useLocation();
   const selectedRoute = (state as any)?.selectedRoute;
 
@@ -20,6 +17,12 @@ const Units = () => {
   const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] =
     useState(false);
   const [units, setUnits] = useState<Character[]>([]);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null,
+  );
+  const [createdCorrinGender, setCreatedCorrinGender] = useState<
+    "Male" | "Female" | null
+  >(null);
 
   const [corrinGender, setCorrinGender] = useState<"Male" | "Female">("Male");
   const [corrinBoon, setCorrinBoon] = useState<string>("Robust");
@@ -84,6 +87,70 @@ const Units = () => {
     }
   }, [corrinBane]);
 
+  // Find the indices of the first and second instances of Jakob and Felicia
+  const jakobFirstIndex = defaultCharactersConquest.findIndex(
+    (char) => char.name === "Jakob",
+  );
+  const jakobSecondIndex = defaultCharactersConquest.findIndex(
+    (char, index) => char.name === "Jakob" && index > jakobFirstIndex,
+  );
+  const feliciaFirstIndex = defaultCharactersConquest.findIndex(
+    (char) => char.name === "Felicia",
+  );
+  const feliciaSecondIndex = defaultCharactersConquest.findIndex(
+    (char, index) => char.name === "Felicia" && index > feliciaFirstIndex,
+  );
+
+  const availableCharacters = defaultCharactersConquest.filter(
+    (character, index) => {
+      if (units.some((unit) => unit.name === character.name)) {
+        return false;
+      }
+
+      // Exclude Corrin (F) if Corrin (M) is in units, and vice versa
+      if (
+        units.some((unit) => unit.name === "Corrin (M)") &&
+        character.name === "Corrin (F)"
+      ) {
+        return false;
+      }
+      if (
+        units.some((unit) => unit.name === "Corrin (F)") &&
+        character.name === "Corrin (M)"
+      ) {
+        return false;
+      }
+
+      // For Male Corrin: exclude the first instance of Jakob and the second instance of Felicia
+      if (createdCorrinGender === "Male") {
+        if (character.name === "Jakob" && index === jakobFirstIndex) {
+          return false;
+        }
+        if (character.name === "Felicia" && index === feliciaSecondIndex) {
+          return false;
+        }
+      }
+
+      // For Female Corrin: exclude the first instance of Felicia and the second instance of Jakob
+      if (createdCorrinGender === "Female") {
+        if (character.name === "Felicia" && index === feliciaFirstIndex) {
+          return false;
+        }
+        if (character.name === "Jakob" && index === jakobSecondIndex) {
+          return false;
+        }
+      }
+
+      return true;
+    },
+  );
+
+  useEffect(() => {
+    setSelectedCharacter(
+      availableCharacters.length > 0 ? availableCharacters[0] : null,
+    );
+  }, [isOverlayAddCharacterOpen, units, createdCorrinGender]);
+
   const handleSetCorrinGender = (gender: "Male" | "Female") => {
     setCorrinTalent("Cavalier");
     setCorrinGender(gender);
@@ -93,8 +160,11 @@ const Units = () => {
     setIsOverlayAddCharacterOpen(!isOverlayAddCharacterOpen);
   };
 
-  const addUnit = (unit: Character) => {
-    setUnits([...units, unit]);
+  const addUnit = () => {
+    if (selectedCharacter) {
+      setUnits([...units, selectedCharacter]);
+      toggleOverlayAddCharacter();
+    }
   };
 
   const createMainCharacter = () => {
@@ -106,7 +176,8 @@ const Units = () => {
     corrin.base_class_set.heart_seal_classes = [getClass(corrinTalent)];
     corrin = applyBoonBaneAdjustments(corrin, corrinBoon, corrinBane);
 
-    addUnit(corrin);
+    setUnits([...units, corrin]);
+    setCreatedCorrinGender(corrinGender);
     toggleOverlayAddCharacter();
   };
 
@@ -223,30 +294,37 @@ const Units = () => {
             ) : (
               <>
                 <h2>Add a New Unit</h2>
-                <div className="add-unit-options">
+                <div className="corrin-form">
+                  <div className="form-field">
+                    <label>Select Character:</label>
+                    <select
+                      value={selectedCharacter?.name || ""}
+                      onChange={(e) => {
+                        const selected = availableCharacters.find(
+                          (char) => char.name === e.target.value,
+                        );
+                        setSelectedCharacter(selected || null);
+                      }}
+                    >
+                      {availableCharacters.length > 0 ? (
+                        availableCharacters.map((char) => (
+                          <option key={char.name} value={char.name}>
+                            {char.name}
+                          </option>
+                        ))
+                      ) : (
+                        <option value="" disabled>
+                          No characters available
+                        </option>
+                      )}
+                    </select>
+                  </div>
                   <button
-                    onClick={() => {
-                      addUnit(unitOne);
-                      toggleOverlayAddCharacter();
-                    }}
+                    className="create-corrin-button"
+                    onClick={addUnit}
+                    disabled={!selectedCharacter}
                   >
-                    Add Unit 1
-                  </button>
-                  <button
-                    onClick={() => {
-                      addUnit(unitTwo);
-                      toggleOverlayAddCharacter();
-                    }}
-                  >
-                    Add Unit 2
-                  </button>
-                  <button
-                    onClick={() => {
-                      addUnit(unitThree);
-                      toggleOverlayAddCharacter();
-                    }}
-                  >
-                    Add Unit 3
+                    Add Unit
                   </button>
                 </div>
               </>

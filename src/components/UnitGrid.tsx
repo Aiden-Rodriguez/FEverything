@@ -331,11 +331,19 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                   unit.base_class_set.starting_class_tree.classTree &&
                   unit.base_class_set.starting_class_tree.classTree.length >
                     0 ? (
-                    unit.base_class_set.starting_class_tree.classTree.map(
-                      (promotedClass, index) => (
+                    unit.base_class_set.starting_class_tree.classTree
+                      .filter((promotedClass) =>
+                        promotedClass.className === "Maid" &&
+                        unit.gender === "M"
+                          ? false
+                          : promotedClass.className === "Butler" &&
+                              unit.gender === "F"
+                            ? false
+                            : true,
+                      )
+                      .map((promotedClass, index) => (
                         <span key={index}>{promotedClass.className}</span>
-                      ),
-                    )
+                      ))
                   ) : (
                     <span>No Base Classes</span>
                   )}
@@ -351,11 +359,21 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                     unit.base_class_set.heart_seal_classes.map(
                       (cls, clsIndex) =>
                         cls.classTree && cls.classTree.length > 0 ? (
-                          cls.classTree.map((promotedClass, treeIndex) => (
-                            <span key={`${clsIndex}-${treeIndex}`}>
-                              {promotedClass.className}
-                            </span>
-                          ))
+                          cls.classTree
+                            .filter((promotedClass) =>
+                              promotedClass.className === "Maid" &&
+                              unit.gender === "M"
+                                ? false
+                                : promotedClass.className === "Butler" &&
+                                    unit.gender === "F"
+                                  ? false
+                                  : true,
+                            )
+                            .map((promotedClass, treeIndex) => (
+                              <span key={`${clsIndex}-${treeIndex}`}>
+                                {promotedClass.className}
+                              </span>
+                            ))
                         ) : (
                           <span key={clsIndex}>No Promotions</span>
                         ),
@@ -374,13 +392,21 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                   unit.base_class_set.friendship_seal_base_class.classTree &&
                   unit.base_class_set.friendship_seal_base_class.classTree
                     .length > 0 ? (
-                    unit.base_class_set.friendship_seal_base_class.classTree.map(
-                      (promotedClass, index) => (
+                    unit.base_class_set.friendship_seal_base_class.classTree
+                      .filter((promotedClass) =>
+                        promotedClass.className === "Maid" &&
+                        unit.gender === "M"
+                          ? false
+                          : promotedClass.className === "Butler" &&
+                              unit.gender === "F"
+                            ? false
+                            : true,
+                      )
+                      .map((promotedClass, index) => (
                         <span key={index}>{promotedClass.className}</span>
-                      ),
-                    )
+                      ))
                   ) : (
-                    <span>No Friendship Seal Classes</span>
+                    <span>No Friendship Seal Classes Yet</span>
                   )}
                 </div>
               </div>
@@ -393,13 +419,21 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                   unit.base_class_set.partner_seal_base_class.classTree &&
                   unit.base_class_set.partner_seal_base_class.classTree.length >
                     0 ? (
-                    unit.base_class_set.partner_seal_base_class.classTree.map(
-                      (promotedClass, index) => (
+                    unit.base_class_set.partner_seal_base_class.classTree
+                      .filter((promotedClass) =>
+                        promotedClass.className === "Maid" &&
+                        unit.gender === "M"
+                          ? false
+                          : promotedClass.className === "Butler" &&
+                              unit.gender === "F"
+                            ? false
+                            : true,
+                      )
+                      .map((promotedClass, index) => (
                         <span key={index}>{promotedClass.className}</span>
-                      ),
-                    )
+                      ))
                   ) : (
-                    <span>No Partner Seal Classes</span>
+                    <span>No Partner Seal Classes Yet</span>
                   )}
                 </div>
               </div>

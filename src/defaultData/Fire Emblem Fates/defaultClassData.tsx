@@ -4246,6 +4246,8 @@ export function initializeClassTree(): void {
   setClassTree("Shrine Maiden", ["Shrine Maiden", "Priestess", "Onmyoji"]);
   setClassTree("Sky Knight", ["Sky Knight", "Falcon Knight", "Kinshi Knight"]);
   setClassTree("Archer", ["Archer", "Kinshi Knight", "Sniper"]);
+  setClassTree("Apothecary", ["Apothecary", "Merchant", "Mechanist"]);
+
   setClassTree("Kitsune", ["Kitsune", "Nine-Tails"]);
 
   setClassTree("Cavalier", ["Cavalier", "Paladin", "Great Knight"]);
