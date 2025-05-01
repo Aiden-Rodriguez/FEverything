@@ -17,7 +17,7 @@
   margin-bottom: 30px;
 }
 
-.add-character-grid {
+.add-remove-character-grid {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,7 @@
   font-size: 3rem;
 }
 
-.add-character-grid:hover {
+.add-remove-character-grid:hover {
   background-color: var(--color-background-cell);
   cursor: pointer;
 }
@@ -100,7 +100,7 @@
 }
 
 span {
-  color: var(--color-text-basic);
+  color: var(--color-accent);
 }
 
 .class-sets-content {
@@ -205,7 +205,7 @@ span {
   color: var(--color-text-basic);
 }
 
-.create-corrin-button {
+.create-corrin-button, .deletion-buttons {
   padding: 10px;
   background-color: var(--color-accent);
   color: var(--color-text-component);
@@ -213,9 +213,11 @@ span {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.create-corrin-button:hover {
+.create-corrin-button:hover, .deletion-buttons:hover{
   background-color: var(--color-accent-focus);
 }
 

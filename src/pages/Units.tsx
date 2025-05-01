@@ -14,20 +14,104 @@ const Units = () => {
 
   const { gameId } = useParams<{ gameId: string }>();
 
-  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] =
-    useState(false);
+  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] = useState(false);
+  const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] = useState(false);
   const [units, setUnits] = useState<Character[]>([]);
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
-    null,
-  );
-  const [createdCorrinGender, setCreatedCorrinGender] = useState<
-    "Male" | "Female" | null
-  >(null);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+  const [createdCorrinGender, setCreatedCorrinGender] = useState<"Male" | "Female" | null>(null);
 
   const [corrinGender, setCorrinGender] = useState<"Male" | "Female">("Male");
   const [corrinBoon, setCorrinBoon] = useState<string>("Robust");
   const [corrinBane, setCorrinBane] = useState<string>("Unlucky");
   const [corrinTalent, setCorrinTalent] = useState<string>("Cavalier");
+
+  // Load units from localStorage on component mount
+  useEffect(() => {
+    const storedUnits = localStorage.getItem(`units_${gameId}_${selectedRoute}`);
+    if (storedUnits) {
+      try {
+        const parsedUnits = JSON.parse(storedUnits);
+        const restoredUnits = parsedUnits
+          .map((unit: any) => {
+            // Find the base character from defaultCharactersConquest
+            let baseCharacter: Character | undefined;
+            if (unit.name === "Jakob" && createdCorrinGender === "Male") {
+              baseCharacter = defaultCharactersConquest.find(
+                (char) => char.name === unit.name && char.level === 13
+              );
+            } else if (unit.name === "Jakob" && createdCorrinGender === "Female") {
+              baseCharacter = defaultCharactersConquest.find(
+                (char) => char.name === unit.name && char.level === 1
+              );
+            } else if (unit.name === "Felicia" && createdCorrinGender === "Male") {
+              baseCharacter = defaultCharactersConquest.find(
+                (char) => char.name === unit.name && char.level === 1
+              );
+            } else if (unit.name === "Felicia" && createdCorrinGender === "Female") {
+              baseCharacter = defaultCharactersConquest.find(
+                (char) => char.name === unit.name && char.level === 13
+              );
+            } else {
+              baseCharacter = defaultCharactersConquest.find(
+                (char) => char.name === unit.name
+              );
+            }
+            if (!baseCharacter) return null;
+
+            // If it's Corrin, apply boon, bane, and talent
+            if (unit.isCorrin) {
+              let corrin = { ...baseCharacter };
+              corrin.base_class_set.heart_seal_classes = [getClass(unit.talent)];
+              corrin = applyBoonBaneAdjustments(corrin, unit.boon, unit.bane);
+              return corrin;
+            }
+            return baseCharacter;
+          })
+          .filter((unit: Character | null) => unit !== null);
+
+        // Set createdCorrinGender based on restored units
+        const corrinUnit = restoredUnits.find(
+          (unit: Character) => unit.name === "Corrin (M)" || unit.name === "Corrin (F)"
+        );
+        if (corrinUnit) {
+          setCreatedCorrinGender(corrinUnit.name === "Corrin (M)" ? "Male" : "Female");
+        }
+
+        setUnits(restoredUnits as Character[]);
+      } catch (error) {
+        console.error("Error parsing stored units:", error);
+      }
+    }
+  }, [gameId, selectedRoute]);
+
+  // Save units to localStorage whenever units change
+  useEffect(() => {
+    if (units.length > 0) {
+      const simplifiedUnits = units.map((unit) => {
+        const isCorrin = unit.name === "Corrin (M)" || unit.name === "Corrin (F)";
+        return {
+          name: unit.name,
+          level: unit.level, // Include level to differentiate Jakob and Felicia
+          isCorrin,
+          ...(isCorrin && {
+            boon: corrinBoon,
+            bane: corrinBane,
+            talent: corrinTalent,
+          }),
+        };
+      });
+      try {
+        localStorage.setItem(
+          `units_${gameId}_${selectedRoute}`,
+          JSON.stringify(simplifiedUnits)
+        );
+      } catch (error) {
+        console.error("Error saving units to localStorage:", error);
+      }
+    } else {
+      localStorage.removeItem(`units_${gameId}_${selectedRoute}`);
+    }
+  }, [units, gameId, selectedRoute, corrinBoon, corrinBane, corrinTalent]);
 
   const conflictingPairs: Record<string, string> = {
     Robust: "Sickly",
@@ -62,11 +146,11 @@ const Units = () => {
   ];
 
   const filteredBaneOptions = baneOptions.filter(
-    (bane) => conflictingPairs[corrinBoon] !== bane,
+    (bane) => conflictingPairs[corrinBoon] !== bane
   );
 
   const filteredBoonOptions = boonOptions.filter(
-    (boon) => conflictingPairs[boon] !== corrinBane,
+    (boon) => conflictingPairs[boon] !== corrinBane
   );
 
   useEffect(() => {
@@ -79,7 +163,7 @@ const Units = () => {
   useEffect(() => {
     if (
       boonOptions.some(
-        (boon) => conflictingPairs[boon] === corrinBane && boon === corrinBoon,
+        (boon) => conflictingPairs[boon] === corrinBane && boon === corrinBoon
       )
     ) {
       const newBoon = filteredBoonOptions[0] || boonOptions[0];
@@ -87,22 +171,9 @@ const Units = () => {
     }
   }, [corrinBane]);
 
-  // Find the indices of the first and second instances of Jakob and Felicia
-  const jakobFirstIndex = defaultCharactersConquest.findIndex(
-    (char) => char.name === "Jakob",
-  );
-  const jakobSecondIndex = defaultCharactersConquest.findIndex(
-    (char, index) => char.name === "Jakob" && index > jakobFirstIndex,
-  );
-  const feliciaFirstIndex = defaultCharactersConquest.findIndex(
-    (char) => char.name === "Felicia",
-  );
-  const feliciaSecondIndex = defaultCharactersConquest.findIndex(
-    (char, index) => char.name === "Felicia" && index > feliciaFirstIndex,
-  );
-
   const availableCharacters = defaultCharactersConquest.filter(
     (character, index) => {
+      // Exclude characters already in units
       if (units.some((unit) => unit.name === character.name)) {
         return false;
       }
@@ -113,7 +184,7 @@ const Units = () => {
         character.name === "Corrin (F)"
       ) {
         return false;
-      }
+  }
       if (
         units.some((unit) => unit.name === "Corrin (F)") &&
         character.name === "Corrin (M)"
@@ -121,33 +192,37 @@ const Units = () => {
         return false;
       }
 
-      // For Male Corrin: exclude the first instance of Jakob and the second instance of Felicia
+      // Handle Jakob and Felicia based on createdCorrinGender
       if (createdCorrinGender === "Male") {
-        if (character.name === "Jakob" && index === jakobFirstIndex) {
+        // Only allow Jakob (level 13) and Felicia (level 1)
+        if (character.name === "Jakob" && character.level !== 13) {
           return false;
         }
-        if (character.name === "Felicia" && index === feliciaSecondIndex) {
+        if (character.name === "Felicia" && character.level !== 1) {
           return false;
         }
-      }
-
-      // For Female Corrin: exclude the first instance of Felicia and the second instance of Jakob
-      if (createdCorrinGender === "Female") {
-        if (character.name === "Felicia" && index === feliciaFirstIndex) {
+      } else if (createdCorrinGender === "Female") {
+        // Only allow Jakob (level 1) and Felicia (level 13)
+        if (character.name === "Jakob" && character.level !== 1) {
           return false;
         }
-        if (character.name === "Jakob" && index === jakobSecondIndex) {
+        if (character.name === "Felicia" && character.level !== 13) {
+          return false;
+        }
+      } else {
+        // If no Corrin is created, exclude both versions of Jakob and Felicia
+        if (character.name === "Jakob" || character.name === "Felicia") {
           return false;
         }
       }
 
       return true;
-    },
+    }
   );
 
   useEffect(() => {
     setSelectedCharacter(
-      availableCharacters.length > 0 ? availableCharacters[0] : null,
+      availableCharacters.length > 0 ? availableCharacters[0] : null
     );
   }, [isOverlayAddCharacterOpen, units, createdCorrinGender]);
 
@@ -160,9 +235,34 @@ const Units = () => {
     setIsOverlayAddCharacterOpen(!isOverlayAddCharacterOpen);
   };
 
+  const toggleOverlayDeleteCharacter = () => {
+    setIsOverlayDeleteCharacterOpen(!isOverlayDeleteCharacterOpen);
+  };
+
+
   const addUnit = () => {
     if (selectedCharacter) {
-      setUnits([...units, selectedCharacter]);
+      // Ensure correct version of Jakob or Felicia is added based on createdCorrinGender
+      let characterToAdd = selectedCharacter;
+      if (selectedCharacter.name === "Jakob" && createdCorrinGender === "Male") {
+        characterToAdd = defaultCharactersConquest.find(
+          (char) => char.name === "Jakob" && char.level === 13
+        ) || selectedCharacter;
+      } else if (selectedCharacter.name === "Jakob" && createdCorrinGender === "Female") {
+        characterToAdd = defaultCharactersConquest.find(
+          (char) => char.name === "Jakob" && char.level === 1
+        ) || selectedCharacter;
+      } else if (selectedCharacter.name === "Felicia" && createdCorrinGender === "Male") {
+        characterToAdd = defaultCharactersConquest.find(
+          (char) => char.name === "Felicia" && char.level === 1
+        ) || selectedCharacter;
+      } else if (selectedCharacter.name === "Felicia" && createdCorrinGender === "Female") {
+        characterToAdd = defaultCharactersConquest.find(
+          (char) => char.name === "Felicia" && char.level === 13
+        ) || selectedCharacter;
+      }
+
+      setUnits([...units, characterToAdd]);
       toggleOverlayAddCharacter();
     }
   };
@@ -181,6 +281,16 @@ const Units = () => {
     toggleOverlayAddCharacter();
   };
 
+  const deleteAllUnits = () => {
+    // Clear units from localStorage
+    localStorage.removeItem(`units_${gameId}_${selectedRoute}`);
+    // Reset units state
+    setUnits([]);
+    // Reset createdCorrinGender to allow new Corrin creation
+    setCreatedCorrinGender(null);
+    toggleOverlayDeleteCharacter();
+  };
+
   const shouldPromptCorrinCreation =
     units.length === 0 && gameId === "Fire Emblem Fates";
 
@@ -192,12 +302,20 @@ const Units = () => {
       <div className="grids-container">
         {units.length > 0 &&
           units.map((unit, index) => (
-            <UnitGrid key={index} unit={unit} gameId={gameId} />
+            <UnitGrid
+              key={`${unit.name}-${index}`} // Unique key using name and index
+              unit={unit}
+              gameId={gameId}
+            />
           ))}
-        <div className="add-character-grid" onClick={toggleOverlayAddCharacter}>
+        <div className="add-remove-character-grid" onClick={toggleOverlayAddCharacter}>
           Add Unit?
         </div>
+        <div className="add-remove-character-grid" onClick={toggleOverlayDeleteCharacter}>
+          Delete All Units?
       </div>
+      </div>
+
 
       {isOverlayAddCharacterOpen && (
         <div className="overlay">
@@ -218,7 +336,7 @@ const Units = () => {
                       value={corrinGender}
                       onChange={(e) =>
                         handleSetCorrinGender(
-                          e.target.value as "Male" | "Female",
+                          e.target.value as "Male" | "Female"
                         )
                       }
                     >
@@ -301,14 +419,17 @@ const Units = () => {
                       value={selectedCharacter?.name || ""}
                       onChange={(e) => {
                         const selected = availableCharacters.find(
-                          (char) => char.name === e.target.value,
+                          (char) => char.name === e.target.value
                         );
                         setSelectedCharacter(selected || null);
                       }}
                     >
                       {availableCharacters.length > 0 ? (
-                        availableCharacters.map((char) => (
-                          <option key={char.name} value={char.name}>
+                        availableCharacters.map((char, index) => (
+                          <option
+                            key={`${char.name}-${index}`} // Unique key for dropdown
+                            value={char.name}
+                          >
                             {char.name}
                           </option>
                         ))
@@ -332,6 +453,23 @@ const Units = () => {
           </div>
         </div>
       )}
+            {isOverlayDeleteCharacterOpen &&
+        <div className="overlay">
+          <div className="overlay-content">
+            <button
+              className="close-button"
+              onClick={toggleOverlayDeleteCharacter}
+            >
+              ✕
+            </button>
+            <h2>Delete all created units?</h2>
+            <h3>This action cannot be undone.</h3>
+            <button className="deletion-buttons" onClick={toggleOverlayDeleteCharacter}>Keep units</button>
+            <button className="deletion-buttons" onClick={deleteAllUnits}>Delete all units</button>
+
+          </div>
+        </div>
+      }
     </div>
   );
 };

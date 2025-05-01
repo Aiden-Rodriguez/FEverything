@@ -4298,6 +4298,12 @@ export function initializeClassTree(): void {
   setClassTree("Butler", ["Troubadour", "Butler"]);
   setClassTree("Maid", ["Troubadour", "Maid"]);
   setClassTree("Wolfssegner", ["Wolfskin", "Wolfssegner"]);
+
+  setClassTree("Songstress", ["Songstress"]);
+  setClassTree("Lodestar", ["Lodestar"]);
+  setClassTree("Vanguard", ["Vanguard"]);
+  setClassTree("Great Lord", ["Great Lord"]);
+  setClassTree("Grandmaster", ["Grandmaster"]);
 }
 
 //Similar as above. Parallel classes are obtained rarely through a unit gaining nothing from a partner/friendship/parent class set
