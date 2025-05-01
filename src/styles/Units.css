@@ -205,7 +205,8 @@ span {
   color: var(--color-text-basic);
 }
 
-.create-corrin-button, .deletion-buttons {
+.create-corrin-button,
+.deletion-buttons {
   padding: 10px;
   background-color: var(--color-accent);
   color: var(--color-text-component);
@@ -217,7 +218,8 @@ span {
   margin-right: 10px;
 }
 
-.create-corrin-button:hover, .deletion-buttons:hover{
+.create-corrin-button:hover,
+.deletion-buttons:hover {
   background-color: var(--color-accent-focus);
 }
 

@@ -2,6 +2,39 @@ export type WeaponRank = "n" | "E" | "D" | "C" | "B" | "A" | "S";
 import { Class } from "./ClassStruct.tsx";
 import { Skill } from "./SkillStruct.tsx";
 
+
+  export const conflictingPairs: Record<string, string> = {
+    Robust: "Sickly",
+    Strong: "Weak",
+    Clever: "Dull",
+    Deft: "Clumsy",
+    Quick: "Slow",
+    Lucky: "Unlucky",
+    Sturdy: "Fragile",
+    Calm: "Excitable",
+  };
+
+  export const boonOptions = [
+    "Robust",
+    "Strong",
+    "Clever",
+    "Deft",
+    "Quick",
+    "Lucky",
+    "Sturdy",
+    "Calm",
+  ];
+  export const baneOptions = [
+    "Sickly",
+    "Weak",
+    "Dull",
+    "Clumsy",
+    "Slow",
+    "Unlucky",
+    "Fragile",
+    "Excitable",
+  ];
+
 export interface Character {
   name: string;
   nickname?: string;
@@ -51,8 +84,8 @@ export interface Character {
     starting_class: Class;
     starting_class_tree: Class;
     heart_seal_classes: Class[];
-    friendship_seal_partners: Character[];
-    partner_seal_partners: Character[];
+    friendship_seal_partners: String[];
+    partner_seal_partners: String[];
     friendship_seal_base_class: Class | null;
     partner_seal_base_class: Class | null;
   };

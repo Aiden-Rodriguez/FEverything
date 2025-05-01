@@ -334,7 +334,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                     unit.base_class_set.starting_class_tree.classTree
                       .filter((promotedClass) =>
                         promotedClass.className === "Maid" &&
-                        unit.gender === "M"
+                        unit.gender === "Male"
                           ? false
                           : promotedClass.className === "Butler" &&
                               unit.gender === "F"
