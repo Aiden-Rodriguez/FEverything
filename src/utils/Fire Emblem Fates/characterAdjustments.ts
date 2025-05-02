@@ -39,22 +39,22 @@ export const applyBoonBaneAdjustments = (
     case "Robust": // Primarily boosts HP
       adjustBaseStat("hp", 3);
       adjustGrowthRate("hp", 15);
-      adjustGrowthRate("defense", 5);
+      adjustGrowthRate("defence", 5);
       adjustGrowthRate("resistance", 5);
       adjustStatCap("strength", 1);
       adjustStatCap("magic", 1);
       adjustStatCap("luck", 2);
-      adjustStatCap("defense", 2);
+      adjustStatCap("defence", 2);
       adjustStatCap("resistance", 2);
       break;
     case "Strong": // Primarily boosts Strength
       adjustBaseStat("strength", 2);
       adjustGrowthRate("strength", 15);
       adjustGrowthRate("skill", 5);
-      adjustGrowthRate("defense", 5);
+      adjustGrowthRate("defence", 5);
       adjustStatCap("strength", 4);
       adjustStatCap("skill", 2);
-      adjustStatCap("defense", 2);
+      adjustStatCap("defence", 2);
       break;
     case "Clever": // Primarily boosts Magic
       adjustBaseStat("magic", 3);
@@ -69,10 +69,10 @@ export const applyBoonBaneAdjustments = (
       adjustBaseStat("skill", 3);
       adjustGrowthRate("skill", 25);
       adjustGrowthRate("strength", 5);
-      adjustGrowthRate("defense", 5);
+      adjustGrowthRate("defence", 5);
       adjustStatCap("skill", 4);
       adjustStatCap("strength", 2);
-      adjustStatCap("defense", 2);
+      adjustStatCap("defence", 2);
       break;
     case "Quick": // Primarily boosts Speed
       adjustBaseStat("speed", 2);
@@ -93,11 +93,11 @@ export const applyBoonBaneAdjustments = (
       adjustStatCap("magic", 2);
       break;
     case "Sturdy": // Primarily boosts Defense
-      adjustBaseStat("defense", 1);
-      adjustGrowthRate("defense", 10);
+      adjustBaseStat("defence", 1);
+      adjustGrowthRate("defence", 10);
       adjustGrowthRate("luck", 5);
       adjustGrowthRate("resistance", 5);
-      adjustStatCap("defense", 4);
+      adjustStatCap("defence", 4);
       adjustStatCap("luck", 2);
       adjustStatCap("resistance", 2);
       break;
@@ -116,22 +116,22 @@ export const applyBoonBaneAdjustments = (
     case "Sickly": // Primarily lowers HP
       adjustBaseStat("hp", -2);
       adjustGrowthRate("hp", -10);
-      adjustGrowthRate("defense", -5);
+      adjustGrowthRate("defence", -5);
       adjustGrowthRate("resistance", -5);
       adjustStatCap("strength", -1);
       adjustStatCap("magic", -1);
       adjustStatCap("luck", -1);
-      adjustStatCap("defense", -1);
+      adjustStatCap("defence", -1);
       adjustStatCap("resistance", -1);
       break;
     case "Weak": // Primarily lowers Strength
       adjustBaseStat("strength", -1);
       adjustGrowthRate("strength", -10);
       adjustGrowthRate("skill", -5);
-      adjustGrowthRate("defense", -5);
+      adjustGrowthRate("defence", -5);
       adjustStatCap("strength", -3);
       adjustStatCap("skill", -1);
-      adjustStatCap("defense", -1);
+      adjustStatCap("defence", -1);
       break;
     case "Dull": // Primarily lowers Magic
       adjustBaseStat("magic", -2);
@@ -146,10 +146,10 @@ export const applyBoonBaneAdjustments = (
       adjustBaseStat("skill", -2);
       adjustGrowthRate("skill", -20);
       adjustGrowthRate("strength", -5);
-      adjustGrowthRate("defense", -5);
+      adjustGrowthRate("defence", -5);
       adjustStatCap("skill", -3);
       adjustStatCap("strength", -1);
-      adjustStatCap("defense", -1);
+      adjustStatCap("defence", -1);
       break;
     case "Slow": // Primarily lowers Speed
       adjustBaseStat("speed", -1);
@@ -170,11 +170,11 @@ export const applyBoonBaneAdjustments = (
       adjustStatCap("magic", -1);
       break;
     case "Fragile": // Primarily lowers Defense
-      adjustBaseStat("defense", -1);
-      adjustGrowthRate("defense", -10);
+      adjustBaseStat("defence", -1);
+      adjustGrowthRate("defence", -10);
       adjustGrowthRate("luck", -5);
       adjustGrowthRate("resistance", -5);
-      adjustStatCap("defense", -3);
+      adjustStatCap("defence", -3);
       adjustStatCap("luck", -1);
       adjustStatCap("resistance", -1);
       break;

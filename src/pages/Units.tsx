@@ -8,8 +8,11 @@ import { Character } from "../types/Fire Emblem Fates/UnitStruct";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments";
 import { getClass } from "../defaultData/Fire Emblem Fates/defaultClassData";
 import { defaultCharactersConquest } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest";
-import { boonOptions, baneOptions, conflictingPairs } from "../types/Fire Emblem Fates/UnitStruct";
-
+import {
+  boonOptions,
+  baneOptions,
+  conflictingPairs,
+} from "../types/Fire Emblem Fates/UnitStruct";
 
 const Units = () => {
   const { state } = useLocation();
@@ -17,11 +20,17 @@ const Units = () => {
 
   const { gameId } = useParams<{ gameId: string }>();
 
-  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] = useState(false);
-  const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] = useState(false);
+  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] =
+    useState(false);
+  const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] =
+    useState(false);
   const [units, setUnits] = useState<Character[]>([]);
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
-  const [createdCorrinGender, setCreatedCorrinGender] = useState<"Male" | "Female" | null>(null);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null,
+  );
+  const [createdCorrinGender, setCreatedCorrinGender] = useState<
+    "Male" | "Female" | null
+  >(null);
 
   const [corrinGender, setCorrinGender] = useState<"Male" | "Female">("Male");
   const [corrinBoon, setCorrinBoon] = useState<string>("Robust");
@@ -30,15 +39,20 @@ const Units = () => {
 
   // TEMP ... load units from localStorage... should be using database later on
   useEffect(() => {
-    const storedUnits = localStorage.getItem(`units_${gameId}_${selectedRoute}`);
+    const storedUnits = localStorage.getItem(
+      `units_${gameId}_${selectedRoute}`,
+    );
     if (storedUnits) {
       try {
         const parsedUnits: Character[] = parse(storedUnits);
         const corrinUnit = parsedUnits.find(
-          (unit: Character) => unit.name === "Corrin (M)" || unit.name === "Corrin (F)"
+          (unit: Character) =>
+            unit.name === "Corrin (M)" || unit.name === "Corrin (F)",
         );
         if (corrinUnit) {
-          setCreatedCorrinGender(corrinUnit.name === "Corrin (M)" ? "Male" : "Female");
+          setCreatedCorrinGender(
+            corrinUnit.name === "Corrin (M)" ? "Male" : "Female",
+          );
         }
         setUnits(parsedUnits);
       } catch (error) {
@@ -53,7 +67,7 @@ const Units = () => {
       try {
         localStorage.setItem(
           `units_${gameId}_${selectedRoute}`,
-          stringify(units)
+          stringify(units),
         );
       } catch (error) {
         console.error("Error saving units to localStorage:", error);
@@ -64,11 +78,11 @@ const Units = () => {
   }, [units, gameId, selectedRoute]);
 
   const filteredBaneOptions = baneOptions.filter(
-    (bane) => conflictingPairs[corrinBoon] !== bane
+    (bane) => conflictingPairs[corrinBoon] !== bane,
   );
 
   const filteredBoonOptions = boonOptions.filter(
-    (boon) => conflictingPairs[boon] !== corrinBane
+    (boon) => conflictingPairs[boon] !== corrinBane,
   );
 
   useEffect(() => {
@@ -81,7 +95,7 @@ const Units = () => {
   useEffect(() => {
     if (
       boonOptions.some(
-        (boon) => conflictingPairs[boon] === corrinBane && boon === corrinBoon
+        (boon) => conflictingPairs[boon] === corrinBane && boon === corrinBoon,
       )
     ) {
       const newBoon = filteredBoonOptions[0] || boonOptions[0];
@@ -128,7 +142,7 @@ const Units = () => {
 
   useEffect(() => {
     setSelectedCharacter(
-      availableCharacters.length > 0 ? availableCharacters[0] : null
+      availableCharacters.length > 0 ? availableCharacters[0] : null,
     );
   }, [isOverlayAddCharacterOpen, units, createdCorrinGender]);
 
@@ -193,10 +207,16 @@ const Units = () => {
               gameId={gameId}
             />
           ))}
-        <div className="add-remove-character-grid" onClick={toggleOverlayAddCharacter}>
+        <div
+          className="add-remove-character-grid"
+          onClick={toggleOverlayAddCharacter}
+        >
           Add Unit?
         </div>
-        <div className="add-remove-character-grid" onClick={toggleOverlayDeleteCharacter}>
+        <div
+          className="add-remove-character-grid"
+          onClick={toggleOverlayDeleteCharacter}
+        >
           Delete All Units?
         </div>
       </div>
@@ -220,7 +240,7 @@ const Units = () => {
                       value={corrinGender}
                       onChange={(e) =>
                         handleSetCorrinGender(
-                          e.target.value as "Male" | "Female"
+                          e.target.value as "Male" | "Female",
                         )
                       }
                     >
@@ -303,20 +323,22 @@ const Units = () => {
                       value={selectedCharacter?.name || ""}
                       onChange={(e) => {
                         const selected = availableCharacters.find(
-                          (char: Character) => char.name === e.target.value
+                          (char: Character) => char.name === e.target.value,
                         );
                         setSelectedCharacter(selected || null);
                       }}
                     >
                       {availableCharacters.length > 0 ? (
-                        availableCharacters.map((char: Character, index: number) => (
-                          <option
-                            key={`${char.name}-${index}`}
-                            value={char.name}
-                          >
-                            {char.name}
-                          </option>
-                        ))
+                        availableCharacters.map(
+                          (char: Character, index: number) => (
+                            <option
+                              key={`${char.name}-${index}`}
+                              value={char.name}
+                            >
+                              {char.name}
+                            </option>
+                          ),
+                        )
                       ) : (
                         <option value="" disabled>
                           No characters available
@@ -348,7 +370,10 @@ const Units = () => {
             </button>
             <h2>Delete all created units?</h2>
             <h3>This action cannot be undone.</h3>
-            <button className="deletion-buttons" onClick={toggleOverlayDeleteCharacter}>
+            <button
+              className="deletion-buttons"
+              onClick={toggleOverlayDeleteCharacter}
+            >
               Keep units
             </button>
             <button className="deletion-buttons" onClick={deleteAllUnits}>

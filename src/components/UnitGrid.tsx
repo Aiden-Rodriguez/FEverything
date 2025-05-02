@@ -146,6 +146,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
           <p> LCK: {unit.stats.luck} </p>
           <p> DEF: {unit.stats.defence} </p>
           <p> RES: {unit.stats.resistance} </p>
+          <p> MOV: {unit.stats.move} </p>
         </div>
       </div>
 

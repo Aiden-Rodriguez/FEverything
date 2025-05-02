@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { parse } from "flatted";
 import { Character } from "../types/Fire Emblem Fates/UnitStruct";
+import normalcurve from "../assets/images/nomal curve.png";
 import "../styles/Averages.css";
-// Define interface for location state
-interface LocationState {
-  selectedRoute?: string;
-}
 
 const Averages = () => {
   const { gameId } = useParams<{ gameId: string }>();
@@ -19,7 +16,9 @@ const Averages = () => {
   // Load units from localStorage on component mount
   useEffect(() => {
     if (gameId && selectedRoute) {
-      const storedUnits = localStorage.getItem(`units_${gameId}_${selectedRoute}`);
+      const storedUnits = localStorage.getItem(
+        `units_${gameId}_${selectedRoute}`,
+      );
       if (storedUnits) {
         try {
           const parsedUnits: Character[] = parse(storedUnits);
@@ -33,21 +32,11 @@ const Averages = () => {
     }
   }, [gameId, selectedRoute]);
 
-  // Handle dropdown selection
+  // Dropdown selection
   const handleUnitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedName = event.target.value;
     const unit = units.find((u) => u.name === selectedName) || null;
     setSelectedUnit(unit);
-  };
-
-  const unitDataStyle: React.CSSProperties = {
-    textAlign: "left",
-    maxWidth: "600px",
-    margin: "0 auto",
-    padding: "20px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    backgroundColor: "#f9f9f9",
   };
 
   return (
@@ -55,7 +44,7 @@ const Averages = () => {
       <h1 className="top-margin">
         Stat Averages: {gameId} {selectedRoute}
       </h1>
-      <div>
+      <div className="select-container">
         <select
           value={selectedUnit?.name || ""}
           onChange={handleUnitChange}
@@ -76,45 +65,142 @@ const Averages = () => {
       </div>
       {selectedUnit ? (
         <div className="averages-grid">
-        <div className="grid-unit-info">
-          <div>
-          <h2>{selectedUnit.name}</h2>
-          <p><strong>Level:</strong> {selectedUnit.level}</p>
-          <p><strong>Class:</strong> {selectedUnit.class?.className || "Unknown"}</p>
+          <div className="grid-unit-info">
+            <div className="averages-grid-top-contents">
+              <h2>{selectedUnit.name}</h2>
+              <p>
+                <strong>Level:</strong> {selectedUnit.level}
+              </p>
+              <p>
+                <strong>Class:</strong> {selectedUnit.class?.className || "Unknown"}
+              </p>
+              <div>
+                <img
+                  src={`/characters/${gameId}/${selectedUnit.name}.png`}
+                  alt={selectedUnit.name}
+                  className="character-image"
+                />
+              </div>
+            </div>
+            <div className="averages-grid-top-contents">
+              <h2>Stats</h2>
+              <ul>
+                <li>HP: {selectedUnit.stats.hp}</li>
+                <li>STR: {selectedUnit.stats.strength}</li>
+                <li>MAG: {selectedUnit.stats.magic}</li>
+                <li>SKL: {selectedUnit.stats.skill}</li>
+                <li>SPD: {selectedUnit.stats.speed}</li>
+                <li>LCK: {selectedUnit.stats.luck}</li>
+                <li>DEF: {selectedUnit.stats.defence}</li>
+                <li>RES: {selectedUnit.stats.resistance}</li>
+                <li>MOV: {selectedUnit.stats.move}</li>
+              </ul>
+            </div>
+            <div className="averages-grid-top-contents">
+              <h2>Growth Rates</h2>
+              <ul>
+                <li>
+                  HP:{" "}
+                  {selectedUnit.class.classGrowths.hp +
+                    selectedUnit.base_growths.hp}
+                  %
+                </li>
+                <li>
+                  STR:{" "}
+                  {selectedUnit.class.classGrowths.strength +
+                    selectedUnit.base_growths.strength}
+                  %
+                </li>
+                <li>
+                  MAG:{" "}
+                  {selectedUnit.class.classGrowths.magic +
+                    selectedUnit.base_growths.magic}
+                  %
+                </li>
+                <li>
+                  SKL:{" "}
+                  {selectedUnit.class.classGrowths.skill +
+                    selectedUnit.base_growths.skill}
+                  %
+                </li>
+                <li>
+                  SPD:{" "}
+                  {selectedUnit.class.classGrowths.speed +
+                    selectedUnit.base_growths.speed}
+                  %
+                </li>
+                <li>
+                  LCK:{" "}
+                  {selectedUnit.class.classGrowths.luck +
+                    selectedUnit.base_growths.luck}
+                  %
+                </li>
+                <li>
+                  DEF:{" "}
+                  {selectedUnit.class.classGrowths.defence +
+                    selectedUnit.base_growths.defence}
+                  %
+                </li>
+                <li>
+                  RES:{" "}
+                  {selectedUnit.class.classGrowths.resistance +
+                    selectedUnit.base_growths.resistance}
+                  %
+                </li>
+              </ul>
+            </div>
+            <div className="averages-grid-top-contents">
+              <h2>Stat Caps</h2>
+              <ul>
+                <li>HP: {selectedUnit.class.MaxStatCaps.hp}</li>
+                <li>
+                  STR:{" "}
+                  {selectedUnit.maxStatModifiers.strength +
+                    selectedUnit.class.MaxStatCaps.strength}
+                </li>
+                <li>
+                  MAG:{" "}
+                  {selectedUnit.maxStatModifiers.magic +
+                    selectedUnit.class.MaxStatCaps.magic}
+                </li>
+                <li>
+                  SKL:{" "}
+                  {selectedUnit.maxStatModifiers.skill +
+                    selectedUnit.class.MaxStatCaps.skill}
+                </li>
+                <li>
+                  SPD:{" "}
+                  {selectedUnit.maxStatModifiers.speed +
+                    selectedUnit.class.MaxStatCaps.speed}
+                </li>
+                <li>
+                  LCK:{" "}
+                  {selectedUnit.maxStatModifiers.luck +
+                    selectedUnit.class.MaxStatCaps.luck}
+                </li>
+                <li>
+                  DEF:{" "}
+                  {selectedUnit.maxStatModifiers.defence +
+                    selectedUnit.class.MaxStatCaps.defence}
+                </li>
+                <li>
+                  RES:{" "}
+                  {selectedUnit.maxStatModifiers.resistance +
+                    selectedUnit.class.MaxStatCaps.resistance}
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
-          <h3>Stats</h3>
-          <ul>
-            {Object.entries(selectedUnit.stats).map(([stat, value]) => (
-              <li key={stat}>{`${stat}: ${value}`}</li>
-            ))}
-          </ul>
+          <div className="averages-grid-bottom">
+            <img
+              className="normal-curve-image"
+              src={normalcurve}
+              alt="Normal curve"
+            />
           </div>
-          <div>
-          <h3>Growth Rates</h3>
-          <ul>
-            {Object.entries(selectedUnit.base_growths).map(([stat, value]) => (
-              <li key={stat}>{`${stat}: ${value}%`}</li>
-            ))}
-          </ul>
-          </div>
-          <div>
-          <h3>Stat Caps (Modifiers)</h3>
-          <ul>
-            {Object.entries(selectedUnit.maxStatModifiers).map(([stat, value]) => (
-              <li key={stat}>{`${stat}: ${value}`}</li>
-            ))}
-          </ul>
-          </div>
-        </div>
-        <div>
-          ABC
-        </div>
         </div>
       ) : (
-        <p>
-          No units available.
-        </p>
+        <p className="no-units">No units available.</p>
       )}
     </div>
   );
