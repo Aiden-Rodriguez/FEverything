@@ -197,6 +197,7 @@ const Averages = () => {
               src={normalcurve}
               alt="Normal curve"
             />
+            {selectedUnit.name} is X standard deviations above/below average!
           </div>
         </div>
       ) : (

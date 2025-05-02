@@ -9,8 +9,7 @@ const Home = () => {
       <div className="page-container">
         <h1 className="home-text">Welcome to FEverything</h1>
         <h2>
-          FEverything is a resource for Fire Emblem players to simulate combat,
-          manage units, and see if their units are above or below average.
+          FEverything is a resource for Fire Emblem players manage playthroughs.
         </h2>
         <div className="home-page-container">
           <div className="home-page-grid">

@@ -97,7 +97,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-main-orange);
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -109,6 +109,14 @@ main {
   padding-top: 4.5rem;
 }
 
+label {
+  color: var(--color-text-basic);
+}
+
+input {
+  background-color: var(--color-text-component);
+  color: var(--color-text-basic);
+}
 #root {
   padding: 0rem;
   text-align: center;
