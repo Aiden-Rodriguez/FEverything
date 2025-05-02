@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 import { Character } from "../types/Fire Emblem Fates/UnitStruct.tsx";
@@ -8,6 +8,7 @@ import { Skill } from "../types/Fire Emblem Fates/SkillStruct.tsx";
 interface UnitGridProps {
   unit: Character;
   gameId?: string;
+  updateUnit: (updatedUnit: Character) => void;
 }
 
 // Define interfaces for dynamically imported modules
@@ -24,7 +25,7 @@ interface SkillsModule {
   getSkill: (skillName: string) => Skill;
 }
 
-const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
+const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const [getClassFn, setGetClassFn] = useState<
     ((className: string) => Class) | null
   >(null);
@@ -33,6 +34,23 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
   >(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [editingField, setEditingField] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const statFields: { key: keyof typeof unit.stats; label: string }[] = [
+    { key: "hp", label: "HP" },
+    { key: "strength", label: "STR" },
+    { key: "magic", label: "MAG" },
+    { key: "skill", label: "SKL" },
+    { key: "speed", label: "SPD" },
+    { key: "luck", label: "LCK" },
+    { key: "defence", label: "DEF" },
+    { key: "resistance", label: "RES" },
+    { key: "move", label: "MOV" },
+  ];
 
   useEffect(() => {
     if (!gameId) {
@@ -67,6 +85,86 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
     loadData();
   }, [gameId]);
 
+  useEffect(() => {
+    if (editingField && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editingField]);
+
+  const handleToggleExpand = () => {
+    setIsExpanded((prev) => !prev);
+    setIsEditing(false); // Exit editing mode when collapsing
+    setEditingField(null);
+    setError("");
+  };
+
+  const handleToggleEdit = () => {
+    setIsEditing((prev) => !prev);
+    setEditingField(null);
+    setError("");
+  };
+
+  const startEditing = (field: string, value: number) => {
+    if (!isEditing) return;
+    setEditingField(field);
+    setEditValue(value.toString());
+    setError("");
+  };
+
+  const validateInput = (field: string, value: string): boolean => {
+    const num = parseInt(value);
+    if (isNaN(num)) {
+      setError(`${field} must be a number`);
+      return false;
+    }
+    if (field === "level" && (num < 1 || num > 20)) {
+      setError("Level must be between 1 and 20 (TEMP IMPLEMENTATIOn)");
+      return false;
+    }
+    if (field !== "level" && (num < 0 || num > 99)) {
+      setError(`${field} must be between 0 and 99 (TEMP IMPLEMENTATION)`);
+      return false;
+    }
+    return true;
+  };
+
+  const saveEdit = () => {
+    if (!editingField || !validateInput(editingField, editValue)) {
+      return;
+    }
+
+    const numValue = parseInt(editValue);
+    let updatedUnit: Character;
+
+    if (editingField === "level") {
+      updatedUnit = { ...unit, level: numValue };
+    } else {
+      updatedUnit = {
+        ...unit,
+        stats: { ...unit.stats, [editingField]: numValue },
+      };
+    }
+
+    updateUnit(updatedUnit);
+    setEditingField(null);
+    setEditValue("");
+    setError("");
+  };
+
+  const cancelEdit = () => {
+    setEditingField(null);
+    setEditValue("");
+    setError("");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      saveEdit();
+    } else if (e.key === "Escape") {
+      cancelEdit();
+    }
+  };
+
   if (isLoading || !getClassFn || !getSkillFn) {
     return (
       <h3>
@@ -75,10 +173,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
       </h3>
     );
   }
-
-  const handleToggleExpand = () => {
-    setIsExpanded((prev: boolean) => !prev);
-  };
 
   const cellVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -120,7 +214,48 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
       </div>
 
       <div className="grid-cell top-right">
-        <h3>Level: {unit.level}</h3>
+        {editingField === "level" ? (
+          <input
+            type="number"
+            value={editValue}
+            onChange={(e) => setEditValue(e.target.value)}
+            onBlur={saveEdit}
+            onKeyDown={handleKeyDown}
+            min="1"
+            max="20"
+            className="inline-input"
+            ref={inputRef}
+          />
+        ) : (
+          <h3
+            onClick={() => startEditing("level", unit.level)}
+            role="button"
+            className={isEditing ? "editable" : ""}
+          >
+            Level: {unit.level}
+          </h3>
+        )}
+        {editingField === "level" && error && (
+          <p className="inline-error">{error}</p>
+        )}
+        {isExpanded && (
+          <span
+            className="edit-icon"
+            onClick={handleToggleEdit}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleToggleEdit();
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label={`Toggle edit mode for ${unit.name}`}
+            aria-expanded={isEditing}
+          >
+            {isEditing ? "Stop Editing" : "Edit Unit"}
+          </span>
+        )}
       </div>
 
       {isExpanded && (
@@ -138,15 +273,34 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
       <div className="grid-cell bottom-left">
         <h3>Stats</h3>
         <div className="bottom-row-grid">
-          <p> HP: {unit.stats.hp} </p>
-          <p> STR: {unit.stats.strength} </p>
-          <p> MAG: {unit.stats.magic} </p>
-          <p> SKL: {unit.stats.skill} </p>
-          <p> SPD: {unit.stats.speed} </p>
-          <p> LCK: {unit.stats.luck} </p>
-          <p> DEF: {unit.stats.defence} </p>
-          <p> RES: {unit.stats.resistance} </p>
-          <p> MOV: {unit.stats.move} </p>
+          {statFields.map(({ key, label }) => (
+            <div key={key}>
+              {editingField === key ? (
+                <input
+                  type="number"
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  onBlur={saveEdit}
+                  onKeyDown={handleKeyDown}
+                  min="0"
+                  max="99"
+                  className="inline-input"
+                  ref={inputRef}
+                />
+              ) : (
+                <p
+                  onClick={() => startEditing(key, unit.stats[key])}
+                  className={isEditing ? "editable" : ""}
+                  role="button"
+                >
+                  {label}: {unit.stats[key]}
+                </p>
+              )}
+              {editingField === key && error && (
+                <p className="inline-error">{error}</p>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
@@ -324,7 +478,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
           >
             <h3>Class Sets</h3>
             <div className="class-sets-content">
-              {/* Base Class Tree */}
               <div className="class-set-column">
                 <div className="class-set-label">Base</div>
                 <div className="class-sets-classes">
@@ -350,8 +503,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                   )}
                 </div>
               </div>
-
-              {/* Heart Seal Class Tree */}
               <div className="class-set-column">
                 <div className="class-set-label">Heart Seal</div>
                 <div className="class-sets-classes">
@@ -384,8 +535,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                   )}
                 </div>
               </div>
-
-              {/* Friendship Seal Class Tree */}
               <div className="class-set-column">
                 <div className="class-set-label">Friendship Seal</div>
                 <div className="class-sets-classes">
@@ -411,8 +560,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId }) => {
                   )}
                 </div>
               </div>
-
-              {/* Partner Seal Class Tree */}
               <div className="class-set-column">
                 <div className="class-set-label">Partner Seal</div>
                 <div className="class-sets-classes">

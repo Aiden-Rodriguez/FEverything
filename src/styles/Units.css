@@ -27,7 +27,7 @@
   border-radius: 8px;
   margin-bottom: 30px;
   color: var(--color-text-basic);
-  font-size: 3rem;
+  font-size: 1.5rem;
 }
 
 .add-remove-character-grid:hover {
@@ -187,6 +187,7 @@ span {
 .form-field {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 5px;
 }
 
@@ -205,7 +206,7 @@ span {
   color: var(--color-text-basic);
 }
 
-.create-corrin-button,
+.create-unit-button,
 .deletion-buttons {
   padding: 10px;
   background-color: var(--color-accent);
@@ -218,7 +219,7 @@ span {
   margin-right: 10px;
 }
 
-.create-corrin-button:hover,
+.create-unit-button:hover,
 .deletion-buttons:hover {
   background-color: var(--color-accent-focus);
 }
@@ -245,6 +246,43 @@ span {
 
 h1 {
   font-size: 2rem;
+}
+
+.editable {
+  cursor: pointer;
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent) 20%,
+    var(--color-text-component)
+  );
+  border: 1px dashed var(--color-accent);
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+  animation: pulse 2s infinite;
+}
+
+.editable:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--color-accent) 40%,
+    var(--color-text-component)
+  );
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media (min-width: 768px) {
@@ -302,6 +340,10 @@ h1 {
   .bottom-extra4 {
     grid-area: bottom-extra4;
   }
+
+  .add-remove-character-grid {
+    font-size: 2.2rem;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -316,5 +358,9 @@ h1 {
 
   .units-grid.expanded {
     grid-column: span 2;
+  }
+
+  .add-remove-character-grid {
+    font-size: 3rem;
   }
 }

@@ -37,13 +37,22 @@ const GamePage = () => {
           <div className="route-selector">
             <h2> {chooseAPathText} </h2>
             <div className="button-group">
-              <button onClick={() => handleSelectRoute("Birthright")}>
+              <button
+                onClick={() => handleSelectRoute("Birthright")}
+                aria-label="Select Birthright route"
+              >
                 Birthright
               </button>
-              <button onClick={() => handleSelectRoute("Conquest")}>
+              <button
+                onClick={() => handleSelectRoute("Conquest")}
+                aria-label="Select Conquest route"
+              >
                 Conquest
               </button>
-              <button onClick={() => handleSelectRoute("Revelation")}>
+              <button
+                onClick={() => handleSelectRoute("Revelation")}
+                aria-label="Select Revalation route"
+              >
                 Revelation
               </button>
             </div>
@@ -56,6 +65,7 @@ const GamePage = () => {
               to={`/${gameId}/units`}
               state={{ selectedRoute }}
               className={`button-link ${featuresDisabled ? "disabled" : ""}`}
+              role="button"
             >
               Unit Manager
             </NavLink>
@@ -66,22 +76,10 @@ const GamePage = () => {
 
           <div className="features-grid-contents">
             <NavLink
-              to={`/${gameId}/combatsimulator`}
-              state={{ selectedRoute }}
-              className={`button-link ${featuresDisabled ? "disabled" : ""}`}
-            >
-              Combat Simulator
-            </NavLink>
-            <div className="features-grid-picture">
-              <img src={fatesbattle} alt="Fire Emblem Fates Combat Scene" />
-            </div>
-          </div>
-
-          <div className="features-grid-contents">
-            <NavLink
               to={`/${gameId}/averages`}
               state={{ selectedRoute }}
               className={`button-link ${featuresDisabled ? "disabled" : ""}`}
+              role="button"
             >
               Stat Averages
             </NavLink>
@@ -93,13 +91,29 @@ const GamePage = () => {
           <div className="features-grid-contents">
             <NavLink
               to={`/game/${gameId}`}
+              // to={`/${gameId}/combatsimulator`}
               state={{ selectedRoute }}
               className={`button-link ${featuresDisabled ? "disabled" : ""}`}
+              role="button"
+            >
+              Combat Simulator (Not Implemented)
+            </NavLink>
+            <div className="features-grid-picture">
+              <img src={fatesbattle} alt="Fire Emblem Fates Combat Scene" />
+            </div>
+          </div>
+
+          <div className="features-grid-contents">
+            <NavLink
+              to={`/game/${gameId}`}
+              state={{ selectedRoute }}
+              className={`button-link ${featuresDisabled ? "disabled" : ""}`}
+              role="button"
             >
               Coming Soon ...
             </NavLink>
             <div className="features-grid-picture">
-              <img src={InProg} alt="Fire Emblem Units" />
+              <img src={InProg} alt="Page not available yet" />
             </div>
           </div>
         </div>

@@ -49,6 +49,9 @@ const Averages = () => {
           value={selectedUnit?.name || ""}
           onChange={handleUnitChange}
           disabled={units.length === 0}
+          aria-describedby={
+            units.length === 0 ? "no-units-message" : "List of your units"
+          }
         >
           {units.length === 0 ? (
             <option value="" disabled>
@@ -72,7 +75,8 @@ const Averages = () => {
                 <strong>Level:</strong> {selectedUnit.level}
               </p>
               <p>
-                <strong>Class:</strong> {selectedUnit.class?.className || "Unknown"}
+                <strong>Class:</strong>{" "}
+                {selectedUnit.class?.className || "Unknown"}
               </p>
               <div>
                 <img

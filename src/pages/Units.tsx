@@ -37,7 +37,6 @@ const Units = () => {
   const [corrinBane, setCorrinBane] = useState<string>("Unlucky");
   const [corrinTalent, setCorrinTalent] = useState<string>("Cavalier");
 
-  // TEMP ... load units from localStorage... should be using database later on
   useEffect(() => {
     const storedUnits = localStorage.getItem(
       `units_${gameId}_${selectedRoute}`,
@@ -61,7 +60,6 @@ const Units = () => {
     }
   }, [gameId, selectedRoute]);
 
-  // Save units to localStorage whenever units change, should have a db call later on.
   useEffect(() => {
     if (units.length > 0) {
       try {
@@ -76,6 +74,14 @@ const Units = () => {
       localStorage.removeItem(`units_${gameId}_${selectedRoute}`);
     }
   }, [units, gameId, selectedRoute]);
+
+  const updateUnit = (updatedUnit: Character) => {
+    setUnits((prevUnits) =>
+      prevUnits.map((unit) =>
+        unit.name === updatedUnit.name ? updatedUnit : unit,
+      ),
+    );
+  };
 
   const filteredBaneOptions = baneOptions.filter(
     (bane) => conflictingPairs[corrinBoon] !== bane,
@@ -147,7 +153,6 @@ const Units = () => {
   }, [isOverlayAddCharacterOpen, units, createdCorrinGender]);
 
   const handleSetCorrinGender = (gender: "Male" | "Female") => {
-    // This is here so that gender-locked classes dont get mixed up.
     setCorrinTalent("Cavalier");
     setCorrinGender(gender);
   };
@@ -194,32 +199,37 @@ const Units = () => {
     units.length === 0 && gameId === "Fire Emblem Fates";
 
   return (
-    <div className="page-container">
+    <main className="page-container">
       <h1 className="top-margin">
         Unit Manager: {gameId} {selectedRoute}
       </h1>
-      <div className="grids-container">
+      <section className="grids-container" aria-label="Unit Management">
         {units.length > 0 &&
           units.map((unit, index) => (
             <UnitGrid
               key={`${unit.name}-${index}`}
               unit={unit}
               gameId={gameId}
+              updateUnit={updateUnit}
             />
           ))}
         <div
           className="add-remove-character-grid"
           onClick={toggleOverlayAddCharacter}
+          role="button"
+          aria-label="Add a new unit"
         >
           Add Unit?
         </div>
         <div
           className="add-remove-character-grid"
           onClick={toggleOverlayDeleteCharacter}
+          role="button"
+          aria-label="Delete your units?"
         >
           Delete All Units?
         </div>
-      </div>
+      </section>
 
       {isOverlayAddCharacterOpen && (
         <div className="overlay">
@@ -227,6 +237,7 @@ const Units = () => {
             <button
               className="close-button"
               onClick={toggleOverlayAddCharacter}
+              aria-label="Close add unit"
             >
               ✕
             </button>
@@ -347,7 +358,7 @@ const Units = () => {
                     </select>
                   </div>
                   <button
-                    className="create-corrin-button"
+                    className="create-unit-button"
                     onClick={addUnit}
                     disabled={!selectedCharacter}
                   >
@@ -365,6 +376,7 @@ const Units = () => {
             <button
               className="close-button"
               onClick={toggleOverlayDeleteCharacter}
+              aria-label="Close delete units"
             >
               ✕
             </button>
@@ -382,7 +394,7 @@ const Units = () => {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 
