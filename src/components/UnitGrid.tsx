@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 import { Character } from "../types/Fire Emblem Fates/UnitStruct.tsx";
-import { Class } from "../types/Fire Emblem Fates/ClassStruct.tsx";
+import { Class, WeaponRank} from "../types/Fire Emblem Fates/ClassStruct.tsx";
 import { Skill } from "../types/Fire Emblem Fates/SkillStruct.tsx";
 
 interface UnitGridProps {
@@ -51,6 +51,58 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     { key: "resistance", label: "RES" },
     { key: "move", label: "MOV" },
   ];
+
+  type WeaponRankKey =
+  | "WeaponRankSwordKatana"
+  | "WeaponRankLanceNaginata"
+  | "WeaponRankAxeClub"
+  | "WeaponRankTomeScroll"
+  | "WeaponRankKnifeShuriken"
+  | "WeaponRankBowYumi"
+  | "WeaponRankStaffRod"
+  | "WeaponRankStone";
+
+  const weaponRankFields: { key: WeaponRankKey; label: string }[] = [
+    { key: "WeaponRankSwordKatana", label: "Sword/Katana" },
+    { key: "WeaponRankLanceNaginata", label: "Lance/Naginata" },
+    { key: "WeaponRankAxeClub", label: "Axe/Club" },
+    { key: "WeaponRankTomeScroll", label: "Tome/Scroll" },
+    { key: "WeaponRankKnifeShuriken", label: "Knife/Shuriken" },
+    { key: "WeaponRankBowYumi", label: "Bow/Yumi" },
+    { key: "WeaponRankStaffRod", label: "Staff/Rod" },
+    { key: "WeaponRankStone", label: "Stone" },
+  ];
+  
+  const filteredFields = weaponRankFields.filter(
+    ({ key }) => unit.class.MaxWeaponRank[key] !== "n"
+  );  
+
+  const allWeaponRanks: WeaponRank[] = ["n", "E", "D", "C", "B", "A", "S"];
+
+  const getWeaponRankOptions = (
+    field: keyof typeof unit.weapon_ranks,
+  ): WeaponRank[] => {
+    const maxRank = unit.class.MaxWeaponRank[field];
+    if (maxRank === "n") {
+      return ["n"];
+    }
+    const maxIndex = allWeaponRanks.indexOf(maxRank);
+    return allWeaponRanks.slice(0, maxIndex + 1);
+  };
+
+  const handleWeaponRankChange = (
+    field: keyof typeof unit.weapon_ranks,
+    value: WeaponRank,
+  ) => {
+    const updatedUnit: Character = {
+      ...unit,
+      weapon_ranks: {
+        ...unit.weapon_ranks,
+        [field]: value,
+      },
+    };
+    updateUnit(updatedUnit);
+  };
 
   useEffect(() => {
     if (!gameId) {
@@ -389,30 +441,43 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             exit="exit"
           >
             <h3>Weapon Ranks</h3>
-            {unit.weapon_ranks.WeaponRankSwordKatana !== "n" && (
-              <p>Sword/Katana: {unit.weapon_ranks.WeaponRankSwordKatana}</p>
-            )}
-            {unit.weapon_ranks.WeaponRankLanceNaginata !== "n" && (
-              <p>Lance/Naginata: {unit.weapon_ranks.WeaponRankLanceNaginata}</p>
-            )}
-            {unit.weapon_ranks.WeaponRankAxeClub !== "n" && (
-              <p>Axe/Club: {unit.weapon_ranks.WeaponRankAxeClub}</p>
-            )}
-            {unit.weapon_ranks.WeaponRankTomeScroll !== "n" && (
-              <p>Tome/Scroll: {unit.weapon_ranks.WeaponRankTomeScroll}</p>
-            )}
-            {unit.weapon_ranks.WeaponRankKnifeShuriken !== "n" && (
-              <p>Knife/Shuriken: {unit.weapon_ranks.WeaponRankKnifeShuriken}</p>
-            )}
-            {unit.weapon_ranks.WeaponRankBowYumi !== "n" && (
-              <p>Bow/Yumi: {unit.weapon_ranks.WeaponRankBowYumi}</p>
-            )}
-            {unit.weapon_ranks.WeaponRankStaffRod !== "n" && (
-              <p>Staff/Rod: {unit.weapon_ranks.WeaponRankStaffRod}</p>
-            )}
-            {unit.weapon_ranks.WeaponRankStone !== "n" && (
-              <p>Stone: {unit.weapon_ranks.WeaponRankStone}</p>
-            )}
+            <div className="bottom-row-grid">
+              {filteredFields.map(({ key, label }) => {
+                const options = getWeaponRankOptions(key);
+                const isEditable = options.length > 1;
+
+                return (
+                  <div key={key} className="weapon-rank-item">
+                    {isEditing && isEditable ? (
+                      <div className="weapon-rank-edit">
+                        <span className="weapon-rank-label">{label}:</span>
+                        <select
+                          value={unit.weapon_ranks[key]}
+                          onChange={(e) =>
+                            handleWeaponRankChange(
+                              key,
+                              e.target.value as WeaponRank,
+                            )
+                          }
+                          className="inline-select"
+                          aria-label={`Edit ${label} rank for ${unit.name}`}
+                        >
+                          {options
+                            .filter((rank) => rank !== "n")
+                            .map((rank) => (
+                              <option key={rank} value={rank}>
+                                {rank}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                    ) : (
+                      <p>{label}: {unit.weapon_ranks[key]}</p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </motion.div>
           <motion.div
             className="grid-cell bottom-extra3"

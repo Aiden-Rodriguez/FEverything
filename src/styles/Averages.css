@@ -131,7 +131,7 @@ h1 {
 @media (min-width: 1200px) {
   select {
     font-size: 1.2rem;
-    width: 300px;
+    max-width: 300px;
   }
 
   .averages-grid {

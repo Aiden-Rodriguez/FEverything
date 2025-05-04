@@ -44,6 +44,7 @@ export interface Character {
   RouteAvailability: string;
   baseInternalLevel: number;
   level: number;
+  class_line: [number, number, Class][];
   stats: {
     hp: number;
     strength: number;

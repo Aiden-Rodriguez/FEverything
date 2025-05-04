@@ -28,6 +28,7 @@ export const defaultCharactersConquest: Character[] = [
     baseInternalLevel: 0,
     royalty_status: true,
     level: 1,
+    class_line: [[0, 1, getClass("Nohr Prince")]],
     starting_weapons: [],
     stats: {
       hp: 19,
@@ -167,6 +168,7 @@ export const defaultCharactersConquest: Character[] = [
     baseInternalLevel: 0,
     royalty_status: true,
     level: 1,
+    class_line: [[0, 1, getClass("Nohr Princess")]],
     starting_weapons: [],
     stats: {
       hp: 19,
@@ -307,6 +309,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Butler"),
     baseInternalLevel: 0,
     level: 1,
+    class_line: [[0, 1, getClass("Butler")]],
     starting_weapons: ["Iron Dagger", "Heal"],
     stats: {
       hp: 21,
@@ -445,6 +448,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Butler"),
     baseInternalLevel: 0,
     level: 13,
+    class_line: [[0, 13, getClass("Butler")]],
     starting_weapons: [],
     stats: {
       hp: 27,
@@ -582,6 +586,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Maid"),
     baseInternalLevel: 0,
     level: 1,
+    class_line: [[0, 1, getClass("Maid")]],
     starting_weapons: ["Iron Dagger", "Heal"],
     stats: {
       hp: 19,
@@ -719,6 +724,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Maid"),
     baseInternalLevel: 0,
     level: 13,
+    class_line: [[0, 13, getClass("Maid")]],
     starting_weapons: [],
     stats: {
       hp: 24,
@@ -856,6 +862,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Ninja"),
     baseInternalLevel: 0,
     level: 9,
+    class_line: [[0, 9, getClass("Ninja")]],
     starting_weapons: ["Iron Shuriken", "Vulnerary"],
     stats: {
       hp: 22,
@@ -993,6 +1000,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Songstress"),
     baseInternalLevel: 0,
     level: 1,
+    class_line: [[0, 1, getClass("Songstress")]],
     starting_weapons: ["Vulnerary", "Chest Key"],
     stats: {
       hp: 16,
@@ -1130,6 +1138,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Cavalier"),
     baseInternalLevel: 0,
     level: 6,
+    class_line: [[0, 6, getClass("Cavalier")]],
     starting_weapons: ["Iron Sword", "Bronze Lance"],
     stats: {
       hp: 22,
@@ -1267,6 +1276,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Adventurer"),
     baseInternalLevel: 20,
     level: 2,
+    class_line: [[20, 2, getClass("Adventurer")]],
     starting_weapons: ["Killer Bow", "Mend"],
     stats: {
       hp: 31,
@@ -1404,6 +1414,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Villager"),
     baseInternalLevel: 0,
     level: 1,
+    class_line: [[0, 1, getClass("Villager")]],
     starting_weapons: ["Brass Naginata", "Vulnerary"],
     stats: {
       hp: 16,
@@ -1541,6 +1552,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Onmyoji"),
     baseInternalLevel: 20,
     level: 5,
+    class_line: [[20, 5, getClass("Onmyoji")]],
     starting_weapons: [],
     stats: {
       hp: 31,
@@ -1678,6 +1690,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Great Knight"),
     baseInternalLevel: 5,
     level: 10,
+    class_line: [[5, 10, getClass("Great Knight")]],
     starting_weapons: ["Steel Lance", "Steel Axe", "Javelin", "Vulnerary"],
     stats: {
       hp: 34,
@@ -1815,6 +1828,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Troubadour"),
     baseInternalLevel: 0,
     level: 5,
+    class_line: [[0, 5, getClass("Troubadour")]],
     starting_weapons: ["Heal", "Freeze"],
     stats: {
       hp: 19,
@@ -1952,6 +1966,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Fighter"),
     baseInternalLevel: 0,
     level: 7,
+    class_line: [[0, 7, getClass("Fighter")]],
     starting_weapons: ["Iron Axe", "Hand Axe"],
     stats: {
       hp: 24,
@@ -2089,6 +2104,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Knight"),
     baseInternalLevel: 0,
     level: 6,
+    class_line: [[0, 6, getClass("Knight")]],
     starting_weapons: ["Iron Lance"],
     stats: {
       hp: 23,
@@ -2226,6 +2242,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Dark Mage"),
     baseInternalLevel: 0,
     level: 5,
+    class_line: [[0, 5, getClass("Dark Mage")]],
     starting_weapons: ["Thunder", "Vulnerary"],
     stats: {
       hp: 21,
@@ -2363,6 +2380,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Outlaw"),
     baseInternalLevel: 0,
     level: 8,
+    class_line: [[0, 8, getClass("Outlaw")]],
     starting_weapons: ["Iron Bow"],
     stats: {
       hp: 22,
@@ -2500,6 +2518,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Dark Mage"),
     baseInternalLevel: 0,
     level: 9,
+    class_line: [[0, 9, getClass("Dark Mage")]],
     starting_weapons: [],
     stats: {
       hp: 20,
@@ -2637,6 +2656,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Malig Knight"),
     baseInternalLevel: 15,
     level: 1,
+    class_line: [[15, 1, getClass("Malig Knight")]],
     starting_weapons: ["Steel Axe", "Thunder"],
     stats: {
       hp: 30,
@@ -2774,6 +2794,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Mercenary"),
     baseInternalLevel: 0,
     level: 10,
+    class_line: [[0, 10, getClass("Mercenary")]],
     starting_weapons: ["Iron Sword", "Bronze Sword", "Vulnerary"],
     stats: {
       hp: 24,
@@ -2909,8 +2930,9 @@ export const defaultCharactersConquest: Character[] = [
     title: "Quiet Assassin",
     royalty_status: false,
     class: getClass("Wyvern Rider"),
-    baseInternalLevel: 9,
+    baseInternalLevel: 0,
     level: 9,
+    class_line: [[0, 9, getClass("Wyvern Rider")]],
     starting_weapons: ["Iron Axe"],
     stats: {
       hp: 23,
@@ -3048,6 +3070,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Mercenary"),
     baseInternalLevel: 0,
     level: 12,
+    class_line: [[0, 12, getClass("Mercenary")]],
     starting_weapons: ["Steel Sword", "Vulnerary"],
     stats: {
       hp: 28,
@@ -3185,6 +3208,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Cavalier"),
     baseInternalLevel: 0,
     level: 10,
+    class_line: [[0, 10, getClass("Cavalier")]],
     starting_weapons: ["Steel Lance", "Iron Sword"],
     stats: {
       hp: 25,
@@ -3322,6 +3346,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Knight"),
     baseInternalLevel: 0,
     level: 15,
+    class_line: [[0, 15, getClass("Knight")]],
     starting_weapons: ["Steel Lance"],
     stats: {
       hp: 31,
@@ -3459,6 +3484,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Fighter"),
     baseInternalLevel: 0,
     level: 10,
+    class_line: [[0, 10, getClass("Fighter")]],
     starting_weapons: ["Steel Axe"],
     stats: {
       hp: 28,
@@ -3596,6 +3622,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Dark Knight"),
     baseInternalLevel: 18,
     level: 2,
+    class_line: [[18, 2, getClass("Dark Knight")]],
     starting_weapons: ["Brynhildr", "Iron Sword"],
     stats: {
       hp: 34,
@@ -3733,6 +3760,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Paladin"),
     baseInternalLevel: 20,
     level: 4,
+    class_line: [[20, 4, getClass("Paladin")]],
     starting_weapons: ["Siegfried"],
     stats: {
       hp: 38,
@@ -3870,6 +3898,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Wolfskin"),
     baseInternalLevel: 0,
     level: 15,
+    class_line: [[0, 15, getClass("Wolfskin")]],
     starting_weapons: ["Beastone", "Beastrune"],
     stats: {
       hp: 35,
@@ -4007,6 +4036,7 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Maid"),
     baseInternalLevel: 20,
     level: 5,
+    class_line: [[20, 5, getClass("Maid")]],
     starting_weapons: [],
     stats: {
       hp: 29,
