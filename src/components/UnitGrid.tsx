@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 import { Character } from "../types/Fire Emblem Fates/UnitStruct.tsx";
-import { Class, WeaponRank} from "../types/Fire Emblem Fates/ClassStruct.tsx";
+import { Class, WeaponRank } from "../types/Fire Emblem Fates/ClassStruct.tsx";
 import { Skill } from "../types/Fire Emblem Fates/SkillStruct.tsx";
 
 interface UnitGridProps {
@@ -35,8 +35,12 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isClassChanging, setIsClassChanging] = useState<boolean>(false);
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>("");
+  const [selectedClassName, setSelectedClassName] = useState<string>(
+    unit.class.className,
+  );
   const [error, setError] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -53,14 +57,14 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   ];
 
   type WeaponRankKey =
-  | "WeaponRankSwordKatana"
-  | "WeaponRankLanceNaginata"
-  | "WeaponRankAxeClub"
-  | "WeaponRankTomeScroll"
-  | "WeaponRankKnifeShuriken"
-  | "WeaponRankBowYumi"
-  | "WeaponRankStaffRod"
-  | "WeaponRankStone";
+    | "WeaponRankSwordKatana"
+    | "WeaponRankLanceNaginata"
+    | "WeaponRankAxeClub"
+    | "WeaponRankTomeScroll"
+    | "WeaponRankKnifeShuriken"
+    | "WeaponRankBowYumi"
+    | "WeaponRankStaffRod"
+    | "WeaponRankStone";
 
   const weaponRankFields: { key: WeaponRankKey; label: string }[] = [
     { key: "WeaponRankSwordKatana", label: "Sword/Katana" },
@@ -72,10 +76,10 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     { key: "WeaponRankStaffRod", label: "Staff/Rod" },
     { key: "WeaponRankStone", label: "Stone" },
   ];
-  
+
   const filteredFields = weaponRankFields.filter(
-    ({ key }) => unit.class.MaxWeaponRank[key] !== "n"
-  );  
+    ({ key }) => unit.class.MaxWeaponRank[key] !== "n",
+  );
 
   const allWeaponRanks: WeaponRank[] = ["n", "E", "D", "C", "B", "A", "S"];
 
@@ -102,6 +106,83 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       },
     };
     updateUnit(updatedUnit);
+  };
+
+  const getAvailableClasses = (): Class[] => {
+    const classes: Class[] = [];
+    const gender = unit.gender;
+
+    // Helper function to filter gender-compatible classes
+    const filterGenderCompatible = (cls: Class) =>
+      !(cls.className === "Maid" && gender === "Male") &&
+      !(cls.className === "Butler" && gender === "F");
+
+    // Base class tree
+    if (
+      unit.base_class_set.starting_class_tree &&
+      unit.base_class_set.starting_class_tree.classTree
+    ) {
+      classes.push(
+        ...unit.base_class_set.starting_class_tree.classTree.filter(
+          filterGenderCompatible,
+        ),
+      );
+    }
+
+    // Heart Seal classes
+    if (unit.base_class_set.heart_seal_classes) {
+      unit.base_class_set.heart_seal_classes.forEach((cls) => {
+        if (cls.classTree) {
+          classes.push(...cls.classTree.filter(filterGenderCompatible));
+        }
+      });
+    }
+
+    // Friendship Seal classes
+    if (
+      unit.base_class_set.friendship_seal_base_class &&
+      unit.base_class_set.friendship_seal_base_class.classTree
+    ) {
+      classes.push(
+        ...unit.base_class_set.friendship_seal_base_class.classTree.filter(
+          filterGenderCompatible,
+        ),
+      );
+    }
+
+    // Partner Seal classes
+    if (
+      unit.base_class_set.partner_seal_base_class &&
+      unit.base_class_set.partner_seal_base_class.classTree
+    ) {
+      classes.push(
+        ...unit.base_class_set.partner_seal_base_class.classTree.filter(
+          filterGenderCompatible,
+        ),
+      );
+    }
+
+    return classes;
+  };
+
+  const handleClassChange = (className: string) => {
+    setSelectedClassName(className);
+  };
+
+  const commitClassChange = () => {
+    if (!getClassFn) return;
+    const newClass = getClassFn(selectedClassName);
+    const updatedUnit: Character = {
+      ...unit,
+      class: newClass,
+    };
+    updateUnit(updatedUnit);
+    setIsClassChanging(false);
+  };
+
+  const cancelClassChange = () => {
+    setIsClassChanging(false);
+    setSelectedClassName(unit.class.className);
   };
 
   useEffect(() => {
@@ -145,15 +226,25 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
 
   const handleToggleExpand = () => {
     setIsExpanded((prev) => !prev);
-    setIsEditing(false); // Exit editing mode when collapsing
+    setIsEditing(false);
+    setIsClassChanging(false);
     setEditingField(null);
     setError("");
   };
 
   const handleToggleEdit = () => {
     setIsEditing((prev) => !prev);
+    setIsClassChanging(false);
     setEditingField(null);
     setError("");
+  };
+
+  const handleToggleClassChange = () => {
+    setIsClassChanging((prev) => !prev);
+    setIsEditing(false);
+    setEditingField(null);
+    setError("");
+    setSelectedClassName(unit.class.className);
   };
 
   const startEditing = (field: string, value: number) => {
@@ -170,7 +261,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       return false;
     }
     if (field === "level" && (num < 1 || num > 20)) {
-      setError("Level must be between 1 and 20 (TEMP IMPLEMENTATIOn)");
+      setError("Level must be between 1 and 20 (TEMP IMPLEMENTATION)");
       return false;
     }
     if (field !== "level" && (num < 0 || num > 99)) {
@@ -262,7 +353,59 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       </div>
 
       <div className="grid-cell top-middle">
-        <h3>{unit.class.className}</h3>
+        <h3>
+          {unit.class.className}
+          {isClassChanging &&
+            selectedClassName !== unit.class.className &&
+            ` --> ${selectedClassName}`}
+        </h3>
+        {isExpanded && !isEditing && !isClassChanging && (
+          <span
+            className="edit-icon"
+            onClick={handleToggleClassChange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleToggleClassChange();
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label={`Toggle class change mode for ${unit.name}`}
+          >
+            Commit Class Change?
+          </span>
+        )}
+        {isClassChanging && (
+          <div>
+            <select
+              value={selectedClassName}
+              onChange={(e) => handleClassChange(e.target.value)}
+              className="inline-select"
+              aria-label={`Select new class for ${unit.name}`}
+            >
+              {getAvailableClasses().map((cls) => (
+                <option key={cls.className} value={cls.className}>
+                  {cls.className}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={commitClassChange}
+              className="inline-button"
+              aria-label={`Confirm class change for ${unit.name}`}
+            >
+              Confirm
+            </button>
+            <button
+              onClick={cancelClassChange}
+              className="inline-button"
+              aria-label={`Cancel class change for ${unit.name}`}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="grid-cell top-right">
@@ -277,6 +420,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             max="20"
             className="inline-input"
             ref={inputRef}
+            aria-label={`Edit level for ${unit.name}`}
           />
         ) : (
           <h3
@@ -338,6 +482,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                   max="99"
                   className="inline-input"
                   ref={inputRef}
+                  aria-label={`Edit ${label} for ${unit.name}`}
                 />
               ) : (
                 <p
