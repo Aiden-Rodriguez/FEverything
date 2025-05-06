@@ -5,6 +5,9 @@ import { Character } from "../types/Fire Emblem Fates/UnitStruct.tsx";
 import { Class, WeaponRank } from "../types/Fire Emblem Fates/ClassStruct.tsx";
 import { Skill } from "../types/Fire Emblem Fates/SkillStruct.tsx";
 
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+
 interface UnitGridProps {
   unit: Character;
   gameId?: string;
@@ -112,8 +115,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     const classes: Class[] = [];
     const gender = unit.gender;
 
-    // Helper function to filter gender-compatible classes
-    const filterGenderCompatible = (cls: Class) =>
+    // Helper function to filter gender-compatible classes and exclude current class
+    const filterClasses = (cls: Class) =>
+      cls.className !== unit.class.className &&
       !(cls.className === "Maid" && gender === "Male") &&
       !(cls.className === "Butler" && gender === "F");
 
@@ -124,7 +128,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       classes.push(
         ...unit.base_class_set.starting_class_tree.classTree.filter(
-          filterGenderCompatible,
+          filterClasses,
         ),
       );
     }
@@ -133,7 +137,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     if (unit.base_class_set.heart_seal_classes) {
       unit.base_class_set.heart_seal_classes.forEach((cls) => {
         if (cls.classTree) {
-          classes.push(...cls.classTree.filter(filterGenderCompatible));
+          classes.push(...cls.classTree.filter(filterClasses));
         }
       });
     }
@@ -145,7 +149,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       classes.push(
         ...unit.base_class_set.friendship_seal_base_class.classTree.filter(
-          filterGenderCompatible,
+          filterClasses,
         ),
       );
     }
@@ -157,7 +161,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       classes.push(
         ...unit.base_class_set.partner_seal_base_class.classTree.filter(
-          filterGenderCompatible,
+          filterClasses,
         ),
       );
     }
@@ -172,9 +176,51 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const commitClassChange = () => {
     if (!getClassFn) return;
     const newClass = getClassFn(selectedClassName);
+    const newClassLine: [number, number, Class] = [
+      unit.baseInternalLevel,
+      unit.level,
+      newClass,
+    ];
+    const newStats = {
+      hp:
+        unit.stats.hp -
+        unit.class.classBaseStats.hp +
+        newClass.classBaseStats.hp,
+      strength:
+        unit.stats.strength -
+        unit.class.classBaseStats.strength +
+        newClass.classBaseStats.strength,
+      magic:
+        unit.stats.magic -
+        unit.class.classBaseStats.magic +
+        newClass.classBaseStats.magic,
+      skill:
+        unit.stats.skill -
+        unit.class.classBaseStats.skill +
+        newClass.classBaseStats.skill,
+      speed:
+        unit.stats.speed -
+        unit.class.classBaseStats.speed +
+        newClass.classBaseStats.speed,
+      luck:
+        unit.stats.luck -
+        unit.class.classBaseStats.luck +
+        newClass.classBaseStats.luck,
+      defence:
+        unit.stats.defence -
+        unit.class.classBaseStats.defence +
+        newClass.classBaseStats.defence,
+      resistance:
+        unit.stats.resistance -
+        unit.class.classBaseStats.resistance +
+        newClass.classBaseStats.resistance,
+      move: newClass.classBaseStats.move,
+    };
     const updatedUnit: Character = {
       ...unit,
       class: newClass,
+      class_line: [...unit.class_line, newClassLine],
+      stats: newStats,
     };
     updateUnit(updatedUnit);
     setIsClassChanging(false);
@@ -354,11 +400,22 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
 
       <div className="grid-cell top-middle">
         <h3>
-          {unit.class.className}
+          <Tippy
+            content={
+              <>
+                <strong>{unit.class.className}</strong>
+                <p className="tooltip-text">{unit.class.description}</p>
+              </>
+            }
+          >
+            <h3>{unit.class.className}</h3>
+          </Tippy>
+
           {isClassChanging &&
             selectedClassName !== unit.class.className &&
             ` --> ${selectedClassName}`}
         </h3>
+
         {isExpanded && !isEditing && !isClassChanging && (
           <span
             className="edit-icon"
@@ -377,7 +434,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           </span>
         )}
         {isClassChanging && (
-          <div>
+          <div className="class-change-column">
             <select
               value={selectedClassName}
               onChange={(e) => handleClassChange(e.target.value)}
@@ -390,20 +447,22 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 </option>
               ))}
             </select>
-            <button
-              onClick={commitClassChange}
-              className="inline-button"
-              aria-label={`Confirm class change for ${unit.name}`}
-            >
-              Confirm
-            </button>
-            <button
-              onClick={cancelClassChange}
-              className="inline-button"
-              aria-label={`Cancel class change for ${unit.name}`}
-            >
-              Cancel
-            </button>
+            <div className="two-button-container">
+              <button
+                onClick={commitClassChange}
+                className="inline-button"
+                aria-label={`Confirm class change for ${unit.name}`}
+              >
+                Confirm
+              </button>
+              <button
+                onClick={cancelClassChange}
+                className="inline-button"
+                aria-label={`Cancel class change for ${unit.name}`}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -503,13 +562,47 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
 
       <div className="grid-cell bottom-middle">
         <h3>Skills</h3>
-        <div className="bottom-row-grid">
-          <p> {unit.personal_skill?.name} </p>
-          <p> {unit.basic_skills[0].name} </p>
-          <p> {unit.basic_skills[1].name} </p>
-          <p> {unit.basic_skills[2].name} </p>
-          <p> {unit.basic_skills[3].name} </p>
-          <p> {unit.basic_skills[4].name} </p>
+        <div className="three-wide-grid">
+          {unit.personal_skill?.name !== "N/A" && (
+            <div className="skill-image-container">
+              <Tippy
+                content={
+                  <>
+                    <strong>{unit.personal_skill.name}</strong>
+                    <p className="tooltip-text">
+                      {unit.personal_skill.description}
+                    </p>
+                  </>
+                }
+              >
+                <img
+                  src={`/skills/${gameId}/${unit.personal_skill.name}.png`}
+                  alt={unit.name}
+                  className="skill-image"
+                />
+              </Tippy>
+            </div>
+          )}
+          {unit.basic_skills
+            .filter((skill) => skill.name !== "N/A")
+            .map((skill, index) => (
+              <div key={index} className="skill-image-container">
+                <Tippy
+                  content={
+                    <>
+                      <strong>{skill.name}</strong>
+                      <p className="tooltip-text">{skill.description}</p>
+                    </>
+                  }
+                >
+                  <img
+                    src={`/skills/${gameId}/${skill.name}.png`}
+                    alt={skill.name}
+                    className="skill-image"
+                  />
+                </Tippy>
+              </div>
+            ))}
         </div>
       </div>
 
@@ -617,7 +710,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         </select>
                       </div>
                     ) : (
-                      <p>{label}: {unit.weapon_ranks[key]}</p>
+                      <p>
+                        {label}: {unit.weapon_ranks[key]}
+                      </p>
                     )}
                   </div>
                 );
@@ -633,50 +728,166 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           >
             <h3>Growth Rates Total</h3>
             <div className="bottom-row-grid">
-              <p>
-                {" "}
-                HP Growth: {unit.base_growths.hp + unit.class.classGrowths.hp}
-                %{" "}
-              </p>
-              <p>
-                {" "}
-                STR Growth:{" "}
-                {unit.base_growths.strength + unit.class.classGrowths.strength}
-                %{" "}
-              </p>
-              <p>
-                {" "}
-                MAG Growth:{" "}
-                {unit.base_growths.magic + unit.class.classGrowths.magic}%{" "}
-              </p>
-              <p>
-                {" "}
-                SKL Growth:{" "}
-                {unit.base_growths.skill + unit.class.classGrowths.skill}%{" "}
-              </p>
-              <p>
-                {" "}
-                SPD Growth:{" "}
-                {unit.base_growths.speed + unit.class.classGrowths.speed}%{" "}
-              </p>
-              <p>
-                {" "}
-                LCK Growth:{" "}
-                {unit.base_growths.luck + unit.class.classGrowths.luck}%{" "}
-              </p>
-              <p>
-                {" "}
-                DEF Growth:{" "}
-                {unit.base_growths.defence + unit.class.classGrowths.defence}
-                %{" "}
-              </p>
-              <p>
-                {" "}
-                RES Growth:{" "}
-                {unit.base_growths.resistance +
-                  unit.class.classGrowths.resistance}
-                %{" "}
-              </p>
+              <Tippy
+                content={
+                  <>
+                    <p className="tooltip-text">
+                      Personal HP Growth: {unit.base_growths.hp}%
+                    </p>
+                    <p className="tooltip-text">
+                      {unit.class.className} HP Growth:{" "}
+                      {unit.class.classGrowths.hp}%
+                    </p>
+                  </>
+                }
+              >
+                <p>
+                  {" "}
+                  HP Growth: {unit.base_growths.hp + unit.class.classGrowths.hp}
+                  %{" "}
+                </p>
+              </Tippy>
+              <Tippy
+                content={
+                  <>
+                    <p className="tooltip-text">
+                      Personal STR Growth: {unit.base_growths.strength}%
+                    </p>
+                    <p className="tooltip-text">
+                      {unit.class.className} STR Growth:{" "}
+                      {unit.class.classGrowths.strength}%
+                    </p>
+                  </>
+                }
+              >
+                <p>
+                  {" "}
+                  STR Growth:{" "}
+                  {unit.base_growths.strength +
+                    unit.class.classGrowths.strength}
+                  %{" "}
+                </p>
+              </Tippy>
+              <Tippy
+                content={
+                  <>
+                    <p className="tooltip-text">
+                      Personal MAG Growth: {unit.base_growths.magic}%
+                    </p>
+                    <p className="tooltip-text">
+                      {unit.class.className} MAG Growth:{" "}
+                      {unit.class.classGrowths.magic}%
+                    </p>
+                  </>
+                }
+              >
+                <p>
+                  {" "}
+                  MAG Growth:{" "}
+                  {unit.base_growths.magic + unit.class.classGrowths.magic}
+                  %{" "}
+                </p>
+              </Tippy>
+              <Tippy
+                content={
+                  <>
+                    <p className="tooltip-text">
+                      Personal SKL Growth: {unit.base_growths.skill}%
+                    </p>
+                    <p className="tooltip-text">
+                      {unit.class.className} SKL Growth:{" "}
+                      {unit.class.classGrowths.skill}%
+                    </p>
+                  </>
+                }
+              >
+                <p>
+                  {" "}
+                  SKL Growth:{" "}
+                  {unit.base_growths.skill + unit.class.classGrowths.skill}
+                  %{" "}
+                </p>
+              </Tippy>
+              <Tippy
+                content={
+                  <>
+                    <p className="tooltip-text">
+                      Personal SPD Growth: {unit.base_growths.speed}%
+                    </p>
+                    <p className="tooltip-text">
+                      {unit.class.className} SPD Growth:{" "}
+                      {unit.class.classGrowths.speed}%
+                    </p>
+                  </>
+                }
+              >
+                <p>
+                  {" "}
+                  SPD Growth:{" "}
+                  {unit.base_growths.speed + unit.class.classGrowths.speed}
+                  %{" "}
+                </p>
+              </Tippy>
+              <Tippy
+                content={
+                  <>
+                    <p className="tooltip-text">
+                      Personal LCK Growth: {unit.base_growths.luck}%
+                    </p>
+                    <p className="tooltip-text">
+                      {unit.class.className} LCK Growth:{" "}
+                      {unit.class.classGrowths.luck}%
+                    </p>
+                  </>
+                }
+              >
+                <p>
+                  {" "}
+                  LCK Growth:{" "}
+                  {unit.base_growths.luck + unit.class.classGrowths.luck}%{" "}
+                </p>
+              </Tippy>
+              <Tippy
+                content={
+                  <>
+                    <p className="tooltip-text">
+                      Personal DEF Growth: {unit.base_growths.defence}%
+                    </p>
+                    <p className="tooltip-text">
+                      {unit.class.className} DEF Growth:{" "}
+                      {unit.class.classGrowths.defence}%
+                    </p>
+                  </>
+                }
+              >
+                <p>
+                  {" "}
+                  DEF Growth:{" "}
+                  {unit.base_growths.defence + unit.class.classGrowths.defence}
+                  %{" "}
+                </p>
+              </Tippy>
+              <Tippy
+                content={
+                  <>
+                    <p className="tooltip-text">
+                      Personal RES Growth: {unit.base_growths.resistance}%
+                    </p>
+                    <p className="tooltip-text">
+                      {unit.class.className} RES Growth:{" "}
+                      {unit.class.classGrowths.resistance}%
+                    </p>
+                  </>
+                }
+              >
+                <p>
+                  {" "}
+                  RES Growth:{" "}
+                  {unit.base_growths.resistance +
+                    unit.class.classGrowths.resistance}
+                  %{" "}
+                </p>
+              </Tippy>
             </div>
           </motion.div>
           <motion.div
@@ -706,7 +917,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             : true,
                       )
                       .map((promotedClass, index) => (
-                        <span key={index}>{promotedClass.className}</span>
+                        <Tippy
+                          content={
+                            <>
+                              <strong>{promotedClass.className}</strong>
+                              <p className="tooltip-text">
+                                {promotedClass.description}
+                              </p>
+                            </>
+                          }
+                        >
+                          <span key={index}>{promotedClass.className}</span>
+                        </Tippy>
                       ))
                   ) : (
                     <span>No Base Classes</span>
@@ -732,9 +954,20 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                                   : true,
                             )
                             .map((promotedClass, treeIndex) => (
-                              <span key={`${clsIndex}-${treeIndex}`}>
-                                {promotedClass.className}
-                              </span>
+                              <Tippy
+                                content={
+                                  <>
+                                    <strong>{promotedClass.className}</strong>
+                                    <p className="tooltip-text">
+                                      {promotedClass.description}
+                                    </p>
+                                  </>
+                                }
+                              >
+                                <span key={`${clsIndex}-${treeIndex}`}>
+                                  {promotedClass.className}
+                                </span>
+                              </Tippy>
                             ))
                         ) : (
                           <span key={clsIndex}>No Promotions</span>
@@ -763,7 +996,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             : true,
                       )
                       .map((promotedClass, index) => (
-                        <span key={index}>{promotedClass.className}</span>
+                        <Tippy
+                          content={
+                            <>
+                              <strong>{promotedClass.className}</strong>
+                              <p className="tooltip-text">
+                                {promotedClass.description}
+                              </p>
+                            </>
+                          }
+                        >
+                          <span key={index}>{promotedClass.className}</span>
+                        </Tippy>
                       ))
                   ) : (
                     <span>No Friendship Seal Classes Yet</span>
@@ -788,7 +1032,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             : true,
                       )
                       .map((promotedClass, index) => (
-                        <span key={index}>{promotedClass.className}</span>
+                        <Tippy
+                          content={
+                            <>
+                              <strong>{promotedClass.className}</strong>
+                              <p className="tooltip-text">
+                                {promotedClass.description}
+                              </p>
+                            </>
+                          }
+                        >
+                          <span key={index}>{promotedClass.className}</span>
+                        </Tippy>
                       ))
                   ) : (
                     <span>No Partner Seal Classes Yet</span>

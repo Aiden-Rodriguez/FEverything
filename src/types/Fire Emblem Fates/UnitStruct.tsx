@@ -79,7 +79,7 @@ export interface Character {
     defence: number;
     resistance: number;
   };
-  personal_skill: Skill | null;
+  personal_skill: Skill;
   base_class_set: {
     starting_class: Class;
     starting_class_tree: Class;
