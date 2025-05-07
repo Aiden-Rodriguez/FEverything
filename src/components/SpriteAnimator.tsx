@@ -89,14 +89,13 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
 
       if (loadedCount === 2) {
         imagesRef.current = loadedImages;
-      
+
         // Grab loop setting from the sprite adjustment logic
         const { loop } = getSpriteAdjustments(unitClass, gender, 0);
         loopRef.current = loop;
-      
+
         requestAnimationFrame(update);
       }
-      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [character, unitClass, gender, game, classMove]);
@@ -123,7 +122,6 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
           directionRef.current *= -1;
         }
       }
-      
 
       context.clearRect(0, 0, canvas.width, canvas.height);
 
