@@ -235,10 +235,21 @@ const Units = () => {
           <SpriteAnimator
             character="Camilla"
             gender="F"
-            class="Sorcerer F"
+            class="Malig Knight"
             game="Fire Emblem Fates"
             displayScale={4}
-            classMove={6}
+            classMove={8}
+          />
+        </div>
+
+        <div className="sprite-wrapper">
+          <SpriteAnimator
+            character="Camilla"
+            gender="M"
+            class="Dark Falcon"
+            game="Fire Emblem Fates"
+            displayScale={4}
+            classMove={8}
           />
         </div>
 
@@ -246,7 +257,7 @@ const Units = () => {
           <SpriteAnimator
             character="Camilla"
             gender="F"
-            class="Malig Knight"
+            class="Dark Falcon"
             game="Fire Emblem Fates"
             displayScale={4}
             classMove={8}

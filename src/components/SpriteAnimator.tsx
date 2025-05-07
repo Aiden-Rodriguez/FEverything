@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { getSpriteAdjustments } from "../components/SpriteAdjustment";
 
 interface SpriteAnimatorProps {
   character: string;
@@ -11,6 +12,7 @@ interface SpriteAnimatorProps {
 
 const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
   character,
+  gender,
   class: unitClass,
   game,
   displayScale = 4,
@@ -20,7 +22,8 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const frameIndexRef = useRef(0);
   const lastTimeRef = useRef(0);
-  const directionRef = useRef(1); // 1 for forward, -1 for backward
+  const directionRef = useRef(1);
+  const loopRef = useRef(true);
 
   const frameCount = 4;
   const fps = 4;
@@ -28,39 +31,75 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
   const offsetX = 2;
   const offsetY = 2;
 
-  const isMounted = classMove >= 7;
-  const characterYOffset = isMounted ? 0 + 32 : 3;
-  const characterFrameWidth = isMounted ? 16 : 32;
-  const characterXOffset = isMounted ? 6 : 0;
+  let isMounted = classMove >= 7 || unitClass === "Ballistician";
+
+  let characterYOffset = isMounted ? 0 + 32 : 3;
+  let characterFrameWidth = isMounted ? 16 : 32;
+  let characterXOffsetAdjustment = isMounted ? 6 : 0;
 
   const frameWidth = 32;
   const frameHeight = 32;
 
   const classYOffset = 1656;
 
-  const images = [
-    `/spritesheets/${game}/${unitClass}.png`,
-    `/spritesheets/${game}/${character}.png`,
-  ];
+  const characterSrc = `/spritesheets/${game}/character/${character}.png`;
+  const genderedClassSrc = `/spritesheets/${game}/class/${unitClass} ${gender}.png`; //if class sprite is gendered
+  const fallbackClassSrc = `/spritesheets/${game}/class/${unitClass}.png`; //if class sprite is not gendered
 
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
 
-    images.forEach((src, i) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === images.length) {
-          imagesRef.current = loadedImages;
-          requestAnimationFrame(update);
-        }
+    // Load class sprite with gender fallback
+    const classImg = new Image();
+    classImg.src = genderedClassSrc;
+
+    classImg.onload = () => {
+      loadedImages[0] = classImg;
+      maybeStart();
+    };
+
+    classImg.onerror = () => {
+      // fallback to non-gendered class image
+      const fallbackImg = new Image();
+      fallbackImg.src = fallbackClassSrc;
+      fallbackImg.onload = () => {
+        loadedImages[0] = fallbackImg;
+        maybeStart();
       };
-      loadedImages[i] = img;
-    });
+      fallbackImg.onerror = () => console.error("Failed to load class image");
+    };
+
+    // Load character image
+    const characterImg = new Image();
+    characterImg.src = characterSrc;
+    characterImg.onload = () => {
+      loadedImages[1] = characterImg;
+      maybeStart();
+    };
+    characterImg.onerror = () =>
+      console.error("Failed to load character image");
+
+    function maybeStart() {
+      loadedCount++;
+      if (loadedCount === 2) {
+        imagesRef.current = loadedImages;
+        requestAnimationFrame(update);
+      }
+
+      if (loadedCount === 2) {
+        imagesRef.current = loadedImages;
+      
+        // Grab loop setting from the sprite adjustment logic
+        const { loop } = getSpriteAdjustments(unitClass, gender, 0);
+        loopRef.current = loop;
+      
+        requestAnimationFrame(update);
+      }
+      
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [character, unitClass, game, classMove]);
+  }, [character, unitClass, gender, game, classMove]);
 
   const update = (timestamp: number) => {
     const canvas = canvasRef.current;
@@ -73,25 +112,34 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
     if (elapsed > 1000 / fps) {
       lastTimeRef.current = now;
 
-      frameIndexRef.current += directionRef.current;
-
-      if (
-        frameIndexRef.current === frameCount - 1 ||
-        frameIndexRef.current === 0
-      ) {
-        directionRef.current *= -1;
+      if (loopRef.current) {
+        frameIndexRef.current = (frameIndexRef.current + 1) % frameCount;
+      } else {
+        frameIndexRef.current += directionRef.current;
+        if (
+          frameIndexRef.current === frameCount - 1 ||
+          frameIndexRef.current === 0
+        ) {
+          directionRef.current *= -1;
+        }
       }
+      
 
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      //This bit conputes character bobbing when the class is applicable
       let characterYOffsetAdjustment = 0;
-      if (unitClass === "Malig Knight") {
-        if (frameIndexRef.current === 0) {
-          characterYOffsetAdjustment = 1;
-        } else if (frameIndexRef.current === 3) {
-          characterYOffsetAdjustment = -1;
-        }
+      let characterXOffset = isMounted ? 6 : 0;
+
+      const adjustment = getSpriteAdjustments(
+        unitClass,
+        gender,
+        frameIndexRef.current,
+      );
+      characterYOffsetAdjustment = adjustment.yOffsetAdjustment;
+      characterXOffset += adjustment.xOffsetAdjustment;
+
+      if (adjustment.xOffsetOverride !== undefined) {
+        characterXOffset = adjustment.xOffsetOverride;
       }
 
       const characterImg = imagesRef.current[1];
@@ -103,7 +151,7 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
           characterFrameWidth,
           frameHeight,
           characterXOffset,
-          characterYOffsetAdjustment, // this is the line that affects bobbing (only certain classes do this)
+          characterYOffsetAdjustment,
           characterFrameWidth,
           frameHeight,
         );
