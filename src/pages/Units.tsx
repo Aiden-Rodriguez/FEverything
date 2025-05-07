@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import "../styles/Units.css";
 import UnitGrid from "../components/UnitGrid";
+import SpriteAnimator from "../components/SpriteAnimator";
 import { parse, stringify } from "flatted";
 
 import { Character } from "../types/Fire Emblem Fates/UnitStruct";
@@ -228,6 +229,28 @@ const Units = () => {
           aria-label="Delete your units?"
         >
           Delete All Units?
+        </div>
+
+        <div className="sprite-wrapper">
+          <SpriteAnimator
+            character="Camilla"
+            gender="F"
+            class="Sorcerer F"
+            game="Fire Emblem Fates"
+            displayScale={4}
+            classMove={6}
+          />
+        </div>
+
+        <div className="sprite-wrapper">
+          <SpriteAnimator
+            character="Camilla"
+            gender="F"
+            class="Malig Knight"
+            game="Fire Emblem Fates"
+            displayScale={4}
+            classMove={8}
+          />
         </div>
       </section>
 

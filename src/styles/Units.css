@@ -304,6 +304,12 @@ h1 {
   color: var(--color-text-component);
 }
 
+/* .sprite-wrapper canvas{
+  width: 128px;
+  height: 128px;
+  image-rendering: pixelated;
+} */
+
 @keyframes pulse {
   0% {
     opacity: 1;

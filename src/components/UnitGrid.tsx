@@ -399,7 +399,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       </div>
 
       <div className="grid-cell top-middle">
-        <h3>
+        <div>
           <Tippy
             content={
               <>
@@ -414,7 +414,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           {isClassChanging &&
             selectedClassName !== unit.class.className &&
             ` --> ${selectedClassName}`}
-        </h3>
+        </div>
 
         {isExpanded && !isEditing && !isClassChanging && (
           <span
