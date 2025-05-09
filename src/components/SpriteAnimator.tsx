@@ -8,6 +8,7 @@ interface SpriteAnimatorProps {
   game: string;
   displayScale?: number;
   classMove: number;
+  faction: string;
 }
 
 const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
@@ -17,6 +18,7 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
   game,
   displayScale = 4,
   classMove,
+  faction,
 }) => {
   const classBackgroundCanvasRef = useRef<HTMLCanvasElement>(null);
   const characterBackgroundCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -29,9 +31,9 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
   const directionRef = useRef(1);
   const loopRef = useRef(true);
   const animationRef = useRef<number>(0);
+  const fpsRef = useRef(4); // Default FPS, will be updated by getSpriteAdjustments
 
   const frameCount = 4;
-  const fps = 4;
 
   const offsetX = 2;
   const offsetY = 2;
@@ -44,7 +46,17 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
   const frameWidth = 32;
   const frameHeight = 32;
 
-  const classYOffset = 1656;
+  let classYOffset;
+  if (faction === "Valla") {
+    classYOffset = 0
+  } else if (faction === "Ally") {
+    classYOffset = 552
+  } else if (faction === "Enemy") {
+    classYOffset = 1104
+  } else {
+    classYOffset = 1656
+  }
+
 
   const characterSrc = `/spritesheets/${game}/character/${character}.png`;
   const genderedClassSrc = `/spritesheets/${game}/class/${unitClass} ${gender}.png`;
@@ -85,8 +97,9 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
       loadedCount++;
       if (loadedCount === 2) {
         imagesRef.current = loadedImages;
-        const { loop } = getSpriteAdjustments(unitClass, gender, 0);
+        const { loop, fps } = getSpriteAdjustments(unitClass, gender, 0);
         loopRef.current = loop;
+        fpsRef.current = fps; // Set initial FPS
 
         // Start animation
         if (animationRef.current) {
@@ -215,7 +228,7 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
     const now = timestamp;
     const elapsed = now - lastTimeRef.current;
 
-    if (elapsed > 1000 / fps) {
+    if (elapsed > 1000 / fpsRef.current) {
       lastTimeRef.current = now;
 
       if (loopRef.current) {
@@ -240,6 +253,7 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
       );
       characterYOffsetAdjustment = adjustment.yOffsetAdjustment;
       characterXOffset += adjustment.xOffsetAdjustment;
+      fpsRef.current = adjustment.fps; // Update FPS each frame
 
       if (adjustment.xOffsetOverride !== undefined) {
         characterXOffset = adjustment.xOffsetOverride;
@@ -360,7 +374,7 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
         ref={characterForegroundCanvasRef}
         width={frameWidth}
         height={frameHeight}
-        style={{ ...canvasStyle, zIndex: 4 }}
+        style={{ ...canvasStyle, zIndex: 2 }}
       />
     </div>
   );

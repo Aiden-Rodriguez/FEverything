@@ -239,6 +239,7 @@ const Units = () => {
             game="Fire Emblem Fates"
             displayScale={4}
             classMove={8}
+            faction="Enemy"
           />
         </div>
 
@@ -246,20 +247,22 @@ const Units = () => {
           <SpriteAnimator
             character="Camilla"
             gender="F"
-            class="Spear Fighter"
+            class="Grandmaster"
             game="Fire Emblem Fates"
             displayScale={4}
             classMove={6}
+            faction="Valla"
           />
         </div>
         <div className="sprite-wrapper">
           <SpriteAnimator
             character="Camilla"
             gender="M"
-            class="Spear Fighter"
+            class="Great Lord"
             game="Fire Emblem Fates"
             displayScale={4}
             classMove={6}
+            faction="Ally"
           />
         </div>
 
@@ -271,6 +274,7 @@ const Units = () => {
             game="Fire Emblem Fates"
             displayScale={4}
             classMove={5}
+            faction="Player"
           />
         </div>
       </section>

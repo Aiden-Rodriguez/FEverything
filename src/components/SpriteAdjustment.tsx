@@ -3,6 +3,7 @@ export interface SpriteAdjustment {
   xOffsetAdjustment: number;
   xOffsetOverride?: number;
   loop: boolean;
+  fps: number;
 }
 
 export function getSpriteAdjustments(
@@ -14,8 +15,10 @@ export function getSpriteAdjustments(
   let xOffsetAdjustment = 0;
   let xOffsetOverride: number | undefined = undefined;
   let loop = false;
+  let fps = 5;
   switch (unitClass) {
     case "Malig Knight":
+        fps = 7;
       if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
       if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
@@ -35,14 +38,16 @@ export function getSpriteAdjustments(
       }
       break;
     case "Ballistician":
+        fps = 7;
+        loop = true
       if (frameIndex === 3) yOffsetAdjustment = 1;
       xOffsetOverride = 8;
       break;
     case "Basara":
-      if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 2);
-      if (frameIndex === 1) (yOffsetAdjustment = -1), (xOffsetAdjustment = 2);
-      if (frameIndex === 2) (yOffsetAdjustment = -1), (xOffsetAdjustment = 3);
-      if (frameIndex === 3) (yOffsetAdjustment = -1), (xOffsetAdjustment = 3);
+      if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
+      if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 1);
+      if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 2);
+      if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 2);
       break;
     case "Berserker":
       loop = true;
@@ -72,12 +77,14 @@ export function getSpriteAdjustments(
       if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = -1);
       break;
     case "Bow Knight":
+        fps = 7;
       if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       break;
     case "Cavalier":
+        fps = 7;
       if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 4);
       if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = 4);
       if (frameIndex === 2) (yOffsetAdjustment = 2), (xOffsetAdjustment = 4);
@@ -90,26 +97,42 @@ export function getSpriteAdjustments(
       if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 3);
       if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       break;
+      case "Dark Knight":
+        fps = 7;
+        if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
+        if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
+        if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
+        if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
+        break;
     case "Diviner":
-      if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
-      if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
-      if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
-      if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
-      break;
+        loop = true;
+        if (unitGender === "F") {
+            if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
+            if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
+            if (frameIndex === 2) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
+            if (frameIndex === 3) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
+        } else if (unitGender === "M") {
+            if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+            if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+            if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+            if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        }
+        break;
     case "Falcon Knight":
       loop = true;
+      fps = 4;
       if (frameIndex === 0) (yOffsetAdjustment = -1), (xOffsetAdjustment = 4);
       if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 4);
-      if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
-      if (frameIndex === 3) (yOffsetAdjustment = -1), (xOffsetAdjustment = 3);
+      if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 3);
+      if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       break;
     case "Fighter":
       loop = true;
       if (unitGender === "F") {
-        if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
-        if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
-        if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 1);
-        if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
+        if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
+        if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
+        if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
+        if (frameIndex === 3) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
       } else if (unitGender === "M") {
         if (frameIndex === 0) (yOffsetAdjustment = 3), (xOffsetAdjustment = 1);
         if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
@@ -130,12 +153,14 @@ export function getSpriteAdjustments(
       if (frameIndex === 3) (yOffsetAdjustment = 2), (xOffsetAdjustment = 2);
       break;
     case "Great Knight":
-      if (frameIndex === 0) (yOffsetAdjustment = -1), (xOffsetAdjustment = 3);
-      if (frameIndex === 1) (yOffsetAdjustment = -1), (xOffsetAdjustment = 3);
-      if (frameIndex === 2) (yOffsetAdjustment = -1), (xOffsetAdjustment = 3);
-      if (frameIndex === 3) (yOffsetAdjustment = -1), (xOffsetAdjustment = 3);
+        fps = 7;
+      if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
+      if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
+      if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
+      if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       break;
     case "Hero":
+        fps = 7;
       if (unitGender === "F") {
         if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
         if (frameIndex === 1) (yOffsetAdjustment = 3), (xOffsetAdjustment = 1);
@@ -168,6 +193,7 @@ export function getSpriteAdjustments(
       break;
     case "Master Ninja":
       loop = true;
+      fps = 7;
       if (unitGender === "F") {
         if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
         if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
@@ -187,10 +213,11 @@ export function getSpriteAdjustments(
       if (frameIndex === 3) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
       break;
     case "Mechanist":
-      if (frameIndex === 0) (yOffsetAdjustment = -1), (xOffsetAdjustment = 4);
-      if (frameIndex === 1) (yOffsetAdjustment = -1), (xOffsetAdjustment = 4);
-      if (frameIndex === 2) (yOffsetAdjustment = -1), (xOffsetAdjustment = 4);
-      if (frameIndex === 3) (yOffsetAdjustment = -1), (xOffsetAdjustment = 4);
+        fps = 7;
+      if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 4);
+      if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 4);
+      if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 4);
+      if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 4);
       break;
     case "Mercenary":
       if (unitGender === "F") {
@@ -214,14 +241,14 @@ export function getSpriteAdjustments(
       if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       break;
     case "Ninja":
-      if (unitGender === "F") {
+        fps = 7;
         loop = true;
+      if (unitGender === "F") {
         if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
         if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
         if (frameIndex === 2) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
         if (frameIndex === 3) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
       } else if (unitGender === "M") {
-        loop = false;
         if (frameIndex === 0) (yOffsetAdjustment = 3), (xOffsetAdjustment = -2);
         if (frameIndex === 1) (yOffsetAdjustment = 3), (xOffsetAdjustment = -2);
         if (frameIndex === 2) (yOffsetAdjustment = 4), (xOffsetAdjustment = -2);
@@ -281,12 +308,14 @@ export function getSpriteAdjustments(
       if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       break;
     case "Paladin":
-      if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 5);
-      if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 5);
-      if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 5);
-      if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 5);
+        fps = 7;
+      if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 4);
+      if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 4);
+      if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 4);
+      if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 4);
       break;
     case "Priestess":
+        fps = 7;
       if (frameIndex === 0) (yOffsetAdjustment = -1), (xOffsetAdjustment = 0);
       if (frameIndex === 1) (yOffsetAdjustment = -1), (xOffsetAdjustment = 0);
       if (frameIndex === 2) (yOffsetAdjustment = -1), (xOffsetAdjustment = 0);
@@ -315,24 +344,32 @@ export function getSpriteAdjustments(
       if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       break;
     case "Sniper":
-      if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
-      if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
-      if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
-      if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        fps = 7;
+        if (unitGender === "F") {
+            if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
+            if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+            if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+            if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+          } else if (unitGender === "M") {
+            if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
+            if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
+            if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
+            if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
+          }
+
       break;
     case "Spear Fighter":
       //not sure why but the looping on this one doesnt seem to line up ..?
-      loop = false;
       if (unitGender === "F") {
         if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
         if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
         if (frameIndex === 2) (yOffsetAdjustment = 3), (xOffsetAdjustment = 0);
         if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       } else if (unitGender === "M") {
-        if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
-        if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
-        if (frameIndex === 2) (yOffsetAdjustment = 3), (xOffsetAdjustment = 0);
-        if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
+        if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
+        if (frameIndex === 2) (yOffsetAdjustment = 3), (xOffsetAdjustment = 1);
+        if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
       }
       break;
     case "Spear Master":
@@ -349,12 +386,15 @@ export function getSpriteAdjustments(
       }
       break;
     case "Strategist":
+        fps = 7;
       if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 3);
       if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 3);
       break;
     case "Swordmaster":
+        fps = 7;
+        loop = true;
       if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       if (frameIndex === 2) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
@@ -387,11 +427,13 @@ export function getSpriteAdjustments(
       break;
     case "Wolfskin":
       if (unitGender === "F") {
+        fps = 5;
         if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
         if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
         if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
         if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
       } else if (unitGender === "M") {
+        fps = 7;
         if (frameIndex === 0) (yOffsetAdjustment = 4), (xOffsetAdjustment = -2);
         if (frameIndex === 1) (yOffsetAdjustment = 3), (xOffsetAdjustment = -2);
         if (frameIndex === 2) (yOffsetAdjustment = 2), (xOffsetAdjustment = -2);
@@ -399,6 +441,7 @@ export function getSpriteAdjustments(
       }
       break;
     case "Wolfssegner":
+        fps = 7;
       if (unitGender === "F") {
         if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
         if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
@@ -412,21 +455,23 @@ export function getSpriteAdjustments(
       }
       break;
     case "Wyvern Lord":
+        fps = 7;
       if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
       if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
       break;
     case "Wyvern Rider":
+        fps = 7;
       if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
       if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
       break;
     case "Apothecary":
-      if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = -2);
-      if (frameIndex === 1) (yOffsetAdjustment = 3), (xOffsetAdjustment = -2);
-      if (frameIndex === 2) (yOffsetAdjustment = 2), (xOffsetAdjustment = -2);
+      if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = -2);
+      if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = -2);
+      if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = -2);
       if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = -2);
       break;
     case "Dread Fighter":
@@ -444,12 +489,14 @@ export function getSpriteAdjustments(
       break;
 
     case "Kinshi Knight":
+        fps = 7;
       if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
       if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
       if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
       break;
     case "Kitsune":
+        loop = true;
       if (unitGender === "F") {
         if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 2);
         if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 2);
@@ -470,12 +517,13 @@ export function getSpriteAdjustments(
       break;
 
     case "Merchant":
-      if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
-      if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = 0);
-      if (frameIndex === 2) (yOffsetAdjustment = 3), (xOffsetAdjustment = 0);
-      if (frameIndex === 3) (yOffsetAdjustment = 4), (xOffsetAdjustment = 0);
+      if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = -1);
+      if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = -1);
+      if (frameIndex === 2) (yOffsetAdjustment = 3), (xOffsetAdjustment = -1);
+      if (frameIndex === 3) (yOffsetAdjustment = 4), (xOffsetAdjustment = -1);
       break;
     case "Nine-Tails":
+        loop = true;
       if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
       if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = 0);
       if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
@@ -483,16 +531,56 @@ export function getSpriteAdjustments(
       break;
     case "Outlaw":
       if (unitGender === "F") {
+        loop = false;
         if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
         if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
         if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
         if (frameIndex === 3) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
       } else if (unitGender === "M") {
+        loop = true;
         if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = -3);
         if (frameIndex === 1) (yOffsetAdjustment = 3), (xOffsetAdjustment = -3);
         if (frameIndex === 2) (yOffsetAdjustment = 3), (xOffsetAdjustment = -3);
         if (frameIndex === 3) (yOffsetAdjustment = 3), (xOffsetAdjustment = -3);
       }
+      break;
+
+      case "Adventurer":
+        fps = 7;
+        loop = true;
+      if (unitGender === "F") {
+        if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+      } else if (unitGender === "M") {
+        if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = -1);
+        if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = -1);
+        if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = -1);
+        if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = -1);
+      }
+      break;
+
+      case "Great Master":
+        fps = 7;
+        if (frameIndex === 0) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        if (frameIndex === 1) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        if (frameIndex === 2) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 0);
+        break;
+    case "Dark Mage":
+      if (frameIndex === 0) (yOffsetAdjustment = 0), (xOffsetAdjustment = -1);
+      if (frameIndex === 1) (yOffsetAdjustment = 0), (xOffsetAdjustment = -1);
+      if (frameIndex === 2) (yOffsetAdjustment = 0), (xOffsetAdjustment = -1);
+      if (frameIndex === 3) (yOffsetAdjustment = 0), (xOffsetAdjustment = -1);
+      break;
+    case "Lancer":
+        //Also here animation acts a little weird>? 
+        loop = true;
+        if (frameIndex === 0) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
+        if (frameIndex === 1) (yOffsetAdjustment = 2), (xOffsetAdjustment = 1);
+        if (frameIndex === 2) (yOffsetAdjustment = 3), (xOffsetAdjustment = 1);
+        if (frameIndex === 3) (yOffsetAdjustment = 1), (xOffsetAdjustment = 1);
       break;
   }
 
@@ -501,5 +589,6 @@ export function getSpriteAdjustments(
     xOffsetAdjustment,
     xOffsetOverride,
     loop,
+    fps,
   };
 }
