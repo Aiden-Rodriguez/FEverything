@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import { getSpriteAdjustments } from "../components/SpriteAdjustment";
-import { parsers } from "prettier/plugins/acorn.js";
 
 interface SpriteAnimatorProps {
   character: string;
@@ -43,23 +42,21 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
 
   let isMounted = classMove >= 7 || unitClass === "Ballistician";
 
-  let characterYOffset = isMounted ? 0 + 32 : 3;
+  let characterYOffset = isMounted ? 0 + 32 : 1; // Should actually be 3 instead of 1, but I use a workaround here so that the sprite below doesnt come into view. Other part visible in spriteadjustment (pt1)
   let characterFrameWidth = isMounted ? 16 : 32;
-
-
 
   const frameWidth = 32;
   const frameHeight = 32;
 
   let classYOffset;
   if (faction === "Valla") {
-    classYOffset = 0
+    classYOffset = 0;
   } else if (faction === "Ally") {
-    classYOffset = 552
+    classYOffset = 552;
   } else if (faction === "Enemy") {
-    classYOffset = 1104
+    classYOffset = 1104;
   } else {
-    classYOffset = 1656
+    classYOffset = 1656;
   }
 
   /* This lines up the correct animation
@@ -70,15 +67,15 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
   if (animationId >= 9 || animationId <= -1) {
     throw console.error("Out of bounds animation - Class.");
   } else if (animationId !== 0) {
-    classYOffset += 36 + ((animationId - 1) * 32 )
+    classYOffset += 36 + (animationId - 1) * 32;
   }
 
   if (animationId >= 9 || animationId <= -1) {
     throw console.error("Out of bounds animation - Character.");
   } else if (animationId !== 0 && isMounted) {
-    characterYOffset += 358 + ((animationId - 1) * 16)
-  } else if (animationId !== 0){
-    characterYOffset += 68 + ((animationId - 1) * 32)
+    characterYOffset += 358 + (animationId - 1) * 16;
+  } else if (animationId !== 0) {
+    characterYOffset += 68 + (animationId - 1) * 32;
   }
 
   const characterSrc = `/spritesheets/${game}/character/${character}.png`;
@@ -120,7 +117,12 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
       loadedCount++;
       if (loadedCount === 2) {
         imagesRef.current = loadedImages;
-        const { loop, fps } = getSpriteAdjustments(unitClass, gender, 0);
+        const { loop, fps } = getSpriteAdjustments(
+          unitClass,
+          gender,
+          0,
+          isMounted,
+        );
         loopRef.current = loop;
         fpsRef.current = fps; // Set initial FPS
 
@@ -273,6 +275,7 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
         unitClass,
         gender,
         frameIndexRef.current,
+        isMounted,
       );
       characterYOffsetAdjustment = adjustment.yOffsetAdjustment;
       characterXOffset += adjustment.xOffsetAdjustment;

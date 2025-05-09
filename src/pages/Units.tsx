@@ -271,14 +271,14 @@ const Units = () => {
 
         <div className="sprite-wrapper">
           <SpriteAnimator
-            character="Selena"
+            character="Azama"
             gender="F"
             class="Wolfssegner"
             game="Fire Emblem Fates"
             displayScale={4}
             classMove={5}
             faction="Player"
-            animationId={3}
+            animationId={0}
           />
         </div>
       </section>
