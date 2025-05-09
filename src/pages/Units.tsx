@@ -231,7 +231,7 @@ const Units = () => {
           Delete All Units?
         </div>
 
-        <div className="sprite-wrapper">
+        {/* <div className="sprite-wrapper">
           <SpriteAnimator
             character="Camilla"
             gender="F"
@@ -280,7 +280,7 @@ const Units = () => {
             faction="Player"
             animationId={0}
           />
-        </div>
+        </div> */}
       </section>
 
       {isOverlayAddCharacterOpen && (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import SpriteAnimator from "../components/SpriteAnimator";
 
 import { Character } from "../types/Fire Emblem Fates/UnitStruct.tsx";
 import { Class, WeaponRank } from "../types/Fire Emblem Fates/ClassStruct.tsx";
@@ -410,10 +411,25 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           >
             <h3>{unit.class.className}</h3>
           </Tippy>
+          <div className="unit-sprite">
+        <div className="sprite-wrapper">
+          <SpriteAnimator
+            character={unit.name}
+            gender={unit.gender}
+            class={unit.class.className}
+            game={gameId ?? ""}
+            displayScale={2}
+            classMove={unit.class.classBaseStats.move}
+            faction="Player"
+            animationId={0}
+          />
+        </div>
+      </div>
+      {isClassChanging &&
+  selectedClassName !== unit.class.className && (
+    <span className="class-change-arrow">{unit.class.className + " --> " + selectedClassName}</span>
+)}
 
-          {isClassChanging &&
-            selectedClassName !== unit.class.className &&
-            ` --> ${selectedClassName}`}
         </div>
 
         {isExpanded && !isEditing && !isClassChanging && (
