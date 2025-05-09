@@ -240,6 +240,7 @@ const Units = () => {
             displayScale={4}
             classMove={8}
             faction="Enemy"
+            animationId={0}
           />
         </div>
 
@@ -252,6 +253,7 @@ const Units = () => {
             displayScale={4}
             classMove={6}
             faction="Valla"
+            animationId={0}
           />
         </div>
         <div className="sprite-wrapper">
@@ -263,6 +265,7 @@ const Units = () => {
             displayScale={4}
             classMove={6}
             faction="Ally"
+            animationId={0}
           />
         </div>
 
@@ -270,11 +273,12 @@ const Units = () => {
           <SpriteAnimator
             character="Selena"
             gender="F"
-            class="Dark Mage"
+            class="Wolfssegner"
             game="Fire Emblem Fates"
             displayScale={4}
             classMove={5}
             faction="Player"
+            animationId={3}
           />
         </div>
       </section>
