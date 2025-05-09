@@ -181,8 +181,8 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
       const g = data[i + 1];
       const b = data[i + 2];
 
-      const isForegroundPixel = r === 136 && g === 136 && b === 136;
-      const isBackgroundPixel = r === 102 && g === 102 && b === 102;
+      const isForegroundPixel = (r === 136 && g === 136 && b === 136) || (r === 255 && g === 255 && b === 255);
+      const isBackgroundPixel = (r === 102 && g === 102 && b === 102) || (r === 238 && g === 238 && b === 238);
 
       // Set alpha based on mask type
       if (maskType === "foreground") {

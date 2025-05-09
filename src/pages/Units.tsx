@@ -258,7 +258,7 @@ const Units = () => {
         </div>
         <div className="sprite-wrapper">
           <SpriteAnimator
-            character="Camilla"
+            character="Nina"
             gender="M"
             class="Great Lord"
             game="Fire Emblem Fates"
