@@ -15,8 +15,6 @@ interface UnitGridProps {
   updateUnit: (updatedUnit: Character) => void;
 }
 
-// Define interfaces for dynamically imported modules
-// Since planned to scale down the line I am dynamically importing the initiation module. This prevents unneccisary importation of data.
 interface InitModule {
   initializeData: () => void;
 }
@@ -116,13 +114,11 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     const classes: Class[] = [];
     const gender = unit.gender;
 
-    // Helper function to filter gender-compatible classes and exclude current class
     const filterClasses = (cls: Class) =>
       cls.className !== unit.class.className &&
       !(cls.className === "Maid" && gender === "Male") &&
       !(cls.className === "Butler" && gender === "F");
 
-    // Base class tree
     if (
       unit.base_class_set.starting_class_tree &&
       unit.base_class_set.starting_class_tree.classTree
@@ -134,7 +130,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       );
     }
 
-    // Heart Seal classes
     if (unit.base_class_set.heart_seal_classes) {
       unit.base_class_set.heart_seal_classes.forEach((cls) => {
         if (cls.classTree) {
@@ -143,7 +138,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       });
     }
 
-    // Friendship Seal classes
     if (
       unit.base_class_set.friendship_seal_base_class &&
       unit.base_class_set.friendship_seal_base_class.classTree
@@ -155,7 +149,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       );
     }
 
-    // Partner Seal classes
     if (
       unit.base_class_set.partner_seal_base_class &&
       unit.base_class_set.partner_seal_base_class.classTree
@@ -167,7 +160,26 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       );
     }
 
-    return classes;
+    const finalClasses = classes.filter((cls) => {
+      if (unit.class.promotionStatus === false) {
+        return (
+          cls.promotionStatus === false ||
+          cls.promotionStatus === null ||
+          (cls.promotionStatus === true && unit.level >= 10)
+        );
+      } else if (unit.class.promotionStatus === true) {
+        return cls.promotionStatus !== false;
+      } else if (unit.class.promotionStatus === null) {
+        if (unit.level > 20) {
+          return cls.promotionStatus !== false;
+        } else {
+          return cls.promotionStatus !== true;
+        }
+      }
+      return false;
+    });
+
+    return finalClasses;
   };
 
   const handleClassChange = (className: string) => {
@@ -217,11 +229,22 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         newClass.classBaseStats.resistance,
       move: newClass.classBaseStats.move,
     };
+    let newLevel = unit.level;
+    let newInternalLevel = unit.baseInternalLevel;
+    if (unit.class.promotionStatus === false && newClass.promotionStatus === true) {
+      newLevel = 1
+      newInternalLevel = 10 + Math.floor(unit.level / 2)
+    } else if (unit.class.promotionStatus === null && newClass.promotionStatus === true) {
+      newLevel = unit.level - 20
+      newInternalLevel = 20
+    }
     const updatedUnit: Character = {
       ...unit,
       class: newClass,
       class_line: [...unit.class_line, newClassLine],
       stats: newStats,
+      level: newLevel,
+      baseInternalLevel: newInternalLevel,
     };
     updateUnit(updatedUnit);
     setIsClassChanging(false);
@@ -287,11 +310,20 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   };
 
   const handleToggleClassChange = () => {
-    setIsClassChanging((prev) => !prev);
+    const newIsClassChanging = !isClassChanging;
+    setIsClassChanging(newIsClassChanging);
     setIsEditing(false);
     setEditingField(null);
     setError("");
-    setSelectedClassName(unit.class.className);
+    if (newIsClassChanging) {
+      const availableClasses = getAvailableClasses();
+      // Set selectedClassName to the first available class if there are any
+      if (availableClasses.length > 0) {
+        setSelectedClassName(availableClasses[0].className);
+      }
+    } else {
+      setSelectedClassName(unit.class.className);
+    }
   };
 
   const startEditing = (field: string, value: number) => {
@@ -307,8 +339,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       setError(`${field} must be a number`);
       return false;
     }
-    if (field === "level" && (num < 1 || num > 20)) {
-      setError("Level must be between 1 and 20 (TEMP IMPLEMENTATION)");
+    if (field === "level" && (num < 1 || num > 40)) {
+      setError("Level must be between 1 and 40 (TEMP IMPLEMENTATION)");
       return false;
     }
     if (field !== "level" && (num < 0 || num > 99)) {
@@ -412,24 +444,24 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             <h3>{unit.class.className}</h3>
           </Tippy>
           <div className="unit-sprite">
-        <div className="sprite-wrapper">
-          <SpriteAnimator
-            character={unit.name}
-            gender={unit.gender}
-            class={unit.class.className}
-            game={gameId ?? ""}
-            displayScale={2}
-            classMove={unit.class.classBaseStats.move}
-            faction="Player"
-            animationId={0}
-          />
-        </div>
-      </div>
-      {isClassChanging &&
-  selectedClassName !== unit.class.className && (
-    <span className="class-change-arrow">{unit.class.className + " --> " + selectedClassName}</span>
-)}
-
+            <div className="sprite-wrapper">
+              <SpriteAnimator
+                character={unit.name}
+                gender={unit.gender}
+                class={unit.class.className}
+                game={gameId ?? ""}
+                displayScale={2}
+                classMove={unit.class.classBaseStats.move}
+                faction="Player"
+                animationId={0}
+              />
+            </div>
+          </div>
+          {isClassChanging && selectedClassName !== unit.class.className && (
+            <span className="class-change-arrow">
+              {unit.class.className + " --> " + selectedClassName}
+            </span>
+          )}
         </div>
 
         {isExpanded && !isEditing && !isClassChanging && (
