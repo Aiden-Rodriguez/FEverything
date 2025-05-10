@@ -373,8 +373,10 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
   );
 };
 
+export default SpriteAnimator;
+
 //for downloading the pngs...
-// export default SpriteAnimator;
+
 
 // import React, { useRef, useEffect } from "react";
 // import { getSpriteAdjustments } from "../components/SpriteAdjustment";
