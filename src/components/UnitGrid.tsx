@@ -189,9 +189,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const commitClassChange = () => {
     if (!getClassFn) return;
     const newClass = getClassFn(selectedClassName);
+    let newLevel = unit.level;
+    let newInternalLevel = unit.baseInternalLevel;
+    if (unit.class.promotionStatus === false && newClass.promotionStatus === true) {
+      newLevel = 1
+      newInternalLevel = 10 + Math.floor(unit.level / 2)
+    } else if (unit.class.promotionStatus === null && newClass.promotionStatus === true) {
+      newLevel = unit.level - 20
+      newInternalLevel = 20
+    }
     const newClassLine: [number, number, Class] = [
-      unit.baseInternalLevel,
-      unit.level,
+      newInternalLevel,
+      newLevel,
       newClass,
     ];
     const newStats = {
@@ -229,15 +238,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         newClass.classBaseStats.resistance,
       move: newClass.classBaseStats.move,
     };
-    let newLevel = unit.level;
-    let newInternalLevel = unit.baseInternalLevel;
-    if (unit.class.promotionStatus === false && newClass.promotionStatus === true) {
-      newLevel = 1
-      newInternalLevel = 10 + Math.floor(unit.level / 2)
-    } else if (unit.class.promotionStatus === null && newClass.promotionStatus === true) {
-      newLevel = unit.level - 20
-      newInternalLevel = 20
-    }
+
     const updatedUnit: Character = {
       ...unit,
       class: newClass,
@@ -246,6 +247,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       level: newLevel,
       baseInternalLevel: newInternalLevel,
     };
+    console.log(newClassLine)
     updateUnit(updatedUnit);
     setIsClassChanging(false);
   };
