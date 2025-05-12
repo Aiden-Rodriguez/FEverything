@@ -12,7 +12,6 @@ export const conflictingPairs: Record<string, string> = {
   Sturdy: "Fragile",
   Calm: "Excitable",
 };
-
 export const boonOptions = [
   "Robust",
   "Strong",
@@ -56,7 +55,9 @@ export interface Character {
     resistance: number;
     move: number;
   };
-  basic_skills: Skill[];
+  personal_skill: Skill;
+  equipped_skills: Skill[];
+  learned_skills: Skill[];
   weapon_ranks: {
     WeaponRankSwordKatana: WeaponRank;
     WeaponRankLanceNaginata: WeaponRank;
@@ -79,7 +80,6 @@ export interface Character {
     defence: number;
     resistance: number;
   };
-  personal_skill: Skill;
   base_class_set: {
     starting_class: Class;
     starting_class_tree: Class;

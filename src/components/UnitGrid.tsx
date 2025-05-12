@@ -191,12 +191,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     const newClass = getClassFn(selectedClassName);
     let newLevel = unit.level;
     let newInternalLevel = unit.baseInternalLevel;
-    if (unit.class.promotionStatus === false && newClass.promotionStatus === true) {
-      newLevel = 1
-      newInternalLevel = 10 + Math.floor(unit.level / 2)
-    } else if (unit.class.promotionStatus === null && newClass.promotionStatus === true) {
-      newLevel = unit.level - 20
-      newInternalLevel = 20
+    if (
+      unit.class.promotionStatus === false &&
+      newClass.promotionStatus === true
+    ) {
+      newLevel = 1;
+      newInternalLevel = 10 + Math.floor(unit.level / 2);
+    } else if (
+      unit.class.promotionStatus === null &&
+      newClass.promotionStatus === true
+    ) {
+      newLevel = unit.level - 20;
+      newInternalLevel = 20;
     }
     const newClassLine: [number, number, Class] = [
       newInternalLevel,
@@ -247,7 +253,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       level: newLevel,
       baseInternalLevel: newInternalLevel,
     };
-    console.log(newClassLine)
+    console.log(newClassLine);
     updateUnit(updatedUnit);
     setIsClassChanging(false);
   };
@@ -633,7 +639,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
               </Tippy>
             </div>
           )}
-          {unit.basic_skills
+          {unit.equipped_skills
             .filter((skill) => skill.name !== "N/A")
             .map((skill, index) => (
               <div key={index} className="skill-image-container">

@@ -52,13 +52,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 25,
     },
     personal_skill: getSkill("Supportive"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Nobility"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Nobility")],
     base_class_set: {
       starting_class: getClass("Nohr Prince"),
       starting_class_tree: getClass("Nohr Prince"),
@@ -192,13 +193,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 25,
     },
     personal_skill: getSkill("Supportive"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Nobility"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Nobility")],
     base_class_set: {
       starting_class: getClass("Nohr Princess"),
       starting_class_tree: getClass("Nohr Princess"),
@@ -333,13 +335,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 25,
     },
     personal_skill: getSkill("Evasive Partner"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Resistance +2"),
       getSkill("Gentilhomme"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Resistance +2"), getSkill("Gentilhomme")],
     base_class_set: {
       starting_class: getClass("Butler"),
       starting_class_tree: getClass("Troubadour"),
@@ -472,12 +475,17 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 25,
     },
     personal_skill: getSkill("Evasive Partner"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Resistance +2"),
       getSkill("Gentilhomme"),
       getSkill("Live to Serve"),
       getSkill("N/A"),
       getSkill("N/A"),
+    ],
+    learned_skills: [
+      getSkill("Resistance +2"),
+      getSkill("Gentilhomme"),
+      getSkill("Live to Serve"),
     ],
     base_class_set: {
       starting_class: getClass("Butler"),
@@ -610,13 +618,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 35,
     },
     personal_skill: getSkill("Devoted Partner"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Resistance +2"),
       getSkill("Demoiselle"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Resistance +2"), getSkill("Demoiselle")],
     base_class_set: {
       starting_class: getClass("Maid"),
       starting_class_tree: getClass("Troubadour"),
@@ -748,12 +757,17 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 35,
     },
     personal_skill: getSkill("Devoted Partner"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Resistance +2"),
       getSkill("Demoiselle"),
       getSkill("Live to Serve"),
       getSkill("N/A"),
       getSkill("N/A"),
+    ],
+    learned_skills: [
+      getSkill("Resistance +2"),
+      getSkill("Demoiselle"),
+      getSkill("Live to Serve"),
     ],
     base_class_set: {
       starting_class: getClass("Maid"),
@@ -886,13 +900,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 35,
     },
     personal_skill: getSkill("Miraculous Save"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Locktouch"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Locktouch")],
     base_class_set: {
       starting_class: getClass("Ninja"),
       starting_class_tree: getClass("Ninja"),
@@ -1024,13 +1039,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 35,
     },
     personal_skill: getSkill("Healing Descant"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Luck +4"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Luck +4")],
     base_class_set: {
       starting_class: getClass("Songstress"),
       starting_class_tree: getClass("Songstress"),
@@ -1162,13 +1178,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 25,
     },
     personal_skill: getSkill("Vow of Friendship"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Elbow Room"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Elbow Room")],
     base_class_set: {
       starting_class: getClass("Cavalier"),
       starting_class_tree: getClass("Cavalier"),
@@ -1300,13 +1317,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 35,
     },
     personal_skill: getSkill("Highwayman"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Locktouch"),
       getSkill("Movement +1"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Locktouch"), getSkill("Movement +1")],
     base_class_set: {
       starting_class: getClass("Adventurer"),
       starting_class_tree: getClass("Outlaw"),
@@ -1438,13 +1456,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 30,
     },
     personal_skill: getSkill("Forager"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Aptitude"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Aptitude")],
     base_class_set: {
       starting_class: getClass("Villager"),
       starting_class_tree: getClass("Villager"),
@@ -1576,12 +1595,17 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 35,
     },
     personal_skill: getSkill("Peacebringer"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Miracle"),
       getSkill("Rally Luck"),
       getSkill("Rally Magic"),
       getSkill("N/A"),
       getSkill("N/A"),
+    ],
+    learned_skills: [
+      getSkill("Miracle"),
+      getSkill("Rally Luck"),
+      getSkill("Rally Magic"),
     ],
     base_class_set: {
       starting_class: getClass("Onmyoji"),
@@ -1714,12 +1738,17 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 5,
     },
     personal_skill: getSkill("Forceful Partner"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Elbow Room"),
       getSkill("Shelter"),
       getSkill("Luna"),
       getSkill("N/A"),
       getSkill("N/A"),
+    ],
+    learned_skills: [
+      getSkill("Elbow Room"),
+      getSkill("Shelter"),
+      getSkill("Luna"),
     ],
     base_class_set: {
       starting_class: getClass("Great Knight"),
@@ -1852,13 +1881,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 40,
     },
     personal_skill: getSkill("Lily's Poise"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Resistance +2"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Resistance +2")],
     base_class_set: {
       starting_class: getClass("Troubadour"),
       starting_class_tree: getClass("Troubadour"),
@@ -1990,13 +2020,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 20,
     },
     personal_skill: getSkill("Misfortunate"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("HP +5"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("HP +5")],
     base_class_set: {
       starting_class: getClass("Fighter"),
       starting_class_tree: getClass("Fighter"),
@@ -2128,13 +2159,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 30,
     },
     personal_skill: getSkill("Puissance"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Defence +2"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Defence +2")],
     base_class_set: {
       starting_class: getClass("Knight"),
       starting_class_tree: getClass("Knight"),
@@ -2266,13 +2298,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 20,
     },
     personal_skill: getSkill("Aching Blood"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Heartseeker"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Heartseeker")],
     base_class_set: {
       starting_class: getClass("Dark Mage"),
       starting_class_tree: getClass("Dark Mage"),
@@ -2404,13 +2437,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 40,
     },
     personal_skill: getSkill("Kidnap"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Locktouch"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Locktouch")],
     base_class_set: {
       starting_class: getClass("Outlaw"),
       starting_class_tree: getClass("Outlaw"),
@@ -2542,13 +2576,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 30,
     },
     personal_skill: getSkill("Countercurse"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Heartseeker"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Heartseeker")],
     base_class_set: {
       starting_class: getClass("Dark Mage"),
       starting_class_tree: getClass("Dark Mage"),
@@ -2680,13 +2715,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 45,
     },
     personal_skill: getSkill("Rose's Thorn"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Strength +2"),
       getSkill("Lunge"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Strength +2"), getSkill("Lunge")],
     base_class_set: {
       starting_class: getClass("Malig Knight"),
       starting_class_tree: getClass("Wyvern Rider"),
@@ -2818,13 +2854,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 30,
     },
     personal_skill: getSkill("Fierce Rival"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Good Fortune"),
       getSkill("Strong Riposte"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Good Fortune"), getSkill("Strong Riposte")],
     base_class_set: {
       starting_class: getClass("Mercenary"),
       starting_class_tree: getClass("Mercenary"),
@@ -2956,13 +2993,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 25,
     },
     personal_skill: getSkill("Opportunist"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Strength +2"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Strength +2")],
     base_class_set: {
       starting_class: getClass("Wyvern Rider"),
       starting_class_tree: getClass("Wyvern Rider"),
@@ -3094,13 +3132,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 25,
     },
     personal_skill: getSkill("Fancy Footwork"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Good Fortune"),
       getSkill("Strong Riposte"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Good Fortune"), getSkill("Strong Riposte")],
     base_class_set: {
       starting_class: getClass("Mercenary"),
       starting_class_tree: getClass("Mercenary"),
@@ -3232,13 +3271,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 45,
     },
     personal_skill: getSkill("Bloodthirst"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Elbow Room"),
       getSkill("Shelter"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Elbow Room"), getSkill("Shelter")],
     base_class_set: {
       starting_class: getClass("Cavalier"),
       starting_class_tree: getClass("Cavalier"),
@@ -3370,13 +3410,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 45,
     },
     personal_skill: getSkill("Fierce Mien"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Defence +2"),
       getSkill("Natural Cover"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Defence +2"), getSkill("Natural Cover")],
     base_class_set: {
       starting_class: getClass("Knight"),
       starting_class_tree: getClass("Knight"),
@@ -3508,13 +3549,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 5,
     },
     personal_skill: getSkill("Unmask"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("HP +5"),
       getSkill("Gamble"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("HP +5"), getSkill("Gamble")],
     base_class_set: {
       starting_class: getClass("Fighter"),
       starting_class_tree: getClass("Fighter"),
@@ -3646,13 +3688,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 45,
     },
     personal_skill: getSkill("Pragmatic"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Heartseeker"),
       getSkill("Malefic Aura"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Heartseeker"), getSkill("Malefic Aura")],
     base_class_set: {
       starting_class: getClass("Dark Knight"),
       starting_class_tree: getClass("Dark Mage"),
@@ -3784,13 +3827,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 15,
     },
     personal_skill: getSkill("Chivalry"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Elbow Room"),
       getSkill("Shelter"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Elbow Room"), getSkill("Shelter")],
     base_class_set: {
       starting_class: getClass("Paladin"),
       starting_class_tree: getClass("Cavalier"),
@@ -3922,13 +3966,14 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 25,
     },
     personal_skill: getSkill("Collector"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Odd Shaped"),
       getSkill("Beastbane"),
       getSkill("N/A"),
       getSkill("N/A"),
       getSkill("N/A"),
     ],
+    learned_skills: [getSkill("Odd Shaped"), getSkill("Beastbane")],
     base_class_set: {
       starting_class: getClass("Wolfskin"),
       starting_class_tree: getClass("Wolfskin"),
@@ -4060,12 +4105,17 @@ export const defaultCharactersConquest: Character[] = [
       resistance: 30,
     },
     personal_skill: getSkill("Icy Blood"),
-    basic_skills: [
+    equipped_skills: [
       getSkill("Resistance +2"),
       getSkill("Demoiselle"),
       getSkill("Live to Serve"),
       getSkill("N/A"),
       getSkill("N/A"),
+    ],
+    learned_skills: [
+      getSkill("Resistance +2"),
+      getSkill("Demoiselle"),
+      getSkill("Live to Serve"),
     ],
     base_class_set: {
       starting_class: getClass("Maid"),
@@ -4201,7 +4251,7 @@ export const defaultCharactersConquest: Character[] = [
 //     resistance: 0,
 //   },
 //   personal_skill: getSkill(""),
-//   basic_skills: [
+//   equipped_skills: [
 //     getSkill("N/A"),
 //     getSkill("N/A"),
 //     getSkill("N/A"),

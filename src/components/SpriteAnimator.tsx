@@ -154,7 +154,12 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
       height,
     );
 
-    const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+    const imageData = ctx.getImageData(
+      0,
+      0,
+      ctx.canvas.width,
+      ctx.canvas.height,
+    );
     const data = imageData.data;
 
     for (let i = 0; i < data.length; i += 4) {
@@ -162,8 +167,12 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
       const g = data[i + 1];
       const b = data[i + 2];
 
-      const isForegroundPixel = (r === 136 && g === 136 && b === 136) || (r === 255 && g === 255 && b === 255);
-      const isBackgroundPixel = (r === 102 && g === 102 && b === 102) || (r === 238 && g === 238 && b === 238);
+      const isForegroundPixel =
+        (r === 136 && g === 136 && b === 136) ||
+        (r === 255 && g === 255 && b === 255);
+      const isBackgroundPixel =
+        (r === 102 && g === 102 && b === 102) ||
+        (r === 238 && g === 238 && b === 238);
 
       if (maskType === "foreground") {
         data[i + 3] = isForegroundPixel ? 255 : 0;
@@ -226,7 +235,6 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
 
     // Draw the masked layer onto the main canvas
     ctx.drawImage(tempCanvas, 0, 0);
-
 
     // const debugData = ctx.getImageData(0, 0, 1, 1).data;
     // console.log(`Layer drawn at (${xOffset}, ${yOffset}), pixel at (0,0): R=${debugData[0]}, G=${debugData[1]}, B=${debugData[2]}, A=${debugData[3]}`);
@@ -376,7 +384,6 @@ const SpriteAnimator: React.FC<SpriteAnimatorProps> = ({
 export default SpriteAnimator;
 
 //for downloading the pngs...
-
 
 // import React, { useRef, useEffect } from "react";
 // import { getSpriteAdjustments } from "../components/SpriteAdjustment";

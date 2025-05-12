@@ -1,5 +1,4 @@
 import { Class } from "./ClassStruct.tsx";
-import { Character } from "./UnitStruct.tsx";
 
 export enum SkillType {
   PROC = "proc",
