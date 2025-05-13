@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import SpriteAnimator from "../components/SpriteAnimator";
-
 import { Character } from "../types/Fire Emblem Fates/UnitStruct.tsx";
 import { Class, WeaponRank } from "../types/Fire Emblem Fates/ClassStruct.tsx";
 import { Skill } from "../types/Fire Emblem Fates/SkillStruct.tsx";
-
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
+import { useUnits } from "../defaultData/Fire Emblem Fates/UnitsContext";
 
 interface UnitGridProps {
   unit: Character;
@@ -28,6 +27,7 @@ interface SkillsModule {
 }
 
 const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
+  const { units } = useUnits();
   const [getClassFn, setGetClassFn] = useState<
     ((className: string) => Class) | null
   >(null);
@@ -41,10 +41,14 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>("");
   const [selectedClassName, setSelectedClassName] = useState<string>(
-    unit.class.className,
+    unit.class.className
   );
-  const [selectedFriendshipPartner, setSelectedFriendshipPartner] = useState<string | null>(null);
-  const [selectedPartnerPartner, setSelectedPartnerPartner] = useState<string | null>(null);
+  const [selectedFriendshipPartner, setSelectedFriendshipPartner] = useState<
+    string | null
+  >(null);
+  const [selectedPartnerPartner, setSelectedPartnerPartner] = useState<
+    string | null
+  >(null);
   const [error, setError] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -82,13 +86,13 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   ];
 
   const filteredFields = weaponRankFields.filter(
-    ({ key }) => unit.class.MaxWeaponRank[key] !== "n",
+    ({ key }) => unit.class.MaxWeaponRank[key] !== "n"
   );
 
   const allWeaponRanks: WeaponRank[] = ["n", "E", "D", "C", "B", "A", "S"];
 
   const getWeaponRankOptions = (
-    field: keyof typeof unit.weapon_ranks,
+    field: keyof typeof unit.weapon_ranks
   ): WeaponRank[] => {
     const maxRank = unit.class.MaxWeaponRank[field];
     if (maxRank === "n") {
@@ -100,7 +104,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
 
   const handleWeaponRankChange = (
     field: keyof typeof unit.weapon_ranks,
-    value: WeaponRank,
+    value: WeaponRank
   ) => {
     const updatedUnit: Character = {
       ...unit,
@@ -127,8 +131,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       classes.push(
         ...unit.base_class_set.starting_class_tree.classTree.filter(
-          filterClasses,
-        ),
+          filterClasses
+        )
       );
     }
 
@@ -146,8 +150,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       classes.push(
         ...unit.base_class_set.friendship_seal_base_class.classTree.filter(
-          filterClasses,
-        ),
+          filterClasses
+        )
       );
     }
 
@@ -157,8 +161,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       classes.push(
         ...unit.base_class_set.partner_seal_base_class.classTree.filter(
-          filterClasses,
-        ),
+          filterClasses
+        )
       );
     }
 
@@ -184,37 +188,43 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     return finalClasses;
   };
 
-  const getAvailablePartners = (partnerType: 'friendship' | 'partner'): Character[] => {
-    const currentPartners = partnerType === 'friendship'
-      ? unit.base_class_set.friendship_seal_partners
-      : unit.base_class_set.partner_seal_partners;
-    const currentPartnerNames = currentPartners.map(p => p.name);
-  
-    // Get initial list of available partners
-    let availablePartners: Character[] = [
-      ...(partnerType === 'friendship'
+  const getAvailablePartners = (
+    partnerType: "friendship" | "partner"
+  ): Character[] => {
+    const currentPartners =
+      partnerType === "friendship"
         ? unit.base_class_set.friendship_seal_partners
-        : unit.base_class_set.partner_seal_partners
-      ).filter(p => !currentPartnerNames.includes(p.name)),
-    ].filter(u => u.name !== unit.name);
-  
-    availablePartners = availablePartners.filter(partner => {
-      if (unit.gender === 'Male') {
-        if (partner.name === 'Felicia' && partner.level !== 1) return false;
-        if (partner.name === 'Jakob' && partner.level !== 13) return false;
-      } else if (unit.gender === 'F') {
-        if (partner.name === 'Felicia' && partner.level !== 13) return false;
-        if (partner.name === 'Jakob' && partner.level !== 1) return false;
-      }
-      return true
-    });
-    
-    console.log(availablePartners)
-    console.log(unit.base_class_set.friendship_seal_partners)
-    console.log(unit.base_class_set.partner_seal_partners)
-    return availablePartners.filter(u => 
-      partnerType === 'friendship' ? u.gender === unit.gender : u.gender !== unit.gender
+        : unit.base_class_set.partner_seal_partners;
+    const currentPartnerNames = currentPartners.map((p) => p.name);
+
+    let availablePartners: Character[] = units.filter(
+      (u) => u.name !== unit.name && !currentPartnerNames.includes(u.name)
     );
+
+    availablePartners = availablePartners.filter((partner) => {
+      const isCorrin = unit.name === "Corrin (M)" || unit.name === "Corrin (F)";
+      const corrinGender = isCorrin
+        ? unit.name === "Corrin (M)"
+          ? "Male"
+          : "Female"
+        : null;
+
+      if (corrinGender === "Male") {
+        if (partner.name === "Felicia" && partner.level !== 1) return false;
+        if (partner.name === "Jakob" && partner.level !== 13) return false;
+      } else if (corrinGender === "Female") {
+        if (partner.name === "Felicia" && partner.level !== 13) return false;
+        if (partner.name === "Jakob" && partner.level !== 1) return false;
+      }
+
+      if (partnerType === "friendship") {
+        return partner.gender === unit.gender;
+      } else {
+        return partner.gender !== unit.gender;
+      }
+    });
+
+    return availablePartners;
   };
 
   const handleClassChange = (className: string) => {
@@ -298,13 +308,16 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   };
 
   const handleFriendshipPartnerChange = (partnerName: string) => {
-    const partner = getAvailablePartners('friendship').find(p => p.name === partnerName);
+    const partner = units.find((p) => p.name === partnerName);
     if (partner) {
       const updatedUnit: Character = {
         ...unit,
         base_class_set: {
           ...unit.base_class_set,
-          friendship_seal_partners: [...unit.base_class_set.friendship_seal_partners, partner],
+          friendship_seal_partners: [
+            ...unit.base_class_set.friendship_seal_partners,
+            partner,
+          ],
         },
       };
       updateUnit(updatedUnit);
@@ -313,13 +326,16 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   };
 
   const handlePartnerPartnerChange = (partnerName: string) => {
-    const partner = getAvailablePartners('partner').find(p => p.name === partnerName);
+    const partner = units.find((p) => p.name === partnerName);
     if (partner) {
       const updatedUnit: Character = {
         ...unit,
         base_class_set: {
           ...unit.base_class_set,
-          partner_seal_partners: [...unit.base_class_set.partner_seal_partners, partner],
+          partner_seal_partners: [
+            ...unit.base_class_set.partner_seal_partners,
+            partner,
+          ],
         },
       };
       updateUnit(updatedUnit);
@@ -332,7 +348,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       ...unit,
       base_class_set: {
         ...unit.base_class_set,
-        friendship_seal_partners: unit.base_class_set.friendship_seal_partners.filter(p => p.name !== partnerName),
+        friendship_seal_partners: unit.base_class_set.friendship_seal_partners.filter(
+          (p) => p.name !== partnerName
+        ),
       },
     };
     updateUnit(updatedUnit);
@@ -343,7 +361,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       ...unit,
       base_class_set: {
         ...unit.base_class_set,
-        partner_seal_partners: unit.base_class_set.partner_seal_partners.filter(p => p.name !== partnerName),
+        partner_seal_partners: unit.base_class_set.partner_seal_partners.filter(
+          (p) => p.name !== partnerName
+        ),
       },
     };
     updateUnit(updatedUnit);
@@ -835,7 +855,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                           onChange={(e) =>
                             handleWeaponRankChange(
                               key,
-                              e.target.value as WeaponRank,
+                              e.target.value as WeaponRank
                             )
                           }
                           className="inline-select"
@@ -1053,9 +1073,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         unit.gender === "Male"
                           ? false
                           : promotedClass.className === "Butler" &&
-                              unit.gender === "F"
-                            ? false
-                            : true,
+                            unit.gender === "F"
+                          ? false
+                          : true
                       )
                       .map((promotedClass, index) => (
                         <Tippy
@@ -1090,9 +1110,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                               unit.gender === "M"
                                 ? false
                                 : promotedClass.className === "Butler" &&
-                                    unit.gender === "F"
-                                  ? false
-                                  : true,
+                                  unit.gender === "F"
+                                ? false
+                                : true
                             )
                             .map((promotedClass, treeIndex) => (
                               <Tippy
@@ -1112,7 +1132,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             ))
                         ) : (
                           <span key={clsIndex}>No Promotions</span>
-                        ),
+                        )
                     )
                   ) : (
                     <span>No Heart Seal Classes</span>
@@ -1122,10 +1142,15 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
               <div className="class-set-column">
                 <div className="class-set-label">Friendship Seal</div>
                 <div className="class-sets-classes">
-                  {unit.base_class_set.friendship_seal_partners &&
-                    unit.base_class_set.friendship_seal_partners.length > 0 ? (
-                    unit.base_class_set.friendship_seal_partners.map(
-                      (partner, index) => (
+                  {(() => {
+                    const activeUnitNames = new Set(units.map((u) => u.name));
+                    const filteredPartners =
+                      unit.base_class_set.friendship_seal_partners?.filter(
+                        (partner) => activeUnitNames.has(partner.name)
+                      ) || [];
+
+                    return filteredPartners.length > 0 ? (
+                      filteredPartners.map((partner, index) => (
                         <div key={index} className="partner-item">
                           <Tippy
                             content={
@@ -1139,7 +1164,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                           </Tippy>
                           {isEditing && (
                             <button
-                              onClick={() => removeFriendshipPartner(partner.name)}
+                              onClick={() =>
+                                removeFriendshipPartner(partner.name)
+                              }
                               className="remove-partner-button"
                               aria-label={`Remove ${partner.name} as friendship partner`}
                             >
@@ -1147,26 +1174,34 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             </button>
                           )}
                         </div>
-                      ),
-                    )
-                  ) : (
-                    <span>No Friendship Seal Partners Yet</span>
-                  )}
+                      ))
+                    ) : (
+                      <span>No Viable Friendship Seal Partners Added Yet</span>
+                    );
+                  })()}
                   {isEditing && (
                     <div className="partner-select">
-                      <select
-                        value={selectedFriendshipPartner || ""}
-                        onChange={(e) => handleFriendshipPartnerChange(e.target.value)}
-                        className="inline-select"
-                        aria-label={`Select friendship partner for ${unit.name}`}
-                      >
-                        <option value="" disabled>Select a partner</option>
-                        {getAvailablePartners('friendship').map((partner) => (
-                          <option key={partner.name} value={partner.name}>
-                            {partner.name}
+                      {getAvailablePartners("friendship").length > 0 ? (
+                        <select
+                          value={selectedFriendshipPartner || ""}
+                          onChange={(e) =>
+                            handleFriendshipPartnerChange(e.target.value)
+                          }
+                          className="inline-select"
+                          aria-label={`Select friendship partner for ${unit.name}`}
+                        >
+                          <option value="" disabled>
+                            Select a partner
                           </option>
-                        ))}
-                      </select>
+                          {getAvailablePartners("friendship").map((partner) => (
+                            <option key={partner.name} value={partner.name}>
+                              {partner.name}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <span>No Viable Friendship Seal Partners Added Yet</span>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1174,10 +1209,15 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
               <div className="class-set-column">
                 <div className="class-set-label">Partner Seal</div>
                 <div className="class-sets-classes">
-                  {unit.base_class_set.partner_seal_partners &&
-                    unit.base_class_set.partner_seal_partners.length > 0 ? (
-                    unit.base_class_set.partner_seal_partners.map(
-                      (partner, index) => (
+                  {(() => {
+                    const activeUnitNames = new Set(units.map((u) => u.name));
+                    const filteredPartners =
+                      unit.base_class_set.partner_seal_partners?.filter(
+                        (partner) => activeUnitNames.has(partner.name)
+                      ) || [];
+
+                    return filteredPartners.length > 0 ? (
+                      filteredPartners.map((partner, index) => (
                         <div key={index} className="partner-item">
                           <Tippy
                             content={
@@ -1199,26 +1239,34 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             </button>
                           )}
                         </div>
-                      ),
-                    )
-                  ) : (
-                    <span>No Partner Seal Partners Yet</span>
-                  )}
+                      ))
+                    ) : (
+                      <span>No Viable Partner Seal Partners Added Yet</span>
+                    );
+                  })()}
                   {isEditing && (
                     <div className="partner-select">
-                      <select
-                        value={selectedPartnerPartner || ""}
-                        onChange={(e) => handlePartnerPartnerChange(e.target.value)}
-                        className="inline-select"
-                        aria-label={`Select partner seal partner for ${unit.name}`}
-                      >
-                        <option value="" disabled>Select a partner</option>
-                        {getAvailablePartners('partner').map((partner) => (
-                          <option key={partner.name} value={partner.name}>
-                            {partner.name}
+                      {getAvailablePartners("partner").length > 0 ? (
+                        <select
+                          value={selectedPartnerPartner || ""}
+                          onChange={(e) =>
+                            handlePartnerPartnerChange(e.target.value)
+                          }
+                          className="inline-select"
+                          aria-label={`Select partner seal partner for ${unit.name}`}
+                        >
+                          <option value="" disabled>
+                            Select a partner
                           </option>
-                        ))}
-                      </select>
+                          {getAvailablePartners("partner").map((partner) => (
+                            <option key={partner.name} value={partner.name}>
+                              {partner.name}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <span>No Viable Partner Seal Partners Added Yet</span>
+                      )}
                     </div>
                   )}
                 </div>

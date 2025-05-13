@@ -4240,7 +4240,7 @@ const friendshipPairs: { [key: string]: string[] } = {
   "Xander": ["Laslow", "Leo", "Kaze"],
   "Keaton": ["Arthur", "Benny", "Laslow"],
   "Shura": [],
-  "Gunter": [],
+  "Gunter": ["Jakob"],
   "Izana": [],
   "Corrin (F)": [...allStandardFemalesNames, "Flora"],
   "Felicia": ["Peri", "Flora"],
