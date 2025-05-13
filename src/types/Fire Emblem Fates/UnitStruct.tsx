@@ -86,6 +86,8 @@ export interface Character {
     heart_seal_classes: Class[];
     friendship_seal_partners: Character[];
     partner_seal_partners: Character[];
+    selected_friendship_seal_partner: Character | null;
+    selected_partner_seal_partner: Character | null;
     friendship_seal_base_class: Class | null;
     partner_seal_base_class: Class | null;
   };
