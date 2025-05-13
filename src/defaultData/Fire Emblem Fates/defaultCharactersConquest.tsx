@@ -205,7 +205,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Nohr Princess"),
       starting_class_tree: getClass("Nohr Princess"),
       heart_seal_classes: [],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -347,7 +347,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Butler"),
       starting_class_tree: getClass("Troubadour"),
       heart_seal_classes: [getClass("Cavalier")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -491,7 +491,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Butler"),
       starting_class_tree: getClass("Troubadour"),
       heart_seal_classes: [getClass("Cavalier")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -630,7 +630,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Maid"),
       starting_class_tree: getClass("Troubadour"),
       heart_seal_classes: [getClass("Mercenary")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -773,7 +773,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Maid"),
       starting_class_tree: getClass("Troubadour"),
       heart_seal_classes: [getClass("Mercenary")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -912,7 +912,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Ninja"),
       starting_class_tree: getClass("Ninja"),
       heart_seal_classes: [getClass("Samurai")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -1051,7 +1051,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Songstress"),
       starting_class_tree: getClass("Songstress"),
       heart_seal_classes: [getClass("Sky Knight")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -1893,7 +1893,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Troubadour"),
       starting_class_tree: getClass("Troubadour"),
       heart_seal_classes: [getClass("Wyvern Rider")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -2171,7 +2171,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Knight"),
       starting_class_tree: getClass("Knight"),
       heart_seal_classes: [getClass("Troubadour")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -2310,7 +2310,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Dark Mage"),
       starting_class_tree: getClass("Dark Mage"),
       heart_seal_classes: [getClass("Samurai")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -2449,7 +2449,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Outlaw"),
       starting_class_tree: getClass("Outlaw"),
       heart_seal_classes: [getClass("Dark Mage")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -2588,7 +2588,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Dark Mage"),
       starting_class_tree: getClass("Dark Mage"),
       heart_seal_classes: [getClass("Outlaw")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -2727,7 +2727,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Malig Knight"),
       starting_class_tree: getClass("Wyvern Rider"),
       heart_seal_classes: [getClass("Dark Mage")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -2866,7 +2866,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Mercenary"),
       starting_class_tree: getClass("Mercenary"),
       heart_seal_classes: [getClass("Sky Knight")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -3005,7 +3005,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Wyvern Rider"),
       starting_class_tree: getClass("Wyvern Rider"),
       heart_seal_classes: [getClass("Fighter")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -3144,7 +3144,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Mercenary"),
       starting_class_tree: getClass("Mercenary"),
       heart_seal_classes: [getClass("Ninja")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -3283,7 +3283,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Cavalier"),
       starting_class_tree: getClass("Cavalier"),
       heart_seal_classes: [getClass("Dark Mage")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -3422,7 +3422,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Knight"),
       starting_class_tree: getClass("Knight"),
       heart_seal_classes: [getClass("Fighter")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -3561,7 +3561,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Fighter"),
       starting_class_tree: getClass("Fighter"),
       heart_seal_classes: [getClass("Troubadour")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -3700,7 +3700,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Dark Knight"),
       starting_class_tree: getClass("Dark Mage"),
       heart_seal_classes: [getClass("Troubadour")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -3839,7 +3839,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Paladin"),
       starting_class_tree: getClass("Cavalier"),
       heart_seal_classes: [getClass("Wyvern Rider")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -3978,7 +3978,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Wolfskin"),
       starting_class_tree: getClass("Wolfskin"),
       heart_seal_classes: [getClass("Fighter")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -4121,7 +4121,7 @@ export const defaultCharactersConquest: Character[] = [
       starting_class: getClass("Maid"),
       starting_class_tree: getClass("Troubadour"),
       heart_seal_classes: [getClass("Dark Mage"), getClass("Mercenary")],
-      friendship_seal_partners: [],
+      friendship_seal_partners: [],   
       partner_seal_partners: [],
       friendship_seal_base_class: null,
       partner_seal_base_class: null,
@@ -4218,6 +4218,94 @@ export const defaultCharactersConquest: Character[] = [
     },
   },
 ];
+
+
+
+const allUnitNames = ["Corrin (M)", "Jakob", "Kaze", "Silas", "Arthur", "Odin", "Niles", "Laslow", "Benny", "Leo", "Xander", "Keaton", "Corrin (F)", "Felicia", "Azura", "Mozu", "Elise", "Effie", "Charlotte", "Camilla", "Selena", "Beruka", "Peri", "Nyx", "Shura", "Gunter", "Izana", "Flora"]
+const allStandardMalesNames = ["Corrin (M)", "Jakob", "Kaze", "Silas", "Arthur", "Odin", "Niles", "Laslow", "Benny", "Leo", "Xander", "Keaton"]
+const allStandardFemalesNames = ["Corrin (F)", "Felicia", "Azura", "Mozu", "Elise", "Effie", "Charlotte", "Camilla", "Selena", "Beruka", "Peri", "Nyx"]
+
+// Friendship seal partners (same-gender friendships)
+const friendshipPairs: { [key: string]: string[] } = {
+  "Corrin (M)": [...allStandardMalesNames, "Izana", "Gunter", "Shura"],
+  "Jakob": ["Gunter", "Silas"],
+  "Kaze": ["Silas", "Xander"],
+  "Silas": ["Jakob", "Kaze"],
+  "Arthur": ["Benny", "Keaton", "Niles"],
+  "Odin": ["Laslow", "Niles", "Leo"],
+  "Niles": ["Odin", "Leo", "Arthur"],
+  "Laslow": ["Odin", "Xander", "Keaton"],
+  "Benny": ["Arthur", "Keaton"],
+  "Leo": ["Niles", "Xander", "Odin"],
+  "Xander": ["Laslow", "Leo", "Kaze"],
+  "Keaton": ["Arthur", "Benny", "Laslow"],
+  "Shura": [],
+  "Gunter": [],
+  "Izana": [],
+  "Corrin (F)": [...allStandardFemalesNames, "Flora"],
+  "Felicia": ["Peri", "Flora"],
+  "Azura": ["Elise"],
+  "Mozu": ["Effie", "Nyx"],
+  "Elise": ["Effie", "Camilla", "Azura"],
+  "Effie": ["Mozu", "Elise", "Nyx"],
+  "Charlotte": ["Beruka", "Peri", "Nyx"],
+  "Camilla": ["Selena", "Elise", "Beruka"],
+  "Selena": ["Beruka", "Peri", "Camilla"],
+  "Beruka": ["Charlotte", "Selena", "Beruka"],
+  "Peri": ["Charlotte", "Selena", "Felicia"],
+  "Nyx": ["Mozu", "Effie", "Charlotte"],
+  "Flora": ["Felicia"],
+};
+
+// Partner seal partners (opposite-gender S-rank supports)
+const partnerPairs: { [key: string]: string[] } = {
+  "Corrin (M)": [...allStandardFemalesNames, "Niles"],
+  "Jakob": [...allStandardFemalesNames],
+  "Kaze": [...allStandardFemalesNames],
+  "Silas": [...allStandardFemalesNames],
+  "Arthur": [...allStandardFemalesNames],
+  "Odin": [...allStandardFemalesNames],
+  "Niles": [...allStandardFemalesNames],
+  "Laslow": [...allStandardFemalesNames],
+  "Benny": [...allStandardFemalesNames],
+  "Leo": ["Corrin (F)", "Felicia", "Azura", "Mozu", "Effie", "Charlotte", "Selena", "Beruka", "Peri", "Nyx"],
+  "Xander": ["Corrin (F)", "Felicia", "Azura", "Mozu", "Effie", "Charlotte", "Selena", "Beruka", "Peri", "Nyx"],
+  "Keaton": [...allStandardFemalesNames],
+  "Shura": ["Corrin (F)"],
+  "Gunter": ["Corrin (F)"],
+  "Izana": ["Corrin (F)"],
+  "Corrin (F)": [...allStandardMalesNames],
+  "Felicia": [...allStandardMalesNames],
+  "Azura": [...allStandardMalesNames],
+  "Mozu": [...allStandardMalesNames],
+  "Elise": ["Corrin (M)", "Jakob", "Kaze", "Silas", "Arthur", "Odin", "Niles", "Laslow", "Benny", "Keaton"],
+  "Effie": [...allStandardMalesNames],
+  "Charlotte": [...allStandardMalesNames],
+  "Camilla": ["Corrin (M)", "Jakob", "Kaze", "Silas", "Arthur", "Odin", "Niles", "Laslow", "Benny", "Keaton"],
+  "Selena": [...allStandardMalesNames],
+  "Beruka": [...allStandardMalesNames],
+  "Peri": [...allStandardMalesNames], 
+  "Nyx": [...allStandardMalesNames],
+  "Flora": ["Corrin (M)"]
+};
+
+// Helper function to find a character by name
+const findCharacter = (name: string): Character => {
+  const character = defaultCharactersConquest.find((char) => char.name === name);
+  if (!character) throw new Error(`Character ${name} not found`);
+  return character;
+};
+
+// Populate the friendship_seal_partners and partner_seal_partners
+defaultCharactersConquest.forEach((character) => {
+  // Populate friendship_seal_partners (same-gender friendships)
+  const friends = friendshipPairs[character.name] || [];
+  character.base_class_set.friendship_seal_partners = friends.map((friendName) => findCharacter(friendName));
+
+  // Populate partner_seal_partners (opposite-gender S-rank supports)
+  const partners = partnerPairs[character.name] || [];
+  character.base_class_set.partner_seal_partners = partners.map((partnerName) => findCharacter(partnerName));
+});
 
 //unit template
 // {
