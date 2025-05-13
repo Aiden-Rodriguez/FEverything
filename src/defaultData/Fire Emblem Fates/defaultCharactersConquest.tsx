@@ -4307,6 +4307,7 @@ defaultCharactersConquest.forEach((character) => {
   character.base_class_set.partner_seal_partners = partners.map((partnerName) => findCharacter(partnerName));
 });
 
+console.log(defaultCharactersConquest[0])
 //unit template
 // {
 //   name: "",
