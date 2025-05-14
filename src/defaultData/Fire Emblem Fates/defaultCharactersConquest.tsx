@@ -4281,7 +4281,7 @@ export const defaultCharactersConquest: Character[] = [
 
 
 
-const allUnitNames = ["Corrin (M)", "Jakob", "Kaze", "Silas", "Arthur", "Odin", "Niles", "Laslow", "Benny", "Leo", "Xander", "Keaton", "Corrin (F)", "Felicia", "Azura", "Mozu", "Elise", "Effie", "Charlotte", "Camilla", "Selena", "Beruka", "Peri", "Nyx", "Shura", "Gunter", "Izana", "Flora"]
+//const allUnitNames = ["Corrin (M)", "Jakob", "Kaze", "Silas", "Arthur", "Odin", "Niles", "Laslow", "Benny", "Leo", "Xander", "Keaton", "Corrin (F)", "Felicia", "Azura", "Mozu", "Elise", "Effie", "Charlotte", "Camilla", "Selena", "Beruka", "Peri", "Nyx", "Shura", "Gunter", "Izana", "Flora"]
 const allStandardMalesNames = ["Corrin (M)", "Jakob", "Kaze", "Silas", "Arthur", "Odin", "Niles", "Laslow", "Benny", "Leo", "Xander", "Keaton"]
 const allStandardFemalesNames = ["Corrin (F)", "Felicia", "Azura", "Mozu", "Elise", "Effie", "Charlotte", "Camilla", "Selena", "Beruka", "Peri", "Nyx"]
 

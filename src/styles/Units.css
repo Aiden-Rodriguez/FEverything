@@ -315,6 +315,18 @@ h1 {
   transform: translateY(50%);
 }
 
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  position: sticky;
+  bottom: 10px;
+  padding: 10px 0;
+}
+
 @keyframes pulse {
   0% {
     opacity: 1;

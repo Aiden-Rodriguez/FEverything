@@ -178,8 +178,13 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       }
       return false;
     });
-
-    return finalClasses;
+    //get rid of dupes
+    const uniqueFinalClasses = finalClasses.filter(
+      (cls, index, self) =>
+        index === self.findIndex((c) => c.className === cls.className)
+    );
+    
+    return uniqueFinalClasses;
   };
 
   const handleClassChange = (className: string) => {
@@ -257,38 +262,34 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setIsClassChanging(false);
   };
 
-  const getAllySealClass = (ClassReciever: Character, ClassGiver: Character) => {
+  const getAllySealClass = (ClassReciever: Character, ClassGiver: Character): Class | null => {
     const giverBaseClass = ClassGiver.base_class_set.starting_class_tree;
-    const giverHeartSealClass1 = ClassGiver.base_class_set.heart_seal_classes?.[0] || null; // Should always have 1 at least heart seal class
+    const giverHeartSealClass1 = ClassGiver.base_class_set.heart_seal_classes?.[0] || null;
     const recieverBaseClass = ClassReciever.base_class_set.starting_class_tree;
-
+  
     const forbiddenClassShareNames = ["Songstress", "Wolfskin", "Kitsune", "Nohr Prince", "Nohr Princess", "Villager"];
-
-  // If giver's base class is forbidden and receiver's base class matches giver's heart seal class
-  if (
-    forbiddenClassShareNames.includes(giverBaseClass.className) &&
-    giverHeartSealClass1 &&
-    recieverBaseClass.className === giverHeartSealClass1.className
-  ) {
-    return giverBaseClass.parallelClass;
-  }
-
-  // Different base classes case (not forbidden)
-  if (
-    giverBaseClass.className !== recieverBaseClass.className &&
-    !forbiddenClassShareNames.includes(giverBaseClass.className)
-  ) {
-    return giverBaseClass;
-  }
-
-  // If base classes match or giver's base is forbidden, give heart seal class if different from base
-  if (giverHeartSealClass1 && giverBaseClass.className !== giverHeartSealClass1.className) {
-    return giverHeartSealClass1;
-  }
-
-  // Fallback to parallel class
-  return giverBaseClass.parallelClass;
-};
+  
+    if (
+      forbiddenClassShareNames.includes(giverBaseClass.className) &&
+      giverHeartSealClass1 &&
+      recieverBaseClass.className === giverHeartSealClass1.className
+    ) {
+      return giverBaseClass.parallelClass ?? null;
+    }
+  
+    if (
+      giverBaseClass.className !== recieverBaseClass.className &&
+      !forbiddenClassShareNames.includes(giverBaseClass.className)
+    ) {
+      return giverBaseClass;
+    }
+  
+    if (giverHeartSealClass1 && giverBaseClass.className !== giverHeartSealClass1.className) {
+      return giverHeartSealClass1;
+    }
+  
+    return giverBaseClass.parallelClass ?? null;
+  };
 
   const cancelClassChange = () => {
     setIsClassChanging(false);
@@ -1082,12 +1083,16 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             value={unit.base_class_set.selected_friendship_seal_partner?.name || ""}
                             onChange={(e) => {
                               const partnerName = e.target.value;
+                              const selectedPartner = partnerName
+                                ? units.find((p) => p.name === partnerName) || null
+                                : null;
                               const updatedUnit: Character = {
                                 ...unit,
                                 base_class_set: {
                                   ...unit.base_class_set,
-                                  selected_friendship_seal_partner: partnerName
-                                    ? units.find((p) => p.name === partnerName) || null
+                                  selected_friendship_seal_partner: selectedPartner,
+                                  friendship_seal_base_class: selectedPartner
+                                    ? getAllySealClass(unit, selectedPartner)
                                     : null,
                                 },
                               };
@@ -1114,36 +1119,34 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                       const selectedPartner = unit.base_class_set.selected_friendship_seal_partner;
                       const isValidPartner = selectedPartner && activeUnitNames.has(selectedPartner.name);
 
-                      return isValidPartner ? (
+                      return isValidPartner && unit.base_class_set.friendship_seal_base_class ? (
                         <div className="partner-item">
                           <span>A+ Support: {selectedPartner.name}</span>
-                          {(() => {
-                            const allyClass = getAllySealClass(unit, selectedPartner);
-                            return allyClass && allyClass.classTree && allyClass.classTree.length > 0 ? (
-                              allyClass.classTree
-                                .filter((promotedClass) =>
-                                  promotedClass.className === "Maid" && unit.gender === "M"
-                                    ? false
-                                    : promotedClass.className === "Butler" && unit.gender === "F"
-                                    ? false
-                                    : true
-                                )
-                                .map((promotedClass, index) => (
-                                  <Tippy
-                                    content={
-                                      <>
-                                        <strong>{promotedClass.className}</strong>
-                                        <p className="tooltip-text">{promotedClass.description}</p>
-                                      </>
-                                    }
-                                  >
-                                    <span key={index}>{promotedClass.className}</span>
-                                  </Tippy>
-                                ))
-                            ) : (
-                              <span>No Promotions</span>
-                            );
-                          })()}
+                          {unit.base_class_set.friendship_seal_base_class.classTree &&
+                          unit.base_class_set.friendship_seal_base_class.classTree.length > 0 ? (
+                            unit.base_class_set.friendship_seal_base_class.classTree
+                              .filter((promotedClass) =>
+                                promotedClass.className === "Maid" && unit.gender === "M"
+                                  ? false
+                                  : promotedClass.className === "Butler" && unit.gender === "F"
+                                  ? false
+                                  : true
+                              )
+                              .map((promotedClass, index) => (
+                                <Tippy
+                                  content={
+                                    <>
+                                      <strong>{promotedClass.className}</strong>
+                                      <p className="tooltip-text">{promotedClass.description}</p>
+                                    </>
+                                  }
+                                >
+                                  <span key={index}>{promotedClass.className}</span>
+                                </Tippy>
+                              ))
+                          ) : (
+                            <span>No Promotions</span>
+                          )}
                         </div>
                       ) : (
                         <span>No Friendship Seal Partner Selected</span>
@@ -1169,12 +1172,16 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             value={unit.base_class_set.selected_partner_seal_partner?.name || ""}
                             onChange={(e) => {
                               const partnerName = e.target.value;
+                              const selectedPartner = partnerName
+                                ? units.find((p) => p.name === partnerName) || null
+                                : null;
                               const updatedUnit: Character = {
                                 ...unit,
                                 base_class_set: {
                                   ...unit.base_class_set,
-                                  selected_partner_seal_partner: partnerName
-                                    ? units.find((p) => p.name === partnerName) || null
+                                  selected_partner_seal_partner: selectedPartner,
+                                  partner_seal_base_class: selectedPartner
+                                    ? getAllySealClass(unit, selectedPartner)
                                     : null,
                                 },
                               };
@@ -1201,36 +1208,34 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                       const selectedPartner = unit.base_class_set.selected_partner_seal_partner;
                       const isValidPartner = selectedPartner && activeUnitNames.has(selectedPartner.name);
 
-                      return isValidPartner ? (
+                      return isValidPartner && unit.base_class_set.partner_seal_base_class ? (
                         <div className="partner-item">
                           <span>S Support: {selectedPartner.name}</span>
-                          {(() => {
-                            const allyClass = getAllySealClass(unit, selectedPartner);
-                            return allyClass && allyClass.classTree && allyClass.classTree.length > 0 ? (
-                              allyClass.classTree
-                                .filter((promotedClass) =>
-                                  promotedClass.className === "Maid" && unit.gender === "M"
-                                    ? false
-                                    : promotedClass.className === "Butler" && unit.gender === "F"
-                                    ? false
-                                    : true
-                                )
-                                .map((promotedClass, index) => (
-                                  <Tippy
-                                    content={
-                                      <>
-                                        <strong>{promotedClass.className}</strong>
-                                        <p className="tooltip-text">{promotedClass.description}</p>
-                                      </>
-                                    }
-                                  >
-                                    <span key={index}>{promotedClass.className}</span>
-                                  </Tippy>
-                                ))
-                            ) : (
-                              <span>No Promotions</span>
-                            );
-                          })()}
+                          {unit.base_class_set.partner_seal_base_class.classTree &&
+                          unit.base_class_set.partner_seal_base_class.classTree.length > 0 ? (
+                            unit.base_class_set.partner_seal_base_class.classTree
+                              .filter((promotedClass) =>
+                                promotedClass.className === "Maid" && unit.gender === "M"
+                                  ? false
+                                  : promotedClass.className === "Butler" && unit.gender === "F"
+                                  ? false
+                                  : true
+                              )
+                              .map((promotedClass, index) => (
+                                <Tippy
+                                  content={
+                                    <>
+                                      <strong>{promotedClass.className}</strong>
+                                      <p className="tooltip-text">{promotedClass.description}</p>
+                                    </>
+                                  }
+                                >
+                                  <span key={index}>{promotedClass.className}</span>
+                                </Tippy>
+                              ))
+                          ) : (
+                            <span>No Promotions</span>
+                          )}
                         </div>
                       ) : (
                         <span>No Partner Seal Partner Selected</span>

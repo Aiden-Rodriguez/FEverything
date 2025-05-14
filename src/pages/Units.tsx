@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import "../styles/Units.css";
 import UnitGrid from "../components/UnitGrid";
-import { parse, stringify } from "flatted";
-import { UnitsProvider, useUnits } from "../defaultData/Fire Emblem Fates/UnitsContext"; // Import useUnits
+import { UnitsProvider, useUnits } from "../defaultData/Fire Emblem Fates/UnitsContext";
 import { Character } from "../types/Fire Emblem Fates/UnitStruct";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments";
 import { getClass } from "../defaultData/Fire Emblem Fates/defaultClassData";
@@ -27,7 +26,7 @@ const Units = () => {
 };
 
 const UnitsContent = () => {
-  const { units, setUnits, updateUnit, addUnit, deleteAllUnits } = useUnits(); // Use context
+  const { units, updateUnit, addUnit, deleteAllUnits } = useUnits();
   const { state } = useLocation();
   const selectedRoute = state?.selectedRoute;
   const { gameId } = useParams<{ gameId: string }>();
@@ -40,8 +39,6 @@ const UnitsContent = () => {
   const [corrinBoon, setCorrinBoon] = useState<string>("Robust");
   const [corrinBane, setCorrinBane] = useState<string>("Unlucky");
   const [corrinTalent, setCorrinTalent] = useState<string>("Cavalier");
-
-  // Remove duplicate localStorage logic since it's handled by UnitsProvider
 
   const filteredBaneOptions = baneOptions.filter(
     (bane) => conflictingPairs[corrinBoon] !== bane
@@ -125,7 +122,7 @@ const UnitsContent = () => {
 
   const addNewUnit = () => {
     if (selectedCharacter) {
-      addUnit(selectedCharacter); // Use context's addUnit
+      addUnit(selectedCharacter);
       toggleOverlayAddCharacter();
     }
   };
@@ -141,13 +138,13 @@ const UnitsContent = () => {
     corrin.bane = corrinBane;
     corrin = applyBoonBaneAdjustments(corrin, corrinBoon, corrinBane);
 
-    addUnit(corrin); // Use context's addUnit
+    addUnit(corrin);
     setCreatedCorrinGender(corrinGender);
     toggleOverlayAddCharacter();
   };
 
   const handleDeleteAllUnits = () => {
-    deleteAllUnits(); // Use context's deleteAllUnits
+    deleteAllUnits();
     setCreatedCorrinGender(null);
     toggleOverlayDeleteCharacter();
   };
@@ -167,9 +164,11 @@ const UnitsContent = () => {
               key={`${unit.name}-${index}`}
               unit={unit}
               gameId={gameId}
-              updateUnit={updateUnit} // Use context's updateUnit
+              updateUnit={updateUnit}
             />
           ))}
+      </section>
+      <div className="button-container">
         <div
           className="add-remove-character-grid"
           onClick={toggleOverlayAddCharacter}
@@ -186,7 +185,7 @@ const UnitsContent = () => {
         >
           Delete All Units?
         </div>
-      </section>
+      </div>
 
       {isOverlayAddCharacterOpen && (
         <div className="overlay">
