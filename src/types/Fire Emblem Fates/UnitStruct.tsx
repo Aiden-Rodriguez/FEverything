@@ -43,6 +43,8 @@ export interface Character {
   RouteAvailability: string;
   baseInternalLevel: number;
   level: number;
+  eternalSealCount: number;
+  maxLevelModifier: number;
   class_line: [number, number, Class][];
   stats: {
     hp: number;

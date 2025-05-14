@@ -5,6 +5,7 @@ export interface Class {
   className: string;
   parallelClass?: Class | null;
   description: string;
+  classMaxLevel: number;
   classBaseStats: {
     hp: number;
     strength: number;

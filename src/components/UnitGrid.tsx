@@ -7,6 +7,8 @@ import { Skill } from "../types/Fire Emblem Fates/SkillStruct.tsx";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { useUnits } from "../defaultData/Fire Emblem Fates/UnitsContext";
+import { findCharacter } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest.tsx";
+import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments.ts";
 
 interface UnitGridProps {
   unit: Character;
@@ -89,9 +91,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     field: keyof typeof unit.weapon_ranks,
   ): WeaponRank[] => {
     const maxRank = unit.class.MaxWeaponRank[field];
-    if (maxRank === "n") {
-      return ["n"];
-    }
+    if (maxRank === "n") return ["n"];
     const maxIndex = allWeaponRanks.indexOf(maxRank);
     return allWeaponRanks.slice(0, maxIndex + 1);
   };
@@ -116,7 +116,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
 
     const filterClasses = (cls: Class) =>
       cls.className !== unit.class.className &&
-      !(cls.className === "Maid" && gender === "Male") &&
+      !(cls.className === "Maid" && gender === "M") &&
       !(cls.className === "Butler" && gender === "F");
 
     if (
@@ -132,9 +132,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
 
     if (unit.base_class_set.heart_seal_classes) {
       unit.base_class_set.heart_seal_classes.forEach((cls) => {
-        if (cls.classTree) {
-          classes.push(...cls.classTree.filter(filterClasses));
-        }
+        if (cls.classTree) classes.push(...cls.classTree.filter(filterClasses));
       });
     }
 
@@ -170,11 +168,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       } else if (unit.class.promotionStatus === true) {
         return cls.promotionStatus !== false;
       } else if (unit.class.promotionStatus === null) {
-        if (unit.level > 20) {
-          return cls.promotionStatus !== false;
-        } else {
-          return cls.promotionStatus !== true;
-        }
+        if (unit.level > 20) return cls.promotionStatus !== false;
+        return cls.promotionStatus !== true;
       }
       return false;
     });
@@ -323,14 +318,12 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           `../defaultData/${gameId}/init.tsx`
         )) as InitModule;
         initModule.initializeData();
-
         const classModule = (await import(
           `../defaultData/${gameId}/defaultClassData.tsx`
         )) as ClassDataModule;
         const skillModule = (await import(
           `../defaultData/${gameId}/defaultSkills.tsx`
         )) as SkillsModule;
-
         setGetClassFn(() => classModule.getClass);
         setGetSkillFn(() => skillModule.getSkill);
       } catch (error) {
@@ -344,9 +337,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   }, [gameId]);
 
   useEffect(() => {
-    if (editingField && inputRef.current) {
-      inputRef.current.focus();
-    }
+    if (editingField && inputRef.current) inputRef.current.focus();
   }, [editingField]);
 
   const handleToggleExpand = () => {
@@ -372,9 +363,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setError("");
     if (newIsClassChanging) {
       const availableClasses = getAvailableClasses();
-      if (availableClasses.length > 0) {
+      if (availableClasses.length > 0)
         setSelectedClassName(availableClasses[0].className);
-      }
     } else {
       setSelectedClassName(unit.class.className);
     }
@@ -393,25 +383,72 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       setError(`${field} must be a number`);
       return false;
     }
-    if (field === "level" && (num < 1 || num > 40)) {
-      setError("Level must be between 1 and 40 (TEMP IMPLEMENTATION)");
-      return false;
-    }
-    if (field !== "level" && (num < 0 || num > 99)) {
-      setError(`${field} must be between 0 and 99 (TEMP IMPLEMENTATION)`);
-      return false;
+
+    if (field === "level") {
+      const eternalSeals = unit.eternalSealCount;
+      const unitMaxLevel =
+        Math.max(unit.maxLevelModifier, unit.class.classMaxLevel) +
+        eternalSeals * 5;
+      if (num < 1 || num > unitMaxLevel) {
+        setError(`Level must be between 1 and ${unitMaxLevel}`);
+        return false;
+      }
+    } else {
+      // Validate stats
+      const statField = field as keyof typeof unit.stats;
+      let maxStat: number;
+      if (statField === "hp") {
+        maxStat = unit.class.MaxStatCaps.hp;
+      } else if (statField === "move") {
+        maxStat = unit.class.classBaseStats.move;
+      } else {
+        maxStat =
+          unit.maxStatModifiers[statField] + unit.class.MaxStatCaps[statField];
+      }
+      let minStat = 1;
+      if (statField === "move") {
+        minStat = maxStat;
+      } else {
+        //find the character's base stats and stuff so we can normalize and see the
+        //true lowest that that they can have in a stat.
+        const baseCharacter = structuredClone(findCharacter(unit.name));
+        //Take characters base stats, remove base class modifier, add current class modifier
+        if (unit.name !== "Corrin (M)" && unit.name !== "Corrin (F)") {
+          minStat =
+            baseCharacter.stats[statField] -
+            baseCharacter.base_class_set.starting_class.classBaseStats[
+              statField
+            ] +
+            unit.class.classBaseStats[statField];
+        } else {
+          const baseCorrin = applyBoonBaneAdjustments(
+            baseCharacter,
+            unit.boon!,
+            unit.bane!,
+          );
+          //Honestly idk why the below needs the average, but it seems to work and I don't know how else to fix it.'
+          //Seems to oddly double the boon bane modifiers here. Weird.
+          minStat =
+            (baseCorrin.stats[statField] + baseCharacter.stats[statField]) / 2 -
+            baseCorrin.base_class_set.starting_class.classBaseStats[statField] +
+            unit.class.classBaseStats[statField];
+        }
+      }
+
+      if (num < minStat || num > maxStat) {
+        setError(
+          `${statFields.find((f) => f.key === statField)?.label || field} must be between ${minStat} and ${maxStat}`,
+        );
+        return false;
+      }
     }
     return true;
   };
 
   const saveEdit = () => {
-    if (!editingField || !validateInput(editingField, editValue)) {
-      return;
-    }
-
+    if (!editingField || !validateInput(editingField, editValue)) return;
     const numValue = parseInt(editValue);
     let updatedUnit: Character;
-
     if (editingField === "level") {
       updatedUnit = { ...unit, level: numValue };
     } else {
@@ -420,7 +457,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         stats: { ...unit.stats, [editingField]: numValue },
       };
     }
-
     updateUnit(updatedUnit);
     setEditingField(null);
     setEditValue("");
@@ -434,11 +470,20 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      saveEdit();
-    } else if (e.key === "Escape") {
-      cancelEdit();
-    }
+    if (e.key === "Enter") saveEdit();
+    else if (e.key === "Escape") cancelEdit();
+  };
+
+  // Calculate max level for input
+  const unitMaxLevel =
+    Math.max(unit.maxLevelModifier, unit.class.classMaxLevel) +
+    unit.eternalSealCount * 5;
+
+  // Function to get max stat for a given stat field
+  const getMaxStat = (field: keyof typeof unit.stats): number => {
+    if (field === "hp") return unit.class.MaxStatCaps.hp;
+    if (field === "move") return unit.class.classBaseStats.move;
+    return unit.maxStatModifiers[field] + unit.class.MaxStatCaps[field];
   };
 
   if (isLoading || !getClassFn || !getSkillFn) {
@@ -578,7 +623,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             onBlur={saveEdit}
             onKeyDown={handleKeyDown}
             min="1"
-            max="20"
+            max={unitMaxLevel}
             className="inline-input"
             ref={inputRef}
             aria-label={`Edit level for ${unit.name}`}
@@ -640,7 +685,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                   onBlur={saveEdit}
                   onKeyDown={handleKeyDown}
                   min="0"
-                  max="99"
+                  max={getMaxStat(key)}
                   className="inline-input"
                   ref={inputRef}
                   aria-label={`Edit ${label} for ${unit.name}`}
@@ -1011,7 +1056,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                     unit.base_class_set.starting_class_tree.classTree
                       .filter((promotedClass) =>
                         promotedClass.className === "Maid" &&
-                        unit.gender === "Male"
+                        unit.gender === "M"
                           ? false
                           : promotedClass.className === "Butler" &&
                               unit.gender === "F"

@@ -104,6 +104,17 @@
   outline-offset: 2px;
 }
 
+.edit-icon {
+  cursor: pointer;
+  font-size: 1rem;
+  align-self: flex-end;
+}
+
+.edit-icon:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 span {
   color: var(--color-accent);
 }
@@ -201,6 +212,10 @@ span {
   flex-direction: column;
   align-items: center;
   gap: 5px;
+}
+
+select {
+  font-size: 1rem;
 }
 
 .form-field label {

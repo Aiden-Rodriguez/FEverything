@@ -8,6 +8,7 @@ export const defaultClassData: Class[] = [
     description:
       "A Nohrian royal fitted with their kingdom's equipment. Their body conceals the power of dragons.",
     TypeProperty: ["Dragon"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 7,
@@ -73,6 +74,7 @@ export const defaultClassData: Class[] = [
     description:
       "A Nohrian royal fitted with their kingdom's equipment. Their body conceals the power of dragons.",
     TypeProperty: ["Dragon"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 7,
@@ -138,6 +140,7 @@ export const defaultClassData: Class[] = [
     description:
       "Royals whose heart aligns with Hoshido. Wields rods in addition to katanas and dragonstones.",
     TypeProperty: ["Dragon"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 10,
@@ -203,6 +206,7 @@ export const defaultClassData: Class[] = [
     description:
       "Royals whose heart aligns with Nohr. Wields magic in addition to swords and dragonstones.",
     TypeProperty: ["Dragon"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 8,
@@ -269,6 +273,7 @@ export const defaultClassData: Class[] = [
       "Those who follow the path of the katana. Excels in battle by taking advantage of its speed.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 4,
@@ -334,6 +339,7 @@ export const defaultClassData: Class[] = [
     description:
       "Those who have reached the pinnacle of the katana. Has exceptional speed and evasion.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 6,
@@ -399,6 +405,7 @@ export const defaultClassData: Class[] = [
     description:
       "Those who can handle any type of enemy. Adept with katanas, naginatas and clubs.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 20,
       strength: 8,
@@ -465,6 +472,7 @@ export const defaultClassData: Class[] = [
       "A demon-like warrior who wields clubs. Boasts high offence and defence.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 6,
@@ -530,6 +538,7 @@ export const defaultClassData: Class[] = [
     description:
       "Those who have transcended to become a demon-god. They pulverise enemies with their clubs and spells.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 9,
@@ -595,6 +604,7 @@ export const defaultClassData: Class[] = [
     description:
       "Artisans who craft weapons. Wields katanas and clubs and boasts superior skill.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 21,
       strength: 8,
@@ -661,6 +671,7 @@ export const defaultClassData: Class[] = [
       "Those who follow the path of the naginata. Excels in battle by dropping the enemy’s defence.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 6,
@@ -726,6 +737,7 @@ export const defaultClassData: Class[] = [
     description:
       "Those who have reached the pinnacle of the naginata. Has stable abilities.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 9,
@@ -791,6 +803,7 @@ export const defaultClassData: Class[] = [
     description:
       "Those who prefer a quirky and free-spirited life. Disrupts enemies with their naginatas and scrolls.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 20,
       strength: 7,
@@ -856,6 +869,7 @@ export const defaultClassData: Class[] = [
       "Those who study the art of spell-casting. They fight using Hoshidan scrolls.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 15,
       strength: 0,
@@ -920,6 +934,7 @@ export const defaultClassData: Class[] = [
     description:
       "Those who have learned myriad spells. Well-versed with both scrolls and rods.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 16,
       strength: 0,
@@ -984,6 +999,7 @@ export const defaultClassData: Class[] = [
     description:
       "Men who study to attain enlightenment. They can heal allies with rods.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 16,
       strength: 0,
@@ -1048,6 +1064,7 @@ export const defaultClassData: Class[] = [
     description:
       "Maidens dedicated to serving the gods. They can heal allies with rods.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 16,
       strength: 0,
@@ -1112,6 +1129,7 @@ export const defaultClassData: Class[] = [
     description:
       "Men who have journeyed to enlightenment. They heal with rods and vanquish foes with naginatas.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 8,
@@ -1176,6 +1194,7 @@ export const defaultClassData: Class[] = [
     description:
       "Maidens who fight for the gods and the people. They heal with rods and vanquish foes with yumi.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 6,
@@ -1241,6 +1260,7 @@ export const defaultClassData: Class[] = [
       "Warriors who soar the skies astride a pegasus. Has excellent speed and resistance.",
     TypeProperty: ["Beast", "Flying"],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 16,
       strength: 3,
@@ -1305,6 +1325,7 @@ export const defaultClassData: Class[] = [
     description:
       "High-ranking Sky Knights. In addition to naginatas, they can guard allies with rods.",
     TypeProperty: ["Beast", "Flying"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 5,
@@ -1369,6 +1390,7 @@ export const defaultClassData: Class[] = [
     description:
       "Those who fight astride the fabled golden kite. With their naginatas and yumi, they dominate the skies.",
     TypeProperty: ["Beast", "Flying"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 4,
@@ -1433,6 +1455,7 @@ export const defaultClassData: Class[] = [
     description: "Those who follow the path of the yumi. Has superior skill.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 5,
@@ -1497,6 +1520,7 @@ export const defaultClassData: Class[] = [
     description:
       "Those who have reached the pinnacle of the yumi. Has exceptional accuracy and critical rate.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 7,
@@ -1562,6 +1586,7 @@ export const defaultClassData: Class[] = [
       "Those who freely operate in the shadows. They use shurikens to attack and weaken enemies.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 16,
       strength: 3,
@@ -1626,6 +1651,7 @@ export const defaultClassData: Class[] = [
     description:
       "Ninja leaders. They execute targets with their shurikens and katanas.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 5,
@@ -1690,6 +1716,7 @@ export const defaultClassData: Class[] = [
     description:
       "Artisans who craft puppets. They wield shurikens and yumi with great dexterity.",
     TypeProperty: ["Automaton"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 7,
@@ -1754,6 +1781,7 @@ export const defaultClassData: Class[] = [
     description:
       "Herb-sellers with extensive knowledge of herbs. They protect themselves with yumi.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 6,
@@ -1818,6 +1846,7 @@ export const defaultClassData: Class[] = [
     description:
       "Merchants with excellent business acumen. They protect their fortune with naginatas and yumi.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 20,
       strength: 8,
@@ -1882,6 +1911,7 @@ export const defaultClassData: Class[] = [
     description:
       "A long-living fox who bewitches humans. Boasts high speed and resistance.",
     TypeProperty: ["Beast"],
+    classMaxLevel: 20,
     parallelClass: null,
     classBaseStats: {
       hp: 16,
@@ -1947,6 +1977,7 @@ export const defaultClassData: Class[] = [
     description:
       "A high-ranking fox with great spiritual power. Has better abilities than a Kitsune.",
     TypeProperty: ["Beast"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 6,
@@ -2012,6 +2043,7 @@ export const defaultClassData: Class[] = [
       "A female who calms minds with her beautiful songs. Can sing to allow allies another action.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 40,
     classBaseStats: {
       hp: 16,
       strength: 3,
@@ -2077,6 +2109,7 @@ export const defaultClassData: Class[] = [
       "Common folk who live in villages. During battles, they fight wielding naginatas.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 5,
@@ -2142,6 +2175,7 @@ export const defaultClassData: Class[] = [
       "Knights who fight on horseback. Can use both swords and lances.",
     TypeProperty: ["Beast"],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 6,
@@ -2206,6 +2240,7 @@ export const defaultClassData: Class[] = [
     description:
       "High-ranking knights praised for their bravery. They have better capabilities than a Cavalier.",
     TypeProperty: ["Beast"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 8,
@@ -2270,6 +2305,7 @@ export const defaultClassData: Class[] = [
     description:
       "Armoured riders. Capable of wielding swords, lances and axes.",
     TypeProperty: ["Armor", "Beast"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 21,
       strength: 10,
@@ -2334,6 +2370,7 @@ export const defaultClassData: Class[] = [
     description:
       "Foot-soldiers encased in heavy armour. Slow but has high defence.",
     TypeProperty: ["Armor"],
+    classMaxLevel: 20,
     parallelClass: null,
     classBaseStats: {
       hp: 19,
@@ -2399,6 +2436,7 @@ export const defaultClassData: Class[] = [
     description:
       "Generals fortified from head to foot with heavy armour. They possess exceptional defence.",
     TypeProperty: ["Armor"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 22,
       strength: 11,
@@ -2464,6 +2502,7 @@ export const defaultClassData: Class[] = [
       "Axe-fighters with a superior body. Has high attack power, but weak defences.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 7,
@@ -2528,6 +2567,7 @@ export const defaultClassData: Class[] = [
     description:
       "Crazed fighters who fight with axes. They excel in performing critical hits.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 24,
       strength: 12,
@@ -2593,6 +2633,7 @@ export const defaultClassData: Class[] = [
       "Sell-swords who can handle any mission. They have well-balanced abilities and superior skill.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 5,
@@ -2657,6 +2698,7 @@ export const defaultClassData: Class[] = [
     description:
       "Heroes renowned for their bravery. They wield swords and axes and can adapt to any battlefield.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 20,
       strength: 8,
@@ -2721,6 +2763,7 @@ export const defaultClassData: Class[] = [
     description:
       "Knights who rain arrows from horseback. In addition to bows, they can wield swords.",
     TypeProperty: ["Beast"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 6,
@@ -2786,6 +2829,7 @@ export const defaultClassData: Class[] = [
       "Crooks who are skilled at picking locks. Wield bows and boast high speed and resistance.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 16,
       strength: 3,
@@ -2850,6 +2894,7 @@ export const defaultClassData: Class[] = [
     description:
       "Glory-seekers who investigate ruins for treasure. With their bows and staves, they're capable of many things.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 4,
@@ -2914,6 +2959,7 @@ export const defaultClassData: Class[] = [
     description:
       "Knights who fight astride a wyvern. Has superior strength and defence.",
     TypeProperty: ["Dragon", "Flying"],
+    classMaxLevel: 20,
     parallelClass: null,
     classBaseStats: {
       hp: 17,
@@ -2979,6 +3025,7 @@ export const defaultClassData: Class[] = [
     description:
       "High-ranking wyvern riders. With their axes and lances, they demolish enemy forces.",
     TypeProperty: ["Dragon", "Flying"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 8,
@@ -3043,6 +3090,7 @@ export const defaultClassData: Class[] = [
     description:
       "Knights who command a mage dragon. With their axes and magic, they trample over enemy forces.",
     TypeProperty: ["Dragon", "Flying"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 7,
@@ -3108,6 +3156,7 @@ export const defaultClassData: Class[] = [
       "Sorcerers who have learned Nohrian magic. They attack enemies with magic.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 16,
       strength: 0,
@@ -3172,6 +3221,7 @@ export const defaultClassData: Class[] = [
     description:
       "High-ranking sorcerers who have reached the esoteric pinnacle. They possess exceptional magic.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 0,
@@ -3236,6 +3286,7 @@ export const defaultClassData: Class[] = [
     description:
       "Magic knights whose bodies are infused with sorcery. They're capable of harnessing swords and magic.",
     TypeProperty: ["Beast"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 8,
@@ -3300,6 +3351,7 @@ export const defaultClassData: Class[] = [
     description:
       "Staff-wielding knights who are incapable of fighting. Instead, they heal allies with staves.",
     TypeProperty: ["Beast"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 15,
       strength: 0,
@@ -3364,6 +3416,7 @@ export const defaultClassData: Class[] = [
     description:
       "Tacticians who command the battlefield from horseback. With their magic and staves, they turn the tide of battle.",
     TypeProperty: ["Beast"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 16,
       strength: 0,
@@ -3428,6 +3481,7 @@ export const defaultClassData: Class[] = [
     description:
       "Female vassals who serve a master. They heal their master with staves and protect them with daggers.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 4,
@@ -3492,6 +3546,7 @@ export const defaultClassData: Class[] = [
     description:
       "Male vassals who serve a master. They heal their master with staves and protect them with daggers.",
     TypeProperty: [],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 4,
@@ -3557,6 +3612,7 @@ export const defaultClassData: Class[] = [
       "A werewolf said to feast on the flesh of humans. Has excellent strength and speed.",
     TypeProperty: ["Beast"],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 8,
@@ -3621,6 +3677,7 @@ export const defaultClassData: Class[] = [
     description:
       "A high-ranking werewolf with a more resilient body. Has better abilities than a Wolfskin.",
     TypeProperty: ["Beast"],
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 22,
       strength: 11,
@@ -3686,6 +3743,7 @@ export const defaultClassData: Class[] = [
       "Those who have learned elusive battle arts. They disorientate foes with katanas, clubs and shurikens.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 8,
@@ -3751,6 +3809,7 @@ export const defaultClassData: Class[] = [
       "Knights who ride astride a pitch-black pegasus. They rush the battlefield armed with lances and tomes.",
     TypeProperty: ["Beast", "Flying"],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 4,
@@ -3816,6 +3875,7 @@ export const defaultClassData: Class[] = [
       "An Outrealm class. Rides a mobile cannon. In addition to bows, it can use cannons to inflict wide damage to enemy troops.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 10,
@@ -3881,6 +3941,7 @@ export const defaultClassData: Class[] = [
       "An Outrealm class. Has the ability to manipulate space. Can teleport great distances in the blink of an eye.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 17,
       strength: 0,
@@ -3946,6 +4007,7 @@ export const defaultClassData: Class[] = [
       "An Outrealm class. A legendary hero spoken of in sagas. Fights wielding swords.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 19,
       strength: 7,
@@ -4011,6 +4073,7 @@ export const defaultClassData: Class[] = [
       "An Outrealm class. A commander who fights at the front-lines. Can wield both swords and axes.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 21,
       strength: 10,
@@ -4076,6 +4139,7 @@ export const defaultClassData: Class[] = [
       "An Outrealm class. A powerful royal who leads armies. Can wield lances, in addition to swords.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 8,
@@ -4141,6 +4205,7 @@ export const defaultClassData: Class[] = [
       "An Outrealm class. A tactician with a gift for commanding troops. Can fight with swords and tomes.",
     TypeProperty: [],
     parallelClass: null,
+    classMaxLevel: 20,
     classBaseStats: {
       hp: 18,
       strength: 7,
@@ -4485,6 +4550,7 @@ export const getClass = (name: string): Class => {
       promotionStatus: null,
       description: "",
       TypeProperty: [],
+      classMaxLevel: 20,
       classBaseStats: {
         hp: 0,
         strength: 0,

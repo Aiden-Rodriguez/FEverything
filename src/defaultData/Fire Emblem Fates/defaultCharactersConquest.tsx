@@ -28,6 +28,8 @@ export const defaultCharactersConquest: Character[] = [
     baseInternalLevel: 0,
     royalty_status: true,
     level: 1,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 1, getClass("Nohr Prince")]],
     starting_weapons: [],
     stats: {
@@ -171,6 +173,8 @@ export const defaultCharactersConquest: Character[] = [
     baseInternalLevel: 0,
     royalty_status: true,
     level: 1,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 1, getClass("Nohr Princess")]],
     starting_weapons: [],
     stats: {
@@ -315,6 +319,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Butler"),
     baseInternalLevel: 0,
     level: 1,
+    eternalSealCount: 0,
+    maxLevelModifier: 40,
     class_line: [[0, 1, getClass("Butler")]],
     starting_weapons: ["Iron Dagger", "Heal"],
     stats: {
@@ -457,6 +463,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Butler"),
     baseInternalLevel: 0,
     level: 13,
+    eternalSealCount: 0,
+    maxLevelModifier: 40,
     class_line: [[0, 13, getClass("Butler")]],
     starting_weapons: [],
     stats: {
@@ -602,6 +610,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Maid"),
     baseInternalLevel: 0,
     level: 1,
+    eternalSealCount: 0,
+    maxLevelModifier: 40,
     class_line: [[0, 1, getClass("Maid")]],
     starting_weapons: ["Iron Dagger", "Heal"],
     stats: {
@@ -743,6 +753,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Maid"),
     baseInternalLevel: 0,
     level: 13,
+    eternalSealCount: 0,
+    maxLevelModifier: 40,
     class_line: [[0, 13, getClass("Maid")]],
     starting_weapons: [],
     stats: {
@@ -888,6 +900,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Ninja"),
     baseInternalLevel: 0,
     level: 9,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 9, getClass("Ninja")]],
     starting_weapons: ["Iron Shuriken", "Vulnerary"],
     stats: {
@@ -1029,6 +1043,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Songstress"),
     baseInternalLevel: 0,
     level: 1,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 1, getClass("Songstress")]],
     starting_weapons: ["Vulnerary", "Chest Key"],
     stats: {
@@ -1170,6 +1186,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Cavalier"),
     baseInternalLevel: 0,
     level: 6,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 6, getClass("Cavalier")]],
     starting_weapons: ["Iron Sword", "Bronze Lance"],
     stats: {
@@ -1311,6 +1329,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Adventurer"),
     baseInternalLevel: 20,
     level: 2,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[20, 2, getClass("Adventurer")]],
     starting_weapons: ["Killer Bow", "Mend"],
     stats: {
@@ -1452,6 +1472,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Villager"),
     baseInternalLevel: 0,
     level: 1,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 1, getClass("Villager")]],
     starting_weapons: ["Brass Naginata", "Vulnerary"],
     stats: {
@@ -1593,6 +1615,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Onmyoji"),
     baseInternalLevel: 20,
     level: 5,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[20, 5, getClass("Onmyoji")]],
     starting_weapons: [],
     stats: {
@@ -1738,6 +1762,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Great Knight"),
     baseInternalLevel: 5,
     level: 10,
+    eternalSealCount: 0,
+    maxLevelModifier: 30,
     class_line: [[5, 10, getClass("Great Knight")]],
     starting_weapons: ["Steel Lance", "Steel Axe", "Javelin", "Vulnerary"],
     stats: {
@@ -1883,6 +1909,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Troubadour"),
     baseInternalLevel: 0,
     level: 5,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 5, getClass("Troubadour")]],
     starting_weapons: ["Heal", "Freeze"],
     stats: {
@@ -2024,6 +2052,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Fighter"),
     baseInternalLevel: 0,
     level: 7,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 7, getClass("Fighter")]],
     starting_weapons: ["Iron Axe", "Hand Axe"],
     stats: {
@@ -2165,6 +2195,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Knight"),
     baseInternalLevel: 0,
     level: 6,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 6, getClass("Knight")]],
     starting_weapons: ["Iron Lance"],
     stats: {
@@ -2306,6 +2338,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Dark Mage"),
     baseInternalLevel: 0,
     level: 5,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 5, getClass("Dark Mage")]],
     starting_weapons: ["Thunder", "Vulnerary"],
     stats: {
@@ -2447,6 +2481,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Outlaw"),
     baseInternalLevel: 0,
     level: 8,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 8, getClass("Outlaw")]],
     starting_weapons: ["Iron Bow"],
     stats: {
@@ -2588,6 +2624,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Dark Mage"),
     baseInternalLevel: 0,
     level: 9,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 9, getClass("Dark Mage")]],
     starting_weapons: [],
     stats: {
@@ -2729,6 +2767,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Malig Knight"),
     baseInternalLevel: 15,
     level: 1,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[15, 1, getClass("Malig Knight")]],
     starting_weapons: ["Steel Axe", "Thunder"],
     stats: {
@@ -2870,6 +2910,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Mercenary"),
     baseInternalLevel: 0,
     level: 10,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 10, getClass("Mercenary")]],
     starting_weapons: ["Iron Sword", "Bronze Sword", "Vulnerary"],
     stats: {
@@ -3011,6 +3053,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Wyvern Rider"),
     baseInternalLevel: 0,
     level: 9,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 9, getClass("Wyvern Rider")]],
     starting_weapons: ["Iron Axe"],
     stats: {
@@ -3152,6 +3196,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Mercenary"),
     baseInternalLevel: 0,
     level: 12,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 12, getClass("Mercenary")]],
     starting_weapons: ["Steel Sword", "Vulnerary"],
     stats: {
@@ -3293,6 +3339,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Cavalier"),
     baseInternalLevel: 0,
     level: 10,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 10, getClass("Cavalier")]],
     starting_weapons: ["Steel Lance", "Iron Sword"],
     stats: {
@@ -3434,6 +3482,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Knight"),
     baseInternalLevel: 0,
     level: 15,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 15, getClass("Knight")]],
     starting_weapons: ["Steel Lance"],
     stats: {
@@ -3575,6 +3625,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Fighter"),
     baseInternalLevel: 0,
     level: 10,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 10, getClass("Fighter")]],
     starting_weapons: ["Steel Axe"],
     stats: {
@@ -3716,6 +3768,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Dark Knight"),
     baseInternalLevel: 18,
     level: 2,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[18, 2, getClass("Dark Knight")]],
     starting_weapons: ["Brynhildr", "Iron Sword"],
     stats: {
@@ -3857,6 +3911,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Paladin"),
     baseInternalLevel: 20,
     level: 4,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[20, 4, getClass("Paladin")]],
     starting_weapons: ["Siegfried"],
     stats: {
@@ -3998,6 +4054,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Wolfskin"),
     baseInternalLevel: 0,
     level: 15,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[0, 15, getClass("Wolfskin")]],
     starting_weapons: ["Beastone", "Beastrune"],
     stats: {
@@ -4139,6 +4197,8 @@ export const defaultCharactersConquest: Character[] = [
     class: getClass("Maid"),
     baseInternalLevel: 20,
     level: 5,
+    eternalSealCount: 0,
+    maxLevelModifier: 0,
     class_line: [[20, 5, getClass("Maid")]],
     starting_weapons: [],
     stats: {
@@ -4446,7 +4506,7 @@ const partnerPairs: { [key: string]: string[] } = {
 };
 
 // Helper function to find a character by name
-const findCharacter = (name: string): Character => {
+export const findCharacter = (name: string): Character => {
   const character = defaultCharactersConquest.find(
     (char) => char.name === name,
   );
