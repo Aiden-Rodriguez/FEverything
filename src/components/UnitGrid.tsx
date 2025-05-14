@@ -41,7 +41,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>("");
   const [selectedClassName, setSelectedClassName] = useState<string>(
-    unit.class.className
+    unit.class.className,
   );
   const [error, setError] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -80,13 +80,13 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   ];
 
   const filteredFields = weaponRankFields.filter(
-    ({ key }) => unit.class.MaxWeaponRank[key] !== "n"
+    ({ key }) => unit.class.MaxWeaponRank[key] !== "n",
   );
 
   const allWeaponRanks: WeaponRank[] = ["n", "E", "D", "C", "B", "A", "S"];
 
   const getWeaponRankOptions = (
-    field: keyof typeof unit.weapon_ranks
+    field: keyof typeof unit.weapon_ranks,
   ): WeaponRank[] => {
     const maxRank = unit.class.MaxWeaponRank[field];
     if (maxRank === "n") {
@@ -98,7 +98,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
 
   const handleWeaponRankChange = (
     field: keyof typeof unit.weapon_ranks,
-    value: WeaponRank
+    value: WeaponRank,
   ) => {
     const updatedUnit: Character = {
       ...unit,
@@ -125,8 +125,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       classes.push(
         ...unit.base_class_set.starting_class_tree.classTree.filter(
-          filterClasses
-        )
+          filterClasses,
+        ),
       );
     }
 
@@ -144,8 +144,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       classes.push(
         ...unit.base_class_set.friendship_seal_base_class.classTree.filter(
-          filterClasses
-        )
+          filterClasses,
+        ),
       );
     }
 
@@ -155,8 +155,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       classes.push(
         ...unit.base_class_set.partner_seal_base_class.classTree.filter(
-          filterClasses
-        )
+          filterClasses,
+        ),
       );
     }
 
@@ -178,12 +178,12 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       }
       return false;
     });
-    //get rid of dupes
+
     const uniqueFinalClasses = finalClasses.filter(
       (cls, index, self) =>
-        index === self.findIndex((c) => c.className === cls.className)
+        index === self.findIndex((c) => c.className === cls.className),
     );
-    
+
     return uniqueFinalClasses;
   };
 
@@ -262,13 +262,24 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setIsClassChanging(false);
   };
 
-  const getAllySealClass = (ClassReciever: Character, ClassGiver: Character): Class | null => {
+  const getAllySealClass = (
+    ClassReciever: Character,
+    ClassGiver: Character,
+  ): Class | null => {
     const giverBaseClass = ClassGiver.base_class_set.starting_class_tree;
-    const giverHeartSealClass1 = ClassGiver.base_class_set.heart_seal_classes?.[0] || null;
+    const giverHeartSealClass1 =
+      ClassGiver.base_class_set.heart_seal_classes?.[0] || null;
     const recieverBaseClass = ClassReciever.base_class_set.starting_class_tree;
-  
-    const forbiddenClassShareNames = ["Songstress", "Wolfskin", "Kitsune", "Nohr Prince", "Nohr Princess", "Villager"];
-  
+
+    const forbiddenClassShareNames = [
+      "Songstress",
+      "Wolfskin",
+      "Kitsune",
+      "Nohr Prince",
+      "Nohr Princess",
+      "Villager",
+    ];
+
     if (
       forbiddenClassShareNames.includes(giverBaseClass.className) &&
       giverHeartSealClass1 &&
@@ -276,18 +287,21 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       return giverBaseClass.parallelClass ?? null;
     }
-  
+
     if (
       giverBaseClass.className !== recieverBaseClass.className &&
       !forbiddenClassShareNames.includes(giverBaseClass.className)
     ) {
       return giverBaseClass;
     }
-  
-    if (giverHeartSealClass1 && giverBaseClass.className !== giverHeartSealClass1.className) {
+
+    if (
+      giverHeartSealClass1 &&
+      giverBaseClass.className !== giverHeartSealClass1.className
+    ) {
       return giverHeartSealClass1;
     }
-  
+
     return giverBaseClass.parallelClass ?? null;
   };
 
@@ -782,7 +796,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                           onChange={(e) =>
                             handleWeaponRankChange(
                               key,
-                              e.target.value as WeaponRank
+                              e.target.value as WeaponRank,
                             )
                           }
                           className="inline-select"
@@ -1000,9 +1014,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         unit.gender === "Male"
                           ? false
                           : promotedClass.className === "Butler" &&
-                            unit.gender === "F"
-                          ? false
-                          : true
+                              unit.gender === "F"
+                            ? false
+                            : true,
                       )
                       .map((promotedClass, index) => (
                         <Tippy
@@ -1037,9 +1051,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                               unit.gender === "M"
                                 ? false
                                 : promotedClass.className === "Butler" &&
-                                  unit.gender === "F"
-                                ? false
-                                : true
+                                    unit.gender === "F"
+                                  ? false
+                                  : true,
                             )
                             .map((promotedClass, treeIndex) => (
                               <Tippy
@@ -1059,7 +1073,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             ))
                         ) : (
                           <span key={clsIndex}>No Promotions</span>
-                        )
+                        ),
                     )
                   ) : (
                     <span>No Heart Seal Classes</span>
@@ -1072,25 +1086,32 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                   {isEditing ? (
                     <div className="partner-select">
                       {(() => {
-                        const activeUnitNames = new Set(units.map((u) => u.name));
+                        const activeUnitNames = new Set(
+                          units.map((u) => u.name),
+                        );
                         const filteredPartners =
                           unit.base_class_set.friendship_seal_partners?.filter(
-                            (partner) => activeUnitNames.has(partner.name)
+                            (partner) => activeUnitNames.has(partner.name),
                           ) || [];
 
                         return filteredPartners.length > 0 ? (
                           <select
-                            value={unit.base_class_set.selected_friendship_seal_partner?.name || ""}
+                            value={
+                              unit.base_class_set
+                                .selected_friendship_seal_partner?.name || ""
+                            }
                             onChange={(e) => {
                               const partnerName = e.target.value;
                               const selectedPartner = partnerName
-                                ? units.find((p) => p.name === partnerName) || null
+                                ? units.find((p) => p.name === partnerName) ||
+                                  null
                                 : null;
                               const updatedUnit: Character = {
                                 ...unit,
                                 base_class_set: {
                                   ...unit.base_class_set,
-                                  selected_friendship_seal_partner: selectedPartner,
+                                  selected_friendship_seal_partner:
+                                    selectedPartner,
                                   friendship_seal_base_class: selectedPartner
                                     ? getAllySealClass(unit, selectedPartner)
                                     : null,
@@ -1116,32 +1137,44 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                   ) : (
                     (() => {
                       const activeUnitNames = new Set(units.map((u) => u.name));
-                      const selectedPartner = unit.base_class_set.selected_friendship_seal_partner;
-                      const isValidPartner = selectedPartner && activeUnitNames.has(selectedPartner.name);
+                      const selectedPartner =
+                        unit.base_class_set.selected_friendship_seal_partner;
+                      const isValidPartner =
+                        selectedPartner &&
+                        activeUnitNames.has(selectedPartner.name);
 
-                      return isValidPartner && unit.base_class_set.friendship_seal_base_class ? (
+                      return isValidPartner &&
+                        unit.base_class_set.friendship_seal_base_class ? (
                         <div className="partner-item">
                           <span>A+ Support: {selectedPartner.name}</span>
-                          {unit.base_class_set.friendship_seal_base_class.classTree &&
-                          unit.base_class_set.friendship_seal_base_class.classTree.length > 0 ? (
+                          {unit.base_class_set.friendship_seal_base_class
+                            .classTree &&
+                          unit.base_class_set.friendship_seal_base_class
+                            .classTree.length > 0 ? (
                             unit.base_class_set.friendship_seal_base_class.classTree
                               .filter((promotedClass) =>
-                                promotedClass.className === "Maid" && unit.gender === "M"
+                                promotedClass.className === "Maid" &&
+                                unit.gender === "M"
                                   ? false
-                                  : promotedClass.className === "Butler" && unit.gender === "F"
-                                  ? false
-                                  : true
+                                  : promotedClass.className === "Butler" &&
+                                      unit.gender === "F"
+                                    ? false
+                                    : true,
                               )
                               .map((promotedClass, index) => (
                                 <Tippy
                                   content={
                                     <>
                                       <strong>{promotedClass.className}</strong>
-                                      <p className="tooltip-text">{promotedClass.description}</p>
+                                      <p className="tooltip-text">
+                                        {promotedClass.description}
+                                      </p>
                                     </>
                                   }
                                 >
-                                  <span key={index}>{promotedClass.className}</span>
+                                  <span key={index}>
+                                    {promotedClass.className}
+                                  </span>
                                 </Tippy>
                               ))
                           ) : (
@@ -1161,30 +1194,93 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                   {isEditing ? (
                     <div className="partner-select">
                       {(() => {
-                        const activeUnitNames = new Set(units.map((u) => u.name));
+                        const activeUnitNames = new Set(
+                          units.map((u) => u.name),
+                        );
                         const filteredPartners =
                           unit.base_class_set.partner_seal_partners?.filter(
-                            (partner) => activeUnitNames.has(partner.name)
+                            (partner) =>
+                              activeUnitNames.has(partner.name) &&
+                              (!units.find((u) => u.name === partner.name)
+                                ?.base_class_set
+                                .selected_partner_seal_partner ||
+                                units.find((u) => u.name === partner.name)
+                                  ?.base_class_set.selected_partner_seal_partner
+                                  ?.name === unit.name),
                           ) || [];
 
                         return filteredPartners.length > 0 ? (
                           <select
-                            value={unit.base_class_set.selected_partner_seal_partner?.name || ""}
+                            value={
+                              unit.base_class_set.selected_partner_seal_partner
+                                ?.name || ""
+                            }
                             onChange={(e) => {
                               const partnerName = e.target.value;
                               const selectedPartner = partnerName
-                                ? units.find((p) => p.name === partnerName) || null
+                                ? units.find((p) => p.name === partnerName) ||
+                                  null
                                 : null;
+
+                              // Update current unit
                               const updatedUnit: Character = {
                                 ...unit,
                                 base_class_set: {
                                   ...unit.base_class_set,
-                                  selected_partner_seal_partner: selectedPartner,
+                                  selected_partner_seal_partner:
+                                    selectedPartner,
                                   partner_seal_base_class: selectedPartner
                                     ? getAllySealClass(unit, selectedPartner)
                                     : null,
                                 },
                               };
+
+                              // Update the partner's Partner Seal info
+                              if (selectedPartner) {
+                                const partnerUnit = units.find(
+                                  (u) => u.name === selectedPartner.name,
+                                );
+                                if (partnerUnit) {
+                                  const updatedPartnerUnit: Character = {
+                                    ...partnerUnit,
+                                    base_class_set: {
+                                      ...partnerUnit.base_class_set,
+                                      selected_partner_seal_partner: unit,
+                                      partner_seal_base_class: getAllySealClass(
+                                        partnerUnit,
+                                        unit,
+                                      ),
+                                    },
+                                  };
+                                  updateUnit(updatedPartnerUnit);
+                                }
+                              }
+
+                              // Clear previous partner's Partner Seal info if applicable
+                              const previousPartner =
+                                unit.base_class_set
+                                  .selected_partner_seal_partner;
+                              if (
+                                previousPartner &&
+                                previousPartner.name !== partnerName
+                              ) {
+                                const previousPartnerUnit = units.find(
+                                  (u) => u.name === previousPartner.name,
+                                );
+                                if (previousPartnerUnit) {
+                                  const updatedPreviousPartnerUnit: Character =
+                                    {
+                                      ...previousPartnerUnit,
+                                      base_class_set: {
+                                        ...previousPartnerUnit.base_class_set,
+                                        selected_partner_seal_partner: null,
+                                        partner_seal_base_class: null,
+                                      },
+                                    };
+                                  updateUnit(updatedPreviousPartnerUnit);
+                                }
+                              }
+
                               updateUnit(updatedUnit);
                             }}
                             className="inline-select"
@@ -1205,32 +1301,44 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                   ) : (
                     (() => {
                       const activeUnitNames = new Set(units.map((u) => u.name));
-                      const selectedPartner = unit.base_class_set.selected_partner_seal_partner;
-                      const isValidPartner = selectedPartner && activeUnitNames.has(selectedPartner.name);
+                      const selectedPartner =
+                        unit.base_class_set.selected_partner_seal_partner;
+                      const isValidPartner =
+                        selectedPartner &&
+                        activeUnitNames.has(selectedPartner.name);
 
-                      return isValidPartner && unit.base_class_set.partner_seal_base_class ? (
+                      return isValidPartner &&
+                        unit.base_class_set.partner_seal_base_class ? (
                         <div className="partner-item">
                           <span>S Support: {selectedPartner.name}</span>
-                          {unit.base_class_set.partner_seal_base_class.classTree &&
-                          unit.base_class_set.partner_seal_base_class.classTree.length > 0 ? (
+                          {unit.base_class_set.partner_seal_base_class
+                            .classTree &&
+                          unit.base_class_set.partner_seal_base_class.classTree
+                            .length > 0 ? (
                             unit.base_class_set.partner_seal_base_class.classTree
                               .filter((promotedClass) =>
-                                promotedClass.className === "Maid" && unit.gender === "M"
+                                promotedClass.className === "Maid" &&
+                                unit.gender === "M"
                                   ? false
-                                  : promotedClass.className === "Butler" && unit.gender === "F"
-                                  ? false
-                                  : true
+                                  : promotedClass.className === "Butler" &&
+                                      unit.gender === "F"
+                                    ? false
+                                    : true,
                               )
                               .map((promotedClass, index) => (
                                 <Tippy
                                   content={
                                     <>
                                       <strong>{promotedClass.className}</strong>
-                                      <p className="tooltip-text">{promotedClass.description}</p>
+                                      <p className="tooltip-text">
+                                        {promotedClass.description}
+                                      </p>
                                     </>
                                   }
                                 >
-                                  <span key={index}>{promotedClass.className}</span>
+                                  <span key={index}>
+                                    {promotedClass.className}
+                                  </span>
                                 </Tippy>
                               ))
                           ) : (

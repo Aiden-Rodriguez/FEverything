@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import "../styles/Units.css";
 import UnitGrid from "../components/UnitGrid";
-import { UnitsProvider, useUnits } from "../defaultData/Fire Emblem Fates/UnitsContext";
+import {
+  UnitsProvider,
+  useUnits,
+} from "../defaultData/Fire Emblem Fates/UnitsContext";
 import { Character } from "../types/Fire Emblem Fates/UnitStruct";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments";
 import { getClass } from "../defaultData/Fire Emblem Fates/defaultClassData";
@@ -19,7 +22,10 @@ const Units = () => {
   const { gameId } = useParams<{ gameId: string }>();
 
   return (
-    <UnitsProvider gameId={gameId || "Fire Emblem Fates"} route={selectedRoute || ""}>
+    <UnitsProvider
+      gameId={gameId || "Fire Emblem Fates"}
+      route={selectedRoute || ""}
+    >
       <UnitsContent />
     </UnitsProvider>
   );
@@ -31,21 +37,27 @@ const UnitsContent = () => {
   const selectedRoute = state?.selectedRoute;
   const { gameId } = useParams<{ gameId: string }>();
 
-  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] = useState(false);
-  const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] = useState(false);
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
-  const [createdCorrinGender, setCreatedCorrinGender] = useState<"Male" | "Female" | null>(null);
+  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] =
+    useState(false);
+  const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] =
+    useState(false);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null,
+  );
+  const [createdCorrinGender, setCreatedCorrinGender] = useState<
+    "Male" | "Female" | null
+  >(null);
   const [corrinGender, setCorrinGender] = useState<"Male" | "Female">("Male");
   const [corrinBoon, setCorrinBoon] = useState<string>("Robust");
   const [corrinBane, setCorrinBane] = useState<string>("Unlucky");
   const [corrinTalent, setCorrinTalent] = useState<string>("Cavalier");
 
   const filteredBaneOptions = baneOptions.filter(
-    (bane) => conflictingPairs[corrinBoon] !== bane
+    (bane) => conflictingPairs[corrinBoon] !== bane,
   );
 
   const filteredBoonOptions = boonOptions.filter(
-    (boon) => conflictingPairs[boon] !== corrinBane
+    (boon) => conflictingPairs[boon] !== corrinBane,
   );
 
   useEffect(() => {
@@ -58,7 +70,7 @@ const UnitsContent = () => {
   useEffect(() => {
     if (
       boonOptions.some(
-        (boon) => conflictingPairs[boon] === corrinBane && boon === corrinBoon
+        (boon) => conflictingPairs[boon] === corrinBane && boon === corrinBoon,
       )
     ) {
       const newBoon = filteredBoonOptions[0] || boonOptions[0];
@@ -103,7 +115,7 @@ const UnitsContent = () => {
 
   useEffect(() => {
     setSelectedCharacter(
-      availableCharacters.length > 0 ? availableCharacters[0] : null
+      availableCharacters.length > 0 ? availableCharacters[0] : null,
     );
   }, [isOverlayAddCharacterOpen, units, createdCorrinGender]);
 
@@ -206,7 +218,9 @@ const UnitsContent = () => {
                     <select
                       value={corrinGender}
                       onChange={(e) =>
-                        handleSetCorrinGender(e.target.value as "Male" | "Female")
+                        handleSetCorrinGender(
+                          e.target.value as "Male" | "Female",
+                        )
                       }
                     >
                       <option value="Male">Male</option>
@@ -255,7 +269,9 @@ const UnitsContent = () => {
                       <option value="Spear Fighter">Spear Fighter</option>
                       <option value="Diviner">Diviner</option>
                       <option
-                        value={corrinGender === "Female" ? "Shrine Maiden" : "Monk"}
+                        value={
+                          corrinGender === "Female" ? "Shrine Maiden" : "Monk"
+                        }
                       >
                         {corrinGender === "Female" ? "Shrine Maiden" : "Monk"}
                       </option>
@@ -286,17 +302,22 @@ const UnitsContent = () => {
                       value={selectedCharacter?.name || ""}
                       onChange={(e) => {
                         const selected = availableCharacters.find(
-                          (char: Character) => char.name === e.target.value
+                          (char: Character) => char.name === e.target.value,
                         );
                         setSelectedCharacter(selected || null);
                       }}
                     >
                       {availableCharacters.length > 0 ? (
-                        availableCharacters.map((char: Character, index: number) => (
-                          <option key={`${char.name}-${index}`} value={char.name}>
-                            {char.name}
-                          </option>
-                        ))
+                        availableCharacters.map(
+                          (char: Character, index: number) => (
+                            <option
+                              key={`${char.name}-${index}`}
+                              value={char.name}
+                            >
+                              {char.name}
+                            </option>
+                          ),
+                        )
                       ) : (
                         <option value="" disabled>
                           No characters available

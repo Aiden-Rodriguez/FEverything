@@ -12,11 +12,11 @@ interface UnitsContextType {
 
 const UnitsContext = createContext<UnitsContextType | undefined>(undefined);
 
-export const UnitsProvider: React.FC<{ children: React.ReactNode; gameId: string; route: string }> = ({
-  children,
-  gameId,
-  route,
-}) => {
+export const UnitsProvider: React.FC<{
+  children: React.ReactNode;
+  gameId: string;
+  route: string;
+}> = ({ children, gameId, route }) => {
   const [units, setUnits] = useState<Character[]>([]);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const UnitsProvider: React.FC<{ children: React.ReactNode; gameId: string
 
   const updateUnit = (updatedUnit: Character) =>
     setUnits((prev) =>
-      prev.map((u) => (u.name === updatedUnit.name ? updatedUnit : u))
+      prev.map((u) => (u.name === updatedUnit.name ? updatedUnit : u)),
     );
 
   const addUnit = (unit: Character) => setUnits((prev) => [...prev, unit]);
