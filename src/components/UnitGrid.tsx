@@ -257,6 +257,39 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setIsClassChanging(false);
   };
 
+  const getAllySealClass = (ClassReciever: Character, ClassGiver: Character) => {
+    const giverBaseClass = ClassGiver.base_class_set.starting_class_tree;
+    const giverHeartSealClass1 = ClassGiver.base_class_set.heart_seal_classes?.[0] || null; // Should always have 1 at least heart seal class
+    const recieverBaseClass = ClassReciever.base_class_set.starting_class_tree;
+
+    const forbiddenClassShareNames = ["Songstress", "Wolfskin", "Kitsune", "Nohr Prince", "Nohr Princess", "Villager"];
+
+  // If giver's base class is forbidden and receiver's base class matches giver's heart seal class
+  if (
+    forbiddenClassShareNames.includes(giverBaseClass.className) &&
+    giverHeartSealClass1 &&
+    recieverBaseClass.className === giverHeartSealClass1.className
+  ) {
+    return giverBaseClass.parallelClass;
+  }
+
+  // Different base classes case (not forbidden)
+  if (
+    giverBaseClass.className !== recieverBaseClass.className &&
+    !forbiddenClassShareNames.includes(giverBaseClass.className)
+  ) {
+    return giverBaseClass;
+  }
+
+  // If base classes match or giver's base is forbidden, give heart seal class if different from base
+  if (giverHeartSealClass1 && giverBaseClass.className !== giverHeartSealClass1.className) {
+    return giverHeartSealClass1;
+  }
+
+  // Fallback to parallel class
+  return giverBaseClass.parallelClass;
+};
+
   const cancelClassChange = () => {
     setIsClassChanging(false);
     setSelectedClassName(unit.class.className);
@@ -1033,143 +1066,179 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 </div>
               </div>
               <div className="class-set-column">
-  <div className="class-set-label">Friendship Seal</div>
-  <div className="class-sets-classes">
-    {isEditing ? (
-      <div className="partner-select">
-        {(() => {
-          const activeUnitNames = new Set(units.map((u) => u.name));
-          const filteredPartners =
-            unit.base_class_set.friendship_seal_partners?.filter(
-              (partner) => activeUnitNames.has(partner.name)
-            ) || [];
+                <div className="class-set-label">Friendship Seal</div>
+                <div className="class-sets-classes">
+                  {isEditing ? (
+                    <div className="partner-select">
+                      {(() => {
+                        const activeUnitNames = new Set(units.map((u) => u.name));
+                        const filteredPartners =
+                          unit.base_class_set.friendship_seal_partners?.filter(
+                            (partner) => activeUnitNames.has(partner.name)
+                          ) || [];
 
-          return filteredPartners.length > 0 ? (
-            <select
-              value={unit.base_class_set.selected_friendship_seal_partner?.name || ""}
-              onChange={(e) => {
-                const partnerName = e.target.value;
-                const updatedUnit: Character = {
-                  ...unit,
-                  base_class_set: {
-                    ...unit.base_class_set,
-                    selected_friendship_seal_partner: partnerName
-                      ? units.find((p) => p.name === partnerName) || null
-                      : null,
-                  },
-                };
-                updateUnit(updatedUnit);
-              }}
-              className="inline-select"
-              aria-label={`Select or change friendship seal partner for ${unit.name}`}
-            >
-              <option value="">No Partner</option>
-              {filteredPartners.map((partner) => (
-                <option key={partner.name} value={partner.name}>
-                  {partner.name}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <span>No Viable Friendship Seal Partners</span>
-          );
-        })()}
-      </div>
-    ) : (
-      (() => {
-        const activeUnitNames = new Set(units.map((u) => u.name));
-        const selectedPartner = unit.base_class_set.selected_friendship_seal_partner;
-        const isValidPartner = selectedPartner && activeUnitNames.has(selectedPartner.name);
+                        return filteredPartners.length > 0 ? (
+                          <select
+                            value={unit.base_class_set.selected_friendship_seal_partner?.name || ""}
+                            onChange={(e) => {
+                              const partnerName = e.target.value;
+                              const updatedUnit: Character = {
+                                ...unit,
+                                base_class_set: {
+                                  ...unit.base_class_set,
+                                  selected_friendship_seal_partner: partnerName
+                                    ? units.find((p) => p.name === partnerName) || null
+                                    : null,
+                                },
+                              };
+                              updateUnit(updatedUnit);
+                            }}
+                            className="inline-select"
+                            aria-label={`Select or change friendship seal partner for ${unit.name}`}
+                          >
+                            <option value="">No Partner</option>
+                            {filteredPartners.map((partner) => (
+                              <option key={partner.name} value={partner.name}>
+                                {partner.name}
+                              </option>
+                            ))}
+                          </select>
+                        ) : (
+                          <span>No Viable Friendship Seal Partners</span>
+                        );
+                      })()}
+                    </div>
+                  ) : (
+                    (() => {
+                      const activeUnitNames = new Set(units.map((u) => u.name));
+                      const selectedPartner = unit.base_class_set.selected_friendship_seal_partner;
+                      const isValidPartner = selectedPartner && activeUnitNames.has(selectedPartner.name);
 
-        return isValidPartner ? (
-          <div className="partner-item">
-            <Tippy
-              content={
-                <>
-                  <strong>{selectedPartner.name}</strong>
-                  <p className="tooltip-text">{selectedPartner.title}</p>
-                </>
-              }
-            >
-              <span>{selectedPartner.name}</span>
-            </Tippy>
-          </div>
-        ) : (
-          <span>No Friendship Seal Partner Selected</span>
-        );
-      })()
-    )}
-  </div>
-</div>
-<div className="class-set-column">
-  <div className="class-set-label">Partner Seal</div>
-  <div className="class-sets-classes">
-    {isEditing ? (
-      <div className="partner-select">
-        {(() => {
-          const activeUnitNames = new Set(units.map((u) => u.name));
-          const filteredPartners =
-            unit.base_class_set.partner_seal_partners?.filter(
-              (partner) => activeUnitNames.has(partner.name)
-            ) || [];
+                      return isValidPartner ? (
+                        <div className="partner-item">
+                          <span>A+ Support: {selectedPartner.name}</span>
+                          {(() => {
+                            const allyClass = getAllySealClass(unit, selectedPartner);
+                            return allyClass && allyClass.classTree && allyClass.classTree.length > 0 ? (
+                              allyClass.classTree
+                                .filter((promotedClass) =>
+                                  promotedClass.className === "Maid" && unit.gender === "M"
+                                    ? false
+                                    : promotedClass.className === "Butler" && unit.gender === "F"
+                                    ? false
+                                    : true
+                                )
+                                .map((promotedClass, index) => (
+                                  <Tippy
+                                    content={
+                                      <>
+                                        <strong>{promotedClass.className}</strong>
+                                        <p className="tooltip-text">{promotedClass.description}</p>
+                                      </>
+                                    }
+                                  >
+                                    <span key={index}>{promotedClass.className}</span>
+                                  </Tippy>
+                                ))
+                            ) : (
+                              <span>No Promotions</span>
+                            );
+                          })()}
+                        </div>
+                      ) : (
+                        <span>No Friendship Seal Partner Selected</span>
+                      );
+                    })()
+                  )}
+                </div>
+              </div>
+              <div className="class-set-column">
+                <div className="class-set-label">Partner Seal</div>
+                <div className="class-sets-classes">
+                  {isEditing ? (
+                    <div className="partner-select">
+                      {(() => {
+                        const activeUnitNames = new Set(units.map((u) => u.name));
+                        const filteredPartners =
+                          unit.base_class_set.partner_seal_partners?.filter(
+                            (partner) => activeUnitNames.has(partner.name)
+                          ) || [];
 
-          return filteredPartners.length > 0 ? (
-            <select
-              value={unit.base_class_set.selected_partner_seal_partner?.name || ""}
-              onChange={(e) => {
-                const partnerName = e.target.value;
-                const updatedUnit: Character = {
-                  ...unit,
-                  base_class_set: {
-                    ...unit.base_class_set,
-                    selected_partner_seal_partner: partnerName
-                      ? units.find((p) => p.name === partnerName) || null
-                      : null,
-                  },
-                };
-                updateUnit(updatedUnit);
-              }}
-              className="inline-select"
-              aria-label={`Select or change partner seal partner for ${unit.name}`}
-            >
-              <option value="">No Partner</option>
-              {filteredPartners.map((partner) => (
-                <option key={partner.name} value={partner.name}>
-                  {partner.name}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <span>No Viable Partner Seal Partners</span>
-          );
-        })()}
-      </div>
-    ) : (
-      (() => {
-        const activeUnitNames = new Set(units.map((u) => u.name));
-        const selectedPartner = unit.base_class_set.selected_partner_seal_partner;
-        const isValidPartner = selectedPartner && activeUnitNames.has(selectedPartner.name);
+                        return filteredPartners.length > 0 ? (
+                          <select
+                            value={unit.base_class_set.selected_partner_seal_partner?.name || ""}
+                            onChange={(e) => {
+                              const partnerName = e.target.value;
+                              const updatedUnit: Character = {
+                                ...unit,
+                                base_class_set: {
+                                  ...unit.base_class_set,
+                                  selected_partner_seal_partner: partnerName
+                                    ? units.find((p) => p.name === partnerName) || null
+                                    : null,
+                                },
+                              };
+                              updateUnit(updatedUnit);
+                            }}
+                            className="inline-select"
+                            aria-label={`Select or change partner seal partner for ${unit.name}`}
+                          >
+                            <option value="">No Partner</option>
+                            {filteredPartners.map((partner) => (
+                              <option key={partner.name} value={partner.name}>
+                                {partner.name}
+                              </option>
+                            ))}
+                          </select>
+                        ) : (
+                          <span>No Viable Partner Seal Partners</span>
+                        );
+                      })()}
+                    </div>
+                  ) : (
+                    (() => {
+                      const activeUnitNames = new Set(units.map((u) => u.name));
+                      const selectedPartner = unit.base_class_set.selected_partner_seal_partner;
+                      const isValidPartner = selectedPartner && activeUnitNames.has(selectedPartner.name);
 
-        return isValidPartner ? (
-          <div className="partner-item">
-            <Tippy
-              content={
-                <>
-                  <strong>{selectedPartner.name}</strong>
-                  <p className="tooltip-text">{selectedPartner.title}</p>
-                </>
-              }
-            >
-              <span>{selectedPartner.name}</span>
-            </Tippy>
-          </div>
-        ) : (
-          <span>No Partner Seal Partner Selected</span>
-        );
-      })()
-    )}
-  </div>
-</div>
+                      return isValidPartner ? (
+                        <div className="partner-item">
+                          <span>S Support: {selectedPartner.name}</span>
+                          {(() => {
+                            const allyClass = getAllySealClass(unit, selectedPartner);
+                            return allyClass && allyClass.classTree && allyClass.classTree.length > 0 ? (
+                              allyClass.classTree
+                                .filter((promotedClass) =>
+                                  promotedClass.className === "Maid" && unit.gender === "M"
+                                    ? false
+                                    : promotedClass.className === "Butler" && unit.gender === "F"
+                                    ? false
+                                    : true
+                                )
+                                .map((promotedClass, index) => (
+                                  <Tippy
+                                    content={
+                                      <>
+                                        <strong>{promotedClass.className}</strong>
+                                        <p className="tooltip-text">{promotedClass.description}</p>
+                                      </>
+                                    }
+                                  >
+                                    <span key={index}>{promotedClass.className}</span>
+                                  </Tippy>
+                                ))
+                            ) : (
+                              <span>No Promotions</span>
+                            );
+                          })()}
+                        </div>
+                      ) : (
+                        <span>No Partner Seal Partner Selected</span>
+                      );
+                    })()
+                  )}
+                </div>
+              </div>
             </div>
           </motion.div>
         </>

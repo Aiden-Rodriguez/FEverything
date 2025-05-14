@@ -4311,7 +4311,7 @@ const friendshipPairs: { [key: string]: string[] } = {
   "Charlotte": ["Beruka", "Peri", "Nyx"],
   "Camilla": ["Selena", "Elise", "Beruka"],
   "Selena": ["Beruka", "Peri", "Camilla"],
-  "Beruka": ["Charlotte", "Selena", "Beruka"],
+  "Beruka": ["Charlotte", "Selena", "Camilla"],
   "Peri": ["Charlotte", "Selena", "Felicia"],
   "Nyx": ["Mozu", "Effie", "Charlotte"],
   "Flora": ["Felicia"],
