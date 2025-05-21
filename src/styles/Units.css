@@ -49,6 +49,7 @@
 .top-right,
 .top-extra {
   background-color: #f0f8ff;
+  position: relative;
 }
 
 .bottom-left,
@@ -340,6 +341,16 @@ h1 {
   position: sticky;
   bottom: 10px;
   padding: 10px 0;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+  z-index: 12;
 }
 
 @keyframes pulse {

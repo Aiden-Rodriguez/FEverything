@@ -33,6 +33,17 @@ export const baneOptions = [
   "Excitable",
 ];
 
+export type StatBlock = {
+  hp: number;
+  strength: number;
+  magic: number;
+  skill: number;
+  speed: number;
+  luck: number;
+  defence: number;
+  resistance: number;
+};
+
 export interface Character {
   name: string;
   nickname?: string;
@@ -41,11 +52,11 @@ export interface Character {
   royalty_status: boolean;
   class: Class;
   RouteAvailability: string;
-  baseInternalLevel: number;
+  internalLevel: number;
   level: number;
   eternalSealCount: number;
   maxLevelModifier: number;
-  class_line: [number, number, Class][];
+  class_line: [number, number, Class, StatBlock][];
   stats: {
     hp: number;
     strength: number;

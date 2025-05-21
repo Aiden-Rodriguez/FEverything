@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import SpriteAnimator from "../components/SpriteAnimator";
-import { Character } from "../types/Fire Emblem Fates/UnitStruct.tsx";
+import { Character, StatBlock } from "../types/Fire Emblem Fates/UnitStruct.tsx";
 import { Class, WeaponRank } from "../types/Fire Emblem Fates/ClassStruct.tsx";
 import { Skill } from "../types/Fire Emblem Fates/SkillStruct.tsx";
 import Tippy from "@tippyjs/react";
@@ -9,6 +9,7 @@ import "tippy.js/dist/tippy.css";
 import { useUnits } from "../defaultData/Fire Emblem Fates/UnitsContext";
 import { findCharacter } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest.tsx";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments.ts";
+// import { label } from "framer-motion/client";
 
 interface UnitGridProps {
   unit: Character;
@@ -29,7 +30,7 @@ interface SkillsModule {
 }
 
 const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
-  const { units } = useUnits();
+  const { units, removeUnit } = useUnits();
   const [getClassFn, setGetClassFn] = useState<
     ((className: string) => Class) | null
   >(null);
@@ -190,7 +191,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     if (!getClassFn) return;
     const newClass = getClassFn(selectedClassName);
     let newLevel = unit.level;
-    let newInternalLevel = unit.baseInternalLevel;
+    let newInternalLevel = unit.internalLevel;
     if (
       unit.class.promotionStatus === false &&
       newClass.promotionStatus === true
@@ -204,11 +205,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       newLevel = unit.level - 20;
       newInternalLevel = 20;
     }
-    const newClassLine: [number, number, Class] = [
-      newInternalLevel,
-      newLevel,
-      newClass,
-    ];
     const newStats = {
       hp:
         unit.stats.hp -
@@ -244,15 +240,30 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         newClass.classBaseStats.resistance,
       move: newClass.classBaseStats.move,
     };
-
+    const newClassLine: [number, number, Class, StatBlock] = [
+      newInternalLevel,
+      newLevel,
+      newClass,
+      {
+        hp: newStats.hp,
+        strength: newStats.strength,
+        magic: newStats.magic,
+        skill: newStats.skill,
+        speed: newStats.speed,
+        luck: newStats.luck,
+        defence: newStats.defence,
+        resistance: newStats.resistance
+      }
+    ];
     const updatedUnit: Character = {
       ...unit,
       class: newClass,
       class_line: [...unit.class_line, newClassLine],
       stats: newStats,
       level: newLevel,
-      baseInternalLevel: newInternalLevel,
+      internalLevel: newInternalLevel,
     };
+    //console.log(updatedUnit.class_line)
     updateUnit(updatedUnit);
     setIsClassChanging(false);
   };
@@ -384,6 +395,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       return false;
     }
 
+    //Take unit's current level, subtract by the previous entry in classline to 
+    const level_difference = unit.level - unit.class_line[unit.class_line.length - 1][1]
+    // console.log(level_difference)
     if (field === "level") {
       const eternalSeals = unit.eternalSealCount;
       const unitMaxLevel =
@@ -391,6 +405,10 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         eternalSeals * 5;
       if (num < 1 || num > unitMaxLevel) {
         setError(`Level must be between 1 and ${unitMaxLevel}`);
+        return false;
+      //if unit has equal internal levels to the previous snapshot, unit cannot go down in level.
+      } else if (unit.class_line[unit.class_line.length - 1][0] === unit.internalLevel && unit.class_line[unit.class_line.length - 1][1] > num) {
+        setError(`Levels cannot lower than what they were at the previous class change.`);
         return false;
       }
     } else {
@@ -441,6 +459,27 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         );
         return false;
       }
+      
+      //Make sure people don't inflate stats past possible considering current level
+      if (statField !== "move") {
+      if (level_difference < (num - unit.class_line[unit.class_line.length - 1][3][statField])) {
+        console.log('2')
+        setError(
+          `${statFields.find((f) => f.key === statField)?.label || field} must be less than or equal to ${level_difference + unit.class_line[unit.class_line.length - 1][3][statField]}; unit cannot gain more than 1 stat in a field per level. Make sure to properly update a unit's level first.`,
+        );
+        return false;
+        //Make sure people don't make the stat lower than it was on a previous class change also
+      } else if (unit.class_line[unit.class_line.length - 1][3][statField] > num) {
+        console.log('3')
+        setError(
+          `${statFields.find((f) => f.key === statField)?.label || field} must be greater than ${unit.class_line[unit.class_line.length - 1][3][statField]} (unit cannot lose stats after a class change below their previous stats.)`,
+        );
+        return false;
+      }
+      console.log(unit.class_line[unit.class_line.length - 1][3][statField])
+      console.log(num)
+    }
+    
     }
     return true;
   };
@@ -557,9 +596,14 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             </div>
           </div>
           {isClassChanging && selectedClassName !== unit.class.className && (
+            <div>
+            <span>
+              Please ensure that before you class change the unit's stats and level are properly updated. <br />
+            </span>
             <span className="class-change-arrow">
               {unit.class.className + " --> " + selectedClassName}
             </span>
+            </div>
           )}
         </div>
 
@@ -658,6 +702,21 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             {isEditing ? "Stop Editing" : "Edit Unit"}
           </span>
         )}
+                <span
+          className="delete-icon"
+          onClick={() => removeUnit(unit.name)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              removeUnit(unit.name);
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label={`Delete unit ${unit.name}`}
+        >
+          X
+        </span>
       </div>
 
       {isExpanded && (

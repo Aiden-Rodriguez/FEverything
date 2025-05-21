@@ -8,6 +8,7 @@ interface UnitsContextType {
   updateUnit: (unit: Character) => void;
   addUnit: (unit: Character) => void;
   deleteAllUnits: () => void;
+  removeUnit: (name: string) => void;
 }
 
 const UnitsContext = createContext<UnitsContextType | undefined>(undefined);
@@ -46,10 +47,13 @@ export const UnitsProvider: React.FC<{
   const addUnit = (unit: Character) => setUnits((prev) => [...prev, unit]);
 
   const deleteAllUnits = () => setUnits([]);
+  
+  const removeUnit = (name: string) =>
+    setUnits((prev) => prev.filter((u) => u.name !== name));
 
   return (
     <UnitsContext.Provider
-      value={{ units, setUnits, updateUnit, addUnit, deleteAllUnits }}
+      value={{ units, setUnits, updateUnit, addUnit, deleteAllUnits, removeUnit }}
     >
       {children}
     </UnitsContext.Provider>
