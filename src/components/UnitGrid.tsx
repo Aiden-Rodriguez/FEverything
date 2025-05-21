@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import SpriteAnimator from "../components/SpriteAnimator";
-import { Character, StatBlock } from "../types/Fire Emblem Fates/UnitStruct.tsx";
+import {
+  Character,
+  StatBlock,
+} from "../types/Fire Emblem Fates/UnitStruct.tsx";
 import { Class, WeaponRank } from "../types/Fire Emblem Fates/ClassStruct.tsx";
 import { Skill } from "../types/Fire Emblem Fates/SkillStruct.tsx";
 import Tippy from "@tippyjs/react";
@@ -252,8 +255,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         speed: newStats.speed,
         luck: newStats.luck,
         defence: newStats.defence,
-        resistance: newStats.resistance
-      }
+        resistance: newStats.resistance,
+      },
     ];
     const updatedUnit: Character = {
       ...unit,
@@ -395,8 +398,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       return false;
     }
 
-    //Take unit's current level, subtract by the previous entry in classline to 
-    const level_difference = unit.level - unit.class_line[unit.class_line.length - 1][1]
+    //Take unit's current level, subtract by the previous entry in classline to
+    const level_difference =
+      unit.level - unit.class_line[unit.class_line.length - 1][1];
     // console.log(level_difference)
     if (field === "level") {
       const eternalSeals = unit.eternalSealCount;
@@ -406,9 +410,14 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       if (num < 1 || num > unitMaxLevel) {
         setError(`Level must be between 1 and ${unitMaxLevel}`);
         return false;
-      //if unit has equal internal levels to the previous snapshot, unit cannot go down in level.
-      } else if (unit.class_line[unit.class_line.length - 1][0] === unit.internalLevel && unit.class_line[unit.class_line.length - 1][1] > num) {
-        setError(`Levels cannot lower than what they were at the previous class change.`);
+        //if unit has equal internal levels to the previous snapshot, unit cannot go down in level.
+      } else if (
+        unit.class_line[unit.class_line.length - 1][0] === unit.internalLevel &&
+        unit.class_line[unit.class_line.length - 1][1] > num
+      ) {
+        setError(
+          `Levels cannot lower than what they were at the previous class change.`,
+        );
         return false;
       }
     } else {
@@ -459,27 +468,31 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         );
         return false;
       }
-      
+
       //Make sure people don't inflate stats past possible considering current level
       if (statField !== "move") {
-      if (level_difference < (num - unit.class_line[unit.class_line.length - 1][3][statField])) {
-        console.log('2')
-        setError(
-          `${statFields.find((f) => f.key === statField)?.label || field} must be less than or equal to ${level_difference + unit.class_line[unit.class_line.length - 1][3][statField]}; unit cannot gain more than 1 stat in a field per level. Make sure to properly update a unit's level first.`,
-        );
-        return false;
-        //Make sure people don't make the stat lower than it was on a previous class change also
-      } else if (unit.class_line[unit.class_line.length - 1][3][statField] > num) {
-        console.log('3')
-        setError(
-          `${statFields.find((f) => f.key === statField)?.label || field} must be greater than ${unit.class_line[unit.class_line.length - 1][3][statField]} (unit cannot lose stats after a class change below their previous stats.)`,
-        );
-        return false;
+        if (
+          level_difference <
+          num - unit.class_line[unit.class_line.length - 1][3][statField]
+        ) {
+          console.log("2");
+          setError(
+            `${statFields.find((f) => f.key === statField)?.label || field} must be less than or equal to ${level_difference + unit.class_line[unit.class_line.length - 1][3][statField]}; unit cannot gain more than 1 stat in a field per level. Make sure to properly update a unit's level first.`,
+          );
+          return false;
+          //Make sure people don't make the stat lower than it was on a previous class change also
+        } else if (
+          unit.class_line[unit.class_line.length - 1][3][statField] > num
+        ) {
+          console.log("3");
+          setError(
+            `${statFields.find((f) => f.key === statField)?.label || field} must be greater than ${unit.class_line[unit.class_line.length - 1][3][statField]} (unit cannot lose stats after a class change below their previous stats.)`,
+          );
+          return false;
+        }
+        console.log(unit.class_line[unit.class_line.length - 1][3][statField]);
+        console.log(num);
       }
-      console.log(unit.class_line[unit.class_line.length - 1][3][statField])
-      console.log(num)
-    }
-    
     }
     return true;
   };
@@ -572,6 +585,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       <div className="grid-cell top-middle">
         <div>
           <Tippy
+            theme="custom"
             content={
               <>
                 <strong>{unit.class.className}</strong>
@@ -597,12 +611,13 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           </div>
           {isClassChanging && selectedClassName !== unit.class.className && (
             <div>
-            <span>
-              Please ensure that before you class change the unit's stats and level are properly updated. <br />
-            </span>
-            <span className="class-change-arrow">
-              {unit.class.className + " --> " + selectedClassName}
-            </span>
+              <span>
+                Please ensure that before you class change the unit's stats and
+                level are properly updated. <br />
+              </span>
+              <span className="class-change-arrow">
+                {unit.class.className + " --> " + selectedClassName}
+              </span>
             </div>
           )}
         </div>
@@ -702,7 +717,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             {isEditing ? "Stop Editing" : "Edit Unit"}
           </span>
         )}
-                <span
+        <span
           className="delete-icon"
           onClick={() => removeUnit(unit.name)}
           onKeyDown={(e) => {
@@ -772,6 +787,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           {unit.personal_skill?.name !== "N/A" && (
             <div className="skill-image-container">
               <Tippy
+                theme="custom"
                 content={
                   <>
                     <strong>{unit.personal_skill.name}</strong>
@@ -794,6 +810,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             .map((skill, index) => (
               <div key={index} className="skill-image-container">
                 <Tippy
+                  theme="custom"
                   content={
                     <>
                       <strong>{skill.name}</strong>
@@ -935,6 +952,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             <h3>Growth Rates Total</h3>
             <div className="bottom-row-grid">
               <Tippy
+                theme="custom"
                 content={
                   <>
                     <p className="tooltip-text">
@@ -954,6 +972,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 </p>
               </Tippy>
               <Tippy
+                theme="custom"
                 content={
                   <>
                     <p className="tooltip-text">
@@ -975,6 +994,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 </p>
               </Tippy>
               <Tippy
+                theme="custom"
                 content={
                   <>
                     <p className="tooltip-text">
@@ -995,6 +1015,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 </p>
               </Tippy>
               <Tippy
+                theme="custom"
                 content={
                   <>
                     <p className="tooltip-text">
@@ -1015,6 +1036,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 </p>
               </Tippy>
               <Tippy
+                theme="custom"
                 content={
                   <>
                     <p className="tooltip-text">
@@ -1035,6 +1057,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 </p>
               </Tippy>
               <Tippy
+                theme="custom"
                 content={
                   <>
                     <p className="tooltip-text">
@@ -1054,6 +1077,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 </p>
               </Tippy>
               <Tippy
+                theme="custom"
                 content={
                   <>
                     <p className="tooltip-text">
@@ -1074,6 +1098,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 </p>
               </Tippy>
               <Tippy
+                theme="custom"
                 content={
                   <>
                     <p className="tooltip-text">
@@ -1124,6 +1149,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                       )
                       .map((promotedClass, index) => (
                         <Tippy
+                          theme="custom"
                           content={
                             <>
                               <strong>{promotedClass.className}</strong>
@@ -1161,6 +1187,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                             )
                             .map((promotedClass, treeIndex) => (
                               <Tippy
+                                theme="custom"
                                 content={
                                   <>
                                     <strong>{promotedClass.className}</strong>
@@ -1267,6 +1294,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                               )
                               .map((promotedClass, index) => (
                                 <Tippy
+                                  theme="custom"
                                   content={
                                     <>
                                       <strong>{promotedClass.className}</strong>
@@ -1431,6 +1459,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                               )
                               .map((promotedClass, index) => (
                                 <Tippy
+                                  theme="custom"
                                   content={
                                     <>
                                       <strong>{promotedClass.className}</strong>

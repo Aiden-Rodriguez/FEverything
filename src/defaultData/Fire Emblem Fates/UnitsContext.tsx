@@ -47,13 +47,20 @@ export const UnitsProvider: React.FC<{
   const addUnit = (unit: Character) => setUnits((prev) => [...prev, unit]);
 
   const deleteAllUnits = () => setUnits([]);
-  
+
   const removeUnit = (name: string) =>
     setUnits((prev) => prev.filter((u) => u.name !== name));
 
   return (
     <UnitsContext.Provider
-      value={{ units, setUnits, updateUnit, addUnit, deleteAllUnits, removeUnit }}
+      value={{
+        units,
+        setUnits,
+        updateUnit,
+        addUnit,
+        deleteAllUnits,
+        removeUnit,
+      }}
     >
       {children}
     </UnitsContext.Provider>

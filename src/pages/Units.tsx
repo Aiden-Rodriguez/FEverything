@@ -144,20 +144,19 @@ const UnitsContent = () => {
       corrinGender === "Male"
         ? defaultCharactersConquest[0]
         : defaultCharactersConquest[1];
-  
+
     let corrin: Character = structuredClone(baseCorrin);
 
     corrin.base_class_set.heart_seal_classes = [getClass(corrinTalent)];
     corrin.boon = corrinBoon;
     corrin.bane = corrinBane;
-  
+
     corrin = applyBoonBaneAdjustments(corrin, corrinBoon, corrinBane);
-    
+
     addUnit(corrin);
     setCreatedCorrinGender(corrinGender);
     toggleOverlayAddCharacter();
   };
-  
 
   const handleDeleteAllUnits = () => {
     deleteAllUnits();

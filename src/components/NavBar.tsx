@@ -2,32 +2,31 @@ import { NavLink, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "../styles/NavBar.css";
-
+import hoshido from "../assets/images/hoshido.webp";
+import nohr from "../assets/images/nohr.webp";
 const NavBar = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "hoshido";
+  });
   const navLinkClass = ({ isActive }: { isActive: boolean }) => {
-    let baseClass = isMobile ? "menu-item menu-item-mobile" : "menu-item";
-    return isActive ? `${baseClass} active` : baseClass;
+    return isActive ? "menu-item active" : "menu-item";
   };
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1200);
-    };
+    document.body.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "hoshido" ? "nohr" : "hoshido"));
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/">
           <motion.div
-            className={isMobile ? "title-mobile" : "title"}
+            className="title"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -36,7 +35,7 @@ const NavBar = () => {
           </motion.div>
         </Link>
 
-        <ul className={isMobile ? "menu-mobile" : "menu"}>
+        <ul className="menu">
           <motion.li whileHover={{ scale: 1.1 }}>
             <NavLink to="/" className={navLinkClass}>
               Home
@@ -63,6 +62,33 @@ const NavBar = () => {
               About
             </NavLink>
           </motion.li>
+
+          <label className="theme">
+            <span className="theme__toggle-wrap">
+              <input
+                id="theme"
+                className="theme__toggle"
+                type="checkbox"
+                role="switch"
+                name="theme"
+                checked={theme === "nohr"}
+                onChange={toggleTheme}
+                aria-label="Toggle theme"
+              />
+              <span className="theme__icon">
+                <img
+                  src={hoshido}
+                  alt="Hoshido theme"
+                  className="theme__icon-part sun"
+                />
+                <img
+                  src={nohr}
+                  alt="Nohr theme"
+                  className="theme__icon-part moon"
+                />
+              </span>
+            </span>
+          </label>
         </ul>
       </div>
     </nav>

@@ -30,21 +30,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 1,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[
-      0,
-      1,
-      getClass("Nohr Prince"),
-      {
-        hp: 19,
-        strength: 7,
-        magic: 4,
-        skill: 7,
-        speed: 6,
-        luck: 5,
-        defence: 6,
-        resistance: 2
-      }
-    ]],    
+    class_line: [
+      [
+        0,
+        1,
+        getClass("Nohr Prince"),
+        {
+          hp: 19,
+          strength: 7,
+          magic: 4,
+          skill: 7,
+          speed: 6,
+          luck: 5,
+          defence: 6,
+          resistance: 2,
+        },
+      ],
+    ],
     starting_weapons: [],
     stats: {
       hp: 19,
@@ -189,21 +191,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 1,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[
-      0,
-      1,
-      getClass("Nohr Princess"),
-      {
-        hp: 19,
-        strength: 7,
-        magic: 4,
-        skill: 7,
-        speed: 6,
-        luck: 5,
-        defence: 6,
-        resistance: 2
-      }
-    ]],
+    class_line: [
+      [
+        0,
+        1,
+        getClass("Nohr Princess"),
+        {
+          hp: 19,
+          strength: 7,
+          magic: 4,
+          skill: 7,
+          speed: 6,
+          luck: 5,
+          defence: 6,
+          resistance: 2,
+        },
+      ],
+    ],
     starting_weapons: [],
     stats: {
       hp: 19,
@@ -349,21 +353,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 1,
     eternalSealCount: 0,
     maxLevelModifier: 40,
-    class_line: [[
-      0,
-      1,
-      getClass("Butler"),
-      {
-        hp: 21,
-        strength: 8,
-        magic: 6,
-        skill: 12,
-        speed: 9,
-        luck: 10,
-        defence: 7,
-        resistance: 6
-      }
-    ]],
+    class_line: [
+      [
+        0,
+        1,
+        getClass("Butler"),
+        {
+          hp: 21,
+          strength: 8,
+          magic: 6,
+          skill: 12,
+          speed: 9,
+          luck: 10,
+          defence: 7,
+          resistance: 6,
+        },
+      ],
+    ],
     starting_weapons: ["Iron Dagger", "Heal"],
     stats: {
       hp: 21,
@@ -507,21 +513,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 13,
     eternalSealCount: 0,
     maxLevelModifier: 40,
-    class_line: [[
-      0,
-      13,
-      getClass("Butler"),
-      {
-        hp: 27,
-        strength: 13,
-        magic: 9,
-        skill: 19,
-        speed: 15,
-        luck: 17,
-        defence: 11,
-        resistance: 10
-      }
-    ]],    
+    class_line: [
+      [
+        0,
+        13,
+        getClass("Butler"),
+        {
+          hp: 27,
+          strength: 13,
+          magic: 9,
+          skill: 19,
+          speed: 15,
+          luck: 17,
+          defence: 11,
+          resistance: 10,
+        },
+      ],
+    ],
     starting_weapons: [],
     stats: {
       hp: 27,
@@ -668,21 +676,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 1,
     eternalSealCount: 0,
     maxLevelModifier: 40,
-    class_line: [[
-      0,
-      1,
-      getClass("Maid"),
-      {
-        hp: 19,
-        strength: 5,
-        magic: 9,
-        skill: 10,
-        speed: 10,
-        luck: 12,
-        defence: 5,
-        resistance: 9
-      }
-    ]],    
+    class_line: [
+      [
+        0,
+        1,
+        getClass("Maid"),
+        {
+          hp: 19,
+          strength: 5,
+          magic: 9,
+          skill: 10,
+          speed: 10,
+          luck: 12,
+          defence: 5,
+          resistance: 9,
+        },
+      ],
+    ],
     starting_weapons: ["Iron Dagger", "Heal"],
     stats: {
       hp: 19,
@@ -825,21 +835,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 13,
     eternalSealCount: 0,
     maxLevelModifier: 40,
-    class_line: [[
-      0,
-      13,
-      getClass("Maid"),
-      {
-        hp: 24,
-        strength: 7,
-        magic: 14,
-        skill: 15,
-        speed: 17,
-        luck: 20,
-        defence: 7,
-        resistance: 14
-      }
-    ]],    
+    class_line: [
+      [
+        0,
+        13,
+        getClass("Maid"),
+        {
+          hp: 24,
+          strength: 7,
+          magic: 14,
+          skill: 15,
+          speed: 17,
+          luck: 20,
+          defence: 7,
+          resistance: 14,
+        },
+      ],
+    ],
     starting_weapons: [],
     stats: {
       hp: 24,
@@ -986,7 +998,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 9,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 9, getClass("Ninja"), { hp: 22, strength: 9, magic: 0, skill: 12, speed: 16, luck: 6, defence: 7, resistance: 13 }]],
+    class_line: [
+      [
+        0,
+        9,
+        getClass("Ninja"),
+        {
+          hp: 22,
+          strength: 9,
+          magic: 0,
+          skill: 12,
+          speed: 16,
+          luck: 6,
+          defence: 7,
+          resistance: 13,
+        },
+      ],
+    ],
     starting_weapons: ["Iron Shuriken", "Vulnerary"],
     stats: {
       hp: 22,
@@ -1129,7 +1157,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 1,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 1, getClass("Songstress"), { hp: 16, strength: 5, magic: 2, skill: 8, speed: 8, luck: 6, defence: 4, resistance: 7 }]],
+    class_line: [
+      [
+        0,
+        1,
+        getClass("Songstress"),
+        {
+          hp: 16,
+          strength: 5,
+          magic: 2,
+          skill: 8,
+          speed: 8,
+          luck: 6,
+          defence: 4,
+          resistance: 7,
+        },
+      ],
+    ],
     starting_weapons: ["Vulnerary", "Chest Key"],
     stats: {
       hp: 16,
@@ -1272,7 +1316,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 6,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 6, getClass("Cavalier"), { hp: 22, strength: 11, magic: 0, skill: 9, speed: 8, luck: 7, defence: 10, resistance: 5 }]],
+    class_line: [
+      [
+        0,
+        6,
+        getClass("Cavalier"),
+        {
+          hp: 22,
+          strength: 11,
+          magic: 0,
+          skill: 9,
+          speed: 8,
+          luck: 7,
+          defence: 10,
+          resistance: 5,
+        },
+      ],
+    ],
     starting_weapons: ["Iron Sword", "Bronze Lance"],
     stats: {
       hp: 22,
@@ -1415,7 +1475,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 2,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[20, 2, getClass("Adventurer"), { hp: 31, strength: 18, magic: 10, skill: 21, speed: 24, luck: 13, defence: 13, resistance: 21 }]],
+    class_line: [
+      [
+        20,
+        2,
+        getClass("Adventurer"),
+        {
+          hp: 31,
+          strength: 18,
+          magic: 10,
+          skill: 21,
+          speed: 24,
+          luck: 13,
+          defence: 13,
+          resistance: 21,
+        },
+      ],
+    ],
     starting_weapons: ["Killer Bow", "Mend"],
     stats: {
       hp: 31,
@@ -1558,7 +1634,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 1,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 1, getClass("Villager"), { hp: 16, strength: 6, magic: 0, skill: 5, speed: 7, luck: 3, defence: 4, resistance: 1 }]],
+    class_line: [
+      [
+        0,
+        1,
+        getClass("Villager"),
+        {
+          hp: 16,
+          strength: 6,
+          magic: 0,
+          skill: 5,
+          speed: 7,
+          luck: 3,
+          defence: 4,
+          resistance: 1,
+        },
+      ],
+    ],
     starting_weapons: ["Brass Naginata", "Vulnerary"],
     stats: {
       hp: 16,
@@ -1701,7 +1793,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 5,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[20, 5, getClass("Onmyoji"), { hp: 31, strength: 8, magic: 23, skill: 25, speed: 18, luck: 17, defence: 14, resistance: 24 }]],
+    class_line: [
+      [
+        20,
+        5,
+        getClass("Onmyoji"),
+        {
+          hp: 31,
+          strength: 8,
+          magic: 23,
+          skill: 25,
+          speed: 18,
+          luck: 17,
+          defence: 14,
+          resistance: 24,
+        },
+      ],
+    ],
     starting_weapons: [],
     stats: {
       hp: 31,
@@ -1848,7 +1956,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 10,
     eternalSealCount: 0,
     maxLevelModifier: 30,
-    class_line: [[5, 10, getClass("Great Knight"), { hp: 34, strength: 17, magic: 0, skill: 24, speed: 10, luck: 13, defence: 20, resistance: 6 }]],
+    class_line: [
+      [
+        5,
+        10,
+        getClass("Great Knight"),
+        {
+          hp: 34,
+          strength: 17,
+          magic: 0,
+          skill: 24,
+          speed: 10,
+          luck: 13,
+          defence: 20,
+          resistance: 6,
+        },
+      ],
+    ],
     starting_weapons: ["Steel Lance", "Steel Axe", "Javelin", "Vulnerary"],
     stats: {
       hp: 34,
@@ -1995,7 +2119,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 5,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 5, getClass("Troubadour"), { hp: 19, strength: 2, magic: 11, skill: 5, speed: 10, luck: 14, defence: 4, resistance: 11 }]],
+    class_line: [
+      [
+        0,
+        5,
+        getClass("Troubadour"),
+        {
+          hp: 19,
+          strength: 2,
+          magic: 11,
+          skill: 5,
+          speed: 10,
+          luck: 14,
+          defence: 4,
+          resistance: 11,
+        },
+      ],
+    ],
     starting_weapons: ["Heal", "Freeze"],
     stats: {
       hp: 19,
@@ -2138,7 +2278,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 7,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 7, getClass("Fighter"), { hp: 24, strength: 12, magic: 0, skill: 9, speed: 8, luck: 1, defence: 9, resistance: 4 }]],
+    class_line: [
+      [
+        0,
+        7,
+        getClass("Fighter"),
+        {
+          hp: 24,
+          strength: 12,
+          magic: 0,
+          skill: 9,
+          speed: 8,
+          luck: 1,
+          defence: 9,
+          resistance: 4,
+        },
+      ],
+    ],
     starting_weapons: ["Iron Axe", "Hand Axe"],
     stats: {
       hp: 24,
@@ -2281,7 +2437,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 6,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 6, getClass("Knight"), { hp: 23, strength: 13, magic: 0, skill: 8, speed: 5, luck: 10, defence: 12, resistance: 4 }]],
+    class_line: [
+      [
+        0,
+        6,
+        getClass("Knight"),
+        {
+          hp: 23,
+          strength: 13,
+          magic: 0,
+          skill: 8,
+          speed: 5,
+          luck: 10,
+          defence: 12,
+          resistance: 4,
+        },
+      ],
+    ],
     starting_weapons: ["Iron Lance"],
     stats: {
       hp: 23,
@@ -2424,7 +2596,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 5,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 5, getClass("Dark Mage"), { hp: 21, strength: 5, magic: 8, skill: 10, speed: 7, luck: 9, defence: 6, resistance: 7 }]],
+    class_line: [
+      [
+        0,
+        5,
+        getClass("Dark Mage"),
+        {
+          hp: 21,
+          strength: 5,
+          magic: 8,
+          skill: 10,
+          speed: 7,
+          luck: 9,
+          defence: 6,
+          resistance: 7,
+        },
+      ],
+    ],
     starting_weapons: ["Thunder", "Vulnerary"],
     stats: {
       hp: 21,
@@ -2567,7 +2755,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 8,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 8, getClass("Outlaw"), { hp: 22, strength: 9, magic: 5, skill: 9, speed: 15, luck: 6, defence: 7, resistance: 12 }]],
+    class_line: [
+      [
+        0,
+        8,
+        getClass("Outlaw"),
+        {
+          hp: 22,
+          strength: 9,
+          magic: 5,
+          skill: 9,
+          speed: 15,
+          luck: 6,
+          defence: 7,
+          resistance: 12,
+        },
+      ],
+    ],
     starting_weapons: ["Iron Bow"],
     stats: {
       hp: 22,
@@ -2710,7 +2914,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 9,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 9, getClass("Dark Mage"), { hp: 20, strength: 1, magic: 12, skill: 5, speed: 11, luck: 3, defence: 4, resistance: 8 }]],
+    class_line: [
+      [
+        0,
+        9,
+        getClass("Dark Mage"),
+        {
+          hp: 20,
+          strength: 1,
+          magic: 12,
+          skill: 5,
+          speed: 11,
+          luck: 3,
+          defence: 4,
+          resistance: 8,
+        },
+      ],
+    ],
     starting_weapons: [],
     stats: {
       hp: 20,
@@ -2853,7 +3073,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 1,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[15, 1, getClass("Malig Knight"), {hp: 30, strength: 19, magic: 11, skill: 15, speed: 19, luck: 12, defence: 18, resistance: 15}]],
+    class_line: [
+      [
+        15,
+        1,
+        getClass("Malig Knight"),
+        {
+          hp: 30,
+          strength: 19,
+          magic: 11,
+          skill: 15,
+          speed: 19,
+          luck: 12,
+          defence: 18,
+          resistance: 15,
+        },
+      ],
+    ],
     starting_weapons: ["Steel Axe", "Thunder"],
     stats: {
       hp: 30,
@@ -2996,7 +3232,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 10,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 10, getClass("Mercenary"), { hp: 24, strength: 12, magic: 3, skill: 12, speed: 15, luck: 9, defence: 11, resistance: 8 }]],
+    class_line: [
+      [
+        0,
+        10,
+        getClass("Mercenary"),
+        {
+          hp: 24,
+          strength: 12,
+          magic: 3,
+          skill: 12,
+          speed: 15,
+          luck: 9,
+          defence: 11,
+          resistance: 8,
+        },
+      ],
+    ],
     starting_weapons: ["Iron Sword", "Bronze Sword", "Vulnerary"],
     stats: {
       hp: 24,
@@ -3139,7 +3391,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 9,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 9, getClass("Wyvern Rider"), { hp: 23, strength: 13, magic: 0, skill: 14, speed: 9, luck: 10, defence: 14, resistance: 7 }]],
+    class_line: [
+      [
+        0,
+        9,
+        getClass("Wyvern Rider"),
+        {
+          hp: 23,
+          strength: 13,
+          magic: 0,
+          skill: 14,
+          speed: 9,
+          luck: 10,
+          defence: 14,
+          resistance: 7,
+        },
+      ],
+    ],
     starting_weapons: ["Iron Axe"],
     stats: {
       hp: 23,
@@ -3282,7 +3550,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 12,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 12, getClass("Mercenary"), { hp: 28, strength: 15, magic: 0, skill: 16, speed: 13, luck: 14, defence: 10, resistance: 7 }]],
+    class_line: [
+      [
+        0,
+        12,
+        getClass("Mercenary"),
+        {
+          hp: 28,
+          strength: 15,
+          magic: 0,
+          skill: 16,
+          speed: 13,
+          luck: 14,
+          defence: 10,
+          resistance: 7,
+        },
+      ],
+    ],
     starting_weapons: ["Steel Sword", "Vulnerary"],
     stats: {
       hp: 28,
@@ -3425,7 +3709,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 10,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 10, getClass("Cavalier"), { hp: 25, strength: 13, magic: 0, skill: 9, speed: 13, luck: 9, defence: 10, resistance: 10 }]],
+    class_line: [
+      [
+        0,
+        10,
+        getClass("Cavalier"),
+        {
+          hp: 25,
+          strength: 13,
+          magic: 0,
+          skill: 9,
+          speed: 13,
+          luck: 9,
+          defence: 10,
+          resistance: 10,
+        },
+      ],
+    ],
     starting_weapons: ["Steel Lance", "Iron Sword"],
     stats: {
       hp: 25,
@@ -3568,7 +3868,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 15,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 15, getClass("Knight"), { hp: 31, strength: 15, magic: 0, skill: 15, speed: 6, luck: 12, defence: 19, resistance: 10 }]],
+    class_line: [
+      [
+        0,
+        15,
+        getClass("Knight"),
+        {
+          hp: 31,
+          strength: 15,
+          magic: 0,
+          skill: 15,
+          speed: 6,
+          luck: 12,
+          defence: 19,
+          resistance: 10,
+        },
+      ],
+    ],
     starting_weapons: ["Steel Lance"],
     stats: {
       hp: 31,
@@ -3711,7 +4027,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 10,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 10, getClass("Fighter"), {hp: 28, strength: 15, magic: 0, skill: 10, speed: 13, luck: 9, defence: 8, resistance: 2}]],
+    class_line: [
+      [
+        0,
+        10,
+        getClass("Fighter"),
+        {
+          hp: 28,
+          strength: 15,
+          magic: 0,
+          skill: 10,
+          speed: 13,
+          luck: 9,
+          defence: 8,
+          resistance: 2,
+        },
+      ],
+    ],
     starting_weapons: ["Steel Axe"],
     stats: {
       hp: 28,
@@ -3854,7 +4186,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 2,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[18, 2, getClass("Dark Knight"), { hp: 34, strength: 14, magic: 20, skill: 14, speed: 15, luck: 15, defence: 16, resistance: 20 }]],
+    class_line: [
+      [
+        18,
+        2,
+        getClass("Dark Knight"),
+        {
+          hp: 34,
+          strength: 14,
+          magic: 20,
+          skill: 14,
+          speed: 15,
+          luck: 15,
+          defence: 16,
+          resistance: 20,
+        },
+      ],
+    ],
     starting_weapons: ["Brynhildr", "Iron Sword"],
     stats: {
       hp: 34,
@@ -3997,7 +4345,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 4,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[20, 4, getClass("Paladin"), { hp: 38, strength: 23, magic: 4, skill: 18, speed: 15, luck: 20, defence: 23, resistance: 11 }]],
+    class_line: [
+      [
+        20,
+        4,
+        getClass("Paladin"),
+        {
+          hp: 38,
+          strength: 23,
+          magic: 4,
+          skill: 18,
+          speed: 15,
+          luck: 20,
+          defence: 23,
+          resistance: 11,
+        },
+      ],
+    ],
     starting_weapons: ["Siegfried"],
     stats: {
       hp: 38,
@@ -4140,7 +4504,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 15,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[0, 15, getClass("Wolfskin"), { hp: 35, strength: 19, magic: 0, skill: 10, speed: 13, luck: 9, defence: 16, resistance: 7 }]],
+    class_line: [
+      [
+        0,
+        15,
+        getClass("Wolfskin"),
+        {
+          hp: 35,
+          strength: 19,
+          magic: 0,
+          skill: 10,
+          speed: 13,
+          luck: 9,
+          defence: 16,
+          resistance: 7,
+        },
+      ],
+    ],
     starting_weapons: ["Beastone", "Beastrune"],
     stats: {
       hp: 35,
@@ -4283,7 +4663,23 @@ export const defaultCharactersConquest: Character[] = [
     level: 5,
     eternalSealCount: 0,
     maxLevelModifier: 0,
-    class_line: [[20, 5, getClass("Maid"), { hp: 29, strength: 18, magic: 16, skill: 25, speed: 15, luck: 11, defence: 14, resistance: 23 }]],
+    class_line: [
+      [
+        20,
+        5,
+        getClass("Maid"),
+        {
+          hp: 29,
+          strength: 18,
+          magic: 16,
+          skill: 25,
+          speed: 15,
+          luck: 11,
+          defence: 14,
+          resistance: 23,
+        },
+      ],
+    ],
     starting_weapons: [],
     stats: {
       hp: 29,

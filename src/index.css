@@ -3,27 +3,72 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  background-color: #ddd6cc;
+  color-scheme: hoshido nohr;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
 
-  /* tokens and shid */
+body.hoshido {
+  transition: 0.4s;
+  color-scheme: hoshido;
+  --color-main-red: #b01818;
+  --color-main-orange: #b06418;
+  --color-accent: #0c7c7c;
+  --color-accent-focus: #124174;
+
+  background-color: #ddd6cc;
   --color-background: #ddd6cc;
   --color-text-basic: rgba(36, 35, 35, 0.87);
   --color-text-sub: rgb(31, 45, 46);
-  --color-main-red: #b01818;
-  --color-main-orange: #b06418;
-  --color-text-navbar: White;
-  --color-text-component: White;
-  --color-background-cell: White;
-  --color-accent: #18b0b0;
-  --color-accent-focus: #2e72bb;
+  --color-text-navbar: #ffffff;
+  --color-text-component: #ffffff;
+  --color-background-cell: #ffffff;
+  --color-component-accent: #f0f8ff;
   --color-background-transparent: rgba(0, 0, 0, 0.308);
   --color-background-units-grid: #f8f8f8;
+  --color-tooltip-background: #333333;
+  --color-tooltip-text: #ffffff;
+}
+
+body.nohr {
+  transition: 0.4s;
+  color-scheme: nohr;
+  --color-main-red: #850909;
+  --color-main-orange: #81470c;
+  --color-accent: #18b0b0;
+  --color-accent-focus: #2e72bb;
+
+  background-color: rgb(24, 22, 22);
+  --color-background: #1d1a1a;
+  --color-text-basic: #e0e0e0;
+  --color-text-sub: #dfdfdf;
+  --color-text-navbar: #e0e0e0;
+  --color-text-component: #2a2a2a;
+  --color-background-cell: #2a2a2a;
+  --color-component-accent: #41464b;
+  --color-background-transparent: rgba(255, 255, 255, 0.2);
+  --color-background-units-grid: #2a2a2a;
+  --color-tooltip-background: #e9e3e3;
+  --color-tooltip-text: #1d1a1a;
+}
+
+.tippy-box[data-theme="custom"] {
+  background-color: var(--color-tooltip-background) !important;
+}
+
+.tippy-box[data-theme="custom"] .tippy-content {
+  color: var(--color-tooltip-text) !important;
+}
+
+.tippy-box[data-theme="custom"] .tippy-content {
+  color: var(--color-tooltip-text) !important;
+}
+
+.tippy-box[data-theme="custom"] .tippy-content {
+  color: var(--color-tooltip-text) !important;
 }
 
 a {
