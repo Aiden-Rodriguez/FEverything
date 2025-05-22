@@ -195,12 +195,31 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     const newClass = getClassFn(selectedClassName);
     let newLevel = unit.level;
     let newInternalLevel = unit.internalLevel;
+    let updatedClassLine = [...unit.class_line];
+
     if (
       unit.class.promotionStatus === false &&
       newClass.promotionStatus === true
     ) {
       newLevel = 1;
       newInternalLevel = 10 + Math.floor(unit.level / 2);
+      // Capture current (pre-promotion) class data
+      const currentClassLine: [number, number, Class, StatBlock] = [
+        unit.internalLevel,
+        unit.level,
+        unit.class,
+        {
+          hp: unit.stats.hp,
+          strength: unit.stats.strength,
+          magic: unit.stats.magic,
+          skill: unit.stats.skill,
+          speed: unit.stats.speed,
+          luck: unit.stats.luck,
+          defence: unit.stats.defence,
+          resistance: unit.stats.resistance,
+        },
+      ];
+      updatedClassLine = [...unit.class_line, currentClassLine];
     } else if (
       unit.class.promotionStatus === null &&
       newClass.promotionStatus === true
@@ -208,6 +227,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       newLevel = unit.level - 20;
       newInternalLevel = 20;
     }
+
     const newStats = {
       hp:
         unit.stats.hp -
@@ -243,6 +263,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         newClass.classBaseStats.resistance,
       move: newClass.classBaseStats.move,
     };
+
     const newClassLine: [number, number, Class, StatBlock] = [
       newInternalLevel,
       newLevel,
@@ -258,18 +279,19 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         resistance: newStats.resistance,
       },
     ];
+
     const updatedUnit: Character = {
       ...unit,
       class: newClass,
-      class_line: [...unit.class_line, newClassLine],
+      class_line: [...updatedClassLine, newClassLine],
       stats: newStats,
       level: newLevel,
       internalLevel: newInternalLevel,
     };
-    //console.log(updatedUnit.class_line)
+
     updateUnit(updatedUnit);
     setIsClassChanging(false);
-  };
+};
 
   const getAllySealClass = (
     ClassReciever: Character,

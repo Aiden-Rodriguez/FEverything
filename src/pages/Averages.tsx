@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { parse } from "flatted";
 import { Character } from "../types/Fire Emblem Fates/UnitStruct";
+import { Class } from "../types/Fire Emblem Fates/ClassStruct";
+import { StatBlock } from "../types/Fire Emblem Fates/UnitStruct";
 import normalcurve from "../assets/images/nomal curve.png";
 import "../styles/Averages.css";
 
@@ -35,6 +37,37 @@ const Averages = () => {
     const unit = units.find((u) => u.name === selectedName) || null;
     setSelectedUnit(unit);
   };
+
+  const calcStatsPerClassChange = () => {
+    console.log("Starting");
+    const classLineList = []
+    if (!selectedUnit) return;
+    classLineList.push(selectedUnit.class_line[0]) //Initialize w/ first instance 
+    const classLine = selectedUnit.class_line;
+    for (let i = 1; i <= classLine.length; i++) {
+      const prev = classLine[i - 1];
+      const curr: [number, number, Class, StatBlock] = i < classLine.length
+        ? classLine[i]
+        : [selectedUnit.internalLevel, selectedUnit.level, selectedUnit.class, selectedUnit.stats]; // final comparison to current unit
+      const [prevInternal, prevLevel] = prev;
+      const [currInternal, currLevel] = curr;
+      if (currLevel - prevLevel === 0) {
+        //Can discard info in here mostly
+        console.log("No change in levels");
+        classLineList.pop() // replace class as the change is irrelevant to growths
+        classLineList.push(curr)      
+      } else if (currInternal !== prevInternal) {
+        //Can also discard info for here
+        console.log("Promotion detected!");
+      } else {
+        console.log("Change in levels");
+        classLineList.push(curr);
+      }
+    }
+    console.log(selectedUnit.class_line);
+    console.log(classLineList);
+  };
+  
 
   // const factorial = (n: number): number => {
   //   if (n <= 1) return 1;
@@ -231,6 +264,7 @@ const Averages = () => {
       ) : (
         <p className="no-units">No units available.</p>
       )}
+      <button onClick={calcStatsPerClassChange}>TEST</button>
     </div>
   );
 };
