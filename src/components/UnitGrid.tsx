@@ -291,7 +291,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
 
     updateUnit(updatedUnit);
     setIsClassChanging(false);
-};
+  };
 
   const getAllySealClass = (
     ClassReciever: Character,
@@ -497,7 +497,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           level_difference <
           num - unit.class_line[unit.class_line.length - 1][3][statField]
         ) {
-          console.log("2");
           setError(
             `${statFields.find((f) => f.key === statField)?.label || field} must be less than or equal to ${level_difference + unit.class_line[unit.class_line.length - 1][3][statField]}; unit cannot gain more than 1 stat in a field per level. Make sure to properly update a unit's level first.`,
           );
@@ -506,14 +505,13 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         } else if (
           unit.class_line[unit.class_line.length - 1][3][statField] > num
         ) {
-          console.log("3");
           setError(
             `${statFields.find((f) => f.key === statField)?.label || field} must be greater than ${unit.class_line[unit.class_line.length - 1][3][statField]} (unit cannot lose stats after a class change below their previous stats.)`,
           );
           return false;
         }
-        console.log(unit.class_line[unit.class_line.length - 1][3][statField]);
-        console.log(num);
+        // console.log(unit.class_line[unit.class_line.length - 1][3][statField]);
+        // console.log(num);
       }
     }
     return true;
