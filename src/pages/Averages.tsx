@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { parse } from "flatted";
 import { Character } from "../types/Fire Emblem Fates/UnitStruct";
 import { Class } from "../types/Fire Emblem Fates/ClassStruct";
 import { StatBlock } from "../types/Fire Emblem Fates/UnitStruct";
 import { Bar } from "react-chartjs-2";
+import SpriteAnimator from "../components/SpriteAnimator";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,7 +17,6 @@ import {
 } from "chart.js";
 import "../styles/Averages.css";
 
-// Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 // Helper function to approximate the error function (erf)
@@ -109,13 +109,12 @@ const getOverallChartData = (
   averageZScore: number,
   characterName: string
 ) => {
-  // Approximate normal distribution around averageZScore
   const xValues = Array.from({ length: 21 }, (_, i) => i / 5 - 2); // -2 to +2
   const probabilities = xValues.map((x) =>
     (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * (x - averageZScore) ** 2)
   );
   const maxProb = Math.max(...probabilities);
-  const normalizedProbs = probabilities.map((p) => p / maxProb); // Normalize for display
+  const normalizedProbs = probabilities.map((p) => p / maxProb);
 
   return {
     labels: xValues.map((x) => x.toFixed(1)),
@@ -140,9 +139,9 @@ const Averages = () => {
   const [selectedUnit, setSelectedUnit] = useState<Character | null>(null);
   const [averageZScore, setAverageZScore] = useState<number | null>(null);
   const [statZScores, setStatZScores] = useState<number[] | null>(null);
-  const [lastGrowthRates, setLastGrowthRates] = useState<number[] | null>(null);
-  const [lastStatGains, setLastStatGains] = useState<number[] | null>(null);
-  const [lastLevelsGained, setLastLevelsGained] = useState<number | null>(null);
+  const [totalGrowthRates, setTotalGrowthRates] = useState<number[] | null>(null);
+  const [totalStatGains, setTotalStatGains] = useState<number[] | null>(null);
+  const [totalLevelsGained, setTotalLevelsGained] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<string>("overall");
 
   useEffect(() => {
@@ -172,9 +171,9 @@ const Averages = () => {
     setSelectedUnit(unit);
     setAverageZScore(null);
     setStatZScores(null);
-    setLastGrowthRates(null);
-    setLastStatGains(null);
-    setLastLevelsGained(null);
+    setTotalGrowthRates(null);
+    setTotalStatGains(null);
+    setTotalLevelsGained(null);
     setActiveTab("overall");
     if (unit) {
       calcStatsPerClassChange(unit);
@@ -182,7 +181,7 @@ const Averages = () => {
   };
 
   const calcStatsPerClassChange = (unit: Character) => {
-    console.log("Starting");
+    // console.log("Starting");
     if (!unit) return;
     const classLineList: [number, number, Class, StatBlock][] = [];
     const classLine = unit.class_line;
@@ -199,14 +198,14 @@ const Averages = () => {
       const [prevInternal, prevLevel] = prev;
       const [currInternal, currLevel] = curr;
       if (currLevel - prevLevel === 0) {
-        console.log("No change in levels");
+        // console.log("No change in levels");
         classLineList.pop();
         classLineList.push(curr);
       } else if (currInternal !== prevInternal) {
-        console.log("Promotion detected!");
+        // console.log("Promotion detected!");
         classLineList.push(curr);
       } else {
-        console.log("Change in levels");
+        // console.log("Change in levels");
         classLineList.push(curr);
       }
     }
@@ -245,21 +244,21 @@ const Averages = () => {
             unit.base_growths.resistance) /
           100;
 
-        const hpGained = secondaryClassData[3].hp - initialClassData[3].hp;
-        const strengthGained =
-          secondaryClassData[3].strength - initialClassData[3].strength;
-        const magicGained =
-          secondaryClassData[3].magic - initialClassData[3].magic;
-        const skillGained =
-          secondaryClassData[3].skill - initialClassData[3].skill;
-        const speedGained =
-          secondaryClassData[3].speed - initialClassData[3].speed;
-        const luckGained =
-          secondaryClassData[3].luck - initialClassData[3].luck;
-        const defenceGained =
-          secondaryClassData[3].defence - initialClassData[3].defence;
-        const resistanceGained =
-          secondaryClassData[3].resistance - initialClassData[3].resistance;
+          const hpGained = (secondaryClassData[3].hp - initialClassData[3].hp) + (initialClassData[2].classBaseStats.hp - secondaryClassData[2].classBaseStats.hp);
+          const strengthGained =
+            secondaryClassData[3].strength - initialClassData[3].strength + (initialClassData[2].classBaseStats.strength - secondaryClassData[2].classBaseStats.strength);
+          const magicGained =
+            secondaryClassData[3].magic - initialClassData[3].magic + (initialClassData[2].classBaseStats.magic - secondaryClassData[2].classBaseStats.magic);
+          const skillGained =
+            secondaryClassData[3].skill - initialClassData[3].skill + (initialClassData[2].classBaseStats.skill - secondaryClassData[2].classBaseStats.skill);
+          const speedGained =
+            secondaryClassData[3].speed - initialClassData[3].speed + (initialClassData[2].classBaseStats.speed - secondaryClassData[2].classBaseStats.speed);
+          const luckGained =
+            secondaryClassData[3].luck - initialClassData[3].luck + (initialClassData[2].classBaseStats.luck - secondaryClassData[2].classBaseStats.luck);
+          const defenceGained =
+            secondaryClassData[3].defence - initialClassData[3].defence + (initialClassData[2].classBaseStats.defence - secondaryClassData[2].classBaseStats.defence);
+          const resistanceGained =
+            secondaryClassData[3].resistance - initialClassData[3].resistance + (initialClassData[2].classBaseStats.resistance - secondaryClassData[2].classBaseStats.resistance);
 
         const levelsGained = secondaryClassData[1] - initialClassData[1];
 
@@ -290,21 +289,24 @@ const Averages = () => {
     }
 
     const zScoresByPeriod: number[][] = [];
-    let lastGrowthRates: number[] | null = null;
-    let lastStatGains: number[] | null = null;
-    let lastLevelsGained: number | null = null;
+    let totalLevelsGained: number = 0;
+    const totalStatGains: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
+    const weightedGrowthSums: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
 
     levelUpData.forEach(
       ([growthRates, statGains, levelsGained], periodIndex) => {
         const zScores: number[] = [];
         if (levelsGained === 0) {
-          console.log(
-            `Period ${periodIndex}: No level-ups, skipping z-score calculation`
-          );
+          // console.log(
+          //   `Period ${periodIndex}: No level-ups, skipping z-score calculation`
+          // );
           return;
         }
+        totalLevelsGained += levelsGained;
         growthRates.forEach((p, statIndex) => {
           const k = statGains[statIndex];
+          totalStatGains[statIndex] += k;
+          weightedGrowthSums[statIndex] += p * levelsGained;
           const mean = levelsGained * p;
           const variance = levelsGained * p * (1 - p);
           const stdDev = Math.sqrt(variance);
@@ -317,15 +319,13 @@ const Averages = () => {
           zScores.push(zScore);
         });
         zScoresByPeriod.push(zScores);
-        console.log(`Period ${periodIndex} z-scores:`, zScores);
-        lastGrowthRates = growthRates;
-        lastStatGains = statGains;
-        lastLevelsGained = levelsGained;
+        // console.log(`Period ${periodIndex} z-scores:`, zScores);
       }
     );
 
     let overallAverageZScore = null;
     let lastStatZScores: number[] | null = null;
+    let totalGrowthRates: number[] | null = null;
     if (zScoresByPeriod.length > 0) {
       const allZScores: number[] = zScoresByPeriod
         .flat()
@@ -335,23 +335,30 @@ const Averages = () => {
         const sumZScores = allZScores.reduce((sum, z) => sum + z, 0);
         overallAverageZScore = sumZScores / allZScores.length;
       }
+      if (totalLevelsGained > 0) {
+        totalGrowthRates = weightedGrowthSums.map(
+          (sum) => sum / totalLevelsGained
+        );
+      }
     }
 
     setAverageZScore(overallAverageZScore);
     setStatZScores(lastStatZScores);
-    setLastGrowthRates(lastGrowthRates);
-    setLastStatGains(lastStatGains);
-    setLastLevelsGained(lastLevelsGained);
-    console.log("levelUpData:", levelUpData);
-    console.log("Overall average z-score:", overallAverageZScore);
-    console.log("Last period stat z-scores:", lastStatZScores);
-    console.log("Last growth rates:", lastGrowthRates);
-    console.log("Last stat gains:", lastStatGains);
-    console.log("Last levels gained:", lastLevelsGained);
+    setTotalGrowthRates(totalGrowthRates);
+    setTotalStatGains(totalStatGains);
+    setTotalLevelsGained(totalLevelsGained);
+    // console.log("levelUpData:", levelUpData);
+    // console.log("Overall average z-score:", overallAverageZScore);
+    // console.log("Last period stat z-scores:", lastStatZScores);
+    // console.log("Total growth rates:", totalGrowthRates);
+    // console.log("Total stat gains:", totalStatGains);
+    // console.log("Total levels gained:", totalLevelsGained);
   };
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 1.5,
     plugins: {
       legend: {
         position: "top" as const,
@@ -407,6 +414,22 @@ const Averages = () => {
             ))
           )}
         </select>
+        {selectedUnit ? (
+  <div className="unit-sprite">
+    <div className="sprite-wrapper">
+      <SpriteAnimator
+        character={selectedUnit.name}
+        gender={selectedUnit.gender}
+        class={selectedUnit.class.className}
+        game={gameId ?? ""}
+        displayScale={2}
+        classMove={selectedUnit.class.classBaseStats.move}
+        faction="Player"
+        animationId={0}
+      />
+    </div>
+  </div>
+) : null}
       </div>
       {selectedUnit ? (
         <div className="averages-grid">
@@ -540,9 +563,10 @@ const Averages = () => {
           <div className="averages-grid-bottom">
             {averageZScore !== null &&
             statZScores !== null &&
-            lastGrowthRates !== null &&
-            lastStatGains !== null &&
-            lastLevelsGained !== null ? (
+            totalGrowthRates !== null &&
+            totalStatGains !== null &&
+            totalLevelsGained !== null &&
+            totalLevelsGained > 0 ? (
               <div>
                 <div className="tab-container">
                   {[
@@ -579,13 +603,13 @@ const Averages = () => {
                   ) : (
                     <Bar
                       data={getChartData(
-                        lastLevelsGained,
-                        lastGrowthRates[
+                        totalLevelsGained,
+                        totalGrowthRates[
                           ["hp", "str", "mag", "skl", "spd", "lck", "def", "res"].indexOf(
                             activeTab
                           )
                         ],
-                        lastStatGains[
+                        totalStatGains[
                           ["hp", "str", "mag", "skl", "spd", "lck", "def", "res"].indexOf(
                             activeTab
                           )
