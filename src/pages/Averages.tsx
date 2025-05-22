@@ -39,7 +39,7 @@ const Averages = () => {
   };
 
   const calcStatsPerClassChange = () => {
-    console.log("Starting");
+    // console.log("Starting");
     const classLineList = []
     if (!selectedUnit) return;
     classLineList.push(selectedUnit.class_line[0]) //Initialize w/ first instance 
@@ -53,19 +53,57 @@ const Averages = () => {
       const [currInternal, currLevel] = curr;
       if (currLevel - prevLevel === 0) {
         //Can discard info in here mostly
-        console.log("No change in levels");
-        classLineList.pop() // replace class as the change is irrelevant to growths
+        // console.log("No change in levels");
+        classLineList.pop() // replace class as the previous change is irrelevant to growths
         classLineList.push(curr)      
       } else if (currInternal !== prevInternal) {
         //Can also discard info for here
-        console.log("Promotion detected!");
+        // console.log("Promotion detected!");
+        classLineList.push(curr)
       } else {
-        console.log("Change in levels");
+        // console.log("Change in levels");
         classLineList.push(curr);
       }
     }
-    console.log(selectedUnit.class_line);
-    console.log(classLineList);
+    // console.log(selectedUnit.class_line);
+    // console.log(classLineList);
+
+    //Contains data of level ups. Tracks levels gained (n), growth rate (p), and actual increase in stats
+    const levelUpData = []
+    for (let i = 1; i < classLineList.length; i++) {
+      const initialClassData = classLineList[i - 1]
+      const secondaryClassData = classLineList[i]
+
+      //If internal levels are different, eg on class change, dont do anything with it.
+      if (initialClassData[0] !== secondaryClassData[0]) {
+        //pass
+      } else {
+        const growthRateHp = (initialClassData[2].classGrowths.hp + selectedUnit.base_growths.hp) / 100
+        const growthRateStrength = (initialClassData[2].classGrowths.strength + selectedUnit.base_growths.strength ) / 100
+        const growthRateMagic = (initialClassData[2].classGrowths.magic + selectedUnit.base_growths.magic) / 100
+        const growthRateSkill = (initialClassData[2].classGrowths.skill + selectedUnit.base_growths.skill) / 100
+        const growthRateSpeed = (initialClassData[2].classGrowths.speed + selectedUnit.base_growths.speed) / 100
+        const growthRateLuck = (initialClassData[2].classGrowths.luck + selectedUnit.base_growths.luck) / 100
+        const growthRateDefence = (initialClassData[2].classGrowths.defence + selectedUnit.base_growths.defence) / 100
+        const growthRateResistance = (initialClassData[2].classGrowths.resistance + selectedUnit.base_growths.resistance) / 100
+
+        const hpGained = (secondaryClassData[3].hp - initialClassData[3].hp)
+        const strengthGained = (secondaryClassData[3].strength - initialClassData[3].strength)
+        const magicGained = (secondaryClassData[3].magic - initialClassData[3].magic)
+        const skillGained = (secondaryClassData[3].skill - initialClassData[3].skill)
+        const speedGained = (secondaryClassData[3].speed - initialClassData[3].speed)
+        const luckGained = (secondaryClassData[3].luck - initialClassData[3].luck)
+        const defenceGained = (secondaryClassData[3].defence - initialClassData[3].defence)
+        const resistanceGained = (secondaryClassData[3].resistance - initialClassData[3].resistance)
+
+        const levelsGained = (secondaryClassData[1] - initialClassData[1])
+
+        levelUpData.push([[growthRateHp, growthRateStrength, growthRateMagic, growthRateSkill, growthRateSpeed, growthRateLuck, growthRateDefence, growthRateResistance], [hpGained, strengthGained, magicGained, skillGained, speedGained, luckGained, defenceGained, resistanceGained], levelsGained])
+      }
+    }
+    // console.log(levelUpData)
+
+    
   };
   
 
