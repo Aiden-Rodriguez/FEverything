@@ -671,7 +671,7 @@ const Averages = () => {
                   average (
                   {getZScorePercentage(averageZScore, selectedUnit.name)}
                   )! <br />
-                  Per-stat standard deviations: <br />
+                  {/* Per-stat standard deviations: <br />
                   Note that at very low change in levels this may be inaccurate
                   due to levels being discrete and not continuous. <br />
                   HP:{" "}
@@ -736,7 +736,7 @@ const Averages = () => {
                         statZScores[7],
                         selectedUnit.name,
                       )})`
-                    : "N/A"}
+                    : "N/A"} */}
                 </p>
               </div>
             ) : (
