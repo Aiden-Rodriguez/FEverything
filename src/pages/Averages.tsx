@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { parse } from "flatted";
 import { Character } from "../types/Fire Emblem Fates/UnitStruct";
@@ -17,7 +17,14 @@ import {
 } from "chart.js";
 import "../styles/Averages.css";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
 // Helper function to approximate the error function (erf)
 const erf = (x: number): number => {
@@ -80,12 +87,12 @@ const getChartData = (
   p: number,
   k: number,
   statName: string,
-  characterName: string
+  characterName: string,
 ) => {
   const labels = Array.from({ length: n + 1 }, (_, i) => i.toString());
   const probabilities = labels.map((x) => binomialPMF(parseInt(x), n, p));
   const backgroundColors = labels.map((x) =>
-    parseInt(x) === k ? "rgba(255, 99, 132, 0.8)" : "rgba(54, 162, 235, 0.8)"
+    parseInt(x) === k ? "rgba(255, 99, 132, 0.8)" : "rgba(54, 162, 235, 0.8)",
   );
 
   return {
@@ -95,9 +102,7 @@ const getChartData = (
         label: `Probability of ${statName} Gains`,
         data: probabilities,
         backgroundColor: backgroundColors,
-        borderColor: backgroundColors.map((color) =>
-          color.replace("0.8", "1")
-        ),
+        borderColor: backgroundColors.map((color) => color.replace("0.8", "1")),
         borderWidth: 1,
       },
     ],
@@ -105,13 +110,11 @@ const getChartData = (
 };
 
 // Helper function to generate chart data for overall (normal approximation)
-const getOverallChartData = (
-  averageZScore: number,
-  characterName: string
-) => {
+const getOverallChartData = (averageZScore: number, characterName: string) => {
   const xValues = Array.from({ length: 21 }, (_, i) => i / 5 - 2); // -2 to +2
-  const probabilities = xValues.map((x) =>
-    (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * (x - averageZScore) ** 2)
+  const probabilities = xValues.map(
+    (x) =>
+      (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * (x - averageZScore) ** 2),
   );
   const maxProb = Math.max(...probabilities);
   const normalizedProbs = probabilities.map((p) => p / maxProb);
@@ -139,15 +142,19 @@ const Averages = () => {
   const [selectedUnit, setSelectedUnit] = useState<Character | null>(null);
   const [averageZScore, setAverageZScore] = useState<number | null>(null);
   const [statZScores, setStatZScores] = useState<number[] | null>(null);
-  const [totalGrowthRates, setTotalGrowthRates] = useState<number[] | null>(null);
+  const [totalGrowthRates, setTotalGrowthRates] = useState<number[] | null>(
+    null,
+  );
   const [totalStatGains, setTotalStatGains] = useState<number[] | null>(null);
-  const [totalLevelsGained, setTotalLevelsGained] = useState<number | null>(null);
+  const [totalLevelsGained, setTotalLevelsGained] = useState<number | null>(
+    null,
+  );
   const [activeTab, setActiveTab] = useState<string>("overall");
 
   useEffect(() => {
     if (gameId && selectedRoute) {
       const storedUnits = localStorage.getItem(
-        `units_${gameId}_${selectedRoute}`
+        `units_${gameId}_${selectedRoute}`,
       );
       if (storedUnits) {
         try {
@@ -244,21 +251,46 @@ const Averages = () => {
             unit.base_growths.resistance) /
           100;
 
-          const hpGained = (secondaryClassData[3].hp - initialClassData[3].hp) + (initialClassData[2].classBaseStats.hp - secondaryClassData[2].classBaseStats.hp);
-          const strengthGained =
-            secondaryClassData[3].strength - initialClassData[3].strength + (initialClassData[2].classBaseStats.strength - secondaryClassData[2].classBaseStats.strength);
-          const magicGained =
-            secondaryClassData[3].magic - initialClassData[3].magic + (initialClassData[2].classBaseStats.magic - secondaryClassData[2].classBaseStats.magic);
-          const skillGained =
-            secondaryClassData[3].skill - initialClassData[3].skill + (initialClassData[2].classBaseStats.skill - secondaryClassData[2].classBaseStats.skill);
-          const speedGained =
-            secondaryClassData[3].speed - initialClassData[3].speed + (initialClassData[2].classBaseStats.speed - secondaryClassData[2].classBaseStats.speed);
-          const luckGained =
-            secondaryClassData[3].luck - initialClassData[3].luck + (initialClassData[2].classBaseStats.luck - secondaryClassData[2].classBaseStats.luck);
-          const defenceGained =
-            secondaryClassData[3].defence - initialClassData[3].defence + (initialClassData[2].classBaseStats.defence - secondaryClassData[2].classBaseStats.defence);
-          const resistanceGained =
-            secondaryClassData[3].resistance - initialClassData[3].resistance + (initialClassData[2].classBaseStats.resistance - secondaryClassData[2].classBaseStats.resistance);
+        const hpGained =
+          secondaryClassData[3].hp -
+          initialClassData[3].hp +
+          (initialClassData[2].classBaseStats.hp -
+            secondaryClassData[2].classBaseStats.hp);
+        const strengthGained =
+          secondaryClassData[3].strength -
+          initialClassData[3].strength +
+          (initialClassData[2].classBaseStats.strength -
+            secondaryClassData[2].classBaseStats.strength);
+        const magicGained =
+          secondaryClassData[3].magic -
+          initialClassData[3].magic +
+          (initialClassData[2].classBaseStats.magic -
+            secondaryClassData[2].classBaseStats.magic);
+        const skillGained =
+          secondaryClassData[3].skill -
+          initialClassData[3].skill +
+          (initialClassData[2].classBaseStats.skill -
+            secondaryClassData[2].classBaseStats.skill);
+        const speedGained =
+          secondaryClassData[3].speed -
+          initialClassData[3].speed +
+          (initialClassData[2].classBaseStats.speed -
+            secondaryClassData[2].classBaseStats.speed);
+        const luckGained =
+          secondaryClassData[3].luck -
+          initialClassData[3].luck +
+          (initialClassData[2].classBaseStats.luck -
+            secondaryClassData[2].classBaseStats.luck);
+        const defenceGained =
+          secondaryClassData[3].defence -
+          initialClassData[3].defence +
+          (initialClassData[2].classBaseStats.defence -
+            secondaryClassData[2].classBaseStats.defence);
+        const resistanceGained =
+          secondaryClassData[3].resistance -
+          initialClassData[3].resistance +
+          (initialClassData[2].classBaseStats.resistance -
+            secondaryClassData[2].classBaseStats.resistance);
 
         const levelsGained = secondaryClassData[1] - initialClassData[1];
 
@@ -320,7 +352,7 @@ const Averages = () => {
         });
         zScoresByPeriod.push(zScores);
         // console.log(`Period ${periodIndex} z-scores:`, zScores);
-      }
+      },
     );
 
     let overallAverageZScore = null;
@@ -337,7 +369,7 @@ const Averages = () => {
       }
       if (totalLevelsGained > 0) {
         totalGrowthRates = weightedGrowthSums.map(
-          (sum) => sum / totalLevelsGained
+          (sum) => sum / totalLevelsGained,
         );
       }
     }
@@ -415,21 +447,21 @@ const Averages = () => {
           )}
         </select>
         {selectedUnit ? (
-  <div className="unit-sprite">
-    <div className="sprite-wrapper">
-      <SpriteAnimator
-        character={selectedUnit.name}
-        gender={selectedUnit.gender}
-        class={selectedUnit.class.className}
-        game={gameId ?? ""}
-        displayScale={2}
-        classMove={selectedUnit.class.classBaseStats.move}
-        faction="Player"
-        animationId={0}
-      />
-    </div>
-  </div>
-) : null}
+          <div className="unit-sprite">
+            <div className="sprite-wrapper">
+              <SpriteAnimator
+                character={selectedUnit.name}
+                gender={selectedUnit.gender}
+                class={selectedUnit.class.className}
+                game={gameId ?? ""}
+                displayScale={2}
+                classMove={selectedUnit.class.classBaseStats.move}
+                faction="Player"
+                animationId={0}
+              />
+            </div>
+          </div>
+        ) : null}
       </div>
       {selectedUnit ? (
         <div className="averages-grid">
@@ -585,9 +617,7 @@ const Averages = () => {
                       className={`tab-button ${activeTab === tab ? "active" : ""}`}
                       onClick={() => setActiveTab(tab)}
                     >
-                      {tab === "overall"
-                        ? "Overall"
-                        : tab.toUpperCase()}
+                      {tab === "overall" ? "Overall" : tab.toUpperCase()}
                     </button>
                   ))}
                 </div>
@@ -596,7 +626,7 @@ const Averages = () => {
                     <Bar
                       data={getOverallChartData(
                         averageZScore,
-                        selectedUnit.name
+                        selectedUnit.name,
                       )}
                       options={chartOptions}
                     />
@@ -605,17 +635,31 @@ const Averages = () => {
                       data={getChartData(
                         totalLevelsGained,
                         totalGrowthRates[
-                          ["hp", "str", "mag", "skl", "spd", "lck", "def", "res"].indexOf(
-                            activeTab
-                          )
+                          [
+                            "hp",
+                            "str",
+                            "mag",
+                            "skl",
+                            "spd",
+                            "lck",
+                            "def",
+                            "res",
+                          ].indexOf(activeTab)
                         ],
                         totalStatGains[
-                          ["hp", "str", "mag", "skl", "spd", "lck", "def", "res"].indexOf(
-                            activeTab
-                          )
+                          [
+                            "hp",
+                            "str",
+                            "mag",
+                            "skl",
+                            "spd",
+                            "lck",
+                            "def",
+                            "res",
+                          ].indexOf(activeTab)
                         ],
                         activeTab.toUpperCase(),
-                        selectedUnit.name
+                        selectedUnit.name,
                       )}
                       options={chartOptions}
                     />
@@ -634,7 +678,7 @@ const Averages = () => {
                   {isFinite(statZScores[0])
                     ? `${statZScores[0].toFixed(2)} (${getZScorePercentage(
                         statZScores[0],
-                        selectedUnit.name
+                        selectedUnit.name,
                       )})`
                     : "N/A"}{" "}
                   <br />
@@ -642,7 +686,7 @@ const Averages = () => {
                   {isFinite(statZScores[1])
                     ? `${statZScores[1].toFixed(2)} (${getZScorePercentage(
                         statZScores[1],
-                        selectedUnit.name
+                        selectedUnit.name,
                       )})`
                     : "N/A"}{" "}
                   <br />
@@ -650,7 +694,7 @@ const Averages = () => {
                   {isFinite(statZScores[2])
                     ? `${statZScores[2].toFixed(2)} (${getZScorePercentage(
                         statZScores[2],
-                        selectedUnit.name
+                        selectedUnit.name,
                       )})`
                     : "N/A"}{" "}
                   <br />
@@ -658,7 +702,7 @@ const Averages = () => {
                   {isFinite(statZScores[3])
                     ? `${statZScores[3].toFixed(2)} (${getZScorePercentage(
                         statZScores[3],
-                        selectedUnit.name
+                        selectedUnit.name,
                       )})`
                     : "N/A"}{" "}
                   <br />
@@ -666,7 +710,7 @@ const Averages = () => {
                   {isFinite(statZScores[4])
                     ? `${statZScores[4].toFixed(2)} (${getZScorePercentage(
                         statZScores[4],
-                        selectedUnit.name
+                        selectedUnit.name,
                       )})`
                     : "N/A"}{" "}
                   <br />
@@ -674,7 +718,7 @@ const Averages = () => {
                   {isFinite(statZScores[5])
                     ? `${statZScores[5].toFixed(2)} (${getZScorePercentage(
                         statZScores[5],
-                        selectedUnit.name
+                        selectedUnit.name,
                       )})`
                     : "N/A"}{" "}
                   <br />
@@ -682,7 +726,7 @@ const Averages = () => {
                   {isFinite(statZScores[6])
                     ? `${statZScores[6].toFixed(2)} (${getZScorePercentage(
                         statZScores[6],
-                        selectedUnit.name
+                        selectedUnit.name,
                       )})`
                     : "N/A"}{" "}
                   <br />
@@ -690,7 +734,7 @@ const Averages = () => {
                   {isFinite(statZScores[7])
                     ? `${statZScores[7].toFixed(2)} (${getZScorePercentage(
                         statZScores[7],
-                        selectedUnit.name
+                        selectedUnit.name,
                       )})`
                     : "N/A"}
                 </p>
