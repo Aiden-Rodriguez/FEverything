@@ -111,13 +111,21 @@ const getChartData = (
 
 // Helper function to generate chart data for overall (normal approximation)
 const getOverallChartData = (averageZScore: number, characterName: string) => {
-  const xValues = Array.from({ length: 21 }, (_, i) => i / 5 - 2); // -2 to +2
+  const xValues = Array.from({ length: 21 }, (_, i) => i / 5 - 2); // -2 to +2 in steps of 0.2
   const probabilities = xValues.map(
-    (x) =>
-      (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * (x - averageZScore) ** 2),
+    (x) => (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * x ** 2), // Standard normal centered at 0
   );
   const maxProb = Math.max(...probabilities);
   const normalizedProbs = probabilities.map((p) => p / maxProb);
+
+  // Find the index of the x-value closest to averageZScore
+  const closestIndex = xValues.reduce((closestIdx, x, idx) => {
+    return Math.abs(x - averageZScore) < Math.abs(xValues[closestIdx] - averageZScore) ? idx : closestIdx;
+  }, 0);
+
+  const backgroundColors = xValues.map((_, idx) =>
+    idx === closestIndex ? "rgba(255, 99, 132, 0.8)" : "rgba(54, 162, 235, 0.8)",
+  );
 
   return {
     labels: xValues.map((x) => x.toFixed(1)),
@@ -125,8 +133,8 @@ const getOverallChartData = (averageZScore: number, characterName: string) => {
       {
         label: `Overall Performance (Normal Approx.)`,
         data: normalizedProbs,
-        backgroundColor: "rgba(54, 162, 235, 0.8)",
-        borderColor: "rgba(54, 162, 235, 1)",
+        backgroundColor: backgroundColors,
+        borderColor: backgroundColors.map((color) => color.replace("0.8", "1")),
         borderWidth: 1,
       },
     ],
@@ -188,7 +196,6 @@ const Averages = () => {
   };
 
   const calcStatsPerClassChange = (unit: Character) => {
-    // console.log("Starting");
     if (!unit) return;
     const classLineList: [number, number, Class, StatBlock][] = [];
     const classLine = unit.class_line;
@@ -205,14 +212,11 @@ const Averages = () => {
       const [prevInternal, prevLevel] = prev;
       const [currInternal, currLevel] = curr;
       if (currLevel - prevLevel === 0) {
-        // console.log("No change in levels");
         classLineList.pop();
         classLineList.push(curr);
       } else if (currInternal !== prevInternal) {
-        // console.log("Promotion detected!");
         classLineList.push(curr);
       } else {
-        // console.log("Change in levels");
         classLineList.push(curr);
       }
     }
@@ -329,9 +333,6 @@ const Averages = () => {
       ([growthRates, statGains, levelsGained], periodIndex) => {
         const zScores: number[] = [];
         if (levelsGained === 0) {
-          // console.log(
-          //   `Period ${periodIndex}: No level-ups, skipping z-score calculation`
-          // );
           return;
         }
         totalLevelsGained += levelsGained;
@@ -351,7 +352,6 @@ const Averages = () => {
           zScores.push(zScore);
         });
         zScoresByPeriod.push(zScores);
-        // console.log(`Period ${periodIndex} z-scores:`, zScores);
       },
     );
 
@@ -379,12 +379,6 @@ const Averages = () => {
     setTotalGrowthRates(totalGrowthRates);
     setTotalStatGains(totalStatGains);
     setTotalLevelsGained(totalLevelsGained);
-    // console.log("levelUpData:", levelUpData);
-    // console.log("Overall average z-score:", overallAverageZScore);
-    // console.log("Last period stat z-scores:", lastStatZScores);
-    // console.log("Total growth rates:", totalGrowthRates);
-    // console.log("Total stat gains:", totalStatGains);
-    // console.log("Total levels gained:", totalLevelsGained);
   };
 
   const chartOptions = {
@@ -671,72 +665,6 @@ const Averages = () => {
                   average (
                   {getZScorePercentage(averageZScore, selectedUnit.name)}
                   )! <br />
-                  {/* Per-stat standard deviations: <br />
-                  Note that at very low change in levels this may be inaccurate
-                  due to levels being discrete and not continuous. <br />
-                  HP:{" "}
-                  {isFinite(statZScores[0])
-                    ? `${statZScores[0].toFixed(2)} (${getZScorePercentage(
-                        statZScores[0],
-                        selectedUnit.name,
-                      )})`
-                    : "N/A"}{" "}
-                  <br />
-                  STR:{" "}
-                  {isFinite(statZScores[1])
-                    ? `${statZScores[1].toFixed(2)} (${getZScorePercentage(
-                        statZScores[1],
-                        selectedUnit.name,
-                      )})`
-                    : "N/A"}{" "}
-                  <br />
-                  MAG:{" "}
-                  {isFinite(statZScores[2])
-                    ? `${statZScores[2].toFixed(2)} (${getZScorePercentage(
-                        statZScores[2],
-                        selectedUnit.name,
-                      )})`
-                    : "N/A"}{" "}
-                  <br />
-                  SKL:{" "}
-                  {isFinite(statZScores[3])
-                    ? `${statZScores[3].toFixed(2)} (${getZScorePercentage(
-                        statZScores[3],
-                        selectedUnit.name,
-                      )})`
-                    : "N/A"}{" "}
-                  <br />
-                  SPD:{" "}
-                  {isFinite(statZScores[4])
-                    ? `${statZScores[4].toFixed(2)} (${getZScorePercentage(
-                        statZScores[4],
-                        selectedUnit.name,
-                      )})`
-                    : "N/A"}{" "}
-                  <br />
-                  LCK:{" "}
-                  {isFinite(statZScores[5])
-                    ? `${statZScores[5].toFixed(2)} (${getZScorePercentage(
-                        statZScores[5],
-                        selectedUnit.name,
-                      )})`
-                    : "N/A"}{" "}
-                  <br />
-                  DEF:{" "}
-                  {isFinite(statZScores[6])
-                    ? `${statZScores[6].toFixed(2)} (${getZScorePercentage(
-                        statZScores[6],
-                        selectedUnit.name,
-                      )})`
-                    : "N/A"}{" "}
-                  <br />
-                  RES:{" "}
-                  {isFinite(statZScores[7])
-                    ? `${statZScores[7].toFixed(2)} (${getZScorePercentage(
-                        statZScores[7],
-                        selectedUnit.name,
-                      )})`
-                    : "N/A"} */}
                 </p>
               </div>
             ) : (
