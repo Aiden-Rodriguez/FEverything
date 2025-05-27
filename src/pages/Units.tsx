@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import "../styles/Units.css";
 import UnitGrid from "../components/UnitGrid";
 import {
@@ -203,7 +204,13 @@ const UnitsContent = () => {
       </div>
 
       {isOverlayAddCharacterOpen && (
-        <div className="overlay">
+        <motion.div
+          className="overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
           <div className="overlay-content">
             <button
               className="close-button"
@@ -339,31 +346,43 @@ const UnitsContent = () => {
               </>
             )}
           </div>
-        </div>
+        </motion.div>
       )}
+
       {isOverlayDeleteCharacterOpen && (
-        <div className="overlay">
-          <div className="overlay-content">
-            <button
-              className="close-button"
-              onClick={toggleOverlayDeleteCharacter}
-              aria-label="Close delete units"
-            >
-              ✕
-            </button>
-            <h2>Delete all created units?</h2>
-            <h3>This action cannot be undone.</h3>
-            <button
-              className="deletion-buttons"
-              onClick={toggleOverlayDeleteCharacter}
-            >
-              Keep units
-            </button>
-            <button className="deletion-buttons" onClick={handleDeleteAllUnits}>
-              Delete all units
-            </button>
+        <motion.div
+          className="overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="overlay">
+            <div className="overlay-content">
+              <button
+                className="close-button"
+                onClick={toggleOverlayDeleteCharacter}
+                aria-label="Close delete units"
+              >
+                ✕
+              </button>
+              <h2>Delete all created units?</h2>
+              <h3>This action cannot be undone.</h3>
+              <button
+                className="deletion-buttons"
+                onClick={toggleOverlayDeleteCharacter}
+              >
+                Keep units
+              </button>
+              <button
+                className="deletion-buttons"
+                onClick={handleDeleteAllUnits}
+              >
+                Delete all units
+              </button>
+            </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </main>
   );

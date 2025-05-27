@@ -120,11 +120,16 @@ const getOverallChartData = (averageZScore: number, characterName: string) => {
 
   // Find the index of the x-value closest to averageZScore
   const closestIndex = xValues.reduce((closestIdx, x, idx) => {
-    return Math.abs(x - averageZScore) < Math.abs(xValues[closestIdx] - averageZScore) ? idx : closestIdx;
+    return Math.abs(x - averageZScore) <
+      Math.abs(xValues[closestIdx] - averageZScore)
+      ? idx
+      : closestIdx;
   }, 0);
 
   const backgroundColors = xValues.map((_, idx) =>
-    idx === closestIndex ? "rgba(255, 99, 132, 0.8)" : "rgba(54, 162, 235, 0.8)",
+    idx === closestIndex
+      ? "rgba(255, 99, 132, 0.8)"
+      : "rgba(54, 162, 235, 0.8)",
   );
 
   return {

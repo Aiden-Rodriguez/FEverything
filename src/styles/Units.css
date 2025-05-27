@@ -27,7 +27,7 @@
   border-radius: 8px;
   margin-bottom: 30px;
   color: var(--color-text-basic);
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .add-remove-character-grid:hover {
@@ -423,7 +423,7 @@ h1 {
   }
 
   .add-remove-character-grid {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -442,6 +442,6 @@ h1 {
   }
 
   .add-remove-character-grid {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 }

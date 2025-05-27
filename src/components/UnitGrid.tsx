@@ -12,7 +12,6 @@ import "tippy.js/dist/tippy.css";
 import { useUnits } from "../defaultData/Fire Emblem Fates/UnitsContext";
 import { findCharacter } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest.tsx";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments.ts";
-// import { label } from "framer-motion/client";
 
 interface UnitGridProps {
   unit: Character;
@@ -44,6 +43,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [isClassChanging, setIsClassChanging] = useState<boolean>(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>("");
   const [selectedClassName, setSelectedClassName] = useState<string>(
@@ -51,6 +51,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   );
   const [error, setError] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [useStatOverride, changeUseStatOverride] = useState(false);
 
   const statFields: { key: keyof typeof unit.stats; label: string }[] = [
     { key: "hp", label: "HP" },
@@ -203,7 +204,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     ) {
       newLevel = 1;
       newInternalLevel = 10 + Math.floor(unit.level / 2);
-      // Capture current (pre-promotion) class data
       const currentClassLine: [number, number, Class, StatBlock] = [
         unit.internalLevel,
         unit.level,
@@ -341,6 +341,19 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setSelectedClassName(unit.class.className);
   };
 
+  const handleDeleteClick = () => {
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = () => {
+    removeUnit(unit.name);
+    setShowDeleteConfirm(false);
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteConfirm(false);
+  };
+
   useEffect(() => {
     if (!gameId) {
       console.warn("No gameId provided; skipping data initialization");
@@ -382,6 +395,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setIsClassChanging(false);
     setEditingField(null);
     setError("");
+    setShowDeleteConfirm(false);
   };
 
   const handleToggleEdit = () => {
@@ -389,6 +403,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setIsClassChanging(false);
     setEditingField(null);
     setError("");
+    setShowDeleteConfirm(false);
   };
 
   const handleToggleClassChange = () => {
@@ -397,6 +412,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setIsEditing(false);
     setEditingField(null);
     setError("");
+    setShowDeleteConfirm(false);
     if (newIsClassChanging) {
       const availableClasses = getAvailableClasses();
       if (availableClasses.length > 0)
@@ -420,10 +436,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       return false;
     }
 
-    //Take unit's current level, subtract by the previous entry in classline to
     const level_difference =
       unit.level - unit.class_line[unit.class_line.length - 1][1];
-    // console.log(level_difference)
+
     if (field === "level") {
       const eternalSeals = unit.eternalSealCount;
       const unitMaxLevel =
@@ -432,10 +447,10 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       if (num < 1 || num > unitMaxLevel) {
         setError(`Level must be between 1 and ${unitMaxLevel}`);
         return false;
-        //if unit has equal internal levels to the previous snapshot, unit cannot go down in level.
       } else if (
         unit.class_line[unit.class_line.length - 1][0] === unit.internalLevel &&
-        unit.class_line[unit.class_line.length - 1][1] > num
+        unit.class_line[unit.class_line.length - 1][1] > num &&
+        !useStatOverride
       ) {
         setError(
           `Levels cannot lower than what they were at the previous class change.`,
@@ -443,7 +458,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         return false;
       }
     } else {
-      // Validate stats
       const statField = field as keyof typeof unit.stats;
       let maxStat: number;
       if (statField === "hp") {
@@ -458,10 +472,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       if (statField === "move") {
         minStat = maxStat;
       } else {
-        //find the character's base stats and stuff so we can normalize and see the
-        //true lowest that that they can have in a stat.
         const baseCharacter = structuredClone(findCharacter(unit.name));
-        //Take characters base stats, remove base class modifier, add current class modifier
         if (unit.name !== "Corrin (M)" && unit.name !== "Corrin (F)") {
           minStat =
             baseCharacter.stats[statField] -
@@ -475,8 +486,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             unit.boon!,
             unit.bane!,
           );
-          //Honestly idk why the below needs the average, but it seems to work and I don't know how else to fix it.'
-          //Seems to oddly double the boon bane modifiers here. Weird.
           minStat =
             (baseCorrin.stats[statField] + baseCharacter.stats[statField]) / 2 -
             baseCorrin.base_class_set.starting_class.classBaseStats[statField] +
@@ -491,8 +500,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         return false;
       }
 
-      //Make sure people don't inflate stats past possible considering current level
-      if (statField !== "move") {
+      if (statField !== "move" && !useStatOverride) {
         if (
           level_difference <
           num - unit.class_line[unit.class_line.length - 1][3][statField]
@@ -501,7 +509,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             `${statFields.find((f) => f.key === statField)?.label || field} must be less than or equal to ${level_difference + unit.class_line[unit.class_line.length - 1][3][statField]}; unit cannot gain more than 1 stat in a field per level. Make sure to properly update a unit's level first.`,
           );
           return false;
-          //Make sure people don't make the stat lower than it was on a previous class change also
         } else if (
           unit.class_line[unit.class_line.length - 1][3][statField] > num
         ) {
@@ -510,8 +517,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           );
           return false;
         }
-        // console.log(unit.class_line[unit.class_line.length - 1][3][statField]);
-        // console.log(num);
       }
     }
     return true;
@@ -546,12 +551,10 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     else if (e.key === "Escape") cancelEdit();
   };
 
-  // Calculate max level for input
   const unitMaxLevel =
     Math.max(unit.maxLevelModifier, unit.class.classMaxLevel) +
     unit.eternalSealCount * 5;
 
-  // Function to get max stat for a given stat field
   const getMaxStat = (field: keyof typeof unit.stats): number => {
     if (field === "hp") return unit.class.MaxStatCaps.hp;
     if (field === "move") return unit.class.classBaseStats.move;
@@ -574,735 +577,649 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   };
 
   return (
-    <motion.main
-      className={`units-grid ${isExpanded ? "expanded" : ""}`}
-      layout
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-    >
-      <div className="grid-cell top-left">
-        <div className="top-left-content">
-          <h3>{unit.name}</h3>
-          {unit.nickname && <p>Nickname: {unit.nickname}</p>}
-          <span
-            className="expand-icon"
-            onClick={handleToggleExpand}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                handleToggleExpand();
-              }
-            }}
-            role="button"
-            tabIndex={0}
-            aria-label={`Toggle expand grid for ${unit.name}`}
-            aria-expanded={isExpanded}
-          >
-            {isExpanded ? "View Less" : "View Detailed"}
-          </span>
-        </div>
-      </div>
-
-      <div className="grid-cell top-middle">
-        <div>
-          <Tippy
-            theme="custom"
-            content={
-              <>
-                <strong>{unit.class.className}</strong>
-                <p className="tooltip-text">{unit.class.description}</p>
-              </>
-            }
-          >
-            <h3>{unit.class.className}</h3>
-          </Tippy>
-          <div className="unit-sprite">
-            <div className="sprite-wrapper">
-              <SpriteAnimator
-                character={unit.name}
-                gender={unit.gender}
-                class={unit.class.className}
-                game={gameId ?? ""}
-                displayScale={2}
-                classMove={unit.class.classBaseStats.move}
-                faction="Player"
-                animationId={0}
-              />
-            </div>
+    <>
+      <motion.main
+        className={`units-grid ${isExpanded ? "expanded" : ""}`}
+        layout
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
+        <div className="grid-cell top-left">
+          <div className="top-left-content">
+            <h3>{unit.name}</h3>
+            {unit.nickname && <p>Nickname: {unit.nickname}</p>}
+            <span
+              className="expand-icon"
+              onClick={handleToggleExpand}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleToggleExpand();
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={`Toggle expand grid for ${unit.name}`}
+              aria-expanded={isExpanded}
+            >
+              {isExpanded ? "View Less" : "View Detailed"}
+            </span>
           </div>
-          {isClassChanging && selectedClassName !== unit.class.className && (
-            <div>
-              <span>
-                Please ensure that before you class change the unit's stats and
-                level are properly updated. <br />
-              </span>
-              <span className="class-change-arrow">
-                {unit.class.className + " --> " + selectedClassName}
-              </span>
+        </div>
+
+        <div className="grid-cell top-middle">
+          <div>
+            <Tippy
+              theme="custom"
+              content={
+                <>
+                  <strong>{unit.class.className}</strong>
+                  <p className="tooltip-text">{unit.class.description}</p>
+                </>
+              }
+            >
+              <h3>{unit.class.className}</h3>
+            </Tippy>
+            <div className="unit-sprite">
+              <div className="sprite-wrapper">
+                <SpriteAnimator
+                  character={unit.name}
+                  gender={unit.gender}
+                  class={unit.class.className}
+                  game={gameId ?? ""}
+                  displayScale={2}
+                  classMove={unit.class.classBaseStats.move}
+                  faction="Player"
+                  animationId={0}
+                />
+              </div>
+            </div>
+            {isClassChanging && selectedClassName !== unit.class.className && (
+              <div>
+                <p style={{ paddingTop: "20px" }}>
+                  Please ensure that before you class change the unit's stats
+                  and level are properly updated. <br />
+                </p>
+                <span className="class-change-arrow">
+                  {unit.class.className + " --> " + selectedClassName}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {isExpanded && !isEditing && !isClassChanging && (
+            <span
+              className="edit-icon"
+              onClick={handleToggleClassChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleToggleClassChange();
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={`Toggle class change mode for ${unit.name}`}
+            >
+              Commit Class Change?
+            </span>
+          )}
+          {isClassChanging && (
+            <div className="class-change-column">
+              <select
+                value={selectedClassName}
+                onChange={(e) => handleClassChange(e.target.value)}
+                className="inline-select"
+                aria-label={`Select new class for ${unit.name}`}
+              >
+                {getAvailableClasses().map((cls) => (
+                  <option key={cls.className} value={cls.className}>
+                    {cls.className}
+                  </option>
+                ))}
+              </select>
+              <div className="two-button-container">
+                <button
+                  onClick={commitClassChange}
+                  className="inline-button"
+                  aria-label={`Confirm class change for ${unit.name}`}
+                >
+                  Confirm
+                </button>
+                <button
+                  onClick={cancelClassChange}
+                  className="inline-button"
+                  aria-label={`Cancel class change for ${unit.name}`}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           )}
         </div>
 
-        {isExpanded && !isEditing && !isClassChanging && (
-          <span
-            className="edit-icon"
-            onClick={handleToggleClassChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                handleToggleClassChange();
-              }
-            }}
-            role="button"
-            tabIndex={0}
-            aria-label={`Toggle class change mode for ${unit.name}`}
-          >
-            Commit Class Change?
-          </span>
-        )}
-        {isClassChanging && (
-          <div className="class-change-column">
-            <select
-              value={selectedClassName}
-              onChange={(e) => handleClassChange(e.target.value)}
-              className="inline-select"
-              aria-label={`Select new class for ${unit.name}`}
+        <div className="grid-cell top-right">
+          {editingField === "level" ? (
+            <input
+              type="number"
+              value={editValue}
+              onChange={(e) => setEditValue(e.target.value)}
+              onBlur={saveEdit}
+              onKeyDown={handleKeyDown}
+              min="1"
+              max={unitMaxLevel}
+              className="inline-input"
+              ref={inputRef}
+              aria-label={`Edit level for ${unit.name}`}
+            />
+          ) : (
+            <h3
+              onClick={() => startEditing("level", unit.level)}
+              role="button"
+              className={isEditing ? "editable" : ""}
             >
-              {getAvailableClasses().map((cls) => (
-                <option key={cls.className} value={cls.className}>
-                  {cls.className}
-                </option>
-              ))}
-            </select>
-            <div className="two-button-container">
-              <button
-                onClick={commitClassChange}
-                className="inline-button"
-                aria-label={`Confirm class change for ${unit.name}`}
-              >
-                Confirm
-              </button>
-              <button
-                onClick={cancelClassChange}
-                className="inline-button"
-                aria-label={`Cancel class change for ${unit.name}`}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="grid-cell top-right">
-        {editingField === "level" ? (
-          <input
-            type="number"
-            value={editValue}
-            onChange={(e) => setEditValue(e.target.value)}
-            onBlur={saveEdit}
-            onKeyDown={handleKeyDown}
-            min="1"
-            max={unitMaxLevel}
-            className="inline-input"
-            ref={inputRef}
-            aria-label={`Edit level for ${unit.name}`}
-          />
-        ) : (
-          <h3
-            onClick={() => startEditing("level", unit.level)}
-            role="button"
-            className={isEditing ? "editable" : ""}
-          >
-            Level: {unit.level}
-          </h3>
-        )}
-        {editingField === "level" && error && (
-          <p className="inline-error">{error}</p>
-        )}
-        {isExpanded && (
+              Level: {unit.level}
+            </h3>
+          )}
+          {editingField === "level" && error && (
+            <p className="inline-error">{error}</p>
+          )}
+          {isExpanded && (
+            <span
+              className="edit-icon"
+              onClick={handleToggleEdit}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleToggleEdit();
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={`Toggle edit mode for ${unit.name}`}
+              aria-expanded={isEditing}
+            >
+              {isEditing ? "Stop Editing" : "Edit Unit"}
+            </span>
+          )}
           <span
-            className="edit-icon"
-            onClick={handleToggleEdit}
+            className="delete-icon"
+            onClick={handleDeleteClick}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
-                handleToggleEdit();
+                handleDeleteClick();
               }
             }}
             role="button"
             tabIndex={0}
-            aria-label={`Toggle edit mode for ${unit.name}`}
-            aria-expanded={isEditing}
+            aria-label={`Delete unit ${unit.name}`}
           >
-            {isEditing ? "Stop Editing" : "Edit Unit"}
+            X
           </span>
-        )}
-        <span
-          className="delete-icon"
-          onClick={() => removeUnit(unit.name)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              removeUnit(unit.name);
-            }
-          }}
-          role="button"
-          tabIndex={0}
-          aria-label={`Delete unit ${unit.name}`}
-        >
-          X
-        </span>
-      </div>
-
-      {isExpanded && (
-        <motion.div
-          className="grid-cell top-extra"
-          variants={cellVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <h3>{unit.title}</h3>
-        </motion.div>
-      )}
-
-      <div className="grid-cell bottom-left">
-        <h3>Stats</h3>
-        <div className="bottom-row-grid">
-          {statFields.map(({ key, label }) => (
-            <div key={key}>
-              {editingField === key ? (
-                <input
-                  type="number"
-                  value={editValue}
-                  onChange={(e) => setEditValue(e.target.value)}
-                  onBlur={saveEdit}
-                  onKeyDown={handleKeyDown}
-                  min="0"
-                  max={getMaxStat(key)}
-                  className="inline-input"
-                  ref={inputRef}
-                  aria-label={`Edit ${label} for ${unit.name}`}
-                />
-              ) : (
-                <p
-                  onClick={() => startEditing(key, unit.stats[key])}
-                  className={isEditing ? "editable" : ""}
-                  role="button"
-                >
-                  {label}: {unit.stats[key]}
-                </p>
-              )}
-              {editingField === key && error && (
-                <p className="inline-error">{error}</p>
-              )}
-            </div>
-          ))}
         </div>
-      </div>
 
-      <div className="grid-cell bottom-middle">
-        <h3>Skills</h3>
-        <div className="three-wide-grid">
-          {unit.personal_skill?.name !== "N/A" && (
-            <div className="skill-image-container">
+        {isExpanded && (
+          <motion.div
+            className="grid-cell top-extra"
+            variants={cellVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <h3>{unit.title}</h3>
+          </motion.div>
+        )}
+
+        <div className="grid-cell bottom-left">
+          <h3>Stats</h3>
+          <div className="bottom-row-grid">
+            {statFields.map(({ key, label }) => (
+              <div key={key}>
+                {editingField === key ? (
+                  <input
+                    type="number"
+                    value={editValue}
+                    onChange={(e) => setEditValue(e.target.value)}
+                    onBlur={saveEdit}
+                    onKeyDown={handleKeyDown}
+                    min="0"
+                    max={getMaxStat(key)}
+                    className="inline-input"
+                    ref={inputRef}
+                    aria-label={`Edit ${label} for ${unit.name}`}
+                  />
+                ) : (
+                  <p
+                    onClick={() => startEditing(key, unit.stats[key])}
+                    className={isEditing ? "editable" : ""}
+                    role="button"
+                  >
+                    {label}: {unit.stats[key]}
+                  </p>
+                )}
+                {editingField === key && error && (
+                  <p className="inline-error">{error}</p>
+                )}
+              </div>
+            ))}
+            {isEditing && (
               <Tippy
                 theme="custom"
                 content={
-                  <>
-                    <strong>{unit.personal_skill.name}</strong>
-                    <p className="tooltip-text">
-                      {unit.personal_skill.description}
-                    </p>
-                  </>
+                  "Allows changing of stats regardless of unit's previous stats on a class change. Also allows unit to lower their level after a class change. Unit will still not be able to lower their class below their bases, or above their stat caps.\nGood for fixing mistakes after a class change, but may cause issues with the stat averages page if used improperly."
                 }
               >
-                <img
-                  src={`/skills/${gameId}/${unit.personal_skill.name}.png`}
-                  alt={unit.name}
-                  className="skill-image"
-                />
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={useStatOverride}
+                    onChange={(e) => changeUseStatOverride(e.target.checked)}
+                  />
+                  Use Stat Override
+                </label>
               </Tippy>
-            </div>
-          )}
-          {unit.equipped_skills
-            .filter((skill) => skill.name !== "N/A")
-            .map((skill, index) => (
-              <div key={index} className="skill-image-container">
+            )}
+          </div>
+        </div>
+
+        <div className="grid-cell bottom-middle">
+          <h3>Skills</h3>
+          <div className="three-wide-grid">
+            {unit.personal_skill?.name !== "N/A" && (
+              <div className="skill-image-container">
                 <Tippy
                   theme="custom"
                   content={
                     <>
-                      <strong>{skill.name}</strong>
-                      <p className="tooltip-text">{skill.description}</p>
+                      <strong>{unit.personal_skill.name}</strong>
+                      <p className="tooltip-text">
+                        {unit.personal_skill.description}
+                      </p>
                     </>
                   }
                 >
                   <img
-                    src={`/skills/${gameId}/${skill.name}.png`}
-                    alt={skill.name}
+                    src={`/skills/${gameId}/${unit.personal_skill.name}.png`}
+                    alt={unit.name}
                     className="skill-image"
                   />
                 </Tippy>
               </div>
-            ))}
+            )}
+            {unit.equipped_skills
+              .filter((skill) => skill.name !== "N/A")
+              .map((skill, index) => (
+                <div key={index} className="skill-image-container">
+                  <Tippy
+                    theme="custom"
+                    content={
+                      <>
+                        <strong>{skill.name}</strong>
+                        <p className="tooltip-text">{skill.description}</p>
+                      </>
+                    }
+                  >
+                    <img
+                      src={`/skills/${gameId}/${skill.name}.png`}
+                      alt={skill.name}
+                      className="skill-image"
+                    />
+                  </Tippy>
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
 
-      <div className="grid-cell bottom-right">
-        <div>
-          <img
-            src={`/characters/${gameId}/${unit.name}.png`}
-            alt={unit.name}
-            className="character-image"
-          />
+        <div className="grid-cell bottom-right">
+          <div>
+            <img
+              src={`/characters/${gameId}/${unit.name}.png`}
+              alt={unit.name}
+              className="character-image"
+            />
+          </div>
         </div>
-      </div>
 
-      {isExpanded && (
-        <>
-          <motion.div
-            className="grid-cell bottom-extra1"
-            variants={cellVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <h3>Unit Stat Caps</h3>
-            <div className="bottom-row-grid">
-              <p> HP: {unit.class.MaxStatCaps.hp} </p>
-              <p>
-                {" "}
-                STR:{" "}
-                {unit.maxStatModifiers.strength +
-                  unit.class.MaxStatCaps.strength}{" "}
-              </p>
-              <p>
-                {" "}
-                MAG:{" "}
-                {unit.maxStatModifiers.magic +
-                  unit.class.MaxStatCaps.magic}{" "}
-              </p>
-              <p>
-                {" "}
-                SKL:{" "}
-                {unit.maxStatModifiers.skill +
-                  unit.class.MaxStatCaps.skill}{" "}
-              </p>
-              <p>
-                {" "}
-                SPD:{" "}
-                {unit.maxStatModifiers.speed +
-                  unit.class.MaxStatCaps.speed}{" "}
-              </p>
-              <p>
-                {" "}
-                LCK:{" "}
-                {unit.maxStatModifiers.luck + unit.class.MaxStatCaps.luck}{" "}
-              </p>
-              <p>
-                {" "}
-                DEF:{" "}
-                {unit.maxStatModifiers.defence +
-                  unit.class.MaxStatCaps.defence}{" "}
-              </p>
-              <p>
-                {" "}
-                RES:{" "}
-                {unit.maxStatModifiers.resistance +
-                  unit.class.MaxStatCaps.resistance}{" "}
-              </p>
-            </div>
-          </motion.div>
-          <motion.div
-            className="grid-cell bottom-extra2"
-            variants={cellVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <h3>Weapon Ranks</h3>
-            <div className="bottom-row-grid">
-              {filteredFields.map(({ key, label }) => {
-                const options = getWeaponRankOptions(key);
-                const isEditable = options.length > 1;
+        {isExpanded && (
+          <>
+            <motion.div
+              className="grid-cell bottom-extra1"
+              variants={cellVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <h3>Unit Stat Caps</h3>
+              <div className="bottom-row-grid">
+                <p> HP: {unit.class.MaxStatCaps.hp} </p>
+                <p>
+                  {" "}
+                  STR:{" "}
+                  {unit.maxStatModifiers.strength +
+                    unit.class.MaxStatCaps.strength}{" "}
+                </p>
+                <p>
+                  {" "}
+                  MAG:{" "}
+                  {unit.maxStatModifiers.magic +
+                    unit.class.MaxStatCaps.magic}{" "}
+                </p>
+                <p>
+                  {" "}
+                  SKL:{" "}
+                  {unit.maxStatModifiers.skill +
+                    unit.class.MaxStatCaps.skill}{" "}
+                </p>
+                <p>
+                  {" "}
+                  SPD:{" "}
+                  {unit.maxStatModifiers.speed +
+                    unit.class.MaxStatCaps.speed}{" "}
+                </p>
+                <p>
+                  {" "}
+                  LCK:{" "}
+                  {unit.maxStatModifiers.luck +
+                    unit.class.MaxStatCaps.luck}{" "}
+                </p>
+                <p>
+                  {" "}
+                  DEF:{" "}
+                  {unit.maxStatModifiers.defence +
+                    unit.class.MaxStatCaps.defence}{" "}
+                </p>
+                <p>
+                  {" "}
+                  RES:{" "}
+                  {unit.maxStatModifiers.resistance +
+                    unit.class.MaxStatCaps.resistance}{" "}
+                </p>
+              </div>
+            </motion.div>
+            <motion.div
+              className="grid-cell bottom-extra2"
+              variants={cellVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <h3>Weapon Ranks</h3>
+              <div className="bottom-row-grid">
+                {filteredFields.map(({ key, label }) => {
+                  const options = getWeaponRankOptions(key);
+                  const isEditable = options.length > 1;
 
-                return (
-                  <div key={key} className="weapon-rank-item">
-                    {isEditing && isEditable ? (
-                      <div className="weapon-rank-edit">
-                        <span className="weapon-rank-label">{label}:</span>
-                        <select
-                          value={unit.weapon_ranks[key]}
-                          onChange={(e) =>
-                            handleWeaponRankChange(
-                              key,
-                              e.target.value as WeaponRank,
-                            )
-                          }
-                          className="inline-select"
-                          aria-label={`Edit ${label} rank for ${unit.name}`}
-                        >
-                          {options
-                            .filter((rank) => rank !== "n")
-                            .map((rank) => (
-                              <option key={rank} value={rank}>
-                                {rank}
-                              </option>
-                            ))}
-                        </select>
-                      </div>
-                    ) : (
-                      <p>
-                        {label}: {unit.weapon_ranks[key]}
+                  return (
+                    <div key={key} className="weapon-rank-item">
+                      {isEditing && isEditable ? (
+                        <div className="weapon-rank-edit">
+                          <span className="weapon-rank-label">{label}:</span>
+                          <select
+                            value={unit.weapon_ranks[key]}
+                            onChange={(e) =>
+                              handleWeaponRankChange(
+                                key,
+                                e.target.value as WeaponRank,
+                              )
+                            }
+                            className="inline-select"
+                            aria-label={`Edit ${label} rank for ${unit.name}`}
+                          >
+                            {options
+                              .filter((rank) => rank !== "n")
+                              .map((rank) => (
+                                <option key={rank} value={rank}>
+                                  {rank}
+                                </option>
+                              ))}
+                          </select>
+                        </div>
+                      ) : (
+                        <p>
+                          {label}: {unit.weapon_ranks[key]}
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+            <motion.div
+              className="grid-cell bottom-extra3"
+              variants={cellVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <h3>Growth Rates Total</h3>
+              <div className="bottom-row-grid">
+                <Tippy
+                  theme="custom"
+                  content={
+                    <>
+                      <p className="tooltip-text">
+                        Personal HP Growth: {unit.base_growths.hp}%
                       </p>
+                      <p className="tooltip-text">
+                        {unit.class.className} HP Growth:{" "}
+                        {unit.class.classGrowths.hp}%
+                      </p>
+                    </>
+                  }
+                >
+                  <p>
+                    {" "}
+                    HP Growth:{" "}
+                    {unit.base_growths.hp + unit.class.classGrowths.hp}%{" "}
+                  </p>
+                </Tippy>
+                <Tippy
+                  theme="custom"
+                  content={
+                    <>
+                      <p className="tooltip-text">
+                        Personal STR Growth: {unit.base_growths.strength}%
+                      </p>
+                      <p className="tooltip-text">
+                        {unit.class.className} STR Growth:{" "}
+                        {unit.class.classGrowths.strength}%
+                      </p>
+                    </>
+                  }
+                >
+                  <p>
+                    {" "}
+                    STR Growth:{" "}
+                    {unit.base_growths.strength +
+                      unit.class.classGrowths.strength}
+                    %{" "}
+                  </p>
+                </Tippy>
+                <Tippy
+                  theme="custom"
+                  content={
+                    <>
+                      <p className="tooltip-text">
+                        Personal MAG Growth: {unit.base_growths.magic}%
+                      </p>
+                      <p className="tooltip-text">
+                        {unit.class.className} MAG Growth:{" "}
+                        {unit.class.classGrowths.magic}%
+                      </p>
+                    </>
+                  }
+                >
+                  <p>
+                    {" "}
+                    MAG Growth:{" "}
+                    {unit.base_growths.magic + unit.class.classGrowths.magic}
+                    %{" "}
+                  </p>
+                </Tippy>
+                <Tippy
+                  theme="custom"
+                  content={
+                    <>
+                      <p className="tooltip-text">
+                        Personal SKL Growth: {unit.base_growths.skill}%
+                      </p>
+                      <p className="tooltip-text">
+                        {unit.class.className} SKL Growth:{" "}
+                        {unit.class.classGrowths.skill}%
+                      </p>
+                    </>
+                  }
+                >
+                  <p>
+                    {" "}
+                    SKL Growth:{" "}
+                    {unit.base_growths.skill + unit.class.classGrowths.skill}
+                    %{" "}
+                  </p>
+                </Tippy>
+                <Tippy
+                  theme="custom"
+                  content={
+                    <>
+                      <p className="tooltip-text">
+                        Personal SPD Growth: {unit.base_growths.speed}%
+                      </p>
+                      <p className="tooltip-text">
+                        {unit.class.className} SPD Growth:{" "}
+                        {unit.class.classGrowths.speed}%
+                      </p>
+                    </>
+                  }
+                >
+                  <p>
+                    {" "}
+                    SPD Growth:{" "}
+                    {unit.base_growths.speed + unit.class.classGrowths.speed}
+                    %{" "}
+                  </p>
+                </Tippy>
+                <Tippy
+                  theme="custom"
+                  content={
+                    <>
+                      <p className="tooltip-text">
+                        Personal LCK Growth: {unit.base_growths.luck}%
+                      </p>
+                      <p className="tooltip-text">
+                        {unit.class.className} LCK Growth:{" "}
+                        {unit.class.classGrowths.luck}%
+                      </p>
+                    </>
+                  }
+                >
+                  <p>
+                    {" "}
+                    LCK Growth:{" "}
+                    {unit.base_growths.luck + unit.class.classGrowths.luck}
+                    %{" "}
+                  </p>
+                </Tippy>
+                <Tippy
+                  theme="custom"
+                  content={
+                    <>
+                      <p className="tooltip-text">
+                        Personal DEF Growth: {unit.base_growths.defence}%
+                      </p>
+                      <p className="tooltip-text">
+                        {unit.class.className} DEF Growth:{" "}
+                        {unit.class.classGrowths.defence}%
+                      </p>
+                    </>
+                  }
+                >
+                  <p>
+                    {" "}
+                    DEF Growth:{" "}
+                    {unit.base_growths.defence +
+                      unit.class.classGrowths.defence}
+                    %{" "}
+                  </p>
+                </Tippy>
+                <Tippy
+                  theme="custom"
+                  content={
+                    <>
+                      <p className="tooltip-text">
+                        Personal RES Growth: {unit.base_growths.resistance}%
+                      </p>
+                      <p className="tooltip-text">
+                        {unit.class.className} RES Growth:{" "}
+                        {unit.class.classGrowths.resistance}%
+                      </p>
+                    </>
+                  }
+                >
+                  <p>
+                    {" "}
+                    RES Growth:{" "}
+                    {unit.base_growths.resistance +
+                      unit.class.classGrowths.resistance}
+                    %{" "}
+                  </p>
+                </Tippy>
+              </div>
+            </motion.div>
+            <motion.div
+              className="grid-cell bottom-extra4"
+              variants={cellVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <h3>Class Sets</h3>
+              <div className="class-sets-content">
+                <div className="class-set-column">
+                  <div className="class-set-label">Base</div>
+                  <div className="class-sets-classes">
+                    {unit.base_class_set.starting_class_tree &&
+                    unit.base_class_set.starting_class_tree.classTree &&
+                    unit.base_class_set.starting_class_tree.classTree.length >
+                      0 ? (
+                      unit.base_class_set.starting_class_tree.classTree
+                        .filter((promotedClass) =>
+                          promotedClass.className === "Maid" &&
+                          unit.gender === "M"
+                            ? false
+                            : promotedClass.className === "Butler" &&
+                                unit.gender === "F"
+                              ? false
+                              : true,
+                        )
+                        .map((promotedClass, index) => (
+                          <Tippy
+                            theme="custom"
+                            content={
+                              <>
+                                <strong>{promotedClass.className}</strong>
+                                <p className="tooltip-text">
+                                  {promotedClass.description}
+                                </p>
+                              </>
+                            }
+                          >
+                            <span key={index}>{promotedClass.className}</span>
+                          </Tippy>
+                        ))
+                    ) : (
+                      <span>No Base Classes</span>
                     )}
                   </div>
-                );
-              })}
-            </div>
-          </motion.div>
-          <motion.div
-            className="grid-cell bottom-extra3"
-            variants={cellVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <h3>Growth Rates Total</h3>
-            <div className="bottom-row-grid">
-              <Tippy
-                theme="custom"
-                content={
-                  <>
-                    <p className="tooltip-text">
-                      Personal HP Growth: {unit.base_growths.hp}%
-                    </p>
-                    <p className="tooltip-text">
-                      {unit.class.className} HP Growth:{" "}
-                      {unit.class.classGrowths.hp}%
-                    </p>
-                  </>
-                }
-              >
-                <p>
-                  {" "}
-                  HP Growth: {unit.base_growths.hp + unit.class.classGrowths.hp}
-                  %{" "}
-                </p>
-              </Tippy>
-              <Tippy
-                theme="custom"
-                content={
-                  <>
-                    <p className="tooltip-text">
-                      Personal STR Growth: {unit.base_growths.strength}%
-                    </p>
-                    <p className="tooltip-text">
-                      {unit.class.className} STR Growth:{" "}
-                      {unit.class.classGrowths.strength}%
-                    </p>
-                  </>
-                }
-              >
-                <p>
-                  {" "}
-                  STR Growth:{" "}
-                  {unit.base_growths.strength +
-                    unit.class.classGrowths.strength}
-                  %{" "}
-                </p>
-              </Tippy>
-              <Tippy
-                theme="custom"
-                content={
-                  <>
-                    <p className="tooltip-text">
-                      Personal MAG Growth: {unit.base_growths.magic}%
-                    </p>
-                    <p className="tooltip-text">
-                      {unit.class.className} MAG Growth:{" "}
-                      {unit.class.classGrowths.magic}%
-                    </p>
-                  </>
-                }
-              >
-                <p>
-                  {" "}
-                  MAG Growth:{" "}
-                  {unit.base_growths.magic + unit.class.classGrowths.magic}
-                  %{" "}
-                </p>
-              </Tippy>
-              <Tippy
-                theme="custom"
-                content={
-                  <>
-                    <p className="tooltip-text">
-                      Personal SKL Growth: {unit.base_growths.skill}%
-                    </p>
-                    <p className="tooltip-text">
-                      {unit.class.className} SKL Growth:{" "}
-                      {unit.class.classGrowths.skill}%
-                    </p>
-                  </>
-                }
-              >
-                <p>
-                  {" "}
-                  SKL Growth:{" "}
-                  {unit.base_growths.skill + unit.class.classGrowths.skill}
-                  %{" "}
-                </p>
-              </Tippy>
-              <Tippy
-                theme="custom"
-                content={
-                  <>
-                    <p className="tooltip-text">
-                      Personal SPD Growth: {unit.base_growths.speed}%
-                    </p>
-                    <p className="tooltip-text">
-                      {unit.class.className} SPD Growth:{" "}
-                      {unit.class.classGrowths.speed}%
-                    </p>
-                  </>
-                }
-              >
-                <p>
-                  {" "}
-                  SPD Growth:{" "}
-                  {unit.base_growths.speed + unit.class.classGrowths.speed}
-                  %{" "}
-                </p>
-              </Tippy>
-              <Tippy
-                theme="custom"
-                content={
-                  <>
-                    <p className="tooltip-text">
-                      Personal LCK Growth: {unit.base_growths.luck}%
-                    </p>
-                    <p className="tooltip-text">
-                      {unit.class.className} LCK Growth:{" "}
-                      {unit.class.classGrowths.luck}%
-                    </p>
-                  </>
-                }
-              >
-                <p>
-                  {" "}
-                  LCK Growth:{" "}
-                  {unit.base_growths.luck + unit.class.classGrowths.luck}%{" "}
-                </p>
-              </Tippy>
-              <Tippy
-                theme="custom"
-                content={
-                  <>
-                    <p className="tooltip-text">
-                      Personal DEF Growth: {unit.base_growths.defence}%
-                    </p>
-                    <p className="tooltip-text">
-                      {unit.class.className} DEF Growth:{" "}
-                      {unit.class.classGrowths.defence}%
-                    </p>
-                  </>
-                }
-              >
-                <p>
-                  {" "}
-                  DEF Growth:{" "}
-                  {unit.base_growths.defence + unit.class.classGrowths.defence}
-                  %{" "}
-                </p>
-              </Tippy>
-              <Tippy
-                theme="custom"
-                content={
-                  <>
-                    <p className="tooltip-text">
-                      Personal RES Growth: {unit.base_growths.resistance}%
-                    </p>
-                    <p className="tooltip-text">
-                      {unit.class.className} RES Growth:{" "}
-                      {unit.class.classGrowths.resistance}%
-                    </p>
-                  </>
-                }
-              >
-                <p>
-                  {" "}
-                  RES Growth:{" "}
-                  {unit.base_growths.resistance +
-                    unit.class.classGrowths.resistance}
-                  %{" "}
-                </p>
-              </Tippy>
-            </div>
-          </motion.div>
-          <motion.div
-            className="grid-cell bottom-extra4"
-            variants={cellVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <h3>Class Sets</h3>
-            <div className="class-sets-content">
-              <div className="class-set-column">
-                <div className="class-set-label">Base</div>
-                <div className="class-sets-classes">
-                  {unit.base_class_set.starting_class_tree &&
-                  unit.base_class_set.starting_class_tree.classTree &&
-                  unit.base_class_set.starting_class_tree.classTree.length >
-                    0 ? (
-                    unit.base_class_set.starting_class_tree.classTree
-                      .filter((promotedClass) =>
-                        promotedClass.className === "Maid" &&
-                        unit.gender === "M"
-                          ? false
-                          : promotedClass.className === "Butler" &&
-                              unit.gender === "F"
-                            ? false
-                            : true,
-                      )
-                      .map((promotedClass, index) => (
-                        <Tippy
-                          theme="custom"
-                          content={
-                            <>
-                              <strong>{promotedClass.className}</strong>
-                              <p className="tooltip-text">
-                                {promotedClass.description}
-                              </p>
-                            </>
-                          }
-                        >
-                          <span key={index}>{promotedClass.className}</span>
-                        </Tippy>
-                      ))
-                  ) : (
-                    <span>No Base Classes</span>
-                  )}
                 </div>
-              </div>
-              <div className="class-set-column">
-                <div className="class-set-label">Heart Seal</div>
-                <div className="class-sets-classes">
-                  {unit.base_class_set.heart_seal_classes &&
-                  unit.base_class_set.heart_seal_classes.length > 0 ? (
-                    unit.base_class_set.heart_seal_classes.map(
-                      (cls, clsIndex) =>
-                        cls.classTree && cls.classTree.length > 0 ? (
-                          cls.classTree
-                            .filter((promotedClass) =>
-                              promotedClass.className === "Maid" &&
-                              unit.gender === "M"
-                                ? false
-                                : promotedClass.className === "Butler" &&
-                                    unit.gender === "F"
-                                  ? false
-                                  : true,
-                            )
-                            .map((promotedClass, treeIndex) => (
-                              <Tippy
-                                theme="custom"
-                                content={
-                                  <>
-                                    <strong>{promotedClass.className}</strong>
-                                    <p className="tooltip-text">
-                                      {promotedClass.description}
-                                    </p>
-                                  </>
-                                }
-                              >
-                                <span key={`${clsIndex}-${treeIndex}`}>
-                                  {promotedClass.className}
-                                </span>
-                              </Tippy>
-                            ))
-                        ) : (
-                          <span key={clsIndex}>No Promotions</span>
-                        ),
-                    )
-                  ) : (
-                    <span>No Heart Seal Classes</span>
-                  )}
-                </div>
-              </div>
-              <div className="class-set-column">
-                <div className="class-set-label">Friendship Seal</div>
-                <div className="class-sets-classes">
-                  {isEditing ? (
-                    <div className="partner-select">
-                      {(() => {
-                        const activeUnitNames = new Set(
-                          units.map((u) => u.name),
-                        );
-                        const filteredPartners =
-                          unit.base_class_set.friendship_seal_partners?.filter(
-                            (partner) => activeUnitNames.has(partner.name),
-                          ) || [];
-
-                        return filteredPartners.length > 0 ? (
-                          <select
-                            value={
-                              unit.base_class_set
-                                .selected_friendship_seal_partner?.name || ""
-                            }
-                            onChange={(e) => {
-                              const partnerName = e.target.value;
-                              const selectedPartner = partnerName
-                                ? units.find((p) => p.name === partnerName) ||
-                                  null
-                                : null;
-                              const updatedUnit: Character = {
-                                ...unit,
-                                base_class_set: {
-                                  ...unit.base_class_set,
-                                  selected_friendship_seal_partner:
-                                    selectedPartner,
-                                  friendship_seal_base_class: selectedPartner
-                                    ? getAllySealClass(unit, selectedPartner)
-                                    : null,
-                                },
-                              };
-                              updateUnit(updatedUnit);
-                            }}
-                            className="inline-select"
-                            aria-label={`Select or change friendship seal partner for ${unit.name}`}
-                          >
-                            <option value="">No Partner</option>
-                            {filteredPartners.map((partner) => (
-                              <option key={partner.name} value={partner.name}>
-                                {partner.name}
-                              </option>
-                            ))}
-                          </select>
-                        ) : (
-                          <span>No Viable Friendship Seal Partners</span>
-                        );
-                      })()}
-                    </div>
-                  ) : (
-                    (() => {
-                      const activeUnitNames = new Set(units.map((u) => u.name));
-                      const selectedPartner =
-                        unit.base_class_set.selected_friendship_seal_partner;
-                      const isValidPartner =
-                        selectedPartner &&
-                        activeUnitNames.has(selectedPartner.name);
-
-                      return isValidPartner &&
-                        unit.base_class_set.friendship_seal_base_class ? (
-                        <div className="partner-item">
-                          <span>A+ Support: {selectedPartner.name}</span>
-                          {unit.base_class_set.friendship_seal_base_class
-                            .classTree &&
-                          unit.base_class_set.friendship_seal_base_class
-                            .classTree.length > 0 ? (
-                            unit.base_class_set.friendship_seal_base_class.classTree
+                <div className="class-set-column">
+                  <div className="class-set-label">Heart Seal</div>
+                  <div className="class-sets-classes">
+                    {unit.base_class_set.heart_seal_classes &&
+                    unit.base_class_set.heart_seal_classes.length > 0 ? (
+                      unit.base_class_set.heart_seal_classes.map(
+                        (cls, clsIndex) =>
+                          cls.classTree && cls.classTree.length > 0 ? (
+                            cls.classTree
                               .filter((promotedClass) =>
                                 promotedClass.className === "Maid" &&
                                 unit.gender === "M"
@@ -1312,7 +1229,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                                     ? false
                                     : true,
                               )
-                              .map((promotedClass, index) => (
+                              .map((promotedClass, treeIndex) => (
                                 <Tippy
                                   theme="custom"
                                   content={
@@ -1324,192 +1241,340 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                                     </>
                                   }
                                 >
-                                  <span key={index}>
+                                  <span key={`${clsIndex}-${treeIndex}`}>
                                     {promotedClass.className}
                                   </span>
                                 </Tippy>
                               ))
                           ) : (
-                            <span>No Promotions</span>
-                          )}
-                        </div>
-                      ) : (
-                        <span>No Friendship Seal Partner Selected</span>
-                      );
-                    })()
-                  )}
+                            <span key={clsIndex}>No Promotions</span>
+                          ),
+                      )
+                    ) : (
+                      <span>No Heart Seal Classes</span>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="class-set-column">
-                <div className="class-set-label">Partner Seal</div>
-                <div className="class-sets-classes">
-                  {isEditing ? (
-                    <div className="partner-select">
-                      {(() => {
+                <div className="class-set-column">
+                  <div className="class-set-label">Friendship Seal</div>
+                  <div className="class-sets-classes">
+                    {isEditing ? (
+                      <div className="partner-select">
+                        {(() => {
+                          const activeUnitNames = new Set(
+                            units.map((u) => u.name),
+                          );
+                          const filteredPartners =
+                            unit.base_class_set.friendship_seal_partners?.filter(
+                              (partner) => activeUnitNames.has(partner.name),
+                            ) || [];
+
+                          return filteredPartners.length > 0 ? (
+                            <select
+                              value={
+                                unit.base_class_set
+                                  .selected_friendship_seal_partner?.name || ""
+                              }
+                              onChange={(e) => {
+                                const partnerName = e.target.value;
+                                const selectedPartner = partnerName
+                                  ? units.find((p) => p.name === partnerName) ||
+                                    null
+                                  : null;
+                                const updatedUnit: Character = {
+                                  ...unit,
+                                  base_class_set: {
+                                    ...unit.base_class_set,
+                                    selected_friendship_seal_partner:
+                                      selectedPartner,
+                                    friendship_seal_base_class: selectedPartner
+                                      ? getAllySealClass(unit, selectedPartner)
+                                      : null,
+                                  },
+                                };
+                                updateUnit(updatedUnit);
+                              }}
+                              className="inline-select"
+                              aria-label={`Select or change friendship seal partner for ${unit.name}`}
+                            >
+                              <option value="">No Partner</option>
+                              {filteredPartners.map((partner) => (
+                                <option key={partner.name} value={partner.name}>
+                                  {partner.name}
+                                </option>
+                              ))}
+                            </select>
+                          ) : (
+                            <span>No Viable Friendship Seal Partners</span>
+                          );
+                        })()}
+                      </div>
+                    ) : (
+                      (() => {
                         const activeUnitNames = new Set(
                           units.map((u) => u.name),
                         );
-                        const filteredPartners =
-                          unit.base_class_set.partner_seal_partners?.filter(
-                            (partner) =>
-                              activeUnitNames.has(partner.name) &&
-                              (!units.find((u) => u.name === partner.name)
-                                ?.base_class_set
-                                .selected_partner_seal_partner ||
-                                units.find((u) => u.name === partner.name)
-                                  ?.base_class_set.selected_partner_seal_partner
-                                  ?.name === unit.name),
-                          ) || [];
+                        const selectedPartner =
+                          unit.base_class_set.selected_friendship_seal_partner;
+                        const isValidPartner =
+                          selectedPartner &&
+                          activeUnitNames.has(selectedPartner.name);
 
-                        return filteredPartners.length > 0 ? (
-                          <select
-                            value={
-                              unit.base_class_set.selected_partner_seal_partner
-                                ?.name || ""
-                            }
-                            onChange={(e) => {
-                              const partnerName = e.target.value;
-                              const selectedPartner = partnerName
-                                ? units.find((p) => p.name === partnerName) ||
-                                  null
-                                : null;
+                        return isValidPartner &&
+                          unit.base_class_set.friendship_seal_base_class ? (
+                          <div className="partner-item">
+                            <span>A+ Support: {selectedPartner.name}</span>
+                            {unit.base_class_set.friendship_seal_base_class
+                              .classTree &&
+                            unit.base_class_set.friendship_seal_base_class
+                              .classTree.length > 0 ? (
+                              unit.base_class_set.friendship_seal_base_class.classTree
+                                .filter((promotedClass) =>
+                                  promotedClass.className === "Maid" &&
+                                  unit.gender === "M"
+                                    ? false
+                                    : promotedClass.className === "Butler" &&
+                                        unit.gender === "F"
+                                      ? false
+                                      : true,
+                                )
+                                .map((promotedClass, index) => (
+                                  <Tippy
+                                    theme="custom"
+                                    content={
+                                      <>
+                                        <strong>
+                                          {promotedClass.className}
+                                        </strong>
+                                        <p className="tooltip-text">
+                                          {promotedClass.description}
+                                        </p>
+                                      </>
+                                    }
+                                  >
+                                    <span key={index}>
+                                      {promotedClass.className}
+                                    </span>
+                                  </Tippy>
+                                ))
+                            ) : (
+                              <span>No Promotions</span>
+                            )}
+                          </div>
+                        ) : (
+                          <span>No Friendship Seal Partner Selected</span>
+                        );
+                      })()
+                    )}
+                  </div>
+                </div>
+                <div className="class-set-column">
+                  <div className="class-set-label">Partner Seal</div>
+                  <div className="class-sets-classes">
+                    {isEditing ? (
+                      <div className="partner-select">
+                        {(() => {
+                          const activeUnitNames = new Set(
+                            units.map((u) => u.name),
+                          );
+                          const filteredPartners =
+                            unit.base_class_set.partner_seal_partners?.filter(
+                              (partner) =>
+                                activeUnitNames.has(partner.name) &&
+                                (!units.find((u) => u.name === partner.name)
+                                  ?.base_class_set
+                                  .selected_partner_seal_partner ||
+                                  units.find((u) => u.name === partner.name)
+                                    ?.base_class_set
+                                    .selected_partner_seal_partner?.name ===
+                                    unit.name),
+                            ) || [];
 
-                              // Update current unit
-                              const updatedUnit: Character = {
-                                ...unit,
-                                base_class_set: {
-                                  ...unit.base_class_set,
-                                  selected_partner_seal_partner:
-                                    selectedPartner,
-                                  partner_seal_base_class: selectedPartner
-                                    ? getAllySealClass(unit, selectedPartner)
-                                    : null,
-                                },
-                              };
-
-                              // Update the partner's Partner Seal info
-                              if (selectedPartner) {
-                                const partnerUnit = units.find(
-                                  (u) => u.name === selectedPartner.name,
-                                );
-                                if (partnerUnit) {
-                                  const updatedPartnerUnit: Character = {
-                                    ...partnerUnit,
-                                    base_class_set: {
-                                      ...partnerUnit.base_class_set,
-                                      selected_partner_seal_partner: unit,
-                                      partner_seal_base_class: getAllySealClass(
-                                        partnerUnit,
-                                        unit,
-                                      ),
-                                    },
-                                  };
-                                  updateUnit(updatedPartnerUnit);
-                                }
-                              }
-
-                              // Clear previous partner's Partner Seal info if applicable
-                              const previousPartner =
+                          return filteredPartners.length > 0 ? (
+                            <select
+                              value={
                                 unit.base_class_set
-                                  .selected_partner_seal_partner;
-                              if (
-                                previousPartner &&
-                                previousPartner.name !== partnerName
-                              ) {
-                                const previousPartnerUnit = units.find(
-                                  (u) => u.name === previousPartner.name,
-                                );
-                                if (previousPartnerUnit) {
-                                  const updatedPreviousPartnerUnit: Character =
-                                    {
-                                      ...previousPartnerUnit,
+                                  .selected_partner_seal_partner?.name || ""
+                              }
+                              onChange={(e) => {
+                                const partnerName = e.target.value;
+                                const selectedPartner = partnerName
+                                  ? units.find((p) => p.name === partnerName) ||
+                                    null
+                                  : null;
+
+                                const updatedUnit: Character = {
+                                  ...unit,
+                                  base_class_set: {
+                                    ...unit.base_class_set,
+                                    selected_partner_seal_partner:
+                                      selectedPartner,
+                                    partner_seal_base_class: selectedPartner
+                                      ? getAllySealClass(unit, selectedPartner)
+                                      : null,
+                                  },
+                                };
+
+                                if (selectedPartner) {
+                                  const partnerUnit = units.find(
+                                    (u) => u.name === selectedPartner.name,
+                                  );
+                                  if (partnerUnit) {
+                                    const updatedPartnerUnit: Character = {
+                                      ...partnerUnit,
                                       base_class_set: {
-                                        ...previousPartnerUnit.base_class_set,
-                                        selected_partner_seal_partner: null,
-                                        partner_seal_base_class: null,
+                                        ...partnerUnit.base_class_set,
+                                        selected_partner_seal_partner: unit,
+                                        partner_seal_base_class:
+                                          getAllySealClass(partnerUnit, unit),
                                       },
                                     };
-                                  updateUnit(updatedPreviousPartnerUnit);
-                                }
-                              }
-
-                              updateUnit(updatedUnit);
-                            }}
-                            className="inline-select"
-                            aria-label={`Select or change partner seal partner for ${unit.name}`}
-                          >
-                            <option value="">No Partner</option>
-                            {filteredPartners.map((partner) => (
-                              <option key={partner.name} value={partner.name}>
-                                {partner.name}
-                              </option>
-                            ))}
-                          </select>
-                        ) : (
-                          <span>No Viable Partner Seal Partners</span>
-                        );
-                      })()}
-                    </div>
-                  ) : (
-                    (() => {
-                      const activeUnitNames = new Set(units.map((u) => u.name));
-                      const selectedPartner =
-                        unit.base_class_set.selected_partner_seal_partner;
-                      const isValidPartner =
-                        selectedPartner &&
-                        activeUnitNames.has(selectedPartner.name);
-
-                      return isValidPartner &&
-                        unit.base_class_set.partner_seal_base_class ? (
-                        <div className="partner-item">
-                          <span>S Support: {selectedPartner.name}</span>
-                          {unit.base_class_set.partner_seal_base_class
-                            .classTree &&
-                          unit.base_class_set.partner_seal_base_class.classTree
-                            .length > 0 ? (
-                            unit.base_class_set.partner_seal_base_class.classTree
-                              .filter((promotedClass) =>
-                                promotedClass.className === "Maid" &&
-                                unit.gender === "M"
-                                  ? false
-                                  : promotedClass.className === "Butler" &&
-                                      unit.gender === "F"
-                                    ? false
-                                    : true,
-                              )
-                              .map((promotedClass, index) => (
-                                <Tippy
-                                  theme="custom"
-                                  content={
-                                    <>
-                                      <strong>{promotedClass.className}</strong>
-                                      <p className="tooltip-text">
-                                        {promotedClass.description}
-                                      </p>
-                                    </>
+                                    updateUnit(updatedPartnerUnit);
                                   }
-                                >
-                                  <span key={index}>
-                                    {promotedClass.className}
-                                  </span>
-                                </Tippy>
-                              ))
+                                }
+
+                                const previousPartner =
+                                  unit.base_class_set
+                                    .selected_partner_seal_partner;
+                                if (
+                                  previousPartner &&
+                                  previousPartner.name !== partnerName
+                                ) {
+                                  const previousPartnerUnit = units.find(
+                                    (u) => u.name === previousPartner.name,
+                                  );
+                                  if (previousPartnerUnit) {
+                                    const updatedPreviousPartnerUnit: Character =
+                                      {
+                                        ...previousPartnerUnit,
+                                        base_class_set: {
+                                          ...previousPartnerUnit.base_class_set,
+                                          selected_partner_seal_partner: null,
+                                          partner_seal_base_class: null,
+                                        },
+                                      };
+                                    updateUnit(updatedPreviousPartnerUnit);
+                                  }
+                                }
+
+                                updateUnit(updatedUnit);
+                              }}
+                              className="inline-select"
+                              aria-label={`Select or change partner seal partner for ${unit.name}`}
+                            >
+                              <option value="">No Partner</option>
+                              {filteredPartners.map((partner) => (
+                                <option key={partner.name} value={partner.name}>
+                                  {partner.name}
+                                </option>
+                              ))}
+                            </select>
                           ) : (
-                            <span>No Promotions</span>
-                          )}
-                        </div>
-                      ) : (
-                        <span>No Partner Seal Partner Selected</span>
-                      );
-                    })()
-                  )}
+                            <span>No Viable Partner Seal Partners</span>
+                          );
+                        })()}
+                      </div>
+                    ) : (
+                      (() => {
+                        const activeUnitNames = new Set(
+                          units.map((u) => u.name),
+                        );
+                        const selectedPartner =
+                          unit.base_class_set.selected_partner_seal_partner;
+                        const isValidPartner =
+                          selectedPartner &&
+                          activeUnitNames.has(selectedPartner.name);
+
+                        return isValidPartner &&
+                          unit.base_class_set.partner_seal_base_class ? (
+                          <div className="partner-item">
+                            <span>S Support: {selectedPartner.name}</span>
+                            {unit.base_class_set.partner_seal_base_class
+                              .classTree &&
+                            unit.base_class_set.partner_seal_base_class
+                              .classTree.length > 0 ? (
+                              unit.base_class_set.partner_seal_base_class.classTree
+                                .filter((promotedClass) =>
+                                  promotedClass.className === "Maid" &&
+                                  unit.gender === "M"
+                                    ? false
+                                    : promotedClass.className === "Butler" &&
+                                        unit.gender === "F"
+                                      ? false
+                                      : true,
+                                )
+                                .map((promotedClass, index) => (
+                                  <Tippy
+                                    theme="custom"
+                                    content={
+                                      <>
+                                        <strong>
+                                          {promotedClass.className}
+                                        </strong>
+                                        <p className="tooltip-text">
+                                          {promotedClass.description}
+                                        </p>
+                                      </>
+                                    }
+                                  >
+                                    <span key={index}>
+                                      {promotedClass.className}
+                                    </span>
+                                  </Tippy>
+                                ))
+                            ) : (
+                              <span>No Promotions</span>
+                            )}
+                          </div>
+                        ) : (
+                          <span>No Partner Seal Partner Selected</span>
+                        );
+                      })()
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        </>
+            </motion.div>
+          </>
+        )}
+      </motion.main>
+
+      {showDeleteConfirm && (
+        <motion.div
+          className="overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="overlay-content">
+            <button
+              className="close-button"
+              onClick={cancelDelete}
+              aria-label={`Close delete confirmation for ${unit.name}`}
+            >
+              ✕
+            </button>
+            <h2>Delete {unit.name}?</h2>
+            <h3>This action cannot be undone.</h3>
+            <button
+              className="deletion-buttons"
+              onClick={cancelDelete}
+              aria-label={`Keep unit ${unit.name}`}
+            >
+              Keep unit
+            </button>
+            <button
+              className="deletion-buttons"
+              onClick={confirmDelete}
+              aria-label={`Confirm deletion of ${unit.name}`}
+            >
+              Delete unit
+            </button>
+          </div>
+        </motion.div>
       )}
-    </motion.main>
+    </>
   );
 };
 
