@@ -12,7 +12,7 @@ import "tippy.js/dist/tippy.css";
 import { useUnits } from "../defaultData/Fire Emblem Fates/UnitsContext";
 import { findCharacter } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest.tsx";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments.ts";
-
+import { defaultSkills } from "../defaultData/Fire Emblem Fates/defaultSkills.tsx";
 interface UnitGridProps {
   unit: Character;
   gameId?: string;
@@ -115,7 +115,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     updateUnit(updatedUnit);
   };
 
-  const getAvailableClasses = (): Class[] => {
+  const getAvailableClasses = (Purpose: String): Class[] => {
     const classes: Class[] = [];
     const gender = unit.gender;
 
@@ -163,6 +163,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       );
     }
 
+    if (Purpose === "Skills") {
+      return classes;
+    }
     const finalClasses = classes.filter((cls) => {
       if (unit.class.promotionStatus === false) {
         return (
@@ -414,7 +417,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setError("");
     setShowDeleteConfirm(false);
     if (newIsClassChanging) {
-      const availableClasses = getAvailableClasses();
+      const availableClasses = getAvailableClasses("Class Change");
       if (availableClasses.length > 0)
         setSelectedClassName(availableClasses[0].className);
     } else {
@@ -576,6 +579,49 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     exit: { opacity: 0, scale: 0.8, transition: { duration: 0.3 } },
   };
 
+  const getAvailableSkills = () => {
+    const availableSkills = [];
+    const availableClasses = getAvailableClasses("Skills");
+    availableClasses.push(unit.class)
+    for (let i = 0; i < defaultSkills.length; i++) {
+      const skill = defaultSkills[i];
+  
+      const class0 = skill.associatedClass?.[0]?.className;
+      const class1 = skill.associatedClass?.[1]?.className;
+      const classPromotionStatus = skill.associatedClass?.[0]?.promotionStatus
+  
+      const matchesAvailableClass = (className: string | undefined) =>
+        className &&
+        availableClasses.some(c => c.className === className);
+  
+      if (matchesAvailableClass(class0) || matchesAvailableClass(class1)) {
+        // console.log(classPromotionStatus, class0)
+        if (
+          (unit.class.promotionStatus === true &&
+          (skill.levelAcquired === undefined || unit.level >= skill.levelAcquired)) ||
+          (classPromotionStatus === false && unit.class.promotionStatus === true)
+        ) {
+          availableSkills.push(skill);
+        } else if (
+          unit.class.promotionStatus === false &&
+          (skill.levelAcquired === undefined || unit.level >= skill.levelAcquired) &&
+          skill.associatedClass?.[0]?.promotionStatus === false
+        )
+        {
+          availableSkills.push(skill);
+        }
+
+      }
+    }
+    // console.log(availableSkills)
+    return availableSkills;
+  };
+  
+  
+  
+  
+  
+
   return (
     <>
       <motion.main
@@ -671,7 +717,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                 className="inline-select"
                 aria-label={`Select new class for ${unit.name}`}
               >
-                {getAvailableClasses().map((cls) => (
+                {getAvailableClasses("Class Change").map((cls) => (
                   <option key={cls.className} value={cls.className}>
                     {cls.className}
                   </option>
@@ -1538,7 +1584,6 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           </>
         )}
       </motion.main>
-
       {showDeleteConfirm && (
         <motion.div
           className="overlay"
