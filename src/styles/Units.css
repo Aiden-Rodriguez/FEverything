@@ -351,7 +351,7 @@ h1 {
   cursor: pointer;
   color: red;
   font-weight: bold;
-  z-index: 1;
+  z-index: 0;
 }
 
 @keyframes pulse {

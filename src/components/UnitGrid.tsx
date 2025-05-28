@@ -44,6 +44,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [isClassChanging, setIsClassChanging] = useState<boolean>(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
+  const [showChangeSkills, setShowChangeSkills] = useState<boolean>(false);
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>("");
   const [selectedClassName, setSelectedClassName] = useState<string>(
@@ -357,6 +358,19 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setShowDeleteConfirm(false);
   };
 
+  const handleSkillChangeClick = () => {
+    setShowChangeSkills(true);
+  };
+
+  const confirmSkillChange = () => {
+    //change the skills
+    setShowChangeSkills(false);
+  };
+
+  const cancelSkillChange = () => {
+    setShowChangeSkills(false);
+  };
+
   useEffect(() => {
     if (!gameId) {
       console.warn("No gameId provided; skipping data initialization");
@@ -399,6 +413,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setEditingField(null);
     setError("");
     setShowDeleteConfirm(false);
+    setShowChangeSkills(false);
   };
 
   const handleToggleEdit = () => {
@@ -407,6 +422,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setEditingField(null);
     setError("");
     setShowDeleteConfirm(false);
+    setShowChangeSkills(false);
   };
 
   const handleToggleClassChange = () => {
@@ -416,6 +432,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     setEditingField(null);
     setError("");
     setShowDeleteConfirm(false);
+    setShowChangeSkills(false);
     if (newIsClassChanging) {
       const availableClasses = getAvailableClasses("Class Change");
       if (availableClasses.length > 0)
@@ -913,6 +930,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                   </Tippy>
                 </div>
               ))}
+            {isEditing ? 
+            <button onClick={handleSkillChangeClick}>Change Equipped Skills?</button> : null}
           </div>
         </div>
 
@@ -1619,6 +1638,43 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           </div>
         </motion.div>
       )}
+
+{showChangeSkills && (
+        <motion.div
+          className="overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="overlay-content">
+            <button
+              className="close-button"
+              onClick={cancelSkillChange}
+              aria-label={`Close skill change confirmation for ${unit.name}`}
+            >
+              ✕
+            </button>
+            <h2>Change {unit.name} skills</h2>
+            <select
+            value={unit.equipped_skills[0].name}
+            ></select>
+                        <select
+            value={unit.equipped_skills[1].name}
+            ></select>
+                        <select
+            value={unit.equipped_skills[2].name}
+            ></select>
+                        <select
+            value={unit.equipped_skills[3].name}
+            ></select>
+                        <select
+            value={unit.equipped_skills[4].name}
+            ></select>
+            <></>
+          </div>
+        </motion.div>
+       )}
     </>
   );
 };

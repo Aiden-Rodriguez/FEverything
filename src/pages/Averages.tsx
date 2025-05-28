@@ -87,7 +87,6 @@ const getChartData = (
   p: number,
   k: number,
   statName: string,
-  characterName: string,
 ) => {
   const labels = Array.from({ length: n + 1 }, (_, i) => i.toString());
   const probabilities = labels.map((x) => binomialPMF(parseInt(x), n, p));
@@ -110,8 +109,8 @@ const getChartData = (
 };
 
 // Helper function to generate chart data for overall (normal approximation)
-const getOverallChartData = (averageZScore: number, characterName: string) => {
-  const xValues = Array.from({ length: 21 }, (_, i) => i / 5 - 2); // -2 to +2 in steps of 0.2
+const getOverallChartData = (averageZScore: number) => {
+  const xValues = Array.from({ length: 31 }, (_, i) => i / 5 - 3); // -3 to +3 in steps of 0.2
   const probabilities = xValues.map(
     (x) => (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * x ** 2), // Standard normal centered at 0
   );
@@ -335,7 +334,7 @@ const Averages = () => {
     const weightedGrowthSums: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
 
     levelUpData.forEach(
-      ([growthRates, statGains, levelsGained], periodIndex) => {
+      ([growthRates, statGains, levelsGained]) => {
         const zScores: number[] = [];
         if (levelsGained === 0) {
           return;
@@ -625,7 +624,6 @@ const Averages = () => {
                     <Bar
                       data={getOverallChartData(
                         averageZScore,
-                        selectedUnit.name,
                       )}
                       options={chartOptions}
                     />
@@ -658,7 +656,6 @@ const Averages = () => {
                           ].indexOf(activeTab)
                         ],
                         activeTab.toUpperCase(),
-                        selectedUnit.name,
                       )}
                       options={chartOptions}
                     />
