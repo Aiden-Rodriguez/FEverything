@@ -361,6 +361,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   };
 
   const confirmDelete = () => {
+    if (unit.name === ("Corrin (F)") || unit.name === ("Corrin (M)")) {
+      
+    }
     removeUnit(unit.name);
     setShowDeleteConfirm(false);
   };

@@ -168,7 +168,7 @@ const UnitsContent = () => {
   };
 
   const shouldPromptCorrinCreation =
-    units.length === 0 && gameId === "Fire Emblem Fates";
+    (units.length === 0 ||  createdCorrinGender === null) && gameId === "Fire Emblem Fates";
 
   return (
     <main className="page-container">

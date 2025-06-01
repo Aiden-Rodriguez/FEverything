@@ -25,8 +25,6 @@ ChartJS.register(
   Tooltip,
   Legend,
 );
-
-// Helper functions (erf, normalCDF, lgamma, binomialPMF, getZScorePercentage, getChartData, getOverallChartData remain unchanged)
 const erf = (x: number): number => {
   const a1 = 0.254829592;
   const a2 = -0.284496736;
@@ -253,24 +251,6 @@ const Averages = () => {
         (initialClassData[2].classGrowths.defence + unit.base_growths.defence) / 100 + aptitudeBoost;
       const growthRateResistance =
         (initialClassData[2].classGrowths.resistance + unit.base_growths.resistance) / 100 + aptitudeBoost;
-
-      // Base growth rates (without Aptitude) for z-score calculations
-      const baseGrowthRateHp =
-        (initialClassData[2].classGrowths.hp + unit.base_growths.hp) / 100;
-      const baseGrowthRateStrength =
-        (initialClassData[2].classGrowths.strength + unit.base_growths.strength) / 100;
-      const baseGrowthRateMagic =
-        (initialClassData[2].classGrowths.magic + unit.base_growths.magic) / 100;
-      const baseGrowthRateSkill =
-        (initialClassData[2].classGrowths.skill + unit.base_growths.skill) / 100;
-      const baseGrowthRateSpeed =
-        (initialClassData[2].classGrowths.speed + unit.base_growths.speed) / 100;
-      const baseGrowthRateLuck =
-        (initialClassData[2].classGrowths.luck + unit.base_growths.luck) / 100;
-      const baseGrowthRateDefence =
-        (initialClassData[2].classGrowths.defence + unit.base_growths.defence) / 100;
-      const baseGrowthRateResistance =
-        (initialClassData[2].classGrowths.resistance + unit.base_growths.resistance) / 100;
 
       const hpGained =
         secondaryClassData[3].hp -
