@@ -162,6 +162,24 @@ const Averages = () => {
     null,
   );
   const [activeTab, setActiveTab] = useState<string>("overall");
+  const [hasAptitudeEquipped, setHasAptitudeEquipped] = useState(false);
+
+  const checkAptitude = () => {
+    if (!selectedUnit) return;
+    setHasAptitudeEquipped(
+      selectedUnit.equipped_skills.some(skill => skill.name === "Aptitude"),
+    );
+  };
+  
+  useEffect(() => {
+    checkAptitude();
+  }, [selectedUnit]);
+
+  useEffect(() => {
+    if (selectedUnit) {
+      calcStatsPerClassChange(selectedUnit);
+    }
+  }, [hasAptitudeEquipped]);
 
   useEffect(() => {
     if (gameId && selectedRoute) {
@@ -174,9 +192,6 @@ const Averages = () => {
           setUnits(parsedUnits);
           const initialUnit = parsedUnits.length > 0 ? parsedUnits[0] : null;
           setSelectedUnit(initialUnit);
-          if (initialUnit) {
-            calcStatsPerClassChange(initialUnit);
-          }
         } catch (error) {
           console.error("Error parsing stored units:", error);
         }
@@ -194,9 +209,6 @@ const Averages = () => {
     setTotalStatGains(null);
     setTotalLevelsGained(null);
     setActiveTab("overall");
-    if (unit) {
-      calcStatsPerClassChange(unit);
-    }
   };
 
   const calcStatsPerClassChange = (unit: Character) => {
@@ -232,32 +244,34 @@ const Averages = () => {
 
       if (initialClassData[0] !== secondaryClassData[0]) {
       } else {
+        // Apply Aptitude boost (+10%) if equipped
+        const aptitudeBoost = hasAptitudeEquipped ? 0.10 : 0;
         const growthRateHp =
-          (initialClassData[2].classGrowths.hp + unit.base_growths.hp) / 100;
+          (initialClassData[2].classGrowths.hp + unit.base_growths.hp) / 100 + aptitudeBoost;
         const growthRateStrength =
           (initialClassData[2].classGrowths.strength +
             unit.base_growths.strength) /
-          100;
+            100 + aptitudeBoost;
         const growthRateMagic =
           (initialClassData[2].classGrowths.magic + unit.base_growths.magic) /
-          100;
+            100 + aptitudeBoost;
         const growthRateSkill =
           (initialClassData[2].classGrowths.skill + unit.base_growths.skill) /
-          100;
+            100 + aptitudeBoost;
         const growthRateSpeed =
           (initialClassData[2].classGrowths.speed + unit.base_growths.speed) /
-          100;
+            100 + aptitudeBoost;
         const growthRateLuck =
           (initialClassData[2].classGrowths.luck + unit.base_growths.luck) /
-          100;
+            100 + aptitudeBoost;
         const growthRateDefence =
           (initialClassData[2].classGrowths.defence +
             unit.base_growths.defence) /
-          100;
+            100 + aptitudeBoost;
         const growthRateResistance =
           (initialClassData[2].classGrowths.resistance +
             unit.base_growths.resistance) /
-          100;
+            100 + aptitudeBoost;
 
         const hpGained =
           secondaryClassData[3].hp -
@@ -501,49 +515,57 @@ const Averages = () => {
                 <li>
                   HP:{" "}
                   {selectedUnit.class.classGrowths.hp +
-                    selectedUnit.base_growths.hp}
+                    selectedUnit.base_growths.hp +
+                    (hasAptitudeEquipped ? 10 : 0)}
                   %
                 </li>
                 <li>
                   STR:{" "}
                   {selectedUnit.class.classGrowths.strength +
-                    selectedUnit.base_growths.strength}
+                    selectedUnit.base_growths.strength +
+                    (hasAptitudeEquipped ? 10 : 0)}
                   %
                 </li>
                 <li>
                   MAG:{" "}
                   {selectedUnit.class.classGrowths.magic +
-                    selectedUnit.base_growths.magic}
+                    selectedUnit.base_growths.magic +
+                    (hasAptitudeEquipped ? 10 : 0)}
                   %
                 </li>
                 <li>
                   SKL:{" "}
                   {selectedUnit.class.classGrowths.skill +
-                    selectedUnit.base_growths.skill}
+                    selectedUnit.base_growths.skill +
+                    (hasAptitudeEquipped ? 10 : 0)}
                   %
                 </li>
                 <li>
                   SPD:{" "}
                   {selectedUnit.class.classGrowths.speed +
-                    selectedUnit.base_growths.speed}
+                    selectedUnit.base_growths.speed +
+                    (hasAptitudeEquipped ? 10 : 0)}
                   %
                 </li>
                 <li>
                   LCK:{" "}
                   {selectedUnit.class.classGrowths.luck +
-                    selectedUnit.base_growths.luck}
+                    selectedUnit.base_growths.luck +
+                    (hasAptitudeEquipped ? 10 : 0)}
                   %
                 </li>
                 <li>
                   DEF:{" "}
                   {selectedUnit.class.classGrowths.defence +
-                    selectedUnit.base_growths.defence}
+                    selectedUnit.base_growths.defence +
+                    (hasAptitudeEquipped ? 10 : 0)}
                   %
                 </li>
                 <li>
                   RES:{" "}
                   {selectedUnit.class.classGrowths.resistance +
-                    selectedUnit.base_growths.resistance}
+                    selectedUnit.base_growths.resistance +
+                    (hasAptitudeEquipped ? 10 : 0)}
                   %
                 </li>
               </ul>
