@@ -154,6 +154,8 @@ const UnitsContent = () => {
 
     corrin = applyBoonBaneAdjustments(corrin, corrinBoon, corrinBane);
 
+    //initialize classline0 correctly, instead of using raw corrin bases.
+    corrin.class_line[0] = [0, 1, corrin.class, corrin.stats]
     addUnit(corrin);
     setCreatedCorrinGender(corrinGender);
     toggleOverlayAddCharacter();
