@@ -18,7 +18,6 @@ async function startServer() {
   });
 
   app.get("/api/users", async (req: Request, res: Response) => {
-    console.log("DB URL:", process.env.SUPABASE_DB_URL);
     try {
       const result = await pool.query('SELECT username FROM users');
       res.json(result.rows);
@@ -28,9 +27,12 @@ async function startServer() {
     }
   });
 
-  app.get(Object.values(ValidRoutes), (req, res) => {
-    res.sendFile("index.html", { root: STATIC_DIR });
-  });
+app.use(express.static(STATIC_DIR));
+
+app.get(Object.values(ValidRoutes), (req, res) => {
+  res.sendFile("index.html", { root: STATIC_DIR });
+});
+
 
   app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
