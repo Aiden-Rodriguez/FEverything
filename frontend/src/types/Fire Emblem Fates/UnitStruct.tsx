@@ -44,7 +44,7 @@ export type StatBlock = {
   resistance: number;
 };
 
-export interface Character {
+export interface BaseCharacter {
   name: string;
   nickname?: string;
   gender: string;
@@ -97,10 +97,10 @@ export interface Character {
     starting_class: Class;
     starting_class_tree: Class;
     heart_seal_classes: Class[];
-    friendship_seal_partners: Character[];
-    partner_seal_partners: Character[];
-    selected_friendship_seal_partner: Character | null;
-    selected_partner_seal_partner: Character | null;
+    friendship_seal_partners: BaseCharacter[];
+    partner_seal_partners: BaseCharacter[];
+    selected_friendship_seal_partner: BaseCharacter | null;
+    selected_partner_seal_partner: BaseCharacter | null;
     friendship_seal_base_class: Class | null;
     partner_seal_base_class: Class | null;
   };
@@ -188,9 +188,45 @@ export interface Character {
   };
 }
 
-// Starting Equipment ..?
-//Inheritable class sets (partner/friendship seals)
+export interface UniqueCharacterData {
+  name: string;
+  nickname?: string;
+  class: Class;
+  internalLevel: number;
+  level: number;
+  eternalSealCount: number;
+  class_line: [number, number, Class, StatBlock][];
+  stats: {
+    hp: number;
+    strength: number;
+    magic: number;
+    skill: number;
+    speed: number;
+    luck: number;
+    defence: number;
+    resistance: number;
+    move: number;
+  };
+  equipped_skills: Skill[];
+  learned_skills: Skill[];
+  weapon_ranks: {
+    WeaponRankSwordKatana: WeaponRank;
+    WeaponRankLanceNaginata: WeaponRank;
+    WeaponRankAxeClub: WeaponRank;
+    WeaponRankTomeScroll: WeaponRank;
+    WeaponRankKnifeShuriken: WeaponRank;
+    WeaponRankBowYumi: WeaponRank;
+    WeaponRankStaffRod: WeaponRank;
+    WeaponRankStone: WeaponRank;
+  };
+  weapons: String[];
+  selected_friendship_seal_partner: BaseCharacter | null;
+  selected_partner_seal_partner: BaseCharacter | null;
+  boon?: string;
+  bane?: string;
+}
 
-// Things that change game to game
-// Supports - All characters
-// Starting equipment, level, stats, starting skills, starting weapon rank
+//What really needs to be stored in db...
+//boon, bane, talent (corrin)
+//Name, class (just name?), internal level, level, eternal seal count, classline (just name? for classnames?), stats, 
+//equipped skills (just name?), weapon ranks, partner/friendship seal partners (just name?/id?)

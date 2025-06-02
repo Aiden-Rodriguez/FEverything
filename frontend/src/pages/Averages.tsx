@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { parse } from "flatted";
-import { Character } from "../types/Fire Emblem Fates/UnitStruct";
+import { BaseCharacter } from "../types/Fire Emblem Fates/UnitStruct";
 import { Class } from "../types/Fire Emblem Fates/ClassStruct";
 import { StatBlock } from "../types/Fire Emblem Fates/UnitStruct";
 import { Bar } from "react-chartjs-2";
@@ -141,8 +141,8 @@ const Averages = () => {
   const { state } = useLocation();
   const selectedRoute = state?.selectedRoute;
 
-  const [units, setUnits] = useState<Character[]>([]);
-  const [selectedUnit, setSelectedUnit] = useState<Character | null>(null);
+  const [units, setUnits] = useState<BaseCharacter[]>([]);
+  const [selectedUnit, setSelectedUnit] = useState<BaseCharacter | null>(null);
   const [averageZScore, setAverageZScore] = useState<number | null>(null);
   const [statZScores, setStatZScores] = useState<number[] | null>(null);
   const [totalGrowthRates, setTotalGrowthRates] = useState<number[] | null>(null);
@@ -167,7 +167,7 @@ const Averages = () => {
       const storedUnits = localStorage.getItem(`units_${gameId}_${selectedRoute}`);
       if (storedUnits) {
         try {
-          const parsedUnits: Character[] = parse(storedUnits);
+          const parsedUnits: BaseCharacter[] = parse(storedUnits);
           setUnits(parsedUnits);
           const initialUnit = parsedUnits.length > 0 ? parsedUnits[0] : null;
           setSelectedUnit(initialUnit);
@@ -196,7 +196,7 @@ const Averages = () => {
     setActiveTab("overall");
   };
 
-  const calcStatsPerClassChange = (unit: Character) => {
+  const calcStatsPerClassChange = (unit: BaseCharacter) => {
     if (!unit) return;
     const classLineList: [number, number, Class, StatBlock][] = [];
     const classLine = unit.class_line;

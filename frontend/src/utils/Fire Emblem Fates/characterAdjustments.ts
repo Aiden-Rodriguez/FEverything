@@ -1,9 +1,9 @@
-import { Character } from "../../types/Fire Emblem Fates/UnitStruct";
+import { BaseCharacter } from "../../types/Fire Emblem Fates/UnitStruct";
 
 //Still needs boon/bane support and pair up bonuses...
 
 export const applyBoonBaneAdjustments = (
-  corrin: Character,
+  corrin: BaseCharacter,
   boon: string,
   bane: string,
 ) => {

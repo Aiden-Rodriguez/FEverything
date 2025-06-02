@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import SpriteAnimator from "../components/SpriteAnimator";
 import {
-  Character,
+  BaseCharacter,
   StatBlock,
 } from "../types/Fire Emblem Fates/UnitStruct.tsx";
 import { Class, WeaponRank } from "../types/Fire Emblem Fates/ClassStruct.tsx";
@@ -15,9 +15,9 @@ import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAd
 import { defaultSkills } from "../defaultData/Fire Emblem Fates/defaultSkills.tsx";
 
 interface UnitGridProps {
-  unit: Character;
+  unit: BaseCharacter;
   gameId?: string;
-  updateUnit: (updatedUnit: Character) => void;
+  updateUnit: (updatedUnit: BaseCharacter) => void;
 }
 
 interface InitModule {
@@ -117,7 +117,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     field: keyof typeof unit.weapon_ranks,
     value: WeaponRank,
   ) => {
-    const updatedUnit: Character = {
+    const updatedUnit: BaseCharacter = {
       ...unit,
       weapon_ranks: {
         ...unit.weapon_ranks,
@@ -295,7 +295,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
       },
     ];
 
-    const updatedUnit: Character = {
+    const updatedUnit: BaseCharacter = {
       ...unit,
       class: newClass,
       class_line: [...updatedClassLine, newClassLine],
@@ -309,8 +309,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   };
 
   const getAllySealClass = (
-    ClassReciever: Character,
-    ClassGiver: Character,
+    ClassReciever: BaseCharacter,
+    ClassGiver: BaseCharacter,
   ): Class | null => {
     const giverBaseClass = ClassGiver.base_class_set.starting_class_tree;
     const giverHeartSealClass1 =
@@ -394,7 +394,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     const newEquippedSkills: Skill[] = selectedSkills.map((skillName) =>
       skillName === "N/A" || !skillName ? getSkillFn("N/A") : getSkillFn(skillName)
     );
-    const updatedUnit: Character = {
+    const updatedUnit: BaseCharacter = {
       ...unit,
       equipped_skills: newEquippedSkills,
     };
@@ -594,7 +594,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const saveEdit = () => {
     if (!editingField || !validateInput(editingField, editValue)) return;
     const numValue = parseInt(editValue);
-    let updatedUnit: Character;
+    let updatedUnit: BaseCharacter;
     if (editingField === "level") {
       updatedUnit = { ...unit, level: numValue };
     } else {
@@ -1393,7 +1393,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                                   ? units.find((p) => p.name === partnerName) ||
                                     null
                                   : null;
-                                const updatedUnit: Character = {
+                                const updatedUnit: BaseCharacter = {
                                   ...unit,
                                   base_class_set: {
                                     ...unit.base_class_set,
@@ -1515,7 +1515,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                                     null
                                   : null;
 
-                                const updatedUnit: Character = {
+                                const updatedUnit: BaseCharacter = {
                                   ...unit,
                                   base_class_set: {
                                     ...unit.base_class_set,
@@ -1532,7 +1532,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                                     (u) => u.name === selectedPartner.name,
                                   );
                                   if (partnerUnit) {
-                                    const updatedPartnerUnit: Character = {
+                                    const updatedPartnerUnit: BaseCharacter = {
                                       ...partnerUnit,
                                       base_class_set: {
                                         ...partnerUnit.base_class_set,
@@ -1556,7 +1556,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                                     (u) => u.name === previousPartner.name,
                                   );
                                   if (previousPartnerUnit) {
-                                    const updatedPreviousPartnerUnit: Character =
+                                    const updatedPreviousPartnerUnit: BaseCharacter =
                                       {
                                         ...previousPartnerUnit,
                                         base_class_set: {

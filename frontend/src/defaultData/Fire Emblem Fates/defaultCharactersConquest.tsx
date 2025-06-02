@@ -1,4 +1,4 @@
-import { Character } from "../../types/Fire Emblem Fates/UnitStruct.tsx";
+import { BaseCharacter } from "../../types/Fire Emblem Fates/UnitStruct.tsx";
 import { defaultClassData } from "./defaultClassData.tsx";
 import { defaultSkills } from "./defaultSkills.tsx";
 import { Class } from "../../types/Fire Emblem Fates/ClassStruct.tsx";
@@ -19,7 +19,7 @@ export function getSkill(skillName: string): Skill {
   return skill;
 }
 
-export const defaultCharactersConquest: Character[] = [
+export const defaultCharactersConquest: BaseCharacter[] = [
   {
     name: "Corrin (M)",
     gender: "M",
@@ -4986,7 +4986,7 @@ const partnerPairs: { [key: string]: string[] } = {
 };
 
 // Helper function to find a character by name
-export const findCharacter = (name: string): Character => {
+export const findCharacter = (name: string): BaseCharacter => {
   const character = defaultCharactersConquest.find(
     (char) => char.name === name,
   );

@@ -7,7 +7,7 @@ import {
   UnitsProvider,
   useUnits,
 } from "../defaultData/Fire Emblem Fates/UnitsContext";
-import { Character } from "../types/Fire Emblem Fates/UnitStruct";
+import { BaseCharacter } from "../types/Fire Emblem Fates/UnitStruct";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments";
 import { getClass } from "../defaultData/Fire Emblem Fates/defaultClassData";
 import { defaultCharactersConquest } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest";
@@ -42,7 +42,7 @@ const UnitsContent = () => {
     useState(false);
   const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] =
     useState(false);
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+  const [selectedCharacter, setSelectedCharacter] = useState<BaseCharacter | null>(
     null,
   );
   const [createdCorrinGender, setCreatedCorrinGender] = useState<
@@ -146,7 +146,7 @@ const UnitsContent = () => {
         ? defaultCharactersConquest[0]
         : defaultCharactersConquest[1];
 
-    let corrin: Character = structuredClone(baseCorrin);
+    let corrin: BaseCharacter = structuredClone(baseCorrin);
 
     corrin.base_class_set.heart_seal_classes = [getClass(corrinTalent)];
     corrin.boon = corrinBoon;
@@ -314,14 +314,14 @@ const UnitsContent = () => {
                       value={selectedCharacter?.name || ""}
                       onChange={(e) => {
                         const selected = availableCharacters.find(
-                          (char: Character) => char.name === e.target.value,
+                          (char: BaseCharacter) => char.name === e.target.value,
                         );
                         setSelectedCharacter(selected || null);
                       }}
                     >
                       {availableCharacters.length > 0 ? (
                         availableCharacters.map(
-                          (char: Character, index: number) => (
+                          (char: BaseCharacter, index: number) => (
                             <option
                               key={`${char.name}-${index}`}
                               value={char.name}
