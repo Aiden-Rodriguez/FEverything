@@ -10,20 +10,22 @@ import GamePage from "./pages/GamePage.tsx";
 import About from "./pages/About.tsx";
 import Signup from "./pages/Signup.tsx";
 import Login from "./pages/Login.tsx";
+import { ValidRoutes } from "../../backend/src/shared/validRoutes.ts"
+
 function App() {
   return (
     <Router>
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Signup" element={<Signup />} />
-        <Route path="/:gameId/Averages" element={<Averages />} />
-        <Route path="/:gameId/Units" element={<Units />} />
-        <Route path="/:gameId/CombatSimulator" element={<CombatSimulator />} />
-        <Route path="/game/:gameId" element={<GamePage />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path={ValidRoutes.HOME} element={<Home />} />
+        <Route path={ValidRoutes.ABOUT} element={<About />} />
+        <Route path={ValidRoutes.LOGIN} element={<Login />} />
+        <Route path={ValidRoutes.SIGNUP} element={<Signup />} />
+        <Route path={ValidRoutes.AVERAGES} element={<Averages />} />
+        <Route path={ValidRoutes.UNITS} element={<Units />} />
+        <Route path={ValidRoutes.COMBATSIMULATOR} element={<CombatSimulator />} />
+        <Route path={ValidRoutes.GAMEPAGE} element={<GamePage />} />
+        <Route path={ValidRoutes.NOTFOUND} element={<NotFound />} />
       </Routes>
     </Router>
   );
