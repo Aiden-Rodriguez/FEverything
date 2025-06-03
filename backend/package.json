@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon",
     "build": "npx tsc",
-    "start": "npm run build && node dist/index.js"
+    "start": "npm run build && node dist/index.js",
+    "format": "prettier --write ."
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "pg": "^8.16.0",
+    "prettier": "^3.5.3",
     "ps": "^1.0.0"
   },
   "devDependencies": {

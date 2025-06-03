@@ -42,9 +42,8 @@ const UnitsContent = () => {
     useState(false);
   const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] =
     useState(false);
-  const [selectedCharacter, setSelectedCharacter] = useState<BaseCharacter | null>(
-    null,
-  );
+  const [selectedCharacter, setSelectedCharacter] =
+    useState<BaseCharacter | null>(null);
   const [createdCorrinGender, setCreatedCorrinGender] = useState<
     "Male" | "Female" | null
   >(null);
@@ -155,7 +154,7 @@ const UnitsContent = () => {
     corrin = applyBoonBaneAdjustments(corrin, corrinBoon, corrinBane);
 
     //initialize classline0 correctly, instead of using raw corrin bases.
-    corrin.class_line[0] = [0, 1, corrin.class, corrin.stats]
+    corrin.class_line[0] = [0, 1, corrin.class, corrin.stats];
     addUnit(corrin);
     setCreatedCorrinGender(corrinGender);
     toggleOverlayAddCharacter();
@@ -168,7 +167,8 @@ const UnitsContent = () => {
   };
 
   const shouldPromptCorrinCreation =
-    (units.length === 0 ||  createdCorrinGender === null) && gameId === "Fire Emblem Fates";
+    (units.length === 0 || createdCorrinGender === null) &&
+    gameId === "Fire Emblem Fates";
 
   return (
     <main className="page-container">

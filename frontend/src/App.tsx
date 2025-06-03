@@ -10,7 +10,7 @@ import GamePage from "./pages/GamePage.tsx";
 import About from "./pages/About.tsx";
 import Signup from "./pages/Signup.tsx";
 import Login from "./pages/Login.tsx";
-import { ValidRoutes } from "../../backend/src/shared/validRoutes.ts"
+import { ValidRoutes } from "../../backend/src/shared/validRoutes.ts";
 
 function App() {
   return (
@@ -23,7 +23,10 @@ function App() {
         <Route path={ValidRoutes.SIGNUP} element={<Signup />} />
         <Route path={ValidRoutes.AVERAGES} element={<Averages />} />
         <Route path={ValidRoutes.UNITS} element={<Units />} />
-        <Route path={ValidRoutes.COMBATSIMULATOR} element={<CombatSimulator />} />
+        <Route
+          path={ValidRoutes.COMBATSIMULATOR}
+          element={<CombatSimulator />}
+        />
         <Route path={ValidRoutes.GAMEPAGE} element={<GamePage />} />
         <Route path={ValidRoutes.NOTFOUND} element={<NotFound />} />
       </Routes>

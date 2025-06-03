@@ -75,12 +75,7 @@ const getZScorePercentage = (z: number, characterName: string): string => {
   return `Worse than ~${percent}% of other ${characterName}`;
 };
 
-const getChartData = (
-  n: number,
-  p: number,
-  k: number,
-  statName: string,
-) => {
+const getChartData = (n: number, p: number, k: number, statName: string) => {
   const labels = Array.from({ length: n + 1 }, (_, i) => i.toString());
   const probabilities = labels.map((x) => binomialPMF(parseInt(x), n, p));
   const backgroundColors = labels.map((x) =>
@@ -145,16 +140,20 @@ const Averages = () => {
   const [selectedUnit, setSelectedUnit] = useState<BaseCharacter | null>(null);
   const [averageZScore, setAverageZScore] = useState<number | null>(null);
   const [statZScores, setStatZScores] = useState<number[] | null>(null);
-  const [totalGrowthRates, setTotalGrowthRates] = useState<number[] | null>(null);
+  const [totalGrowthRates, setTotalGrowthRates] = useState<number[] | null>(
+    null,
+  );
   const [totalStatGains, setTotalStatGains] = useState<number[] | null>(null);
-  const [totalLevelsGained, setTotalLevelsGained] = useState<number | null>(null);
+  const [totalLevelsGained, setTotalLevelsGained] = useState<number | null>(
+    null,
+  );
   const [activeTab, setActiveTab] = useState<string>("overall");
   const [hasAptitudeEquipped, setHasAptitudeEquipped] = useState(false);
 
   const checkAptitude = () => {
     if (!selectedUnit) return;
     setHasAptitudeEquipped(
-      selectedUnit.equipped_skills.some(skill => skill.name === "Aptitude"),
+      selectedUnit.equipped_skills.some((skill) => skill.name === "Aptitude"),
     );
   };
 
@@ -164,7 +163,9 @@ const Averages = () => {
 
   useEffect(() => {
     if (gameId && selectedRoute) {
-      const storedUnits = localStorage.getItem(`units_${gameId}_${selectedRoute}`);
+      const storedUnits = localStorage.getItem(
+        `units_${gameId}_${selectedRoute}`,
+      );
       if (storedUnits) {
         try {
           const parsedUnits: BaseCharacter[] = parse(storedUnits);
@@ -218,10 +219,20 @@ const Averages = () => {
     }
 
     // Add current unit state if it represents a level increase
-    const lastClassLine = classLine[classLine.length - 1] || [unit.internalLevel, unit.level, unit.class, unit.stats];
+    const lastClassLine = classLine[classLine.length - 1] || [
+      unit.internalLevel,
+      unit.level,
+      unit.class,
+      unit.stats,
+    ];
     const [lastInternal, lastLevel] = lastClassLine;
     if (unit.level > lastLevel || unit.internalLevel !== lastInternal) {
-      classLineList.push([unit.internalLevel, unit.level, unit.class, unit.stats]);
+      classLineList.push([
+        unit.internalLevel,
+        unit.level,
+        unit.class,
+        unit.stats,
+      ]);
     }
 
     const levelUpData: [number[], number[], number][] = [];
@@ -234,56 +245,80 @@ const Averages = () => {
       if (levelsGained <= 0) continue;
 
       // Apply Aptitude boost (+10%) for graphs and levelUpData
-      const aptitudeBoost = hasAptitudeEquipped ? 0.10 : 0;
+      const aptitudeBoost = hasAptitudeEquipped ? 0.1 : 0;
       const growthRateHp =
-        (initialClassData[2].classGrowths.hp + unit.base_growths.hp) / 100 + aptitudeBoost;
+        (initialClassData[2].classGrowths.hp + unit.base_growths.hp) / 100 +
+        aptitudeBoost;
       const growthRateStrength =
-        (initialClassData[2].classGrowths.strength + unit.base_growths.strength) / 100 + aptitudeBoost;
+        (initialClassData[2].classGrowths.strength +
+          unit.base_growths.strength) /
+          100 +
+        aptitudeBoost;
       const growthRateMagic =
-        (initialClassData[2].classGrowths.magic + unit.base_growths.magic) / 100 + aptitudeBoost;
+        (initialClassData[2].classGrowths.magic + unit.base_growths.magic) /
+          100 +
+        aptitudeBoost;
       const growthRateSkill =
-        (initialClassData[2].classGrowths.skill + unit.base_growths.skill) / 100 + aptitudeBoost;
+        (initialClassData[2].classGrowths.skill + unit.base_growths.skill) /
+          100 +
+        aptitudeBoost;
       const growthRateSpeed =
-        (initialClassData[2].classGrowths.speed + unit.base_growths.speed) / 100 + aptitudeBoost;
+        (initialClassData[2].classGrowths.speed + unit.base_growths.speed) /
+          100 +
+        aptitudeBoost;
       const growthRateLuck =
-        (initialClassData[2].classGrowths.luck + unit.base_growths.luck) / 100 + aptitudeBoost;
+        (initialClassData[2].classGrowths.luck + unit.base_growths.luck) / 100 +
+        aptitudeBoost;
       const growthRateDefence =
-        (initialClassData[2].classGrowths.defence + unit.base_growths.defence) / 100 + aptitudeBoost;
+        (initialClassData[2].classGrowths.defence + unit.base_growths.defence) /
+          100 +
+        aptitudeBoost;
       const growthRateResistance =
-        (initialClassData[2].classGrowths.resistance + unit.base_growths.resistance) / 100 + aptitudeBoost;
+        (initialClassData[2].classGrowths.resistance +
+          unit.base_growths.resistance) /
+          100 +
+        aptitudeBoost;
 
       const hpGained =
         secondaryClassData[3].hp -
         initialClassData[3].hp +
-        (initialClassData[2].classBaseStats.hp - secondaryClassData[2].classBaseStats.hp);
+        (initialClassData[2].classBaseStats.hp -
+          secondaryClassData[2].classBaseStats.hp);
       const strengthGained =
         secondaryClassData[3].strength -
         initialClassData[3].strength +
-        (initialClassData[2].classBaseStats.strength - secondaryClassData[2].classBaseStats.strength);
+        (initialClassData[2].classBaseStats.strength -
+          secondaryClassData[2].classBaseStats.strength);
       const magicGained =
         secondaryClassData[3].magic -
         initialClassData[3].magic +
-        (initialClassData[2].classBaseStats.magic - secondaryClassData[2].classBaseStats.magic);
+        (initialClassData[2].classBaseStats.magic -
+          secondaryClassData[2].classBaseStats.magic);
       const skillGained =
         secondaryClassData[3].skill -
         initialClassData[3].skill +
-        (initialClassData[2].classBaseStats.skill - secondaryClassData[2].classBaseStats.skill);
+        (initialClassData[2].classBaseStats.skill -
+          secondaryClassData[2].classBaseStats.skill);
       const speedGained =
         secondaryClassData[3].speed -
         initialClassData[3].speed +
-        (initialClassData[2].classBaseStats.speed - secondaryClassData[2].classBaseStats.speed);
+        (initialClassData[2].classBaseStats.speed -
+          secondaryClassData[2].classBaseStats.speed);
       const luckGained =
         secondaryClassData[3].luck -
         initialClassData[3].luck +
-        (initialClassData[2].classBaseStats.luck - secondaryClassData[2].classBaseStats.luck);
+        (initialClassData[2].classBaseStats.luck -
+          secondaryClassData[2].classBaseStats.luck);
       const defenceGained =
         secondaryClassData[3].defence -
         initialClassData[3].defence +
-        (initialClassData[2].classBaseStats.defence - secondaryClassData[2].classBaseStats.defence);
+        (initialClassData[2].classBaseStats.defence -
+          secondaryClassData[2].classBaseStats.defence);
       const resistanceGained =
         secondaryClassData[3].resistance -
         initialClassData[3].resistance +
-        (initialClassData[2].classBaseStats.resistance - secondaryClassData[2].classBaseStats.resistance);
+        (initialClassData[2].classBaseStats.resistance -
+          secondaryClassData[2].classBaseStats.resistance);
 
       levelUpData.push([
         [
@@ -315,54 +350,76 @@ const Averages = () => {
     const totalStatGains: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
     const weightedGrowthSums: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
 
-    levelUpData.forEach(([growthRates, statGains, levelsGained], periodIndex) => {
-      const zScores: number[] = [];
-      if (levelsGained <= 0) return;
-      totalLevelsGained += levelsGained;
+    levelUpData.forEach(
+      ([growthRates, statGains, levelsGained], periodIndex) => {
+        const zScores: number[] = [];
+        if (levelsGained <= 0) return;
+        totalLevelsGained += levelsGained;
 
-      // Use base growth rates for z-score calculations
-      const baseGrowthRates = [
-        (classLineList[periodIndex][2].classGrowths.hp + unit.base_growths.hp) / 100,
-        (classLineList[periodIndex][2].classGrowths.strength + unit.base_growths.strength) / 100,
-        (classLineList[periodIndex][2].classGrowths.magic + unit.base_growths.magic) / 100,
-        (classLineList[periodIndex][2].classGrowths.skill + unit.base_growths.skill) / 100,
-        (classLineList[periodIndex][2].classGrowths.speed + unit.base_growths.speed) / 100,
-        (classLineList[periodIndex][2].classGrowths.luck + unit.base_growths.luck) / 100,
-        (classLineList[periodIndex][2].classGrowths.defence + unit.base_growths.defence) / 100,
-        (classLineList[periodIndex][2].classGrowths.resistance + unit.base_growths.resistance) / 100,
-      ];
+        // Use base growth rates for z-score calculations
+        const baseGrowthRates = [
+          (classLineList[periodIndex][2].classGrowths.hp +
+            unit.base_growths.hp) /
+            100,
+          (classLineList[periodIndex][2].classGrowths.strength +
+            unit.base_growths.strength) /
+            100,
+          (classLineList[periodIndex][2].classGrowths.magic +
+            unit.base_growths.magic) /
+            100,
+          (classLineList[periodIndex][2].classGrowths.skill +
+            unit.base_growths.skill) /
+            100,
+          (classLineList[periodIndex][2].classGrowths.speed +
+            unit.base_growths.speed) /
+            100,
+          (classLineList[periodIndex][2].classGrowths.luck +
+            unit.base_growths.luck) /
+            100,
+          (classLineList[periodIndex][2].classGrowths.defence +
+            unit.base_growths.defence) /
+            100,
+          (classLineList[periodIndex][2].classGrowths.resistance +
+            unit.base_growths.resistance) /
+            100,
+        ];
 
-      growthRates.forEach((p, statIndex) => {
-        const k = statGains[statIndex];
-        totalStatGains[statIndex] += k;
-        weightedGrowthSums[statIndex] += p * levelsGained;
-        const baseP = baseGrowthRates[statIndex];
-        const mean = levelsGained * baseP;
-        const variance = levelsGained * baseP * (1 - baseP);
-        const stdDev = Math.sqrt(variance);
-        let zScore = 0;
-        if (stdDev > 0) {
-          zScore = (k - mean) / stdDev;
-        } else if (k !== mean) {
-          zScore = k > mean ? Infinity : -Infinity;
-        }
-        zScores.push(zScore);
-      });
-      zScoresByPeriod.push(zScores);
-    });
+        growthRates.forEach((p, statIndex) => {
+          const k = statGains[statIndex];
+          totalStatGains[statIndex] += k;
+          weightedGrowthSums[statIndex] += p * levelsGained;
+          const baseP = baseGrowthRates[statIndex];
+          const mean = levelsGained * baseP;
+          const variance = levelsGained * baseP * (1 - baseP);
+          const stdDev = Math.sqrt(variance);
+          let zScore = 0;
+          if (stdDev > 0) {
+            zScore = (k - mean) / stdDev;
+          } else if (k !== mean) {
+            zScore = k > mean ? Infinity : -Infinity;
+          }
+          zScores.push(zScore);
+        });
+        zScoresByPeriod.push(zScores);
+      },
+    );
 
     let overallAverageZScore = null;
     let lastStatZScores: number[] | null = null;
     let totalGrowthRates: number[] | null = null;
     if (zScoresByPeriod.length > 0) {
-      const allZScores: number[] = zScoresByPeriod.flat().filter((z) => isFinite(z));
+      const allZScores: number[] = zScoresByPeriod
+        .flat()
+        .filter((z) => isFinite(z));
       lastStatZScores = zScoresByPeriod[zScoresByPeriod.length - 1] || null;
       if (allZScores.length > 0) {
         const sumZScores = allZScores.reduce((sum, z) => sum + z, 0);
         overallAverageZScore = sumZScores / allZScores.length;
       }
       if (totalLevelsGained > 0) {
-        totalGrowthRates = weightedGrowthSums.map((sum) => sum / totalLevelsGained);
+        totalGrowthRates = weightedGrowthSums.map(
+          (sum) => sum / totalLevelsGained,
+        );
       }
     }
 
@@ -626,10 +683,28 @@ const Averages = () => {
                       data={getChartData(
                         totalLevelsGained,
                         totalGrowthRates[
-                          ["hp", "str", "mag", "skl", "spd", "lck", "def", "res"].indexOf(activeTab)
+                          [
+                            "hp",
+                            "str",
+                            "mag",
+                            "skl",
+                            "spd",
+                            "lck",
+                            "def",
+                            "res",
+                          ].indexOf(activeTab)
                         ],
                         totalStatGains[
-                          ["hp", "str", "mag", "skl", "spd", "lck", "def", "res"].indexOf(activeTab)
+                          [
+                            "hp",
+                            "str",
+                            "mag",
+                            "skl",
+                            "spd",
+                            "lck",
+                            "def",
+                            "res",
+                          ].indexOf(activeTab)
                         ],
                         activeTab.toUpperCase(),
                       )}

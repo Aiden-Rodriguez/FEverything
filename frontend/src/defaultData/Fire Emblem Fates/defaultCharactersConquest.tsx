@@ -30,6 +30,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
     level: 1,
     eternalSealCount: 0,
     maxLevelModifier: 0,
+    talent: null,
     class_line: [
       [
         0,
@@ -191,6 +192,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
     level: 1,
     eternalSealCount: 0,
     maxLevelModifier: 0,
+    talent: null,
     class_line: [
       [
         0,

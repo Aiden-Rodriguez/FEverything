@@ -56,6 +56,7 @@ export interface BaseCharacter {
   level: number;
   eternalSealCount: number;
   maxLevelModifier: number;
+  talent?: Class | null;
   class_line: [number, number, Class, StatBlock][];
   stats: {
     hp: number;
@@ -191,6 +192,7 @@ export interface BaseCharacter {
 export interface UniqueCharacterData {
   name: string;
   nickname?: string;
+  talent?: Class;
   class: Class;
   internalLevel: number;
   level: number;
@@ -228,5 +230,5 @@ export interface UniqueCharacterData {
 
 //What really needs to be stored in db...
 //boon, bane, talent (corrin)
-//Name, class (just name?), internal level, level, eternal seal count, classline (just name? for classnames?), stats, 
+//Name, class (just name?), internal level, level, eternal seal count, classline (just name? for classnames?), stats,
 //equipped skills (just name?), weapon ranks, partner/friendship seal partners (just name?/id?)

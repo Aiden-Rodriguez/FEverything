@@ -49,21 +49,21 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>("");
   const [selectedClassName, setSelectedClassName] = useState<string>(
-    unit.class.className
+    unit.class.className,
   );
   const [selectedSkills, setSelectedSkills] = useState<string[]>(
     (() => {
       const skills = unit.equipped_skills.map((skill) => skill.name);
       const seen = new Set<string>();
       return skills.map((skill) =>
-        skill !== "N/A" && seen.has(skill) ? "N/A" : (seen.add(skill), skill)
+        skill !== "N/A" && seen.has(skill) ? "N/A" : (seen.add(skill), skill),
       );
-    })()
+    })(),
   );
   const [error, setError] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [useStatOverride, changeUseStatOverride] = useState(false);
-  const [hasAptitudeEquipped, setHasAptitudeEquipped] = useState(false)
+  const [hasAptitudeEquipped, setHasAptitudeEquipped] = useState(false);
 
   const statFields: { key: keyof typeof unit.stats; label: string }[] = [
     { key: "hp", label: "HP" },
@@ -361,8 +361,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   };
 
   const confirmDelete = () => {
-    if (unit.name === ("Corrin (F)") || unit.name === ("Corrin (M)")) {
-      
+    if (unit.name === "Corrin (F)" || unit.name === "Corrin (M)") {
     }
     removeUnit(unit.name);
     setShowDeleteConfirm(false);
@@ -375,9 +374,11 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const handleSkillChangeClick = () => {
     setShowChangeSkills(true);
     setSelectedSkills(
-      unit.equipped_skills.map((skill) => skill.name).map((skill, i, arr) =>
-        skill !== "N/A" && arr.indexOf(skill) !== i ? "N/A" : skill
-      )
+      unit.equipped_skills
+        .map((skill) => skill.name)
+        .map((skill, i, arr) =>
+          skill !== "N/A" && arr.indexOf(skill) !== i ? "N/A" : skill,
+        ),
     );
   };
 
@@ -392,7 +393,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const confirmSkillChange = () => {
     if (!getSkillFn) return;
     const newEquippedSkills: Skill[] = selectedSkills.map((skillName) =>
-      skillName === "N/A" || !skillName ? getSkillFn("N/A") : getSkillFn(skillName)
+      skillName === "N/A" || !skillName
+        ? getSkillFn("N/A")
+        : getSkillFn(skillName),
     );
     const updatedUnit: BaseCharacter = {
       ...unit,
@@ -405,14 +408,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
   const cancelSkillChange = () => {
     setShowChangeSkills(false);
     setSelectedSkills(
-      unit.equipped_skills.map((skill) => skill.name).map((skill, i, arr) =>
-        skill !== "N/A" && arr.indexOf(skill) !== i ? "N/A" : skill
-      )
+      unit.equipped_skills
+        .map((skill) => skill.name)
+        .map((skill, i, arr) =>
+          skill !== "N/A" && arr.indexOf(skill) !== i ? "N/A" : skill,
+        ),
     );
   };
 
   const checkAptitude = () => {
-    setHasAptitudeEquipped(unit.equipped_skills.some(skill => skill.name === "Aptitude"));
+    setHasAptitudeEquipped(
+      unit.equipped_skills.some((skill) => skill.name === "Aptitude"),
+    );
   };
 
   useEffect(() => {
@@ -572,8 +579,11 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
           level_difference <
           num - unit.class_line[unit.class_line.length - 1][3][statField]
         ) {
-          console.log(num, unit.class_line[unit.class_line.length - 1][3][statField])
-          console.log(unit.class_line)
+          console.log(
+            num,
+            unit.class_line[unit.class_line.length - 1][3][statField],
+          );
+          console.log(unit.class_line);
           setError(
             `${statFields.find((f) => f.key === statField)?.label || field} must be less than or equal to ${level_difference + unit.class_line[unit.class_line.length - 1][3][statField]}; unit cannot gain more than 1 stat in a field per level. Make sure to properly update a unit's level first.`,
           );
@@ -636,25 +646,27 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
     availableClasses.push(unit.class);
     for (let i = 0; i < defaultSkills.length; i++) {
       const skill = defaultSkills[i];
-  
+
       const class0 = skill.associatedClass?.[0]?.className;
       const class1 = skill.associatedClass?.[1]?.className;
       const classPromotionStatus = skill.associatedClass?.[0]?.promotionStatus;
-  
+
       const matchesAvailableClass = (className: string | undefined) =>
-        className &&
-        availableClasses.some(c => c.className === className);
-  
+        className && availableClasses.some((c) => c.className === className);
+
       if (matchesAvailableClass(class0) || matchesAvailableClass(class1)) {
         if (
           (unit.class.promotionStatus === true &&
-          (skill.levelAcquired === undefined || unit.level >= skill.levelAcquired)) ||
-          (classPromotionStatus === false && unit.class.promotionStatus === true)
+            (skill.levelAcquired === undefined ||
+              unit.level >= skill.levelAcquired)) ||
+          (classPromotionStatus === false &&
+            unit.class.promotionStatus === true)
         ) {
           availableSkills.push(skill);
         } else if (
           unit.class.promotionStatus === false &&
-          (skill.levelAcquired === undefined || unit.level >= skill.levelAcquired) &&
+          (skill.levelAcquired === undefined ||
+            unit.level >= skill.levelAcquired) &&
           skill.associatedClass?.[0]?.promotionStatus === false
         ) {
           availableSkills.push(skill);
@@ -970,8 +982,11 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                   </Tippy>
                 </div>
               ))}
-            {isEditing ? 
-            <button onClick={handleSkillChangeClick}>Change Equipped Skills?</button> : null}
+            {isEditing ? (
+              <button onClick={handleSkillChangeClick}>
+                Change Equipped Skills?
+              </button>
+            ) : null}
           </div>
         </div>
 
@@ -1109,14 +1124,19 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         {unit.class.className} HP Growth:{" "}
                         {unit.class.classGrowths.hp}%
                       </p>
-                      {hasAptitudeEquipped && <p className="tooltip-text">Aptitude HP Growth: 10%</p>}
+                      {hasAptitudeEquipped && (
+                        <p className="tooltip-text">Aptitude HP Growth: 10%</p>
+                      )}
                     </>
                   }
                 >
                   <p>
                     {" "}
                     HP Growth:{" "}
-                    {unit.base_growths.hp + unit.class.classGrowths.hp + (hasAptitudeEquipped ? 10 : 0)}%{" "}
+                    {unit.base_growths.hp +
+                      unit.class.classGrowths.hp +
+                      (hasAptitudeEquipped ? 10 : 0)}
+                    %{" "}
                   </p>
                 </Tippy>
                 <Tippy
@@ -1130,14 +1150,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         {unit.class.className} STR Growth:{" "}
                         {unit.class.classGrowths.strength}%
                       </p>
-                      {hasAptitudeEquipped && <p className="tooltip-text">Aptitude STR Growth: 10%</p>}
+                      {hasAptitudeEquipped && (
+                        <p className="tooltip-text">Aptitude STR Growth: 10%</p>
+                      )}
                     </>
                   }
                 >
                   <p>
                     {" "}
                     STR Growth:{" "}
-                    {unit.base_growths.strength + unit.class.classGrowths.strength  + (hasAptitudeEquipped ? 10 : 0)}
+                    {unit.base_growths.strength +
+                      unit.class.classGrowths.strength +
+                      (hasAptitudeEquipped ? 10 : 0)}
                     %{" "}
                   </p>
                 </Tippy>
@@ -1152,14 +1176,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         {unit.class.className} MAG Growth:{" "}
                         {unit.class.classGrowths.magic}%
                       </p>
-                      {hasAptitudeEquipped && <p className="tooltip-text">Aptitude MAG Growth: 10%</p>}
+                      {hasAptitudeEquipped && (
+                        <p className="tooltip-text">Aptitude MAG Growth: 10%</p>
+                      )}
                     </>
                   }
                 >
                   <p>
                     {" "}
                     MAG Growth:{" "}
-                    {unit.base_growths.magic + unit.class.classGrowths.magic  + (hasAptitudeEquipped ? 10 : 0)}
+                    {unit.base_growths.magic +
+                      unit.class.classGrowths.magic +
+                      (hasAptitudeEquipped ? 10 : 0)}
                     %{" "}
                   </p>
                 </Tippy>
@@ -1174,14 +1202,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         {unit.class.className} SKL Growth:{" "}
                         {unit.class.classGrowths.skill}%
                       </p>
-                      {hasAptitudeEquipped && <p className="tooltip-text">Aptitude SKL Growth: 10%</p>}
+                      {hasAptitudeEquipped && (
+                        <p className="tooltip-text">Aptitude SKL Growth: 10%</p>
+                      )}
                     </>
                   }
                 >
                   <p>
                     {" "}
                     SKL Growth:{" "}
-                    {unit.base_growths.skill + unit.class.classGrowths.skill  + (hasAptitudeEquipped ? 10 : 0)}
+                    {unit.base_growths.skill +
+                      unit.class.classGrowths.skill +
+                      (hasAptitudeEquipped ? 10 : 0)}
                     %{" "}
                   </p>
                 </Tippy>
@@ -1196,14 +1228,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         {unit.class.className} SPD Growth:{" "}
                         {unit.class.classGrowths.speed}%
                       </p>
-                      {hasAptitudeEquipped && <p className="tooltip-text">Aptitude SPD Growth: 10%</p>}
+                      {hasAptitudeEquipped && (
+                        <p className="tooltip-text">Aptitude SPD Growth: 10%</p>
+                      )}
                     </>
                   }
                 >
                   <p>
                     {" "}
                     SPD Growth:{" "}
-                    {unit.base_growths.speed + unit.class.classGrowths.speed  + (hasAptitudeEquipped ? 10 : 0)}
+                    {unit.base_growths.speed +
+                      unit.class.classGrowths.speed +
+                      (hasAptitudeEquipped ? 10 : 0)}
                     %{" "}
                   </p>
                 </Tippy>
@@ -1218,14 +1254,18 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         {unit.class.className} LCK Growth:{" "}
                         {unit.class.classGrowths.luck}%
                       </p>
-                      {hasAptitudeEquipped && <p className="tooltip-text">Aptitude LCK Growth: 10%</p>}
+                      {hasAptitudeEquipped && (
+                        <p className="tooltip-text">Aptitude LCK Growth: 10%</p>
+                      )}
                     </>
                   }
                 >
                   <p>
                     {" "}
                     LCK Growth:{" "}
-                    {unit.base_growths.luck + unit.class.classGrowths.luck  + (hasAptitudeEquipped ? 10 : 0)}
+                    {unit.base_growths.luck +
+                      unit.class.classGrowths.luck +
+                      (hasAptitudeEquipped ? 10 : 0)}
                     %{" "}
                   </p>
                 </Tippy>
@@ -1240,7 +1280,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         {unit.class.className} DEF Growth:{" "}
                         {unit.class.classGrowths.defence}%
                       </p>
-                      {hasAptitudeEquipped && <p className="tooltip-text">Aptitude DEF Growth: 10%</p>}
+                      {hasAptitudeEquipped && (
+                        <p className="tooltip-text">Aptitude DEF Growth: 10%</p>
+                      )}
                     </>
                   }
                 >
@@ -1248,7 +1290,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                     {" "}
                     DEF Growth:{" "}
                     {unit.base_growths.defence +
-                      unit.class.classGrowths.defence  + (hasAptitudeEquipped ? 10 : 0)}
+                      unit.class.classGrowths.defence +
+                      (hasAptitudeEquipped ? 10 : 0)}
                     %{" "}
                   </p>
                 </Tippy>
@@ -1263,7 +1306,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                         {unit.class.className} RES Growth:{" "}
                         {unit.class.classGrowths.resistance}%
                       </p>
-                      {hasAptitudeEquipped && <p className="tooltip-text">Aptitude RES Growth: 10%</p>}
+                      {hasAptitudeEquipped && (
+                        <p className="tooltip-text">Aptitude RES Growth: 10%</p>
+                      )}
                     </>
                   }
                 >
@@ -1271,7 +1316,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                     {" "}
                     RES Growth:{" "}
                     {unit.base_growths.resistance +
-                      unit.class.classGrowths.resistance  + (hasAptitudeEquipped ? 10 : 0)}
+                      unit.class.classGrowths.resistance +
+                      (hasAptitudeEquipped ? 10 : 0)}
                     %{" "}
                   </p>
                 </Tippy>
@@ -1711,7 +1757,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                   ...getAvailableSkills().filter(
                     (skill) =>
                       skill.name === selectedSkills[index] ||
-                      !selectedSkills.includes(skill.name)
+                      !selectedSkills.includes(skill.name),
                   ),
                 ];
                 return (
@@ -1719,7 +1765,9 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
                     <label>Skill Slot {index + 1}:</label>
                     <select
                       value={selectedSkills[index] || "N/A"}
-                      onChange={(e) => handleSkillSelection(index, e.target.value)}
+                      onChange={(e) =>
+                        handleSkillSelection(index, e.target.value)
+                      }
                       className="inline-select"
                       aria-label={`Select skill for slot ${index + 1} for ${unit.name}`}
                     >
