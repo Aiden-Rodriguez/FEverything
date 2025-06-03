@@ -9,6 +9,24 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --color-main-red: #b01818;
+  --color-main-orange: #b06418;
+  --color-accent: #0c7c7c;
+  --color-accent-focus: #124174;
+
+  background-color: #ddd6cc;
+  --color-background: #ddd6cc;
+  --color-text-basic: rgba(36, 35, 35, 0.87);
+  --color-text-sub: rgb(31, 45, 46);
+  --color-text-navbar: #ffffff;
+  --color-text-component: #ffffff;
+  --color-background-cell: #ffffff;
+  --color-component-accent: #f0f8ff;
+  --color-background-transparent: rgba(0, 0, 0, 0.308);
+  --color-background-units-grid: #f8f8f8;
+  --color-tooltip-background: #333333;
+  --color-tooltip-text: #ffffff;
 }
 
 body.hoshido {
