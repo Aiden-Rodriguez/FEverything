@@ -9,7 +9,6 @@ import cors from "cors";
 
 dotenv.config();
 
-
 const PORT = process.env.PORT || 3000;
 const STATIC_DIR = process.env.STATIC_DIR || "public";
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -23,8 +22,6 @@ async function startServer() {
     const app = express();
     app.use(express.json());
 
-
-
     const pool = new Pool({
       connectionString: process.env.SUPABASE_DB_URL,
       ssl: {
@@ -36,10 +33,12 @@ async function startServer() {
 
     const userProvider = new UserProvider(pool);
 
-    app.use(cors({
-      origin: "http://localhost:5173",
-      credentials: true,
-    }));
+    app.use(
+      cors({
+        origin: "http://localhost:5173",
+        credentials: true,
+      }),
+    );
 
     app.use(express.static(STATIC_DIR));
 

@@ -16,8 +16,10 @@ const AuthForm: React.FC = () => {
     password: "",
     confirmPassword: "",
   });
-  const [message, setHelperMessage] = useState<{ type: "error" | "success"; text: string } | null>(null);
-
+  const [message, setHelperMessage] = useState<{
+    type: "error" | "success";
+    text: string;
+  } | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,33 +54,36 @@ const AuthForm: React.FC = () => {
             : "Authentication failed";
         setHelperMessage({ type: "error", text: errorMessage });
         return;
-      }      
+      }
 
       // Store JWT token
       localStorage.setItem("token", data.token);
+      window.dispatchEvent(new Event("login"));
       //console.log(`${isRegister ? "Registration" : "Login"} successful:`, data.token);
 
-      setHelperMessage({ type: "success", text: `${isRegister ? "Registration" : "Login"} successful`})
+      setHelperMessage({
+        type: "success",
+        text: `${isRegister ? "Registration" : "Login"} successful`,
+      });
       setTimeout(() => {
         navigate("/");
       }, 1500);
     } catch (err) {
       console.error("Auth error:", err);
-      setHelperMessage({ type: "error", text: "Server Error. Please try again later" });
+      setHelperMessage({
+        type: "error",
+        text: "Server Error. Please try again later",
+      });
     }
   };
 
   return (
     <div>
       <div>
-        <h1>
-          {isRegister ? "Register" : "Login"}
-        </h1>
+        <h1>{isRegister ? "Register" : "Login"}</h1>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username">
-              Username
-            </label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               id="username"
@@ -89,9 +94,7 @@ const AuthForm: React.FC = () => {
             />
           </div>
           <div>
-            <label htmlFor="password">
-              Password
-            </label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
@@ -103,9 +106,7 @@ const AuthForm: React.FC = () => {
           </div>
           {isRegister && (
             <div>
-              <label htmlFor="confirmPassword">
-                Confirm Password
-              </label>
+              <label htmlFor="confirmPassword">Confirm Password</label>
               <input
                 type="password"
                 id="confirmPassword"
@@ -116,20 +117,20 @@ const AuthForm: React.FC = () => {
               />
             </div>
           )}
-          {message && <p className={message.type === "error" ? "error-message" : "success-message"}>
-            {message.text} 
-            </p>}
-          <button
-            type="submit"
-          >
-            {isRegister ? "Register" : "Login"}
-          </button>
+          {message && (
+            <p
+              className={
+                message.type === "error" ? "error-message" : "success-message"
+              }
+            >
+              {message.text}
+            </p>
+          )}
+          <button type="submit">{isRegister ? "Register" : "Login"}</button>
         </form>
         <p>
           {isRegister ? "Already have an account?" : "Don't have an account?"}{" "}
-          <Link
-            to={isRegister ? "/Login" : "/Register"}
-          >
+          <Link to={isRegister ? "/Login" : "/Register"}>
             {isRegister ? "Login" : "Register"}
           </Link>
         </p>

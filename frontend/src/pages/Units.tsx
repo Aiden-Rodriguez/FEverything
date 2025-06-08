@@ -371,15 +371,12 @@ const UnitsContent = () => {
               <h2>Delete all created units?</h2>
               <h3>This action cannot be undone.</h3>
               <button
-                className="deletion-buttons"
+                className="overlay-button"
                 onClick={toggleOverlayDeleteCharacter}
               >
                 Keep units
               </button>
-              <button
-                className="deletion-buttons"
-                onClick={handleDeleteAllUnits}
-              >
+              <button className="overlay-button" onClick={handleDeleteAllUnits}>
                 Delete all units
               </button>
             </div>

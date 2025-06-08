@@ -11,7 +11,6 @@ import AuthForm from "./pages/AuthForm.tsx";
 import { ValidRoutes } from "../../backend/src/shared/validRoutes.ts";
 
 function App() {
-
   return (
     <Router>
       <NavBar />

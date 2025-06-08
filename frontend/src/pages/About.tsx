@@ -7,10 +7,9 @@ const About = () => {
       <h1 className="top-margin">About</h1>
       <div className="about-content">
         <p>
-          Welcome to the FEverything, universal tool designed to help players
-          plan or manage their Fire Emblem playthroughs.
+          Welcome to FEverything, a universal tool designed to help players plan
+          or manage their Fire Emblem playthroughs.
         </p>
-        <p>With this application, you can:</p>
         <ul>
           <li>Track unit stats, growth rates, and stat caps.</li>
           <li>Customize units with different classes and attributes.</li>
@@ -19,7 +18,7 @@ const About = () => {
             Simulate and plan in-game combat, and check sucess rates of combat.
           </li>
         </ul>
-        <p>Contact a developer at a.woodenrod@gmail.com</p>
+        <p>Contact the developer at a.woodenrod@gmail.com</p>
       </div>
     </div>
   );

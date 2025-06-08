@@ -1715,14 +1715,14 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
             <h2>Delete {unit.name}?</h2>
             <h3>This action cannot be undone.</h3>
             <button
-              className="deletion-buttons"
+              className="overlay-button"
               onClick={cancelDelete}
               aria-label={`Keep unit ${unit.name}`}
             >
               Keep unit
             </button>
             <button
-              className="deletion-buttons"
+              className="overlay-button"
               onClick={confirmDelete}
               aria-label={`Confirm deletion of ${unit.name}`}
             >
