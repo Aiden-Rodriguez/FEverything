@@ -1,10 +1,11 @@
 ### 1: upload unit
-POST http://localhost:3000/api/units/1/Fire%20Emblem%20Fates
+POST http://localhost:3000/api/units/Fire%20Emblem%20Fates
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRpbW15MTIzIiwiaWF0IjoxNzQ5NDE2NDExLCJleHAiOjE3NDk1MDI4MTF9.wObXgeUCH79V6f0ayBmdNJ313mMwF6-6U6oEftChSFE
 
 {
   "path": "Conquest",
-  "name": "Camilla",
+  "name": "Camilla2",
   "class": "Malig Knight",
   "level": 12,
   "internalLevel": 15,
@@ -48,9 +49,27 @@ Content-Type: application/json
   "weapons": ["Steel Axe", "Thunder"]
 }
 
+### 2: get units
+GET http://localhost:3000/api/units/Fire%20Emblem%20Fates
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRpbW15MTIzIiwiaWF0IjoxNzQ5NDE2NDExLCJleHAiOjE3NDk1MDI4MTF9.wObXgeUCH79V6f0ayBmdNJ313mMwF6-6U6oEftChSFE
 
+### 3: login account
+POST http://localhost:3000/auth/login
+Content-Type: application/json
 
+{
+  "username": "Timmy123",
+  "password": "poopooCACA"
+}
+### 4: register account
 
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "username": "Timmy123",
+  "password": "poopooCACA"
+}
 
 # export interface UniqueCharacterData {
 #   name: string;
