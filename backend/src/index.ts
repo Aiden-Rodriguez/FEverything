@@ -5,8 +5,10 @@ import { ValidRoutes } from "./shared/validRoutes";
 import { registerUnitRoutes } from "./routes/unitRoutes";
 import { registerAuthRoutes, verifyAuthToken } from "./routes/authRoutes";
 import { UserProvider } from "./userProvider";
+import cors from "cors";
 
 dotenv.config();
+
 
 const PORT = process.env.PORT || 3000;
 const STATIC_DIR = process.env.STATIC_DIR || "public";
@@ -33,6 +35,11 @@ async function startServer() {
     app.locals.JWT_SECRET = JWT_SECRET;
 
     const userProvider = new UserProvider(pool);
+
+    app.use(cors({
+      origin: "http://localhost:5173",
+      credentials: true,
+    }));
 
     app.use(express.static(STATIC_DIR));
 

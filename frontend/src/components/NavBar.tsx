@@ -51,8 +51,8 @@ const NavBar = () => {
           <div>|</div>
 
           <motion.li whileHover={{ scale: 1.1 }}>
-            <NavLink to="/Signup" className={navLinkClass}>
-              Sign Up
+            <NavLink to="/Register" className={navLinkClass}>
+              Register
             </NavLink>
           </motion.li>
           <div>|</div>

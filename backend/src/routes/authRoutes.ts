@@ -70,7 +70,23 @@ export function registerAuthRoutes(
                 return;
             }
 
-            // Check if user already exists via UserProvider
+      if (username.length < 5) {
+        res.status(400).json({
+          error: "Invalid username",
+          message: "Username must be at least 5 characters long",
+        });
+        return;
+      }
+
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        res.status(400).json({
+          error: "Invalid password",
+          message:
+            "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character (e.g., @$!%*?&)",
+        });
+        return;
+      }
             const userCreated = await userProvider.createUser(username, password);
             if (!userCreated) {
                 res.status(409).json({

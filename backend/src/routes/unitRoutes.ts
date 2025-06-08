@@ -2,7 +2,6 @@ import { Router, Request, Response, Application } from "express";
 import { Pool } from "pg";
 
 export function registerUnitRoutes(app: Application, pool: Pool, verifyAuthToken: any): void {
-  // POST route for creating/updating units
   app.post("/api/units/:gameId/", verifyAuthToken, async (req: Request, res: Response) => {
     const { gameId } = req.params;
     const unitData = req.body;
@@ -38,7 +37,6 @@ export function registerUnitRoutes(app: Application, pool: Pool, verifyAuthToken
     }
 
     try {
-      // Get user_id from users table
       const userQuery = `
         SELECT id
         FROM users
@@ -189,7 +187,6 @@ export function registerUnitRoutes(app: Application, pool: Pool, verifyAuthToken
     }
   });
 
-  // GET route for fetching units
   app.get("/api/units/:gameId/", verifyAuthToken, async (req: Request, res: Response) => {
     const { gameId } = req.params;
     const username = req.user?.username;
@@ -206,7 +203,6 @@ export function registerUnitRoutes(app: Application, pool: Pool, verifyAuthToken
     }
 
     try {
-      // Get user_id from users table
       const userQuery = `
         SELECT id
         FROM users
@@ -219,7 +215,6 @@ export function registerUnitRoutes(app: Application, pool: Pool, verifyAuthToken
       }
       const userId = userResult.rows[0].id;
 
-      // Get units for the user
       const unitsQuery = `
         SELECT *
         FROM "${gameId}"

@@ -2,10 +2,10 @@ export const ValidRoutes = {
   HOME: "/",
   ABOUT: "/About",
   LOGIN: "/Login",
-  SIGNUP: "/Signup",
+  SIGNUP: "/Register",
   AVERAGES: "/:gameId/Averages",
   UNITS: "/:gameId/Units",
   COMBATSIMULATOR: "/:gameId/CombatSimulator",
-  GAMEPAGE: "game/:gameId",
+  GAMEPAGE: "Game/:gameId",
   NOTFOUND: "*",
 };

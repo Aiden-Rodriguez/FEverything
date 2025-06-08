@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound.tsx";
 import Home from "./pages/Home.tsx";
@@ -8,19 +7,19 @@ import Units from "./pages/Units.tsx";
 import CombatSimulator from "./pages/CombatSimulator.tsx";
 import GamePage from "./pages/GamePage.tsx";
 import About from "./pages/About.tsx";
-import Signup from "./pages/Signup.tsx";
-import Login from "./pages/Login.tsx";
+import AuthForm from "./pages/AuthForm.tsx";
 import { ValidRoutes } from "../../backend/src/shared/validRoutes.ts";
 
 function App() {
+
   return (
     <Router>
       <NavBar />
       <Routes>
         <Route path={ValidRoutes.HOME} element={<Home />} />
         <Route path={ValidRoutes.ABOUT} element={<About />} />
-        <Route path={ValidRoutes.LOGIN} element={<Login />} />
-        <Route path={ValidRoutes.SIGNUP} element={<Signup />} />
+        <Route path={ValidRoutes.LOGIN} element={<AuthForm />} />
+        <Route path={ValidRoutes.SIGNUP} element={<AuthForm />} />
         <Route path={ValidRoutes.AVERAGES} element={<Averages />} />
         <Route path={ValidRoutes.UNITS} element={<Units />} />
         <Route

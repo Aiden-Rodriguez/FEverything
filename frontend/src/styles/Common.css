@@ -41,3 +41,11 @@
 .top-margin {
   margin-top: 6rem;
 }
+
+.error-message {
+  color: red;
+}
+
+.success-message {
+  color: green;
+}
