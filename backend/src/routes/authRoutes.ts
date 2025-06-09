@@ -44,7 +44,7 @@ function generateAuthToken(
     const payload: IAuthTokenPayload = {
       username,
     };
-    jwt.sign(payload, jwtSecret, { expiresIn: "1d" }, (error, token) => {
+    jwt.sign(payload, jwtSecret, { expiresIn: "5s" }, (error, token) => {
       if (error) reject(error);
       else resolve(token as string);
     });

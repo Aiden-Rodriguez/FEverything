@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 interface AuthFormData {
@@ -21,9 +21,12 @@ const AuthForm: React.FC = () => {
     text: string;
   } | null>(null);
 
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setHelperMessage({ type: "success", text: "" });
+    if (message?.type !== "error") {
+      setHelperMessage({ type: "success", text: "" });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -77,6 +80,20 @@ const AuthForm: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const expiredFlag = sessionStorage.getItem("sessionExpired");
+    if (expiredFlag === "true") {
+      console.log("Expiry message")
+      setHelperMessage({
+        type: "error",
+        text: "Session expired. Please log in again.",
+      });
+      sessionStorage.removeItem("sessionExpired");
+    }
+  }, []);
+  
+  
+  
   return (
     <div>
       <div>
