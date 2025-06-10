@@ -3,10 +3,6 @@ import { useParams, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../styles/Units.css";
 import UnitGrid from "../components/UnitGrid";
-import {
-  UnitsProvider,
-  useUnits,
-} from "../defaultData/Fire Emblem Fates/UnitsContext";
 import { BaseCharacter } from "../types/Fire Emblem Fates/UnitStruct";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments";
 import { getClass } from "../defaultData/Fire Emblem Fates/defaultClassData";
@@ -18,39 +14,22 @@ import {
 } from "../types/Fire Emblem Fates/UnitStruct";
 
 interface UnitsProps {
-  units: BaseCharacter[]
+  units: BaseCharacter[];
+  // updateUnit: (unit: BaseCharacter) => void;
+  // addUnit: (unit: BaseCharacter) => void;
+  // deleteAllUnits: () => void;
+  // removeUnit: (name: string) => void;
 }
 
-const Units = ({units} : UnitsProps) => {
+const Units: React.FC<UnitsProps> = ({ units/*, updateUnit, addUnit, deleteAllUnits, removeUnit*/ }) => {
   const { state } = useLocation();
-  const selectedRoute = state?.selectedRoute;
+  const selectedRoute = state?.selectedRoute || "";
   const { gameId } = useParams<{ gameId: string }>();
 
-  return (
-    <UnitsProvider
-      gameId={gameId || "Fire Emblem Fates"}
-      route={selectedRoute || ""}
-    >
-      <UnitsContent />
-    </UnitsProvider>
-  );
-};
-
-const UnitsContent = () => {
-  const { units, updateUnit, addUnit, deleteAllUnits } = useUnits();
-  const { state } = useLocation();
-  const selectedRoute = state?.selectedRoute;
-  const { gameId } = useParams<{ gameId: string }>();
-
-  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] =
-    useState(false);
-  const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] =
-    useState(false);
-  const [selectedCharacter, setSelectedCharacter] =
-    useState<BaseCharacter | null>(null);
-  const [createdCorrinGender, setCreatedCorrinGender] = useState<
-    "Male" | "Female" | null
-  >(null);
+  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] = useState(false);
+  const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] = useState(false);
+  const [selectedCharacter, setSelectedCharacter] = useState<BaseCharacter | null>(null);
+  const [createdCorrinGender, setCreatedCorrinGender] = useState<"Male" | "Female" | null>(null);
   const [corrinGender, setCorrinGender] = useState<"Male" | "Female">("Male");
   const [corrinBoon, setCorrinBoon] = useState<string>("Robust");
   const [corrinBane, setCorrinBane] = useState<string>("Unlucky");
@@ -138,7 +117,7 @@ const UnitsContent = () => {
 
   const addNewUnit = () => {
     if (selectedCharacter) {
-      addUnit(selectedCharacter);
+      // addUnit(selectedCharacter);
       toggleOverlayAddCharacter();
     }
   };
@@ -157,15 +136,14 @@ const UnitsContent = () => {
 
     corrin = applyBoonBaneAdjustments(corrin, corrinBoon, corrinBane);
 
-    //initialize classline0 correctly, instead of using raw corrin bases.
     corrin.class_line[0] = [0, 1, corrin.class, corrin.stats];
-    addUnit(corrin);
+    // addUnit(corrin);
     setCreatedCorrinGender(corrinGender);
     toggleOverlayAddCharacter();
   };
 
   const handleDeleteAllUnits = () => {
-    deleteAllUnits();
+    // deleteAllUnits();
     setCreatedCorrinGender(null);
     toggleOverlayDeleteCharacter();
   };
@@ -186,7 +164,9 @@ const UnitsContent = () => {
               key={`${unit.name}-${index}`}
               unit={unit}
               gameId={gameId}
-              updateUnit={updateUnit}
+              // updateUnit={updateUnit}
+              // removeUnit={removeUnit}
+              units={units}
             />
           ))}
       </section>
