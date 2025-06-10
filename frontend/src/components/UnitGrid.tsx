@@ -12,12 +12,14 @@ import "tippy.js/dist/tippy.css";
 import { findCharacter } from "../defaultData/Fire Emblem Fates/defaultCharactersConquest.tsx";
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments.ts";
 import { defaultSkills } from "../defaultData/Fire Emblem Fates/defaultSkills.tsx";
+import { getAllySealClass } from "../utils/Fire Emblem Fates/getAllyClass.ts";
+import { deleteUnitByName } from "../helper/apiCalls.tsx";
 
 interface UnitGridProps {
   unit: BaseCharacter;
-  gameId?: string;
-  // updateUnit: (updatedUnit: BaseCharacter) => void;
-  // removeUnit: (name: string) => void;
+  gameId: string;
+  updateUnit: (gameId: string, updatedUnit: BaseCharacter) => void;
+  deleteUnitByName: (gameId: string, path: string, unitName: string) => void;
   units: BaseCharacter[];
 }
 
@@ -33,7 +35,13 @@ interface SkillsModule {
   getSkill: (skillName: string) => Skill;
 }
 
-const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, /*updateUnit, removeUnit,*/ units }) => {
+const UnitGrid: React.FC<UnitGridProps> = ({
+  unit,
+  gameId,
+  updateUnit,
+  deleteUnitByName,
+  units,
+}) => {
   const [getClassFn, setGetClassFn] = useState<
     ((className: string) => Class) | null
   >(null);
@@ -124,7 +132,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, /*updateUnit, removeU
         [field]: value,
       },
     };
-    // updateUnit(updatedUnit);
+    updateUnit(gameId, updatedUnit);
   };
 
   const getAvailableClasses = (Purpose: String): Class[] => {
@@ -304,51 +312,8 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, /*updateUnit, removeU
       internalLevel: newInternalLevel,
     };
 
-    // updateUnit(updatedUnit);
+    updateUnit(gameId, updatedUnit);
     setIsClassChanging(false);
-  };
-
-  const getAllySealClass = (
-    ClassReciever: BaseCharacter,
-    ClassGiver: BaseCharacter,
-  ): Class | null => {
-    const giverBaseClass = ClassGiver.base_class_set.starting_class_tree;
-    const giverHeartSealClass1 =
-      ClassGiver.base_class_set.heart_seal_classes?.[0] || null;
-    const recieverBaseClass = ClassReciever.base_class_set.starting_class_tree;
-
-    const forbiddenClassShareNames = [
-      "Songstress",
-      "Wolfskin",
-      "Kitsune",
-      "Nohr Prince",
-      "Nohr Princess",
-      "Villager",
-    ];
-
-    if (
-      forbiddenClassShareNames.includes(giverBaseClass.className) &&
-      giverHeartSealClass1 &&
-      recieverBaseClass.className === giverHeartSealClass1.className
-    ) {
-      return giverBaseClass.parallelClass ?? null;
-    }
-
-    if (
-      giverBaseClass.className !== recieverBaseClass.className &&
-      !forbiddenClassShareNames.includes(giverBaseClass.className)
-    ) {
-      return giverBaseClass;
-    }
-
-    if (
-      giverHeartSealClass1 &&
-      giverBaseClass.className !== giverHeartSealClass1.className
-    ) {
-      return giverHeartSealClass1;
-    }
-
-    return giverBaseClass.parallelClass ?? null;
   };
 
   const cancelClassChange = () => {
@@ -363,7 +328,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, /*updateUnit, removeU
   const confirmDelete = () => {
     if (unit.name === "Corrin (F)" || unit.name === "Corrin (M)") {
     }
-    // removeUnit(unit.name);
+    deleteUnitByName(gameId, unit.path ?? "", unit.name);
     setShowDeleteConfirm(false);
   };
 
@@ -401,7 +366,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, /*updateUnit, removeU
       ...unit,
       equipped_skills: newEquippedSkills,
     };
-    // updateUnit(updatedUnit);
+    updateUnit(gameId, updatedUnit);
     setShowChangeSkills(false);
   };
 
@@ -617,7 +582,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, /*updateUnit, removeU
         stats: { ...unit.stats, [editingField]: numValue },
       };
     }
-    // updateUnit(updatedUnit);
+    updateUnit(gameId, updatedUnit);
     setEditingField(null);
     setEditValue("");
     setError("");
@@ -1454,7 +1419,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, /*updateUnit, removeU
                                       : null,
                                   },
                                 };
-                                // updateUnit(updatedUnit);
+                                updateUnit(gameId, updatedUnit);
                               }}
                               className="inline-select"
                               aria-label={`Select or change friendship seal partner for ${unit.name}`}
@@ -1591,7 +1556,7 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, /*updateUnit, removeU
                                           getAllySealClass(partnerUnit, unit),
                                       },
                                     };
-                                    // updateUnit(updatedPartnerUnit);
+                                    updateUnit(gameId, updatedPartnerUnit);
                                   }
                                 }
 
@@ -1615,11 +1580,13 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, /*updateUnit, removeU
                                           partner_seal_base_class: null,
                                         },
                                       };
-                                    // updateUnit(updatedPreviousPartnerUnit);
+                                    updateUnit(
+                                      gameId,
+                                      updatedPreviousPartnerUnit,
+                                    );
                                   }
                                 }
-
-                                // updateUnit(updatedUnit);
+                                updateUnit(gameId, updatedUnit);
                               }}
                               className="inline-select"
                               aria-label={`Select or change partner seal partner for ${unit.name}`}

@@ -5023,7 +5023,7 @@ export const findCharacter = (name: string): BaseCharacter | null => {
     (char) => char.name === name,
   );
   if (!character) {
-    return null
+    return null;
   } else {
     return character;
   }
@@ -5042,7 +5042,6 @@ defaultCharactersConquest.forEach((character) => {
     .map((partnerName) => findCharacter(partnerName))
     .filter((char): char is BaseCharacter => char !== null); // 👈 type guard
 });
-
 
 // console.log(defaultCharactersConquest[0]);
 //unit template

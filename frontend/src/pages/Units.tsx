@@ -15,21 +15,30 @@ import {
 
 interface UnitsProps {
   units: BaseCharacter[];
-  // updateUnit: (unit: BaseCharacter) => void;
-  // addUnit: (unit: BaseCharacter) => void;
-  // deleteAllUnits: () => void;
-  // removeUnit: (name: string) => void;
+  updateUnit: (gameId: string, unit: BaseCharacter) => void;
+  deleteUnitByName: (gameId: string, path: string, unitName: string) => void;
+  deleteAllUnits: (gameId: string, path: string) => void;
 }
 
-const Units: React.FC<UnitsProps> = ({ units/*, updateUnit, addUnit, deleteAllUnits, removeUnit*/ }) => {
+const Units: React.FC<UnitsProps> = ({
+  units,
+  updateUnit,
+  deleteUnitByName,
+  deleteAllUnits,
+}) => {
   const { state } = useLocation();
   const selectedRoute = state?.selectedRoute || "";
-  const { gameId } = useParams<{ gameId: string }>();
+  const gameId = useParams<{ gameId?: string }>().gameId ?? "";
 
-  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] = useState(false);
-  const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] = useState(false);
-  const [selectedCharacter, setSelectedCharacter] = useState<BaseCharacter | null>(null);
-  const [createdCorrinGender, setCreatedCorrinGender] = useState<"Male" | "Female" | null>(null);
+  const [isOverlayAddCharacterOpen, setIsOverlayAddCharacterOpen] =
+    useState(false);
+  const [isOverlayDeleteCharacterOpen, setIsOverlayDeleteCharacterOpen] =
+    useState(false);
+  const [selectedCharacter, setSelectedCharacter] =
+    useState<BaseCharacter | null>(null);
+  const [createdCorrinGender, setCreatedCorrinGender] = useState<
+    "Male" | "Female" | null
+  >(null);
   const [corrinGender, setCorrinGender] = useState<"Male" | "Female">("Male");
   const [corrinBoon, setCorrinBoon] = useState<string>("Robust");
   const [corrinBane, setCorrinBane] = useState<string>("Unlucky");
@@ -60,6 +69,16 @@ const Units: React.FC<UnitsProps> = ({ units/*, updateUnit, addUnit, deleteAllUn
       setCorrinBoon(newBoon);
     }
   }, [corrinBane]);
+
+  useEffect(() => {
+    if (units.some((unit) => unit.name === "Corrin (M)")) {
+      setCreatedCorrinGender("Male");
+    } else if (units.some((unit) => unit.name === "Corrin (F)")) {
+      setCreatedCorrinGender("Female");
+    } else {
+      setCreatedCorrinGender(null);
+    }
+  }, [units]);
 
   const availableCharacters = defaultCharactersConquest.filter((character) => {
     if (units.some((unit) => unit.name === character.name)) {
@@ -117,7 +136,7 @@ const Units: React.FC<UnitsProps> = ({ units/*, updateUnit, addUnit, deleteAllUn
 
   const addNewUnit = () => {
     if (selectedCharacter) {
-      // addUnit(selectedCharacter);
+      updateUnit(gameId, selectedCharacter);
       toggleOverlayAddCharacter();
     }
   };
@@ -131,19 +150,21 @@ const Units: React.FC<UnitsProps> = ({ units/*, updateUnit, addUnit, deleteAllUn
     let corrin: BaseCharacter = structuredClone(baseCorrin);
 
     corrin.base_class_set.heart_seal_classes = [getClass(corrinTalent)];
+    corrin.talent = corrinTalent;
     corrin.boon = corrinBoon;
     corrin.bane = corrinBane;
 
     corrin = applyBoonBaneAdjustments(corrin, corrinBoon, corrinBane);
 
     corrin.class_line[0] = [0, 1, corrin.class, corrin.stats];
-    // addUnit(corrin);
+    updateUnit(gameId, corrin);
+    console.log(corrin);
     setCreatedCorrinGender(corrinGender);
     toggleOverlayAddCharacter();
   };
 
   const handleDeleteAllUnits = () => {
-    // deleteAllUnits();
+    deleteAllUnits(gameId, selectedRoute);
     setCreatedCorrinGender(null);
     toggleOverlayDeleteCharacter();
   };
@@ -164,8 +185,8 @@ const Units: React.FC<UnitsProps> = ({ units/*, updateUnit, addUnit, deleteAllUn
               key={`${unit.name}-${index}`}
               unit={unit}
               gameId={gameId}
-              // updateUnit={updateUnit}
-              // removeUnit={removeUnit}
+              updateUnit={updateUnit}
+              deleteUnitByName={deleteUnitByName}
               units={units}
             />
           ))}

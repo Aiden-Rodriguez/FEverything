@@ -57,7 +57,7 @@ export interface BaseCharacter {
   level: number;
   eternalSealCount: number;
   maxLevelModifier: number;
-  talent?: Class | null;
+  talent?: string | null;
   class_line: [number, number, Class, StatBlock][];
   stats: {
     hp: number;
@@ -189,15 +189,17 @@ export interface BaseCharacter {
   };
 }
 
+//used for db purposes
 export interface UniqueCharacterData {
   name: string;
-  nickname?: string;
-  talent?: Class;
-  class: Class;
+  path: string;
+  // nickname?: string;
+  talent?: string;
+  class: string;
   internalLevel: number;
   level: number;
   eternalSealCount: number;
-  class_line: [number, number, Class, StatBlock][];
+  class_line: [number, number, string, StatBlock][];
   stats: {
     hp: number;
     strength: number;
@@ -209,8 +211,8 @@ export interface UniqueCharacterData {
     resistance: number;
     move: number;
   };
-  equipped_skills: Skill[];
-  learned_skills: Skill[];
+  equipped_skills: string[];
+  learned_skills: string[];
   weapon_ranks: {
     WeaponRankSwordKatana: WeaponRank;
     WeaponRankLanceNaginata: WeaponRank;
@@ -222,11 +224,64 @@ export interface UniqueCharacterData {
     WeaponRankStone: WeaponRank;
   };
   weapons: String[];
-  selected_friendship_seal_partner: BaseCharacter | null;
-  selected_partner_seal_partner: BaseCharacter | null;
+  selected_friendship_seal_partner: string | null;
+  selected_partner_seal_partner: string | null;
   boon?: string;
   bane?: string;
 }
+
+//used for db purposes
+export const tmpCamilla: UniqueCharacterData = {
+  name: "Camilla",
+  path: "Conquest",
+  class: "Malig Knight",
+  internalLevel: 15,
+  level: 14,
+  eternalSealCount: 0,
+  class_line: [
+    [
+      15,
+      1,
+      "Malig Knight",
+      {
+        hp: 10,
+        strength: 11,
+        magic: 10,
+        skill: 0,
+        speed: 0,
+        luck: 0,
+        defence: 0,
+        resistance: 0,
+      },
+    ],
+  ],
+  stats: {
+    hp: 1,
+    strength: 11,
+    magic: 10,
+    skill: 0,
+    speed: 0,
+    luck: 0,
+    defence: 0,
+    resistance: 0,
+    move: 0,
+  },
+  equipped_skills: ["Strength +2", "Lunge"],
+  learned_skills: ["Strength +2", "Lunge"],
+  weapon_ranks: {
+    WeaponRankSwordKatana: "E",
+    WeaponRankLanceNaginata: "E",
+    WeaponRankAxeClub: "C",
+    WeaponRankTomeScroll: "D",
+    WeaponRankKnifeShuriken: "E",
+    WeaponRankBowYumi: "E",
+    WeaponRankStaffRod: "E",
+    WeaponRankStone: "E",
+  },
+  weapons: ["Steel Axe", "Thunder"],
+  selected_friendship_seal_partner: null,
+  selected_partner_seal_partner: null,
+};
 
 //What really needs to be stored in db...
 //boon, bane, talent (corrin)

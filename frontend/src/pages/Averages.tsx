@@ -25,6 +25,7 @@ ChartJS.register(
   Tooltip,
   Legend,
 );
+
 const erf = (x: number): number => {
   const a1 = 0.254829592;
   const a2 = -0.284496736;
@@ -86,7 +87,7 @@ const getChartData = (n: number, p: number, k: number, statName: string) => {
     labels,
     datasets: [
       {
-        label: `Probability of ${statName} Gains`,
+        label: `Probability of ${statName}`,
         data: probabilities,
         backgroundColor: backgroundColors,
         borderColor: backgroundColors.map((color) => color.replace("0.8", "1")),
@@ -132,15 +133,15 @@ const getOverallChartData = (averageZScore: number) => {
 };
 
 interface AveragesProps {
-  unitss: BaseCharacter[]
+  units: BaseCharacter[];
+  isLoading: boolean;
 }
 
-const Averages = ({unitss} : AveragesProps) => {
+const Averages = ({ units, isLoading }: AveragesProps) => {
   const { gameId } = useParams<{ gameId: string }>();
   const { state } = useLocation();
   const selectedRoute = state?.selectedRoute;
 
-  const [units, setUnits] = useState<BaseCharacter[]>([]);
   const [selectedUnit, setSelectedUnit] = useState<BaseCharacter | null>(null);
   const [averageZScore, setAverageZScore] = useState<number | null>(null);
   const [statZScores, setStatZScores] = useState<number[] | null>(null);
@@ -164,26 +165,6 @@ const Averages = ({unitss} : AveragesProps) => {
   useEffect(() => {
     checkAptitude();
   }, [selectedUnit]);
-
-  useEffect(() => {
-    if (gameId && selectedRoute) {
-      const storedUnits = localStorage.getItem(
-        `units_${gameId}_${selectedRoute}`,
-      );
-      if (storedUnits) {
-        try {
-          const parsedUnits: BaseCharacter[] = parse(storedUnits);
-          setUnits(parsedUnits);
-          const initialUnit = parsedUnits.length > 0 ? parsedUnits[0] : null;
-          setSelectedUnit(initialUnit);
-
-          // setUnits(unitss);
-        } catch (error) {
-          console.error("Error parsing stored units:", error);
-        }
-      }
-    }
-  }, [gameId, selectedRoute]);
 
   useEffect(() => {
     if (selectedUnit) {
@@ -474,265 +455,278 @@ const Averages = ({unitss} : AveragesProps) => {
       <h1 className="top-margin">
         Stat Averages: {gameId} {selectedRoute}
       </h1>
-      <div className="select-container">
-        <select
-          value={selectedUnit?.name || ""}
-          onChange={handleUnitChange}
-          disabled={units.length === 0}
-          aria-describedby={
-            units.length === 0 ? "no-units-message" : "List of your units"
-          }
-        >
-          {units.length === 0 ? (
-            <option value="" disabled>
-              No units available
-            </option>
-          ) : (
-            units.map((unit) => (
-              <option key={unit.name} value={unit.name}>
-                {unit.name}
-              </option>
-            ))
-          )}
-        </select>
-        {selectedUnit ? (
-          <div className="unit-sprite">
-            <div className="sprite-wrapper">
-              <SpriteAnimator
-                character={selectedUnit.name}
-                gender={selectedUnit.gender}
-                class={selectedUnit.class.className}
-                game={gameId ?? ""}
-                displayScale={2}
-                classMove={selectedUnit.class.classBaseStats.move}
-                faction="Player"
-                animationId={0}
-              />
-            </div>
-          </div>
-        ) : null}
-      </div>
-      {selectedUnit ? (
-        <div className="averages-grid">
-          <div className="grid-unit-info">
-            <div className="averages-grid-top-contents">
-              <h2>{selectedUnit.name}</h2>
-              <p>
-                <strong>Level:</strong> {selectedUnit.level}
-              </p>
-              <p>
-                <strong>Class:</strong>{" "}
-                {selectedUnit.class?.className || "Unknown"}
-              </p>
-              <div>
-                <img
-                  src={`/characters/${gameId}/${selectedUnit.name}.png`}
-                  alt={selectedUnit.name}
-                  className="character-image"
-                />
-              </div>
-            </div>
-            <div className="averages-grid-top-contents">
-              <h2>Stats</h2>
-              <ul>
-                <li>HP: {selectedUnit.stats.hp}</li>
-                <li>STR: {selectedUnit.stats.strength}</li>
-                <li>MAG: {selectedUnit.stats.magic}</li>
-                <li>SKL: {selectedUnit.stats.skill}</li>
-                <li>SPD: {selectedUnit.stats.speed}</li>
-                <li>LCK: {selectedUnit.stats.luck}</li>
-                <li>DEF: {selectedUnit.stats.defence}</li>
-                <li>RES: {selectedUnit.stats.resistance}</li>
-                <li>MOV: {selectedUnit.stats.move}</li>
-              </ul>
-            </div>
-            <div className="averages-grid-top-contents">
-              <h2>Growth Rates</h2>
-              <ul>
-                <li>
-                  HP:{" "}
-                  {selectedUnit.class.classGrowths.hp +
-                    selectedUnit.base_growths.hp +
-                    (hasAptitudeEquipped ? 10 : 0)}
-                  %
-                </li>
-                <li>
-                  STR:{" "}
-                  {selectedUnit.class.classGrowths.strength +
-                    selectedUnit.base_growths.strength +
-                    (hasAptitudeEquipped ? 10 : 0)}
-                  %
-                </li>
-                <li>
-                  MAG:{" "}
-                  {selectedUnit.class.classGrowths.magic +
-                    selectedUnit.base_growths.magic +
-                    (hasAptitudeEquipped ? 10 : 0)}
-                  %
-                </li>
-                <li>
-                  SKL:{" "}
-                  {selectedUnit.class.classGrowths.skill +
-                    selectedUnit.base_growths.skill +
-                    (hasAptitudeEquipped ? 10 : 0)}
-                  %
-                </li>
-                <li>
-                  SPD:{" "}
-                  {selectedUnit.class.classGrowths.speed +
-                    selectedUnit.base_growths.speed +
-                    (hasAptitudeEquipped ? 10 : 0)}
-                  %
-                </li>
-                <li>
-                  LCK:{" "}
-                  {selectedUnit.class.classGrowths.luck +
-                    selectedUnit.base_growths.luck +
-                    (hasAptitudeEquipped ? 10 : 0)}
-                  %
-                </li>
-                <li>
-                  DEF:{" "}
-                  {selectedUnit.class.classGrowths.defence +
-                    selectedUnit.base_growths.defence +
-                    (hasAptitudeEquipped ? 10 : 0)}
-                  %
-                </li>
-                <li>
-                  RES:{" "}
-                  {selectedUnit.class.classGrowths.resistance +
-                    selectedUnit.base_growths.resistance +
-                    (hasAptitudeEquipped ? 10 : 0)}
-                  %
-                </li>
-              </ul>
-            </div>
-            <div className="averages-grid-top-contents">
-              <h2>Stat Caps</h2>
-              <ul>
-                <li>HP: {selectedUnit.class.MaxStatCaps.hp}</li>
-                <li>
-                  STR:{" "}
-                  {selectedUnit.maxStatModifiers.strength +
-                    selectedUnit.class.MaxStatCaps.strength}
-                </li>
-                <li>
-                  MAG:{" "}
-                  {selectedUnit.maxStatModifiers.magic +
-                    selectedUnit.class.MaxStatCaps.magic}
-                </li>
-                <li>
-                  SKL:{" "}
-                  {selectedUnit.maxStatModifiers.skill +
-                    selectedUnit.class.MaxStatCaps.skill}
-                </li>
-                <li>
-                  SPD:{" "}
-                  {selectedUnit.maxStatModifiers.speed +
-                    selectedUnit.class.MaxStatCaps.speed}
-                </li>
-                <li>
-                  LCK:{" "}
-                  {selectedUnit.maxStatModifiers.luck +
-                    selectedUnit.class.MaxStatCaps.luck}
-                </li>
-                <li>
-                  DEF:{" "}
-                  {selectedUnit.maxStatModifiers.defence +
-                    selectedUnit.class.MaxStatCaps.defence}
-                </li>
-                <li>
-                  RES:{" "}
-                  {selectedUnit.maxStatModifiers.resistance +
-                    selectedUnit.class.MaxStatCaps.resistance}
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="averages-grid-bottom">
-            {averageZScore !== null &&
-            statZScores !== null &&
-            totalGrowthRates !== null &&
-            totalStatGains !== null &&
-            totalLevelsGained !== null &&
-            totalLevelsGained > 0 ? (
-              <div>
-                <div className="tab-container">
-                  {[
-                    "overall",
-                    "hp",
-                    "str",
-                    "mag",
-                    "skl",
-                    "spd",
-                    "lck",
-                    "def",
-                    "res",
-                  ].map((tab) => (
-                    <button
-                      key={tab}
-                      className={`tab-button ${activeTab === tab ? "active" : ""}`}
-                      onClick={() => setActiveTab(tab)}
-                    >
-                      {tab === "overall" ? "Overall" : tab.toUpperCase()}
-                    </button>
+      {isLoading ? (
+        <p>Loading units...</p>
+      ) : (
+        <>
+          <div className="select-container">
+            <select
+              value={selectedUnit?.name || ""}
+              onChange={handleUnitChange}
+              disabled={units.length === 0}
+              aria-describedby={
+                units.length === 0 ? "no-units-message" : "List of your units"
+              }
+            >
+              {units.length === 0 ? (
+                <option value="" disabled>
+                  No units available
+                </option>
+              ) : (
+                <>
+                  <option value="" disabled>
+                    Select a unit
+                  </option>
+                  {units.map((unit) => (
+                    <option key={unit.name} value={unit.name}>
+                      {unit.name}
+                    </option>
                   ))}
+                </>
+              )}
+            </select>
+            {selectedUnit && (
+              <div className="unit-sprite">
+                <div className="sprite-wrapper">
+                  <SpriteAnimator
+                    character={selectedUnit.name}
+                    gender={selectedUnit.gender}
+                    class={selectedUnit.class.className}
+                    game={gameId ?? ""}
+                    displayScale={2}
+                    classMove={selectedUnit.class.classBaseStats.move}
+                    faction="Player"
+                    animationId={0}
+                  />
                 </div>
-                <div className="chart-container">
-                  {activeTab === "overall" ? (
-                    <Bar
-                      data={getOverallChartData(averageZScore)}
-                      options={chartOptions}
-                    />
-                  ) : (
-                    <Bar
-                      data={getChartData(
-                        totalLevelsGained,
-                        totalGrowthRates[
-                          [
-                            "hp",
-                            "str",
-                            "mag",
-                            "skl",
-                            "spd",
-                            "lck",
-                            "def",
-                            "res",
-                          ].indexOf(activeTab)
-                        ],
-                        totalStatGains[
-                          [
-                            "hp",
-                            "str",
-                            "mag",
-                            "skl",
-                            "spd",
-                            "lck",
-                            "def",
-                            "res",
-                          ].indexOf(activeTab)
-                        ],
-                        activeTab.toUpperCase(),
-                      )}
-                      options={chartOptions}
-                    />
-                  )}
-                </div>
-                <p>
-                  {selectedUnit.name} is {Math.abs(averageZScore).toFixed(2)}{" "}
-                  standard deviations {averageZScore >= 0 ? "above" : "below"}{" "}
-                  average (
-                  {getZScorePercentage(averageZScore, selectedUnit.name)}
-                  )! <br />
-                </p>
               </div>
-            ) : (
-              <p>No level ups for the unit yet</p>
             )}
           </div>
-        </div>
-      ) : (
-        <p className="no-units">No units available.</p>
+          {selectedUnit ? (
+            <div className="averages-grid">
+              <div className="grid-unit-info">
+                <div className="averages-grid-top-contents">
+                  <h2>{selectedUnit.name}</h2>
+                  <p>
+                    <strong>Level:</strong> {selectedUnit.level}
+                  </p>
+                  <p>
+                    <strong>Class:</strong>{" "}
+                    {selectedUnit.class?.className || "Unknown"}
+                  </p>
+                  <div>
+                    <img
+                      src={`/characters/${gameId}/${selectedUnit.name}.png`}
+                      alt={selectedUnit.name}
+                      className="character-image"
+                    />
+                  </div>
+                </div>
+                <div className="averages-grid-top-contents">
+                  <h2>Stats</h2>
+                  <ul>
+                    <li>HP: {selectedUnit.stats.hp}</li>
+                    <li>STR: {selectedUnit.stats.strength}</li>
+                    <li>MAG: {selectedUnit.stats.magic}</li>
+                    <li>SKL: {selectedUnit.stats.skill}</li>
+                    <li>SPD: {selectedUnit.stats.speed}</li>
+                    <li>LCK: {selectedUnit.stats.luck}</li>
+                    <li>DEF: {selectedUnit.stats.defence}</li>
+                    <li>RES: {selectedUnit.stats.resistance}</li>
+                    <li>MOV: {selectedUnit.stats.move}</li>
+                  </ul>
+                </div>
+                <div className="averages-grid-top-contents">
+                  <h2>Growth Rates</h2>
+                  <ul>
+                    <li>
+                      HP:{" "}
+                      {selectedUnit.class.classGrowths.hp +
+                        selectedUnit.base_growths.hp +
+                        (hasAptitudeEquipped ? 10 : 0)}
+                      %
+                    </li>
+                    <li>
+                      STR:{" "}
+                      {selectedUnit.class.classGrowths.strength +
+                        selectedUnit.base_growths.strength +
+                        (hasAptitudeEquipped ? 10 : 0)}
+                      %
+                    </li>
+                    <li>
+                      MAG:{" "}
+                      {selectedUnit.class.classGrowths.magic +
+                        selectedUnit.base_growths.magic +
+                        (hasAptitudeEquipped ? 10 : 0)}
+                      %
+                    </li>
+                    <li>
+                      SKL:{" "}
+                      {selectedUnit.class.classGrowths.skill +
+                        selectedUnit.base_growths.skill +
+                        (hasAptitudeEquipped ? 10 : 0)}
+                      %
+                    </li>
+                    <li>
+                      SPD:{" "}
+                      {selectedUnit.class.classGrowths.speed +
+                        selectedUnit.base_growths.speed +
+                        (hasAptitudeEquipped ? 10 : 0)}
+                      %
+                    </li>
+                    <li>
+                      LCK:{" "}
+                      {selectedUnit.class.classGrowths.luck +
+                        selectedUnit.base_growths.luck +
+                        (hasAptitudeEquipped ? 10 : 0)}
+                      %
+                    </li>
+                    <li>
+                      DEF:{" "}
+                      {selectedUnit.class.classGrowths.defence +
+                        selectedUnit.base_growths.defence +
+                        (hasAptitudeEquipped ? 10 : 0)}
+                      %
+                    </li>
+                    <li>
+                      RES:{" "}
+                      {selectedUnit.class.classGrowths.resistance +
+                        selectedUnit.base_growths.resistance +
+                        (hasAptitudeEquipped ? 10 : 0)}
+                      %
+                    </li>
+                  </ul>
+                </div>
+                <div className="averages-grid-top-contents">
+                  <h2>Stat Caps</h2>
+                  <ul>
+                    <li>HP: {selectedUnit.class.MaxStatCaps.hp}</li>
+                    <li>
+                      STR:{" "}
+                      {selectedUnit.maxStatModifiers.strength +
+                        selectedUnit.class.MaxStatCaps.strength}
+                    </li>
+                    <li>
+                      MAG:{" "}
+                      {selectedUnit.maxStatModifiers.magic +
+                        selectedUnit.class.MaxStatCaps.magic}
+                    </li>
+                    <li>
+                      SKL:{" "}
+                      {selectedUnit.maxStatModifiers.skill +
+                        selectedUnit.class.MaxStatCaps.skill}
+                    </li>
+                    <li>
+                      SPD:{" "}
+                      {selectedUnit.maxStatModifiers.speed +
+                        selectedUnit.class.MaxStatCaps.speed}
+                    </li>
+                    <li>
+                      LCK:{" "}
+                      {selectedUnit.maxStatModifiers.luck +
+                        selectedUnit.class.MaxStatCaps.luck}
+                    </li>
+                    <li>
+                      DEF:{" "}
+                      {selectedUnit.maxStatModifiers.defence +
+                        selectedUnit.class.MaxStatCaps.defence}
+                    </li>
+                    <li>
+                      RES:{" "}
+                      {selectedUnit.maxStatModifiers.resistance +
+                        selectedUnit.class.MaxStatCaps.resistance}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="averages-grid-bottom">
+                {averageZScore !== null &&
+                statZScores !== null &&
+                totalGrowthRates !== null &&
+                totalStatGains !== null &&
+                totalLevelsGained !== null &&
+                totalLevelsGained > 0 ? (
+                  <div>
+                    <div className="tab-container">
+                      {[
+                        "overall",
+                        "hp",
+                        "str",
+                        "mag",
+                        "skl",
+                        "spd",
+                        "lck",
+                        "def",
+                        "res",
+                      ].map((tab) => (
+                        <button
+                          key={tab}
+                          className={`tab-button ${activeTab === tab ? "active" : ""}`}
+                          onClick={() => setActiveTab(tab)}
+                        >
+                          {tab === "overall" ? "Overall" : tab.toUpperCase()}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="chart-container">
+                      {activeTab === "overall" ? (
+                        <Bar
+                          data={getOverallChartData(averageZScore)}
+                          options={chartOptions}
+                        />
+                      ) : (
+                        <Bar
+                          data={getChartData(
+                            totalLevelsGained,
+                            totalGrowthRates[
+                              [
+                                "hp",
+                                "str",
+                                "mag",
+                                "skl",
+                                "spd",
+                                "lck",
+                                "def",
+                                "res",
+                              ].indexOf(activeTab)
+                            ],
+                            totalStatGains[
+                              [
+                                "hp",
+                                "str",
+                                "mag",
+                                "skl",
+                                "spd",
+                                "lck",
+                                "def",
+                                "res",
+                              ].indexOf(activeTab)
+                            ],
+                            activeTab.toUpperCase(),
+                          )}
+                          options={chartOptions}
+                        />
+                      )}
+                    </div>
+                    <p>
+                      {selectedUnit.name} is{" "}
+                      {Math.abs(averageZScore).toFixed(2)} standard deviations{" "}
+                      {averageZScore >= 0 ? "above" : "below"} average (
+                      {getZScorePercentage(averageZScore, selectedUnit.name)}
+                      )! <br />
+                    </p>
+                  </div>
+                ) : (
+                  <p>No level ups for the unit yet</p>
+                )}
+              </div>
+            </div>
+          ) : units.length === 0 ? (
+            <p className="no-units">No units available.</p>
+          ) : (
+            <p>Please select a unit.</p>
+          )}
+        </>
       )}
     </div>
   );

@@ -7,7 +7,11 @@ interface AuthFormData {
   confirmPassword?: string;
 }
 
-const AuthForm: React.FC = () => {
+interface AuthFormProps {
+  loadUnits: () => void;
+}
+
+const AuthForm = ({ loadUnits }: AuthFormProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isRegister = location.pathname === "/Register";
@@ -21,7 +25,6 @@ const AuthForm: React.FC = () => {
     text: string;
   } | null>(null);
 
-  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (message?.type !== "error") {
@@ -61,6 +64,7 @@ const AuthForm: React.FC = () => {
 
       // Store JWT token
       localStorage.setItem("token", data.token);
+      loadUnits();
       window.dispatchEvent(new Event("login"));
       //console.log(`${isRegister ? "Registration" : "Login"} successful:`, data.token);
 
@@ -83,7 +87,7 @@ const AuthForm: React.FC = () => {
   useEffect(() => {
     const expiredFlag = sessionStorage.getItem("sessionExpired");
     if (expiredFlag === "true") {
-      console.log("Expiry message")
+      console.log("Expiry message");
       setHelperMessage({
         type: "error",
         text: "Session expired. Please log in again.",
@@ -91,9 +95,7 @@ const AuthForm: React.FC = () => {
       sessionStorage.removeItem("sessionExpired");
     }
   }, []);
-  
-  
-  
+
   return (
     <div>
       <div>

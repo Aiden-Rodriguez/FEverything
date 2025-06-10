@@ -135,7 +135,7 @@ export const applyBoonBaneAdjustments = (
       break;
     case "Dull": // Primarily lowers Magic
       adjustBaseStat("magic", -2);
-      adjustGrowthRate("magic", -20);
+      adjustGrowthRate("magic", -15);
       adjustGrowthRate("speed", -5);
       adjustGrowthRate("resistance", -5);
       adjustStatCap("magic", -3);

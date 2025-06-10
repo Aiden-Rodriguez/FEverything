@@ -60,7 +60,7 @@ export function registerUnitRoutes(
         }
         const userId = userResult.rows[0].id;
 
-        const allowedPaths = ["Conquest", "Birthright", "Revalation"];
+        const allowedPaths = ["Conquest", "Birthright", "Revelation"];
         let path = null;
         if (typeof unitData.path === "string") {
           if (allowedPaths.includes(unitData.path)) {
@@ -166,8 +166,7 @@ export function registerUnitRoutes(
         selected_friendship_seal_partner = EXCLUDED.selected_friendship_seal_partner,
         boon = EXCLUDED.boon,
         bane = EXCLUDED.bane,
-        talent = EXCLUDED.talent
-      `;
+        talent = EXCLUDED.talent`;
 
         const values = [
           userId,
@@ -236,10 +235,117 @@ export function registerUnitRoutes(
         SELECT *
         FROM "${gameId}"
         WHERE user_id = $1
+        ORDER BY created_at ASC
       `;
         const unitsResult = await pool.query(unitsQuery, [userId]);
         res.json(unitsResult.rows);
       } catch (err: unknown) {
+        console.error("Database error:", err);
+        res.status(500).json({ error: "Database error" });
+      }
+    },
+  );
+
+  app.delete(
+    "/api/units/:gameId/:path/:unitName",
+    verifyAuthToken,
+    async (req: Request, res: Response) => {
+      const { gameId, path, unitName } = req.params;
+      const username = req.user?.username;
+
+      if (!username) {
+        res
+          .status(401)
+          .json({ error: "Unauthorized: No user information in token" });
+        return;
+      }
+
+      const allowedGames = ["Fire Emblem Fates"];
+      const allowedPaths = ["Conquest", "Birthright", "Revelation"]; // fixed spelling
+
+      if (!allowedGames.includes(gameId)) {
+        res.status(400).json({ error: "Unsupported gameId" });
+        return;
+      }
+
+      if (!allowedPaths.includes(path)) {
+        res.status(400).json({ error: "Invalid path" });
+        return;
+      }
+
+      try {
+        const userQuery = `SELECT id FROM users WHERE username = $1`;
+        const userResult = await pool.query(userQuery, [username]);
+        if (userResult.rowCount === 0) {
+          res.status(404).json({ error: "User not found" });
+          return;
+        }
+        const userId = userResult.rows[0].id;
+
+        const deleteQuery = `
+          DELETE FROM "${gameId}"
+          WHERE user_id = $1 AND path = $2 AND name = $3
+        `;
+        const result = await pool.query(deleteQuery, [userId, path, unitName]);
+
+        if (result.rowCount === 0) {
+          res.status(404).json({ error: "Unit not found or already deleted" });
+        } else {
+          res.json({ message: "Unit successfully deleted" });
+        }
+      } catch (err: unknown) {
+        console.error("Database error:", err);
+        res.status(500).json({ error: "Database error" });
+      }
+    },
+  );
+
+  app.delete(
+    "/api/units/:gameId/:path",
+    verifyAuthToken,
+    async (req: Request, res: Response) => {
+      const { gameId, path } = req.params;
+      const username = req.user?.username;
+
+      if (!username) {
+        res
+          .status(401)
+          .json({ error: "Unauthorized: No user information in token" });
+        return;
+      }
+
+      const allowedGames = ["Fire Emblem Fates"];
+      const allowedPaths = ["Conquest", "Birthright", "Revelation"];
+
+      if (!allowedGames.includes(gameId)) {
+        res.status(400).json({ error: "Unsupported gameId" });
+        return;
+      }
+
+      if (!allowedPaths.includes(path)) {
+        res.status(400).json({ error: "Invalid path" });
+        return;
+      }
+
+      try {
+        const userQuery = `SELECT id FROM users WHERE username = $1`;
+        const userResult = await pool.query(userQuery, [username]);
+        if (userResult.rowCount === 0) {
+          res.status(404).json({ error: "User not found" });
+          return;
+        }
+        const userId = userResult.rows[0].id;
+
+        const deleteAllQuery = `
+          DELETE FROM "${gameId}"
+          WHERE user_id = $1 AND path = $2
+        `;
+        const result = await pool.query(deleteAllQuery, [userId, path]);
+
+        res.json({
+          message: `Deleted ${result.rowCount} unit(s) for path "${path}"`,
+        });
+      } catch (err) {
         console.error("Database error:", err);
         res.status(500).json({ error: "Database error" });
       }
