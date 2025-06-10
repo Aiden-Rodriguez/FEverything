@@ -131,7 +131,11 @@ const getOverallChartData = (averageZScore: number) => {
   };
 };
 
-const Averages = () => {
+interface AveragesProps {
+  unitss: BaseCharacter[]
+}
+
+const Averages = ({unitss} : AveragesProps) => {
   const { gameId } = useParams<{ gameId: string }>();
   const { state } = useLocation();
   const selectedRoute = state?.selectedRoute;
@@ -172,6 +176,8 @@ const Averages = () => {
           setUnits(parsedUnits);
           const initialUnit = parsedUnits.length > 0 ? parsedUnits[0] : null;
           setSelectedUnit(initialUnit);
+
+          // setUnits(unitss);
         } catch (error) {
           console.error("Error parsing stored units:", error);
         }

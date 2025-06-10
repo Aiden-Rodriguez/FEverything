@@ -17,7 +17,11 @@ import {
   conflictingPairs,
 } from "../types/Fire Emblem Fates/UnitStruct";
 
-const Units = () => {
+interface UnitsProps {
+  units: BaseCharacter[]
+}
+
+const Units = ({units} : UnitsProps) => {
   const { state } = useLocation();
   const selectedRoute = state?.selectedRoute;
   const { gameId } = useParams<{ gameId: string }>();

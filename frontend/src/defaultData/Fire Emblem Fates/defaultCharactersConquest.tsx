@@ -22,6 +22,7 @@ export function getSkill(skillName: string): Skill {
 export const defaultCharactersConquest: BaseCharacter[] = [
   {
     name: "Corrin (M)",
+    path: "Conquest",
     gender: "M",
     title: "Crux of Fate",
     class: getClass("Nohr Prince"),
@@ -184,6 +185,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Corrin (F)",
+    path: "Conquest",
     gender: "F",
     title: "Crux of Fate",
     class: getClass("Nohr Princess"),
@@ -347,6 +349,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   // This is for female Corrin, where Jakob appears as the first partner at lvl1. Changes to lvl 13 otherwise on male Corrin. Same rules apply for Felicia, in reverse.
   {
     name: "Jakob",
+    path: "Conquest",
     gender: "M",
     title: "Devoted Servant",
     royalty_status: false,
@@ -507,6 +510,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   {
     // second version of jakob as discussed above
     name: "Jakob",
+    path: "Conquest",
     gender: "M",
     title: "Devoted Servant",
     royalty_status: false,
@@ -670,6 +674,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Felicia",
+    path: "Conquest",
     gender: "F",
     title: "Maid Mayhem",
     royalty_status: false,
@@ -829,6 +834,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Felicia",
+    path: "Conquest",
     gender: "F",
     title: "Maid Mayhem",
     royalty_status: false,
@@ -992,6 +998,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Kaze",
+    path: "Conquest",
     gender: "M",
     title: "Easygoing Ninja",
     royalty_status: false,
@@ -1151,6 +1158,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Azura",
+    path: "Conquest",
     gender: "F",
     title: "Lady of the Lake",
     royalty_status: true,
@@ -1310,6 +1318,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Silas",
+    path: "Conquest",
     gender: "M",
     title: "Loyal Knight",
     royalty_status: false,
@@ -1469,6 +1478,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Shura",
+    path: "Conquest",
     gender: "M",
     title: "Righteous Rebel",
     royalty_status: false,
@@ -1628,6 +1638,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Mozu",
+    path: "Conquest",
     gender: "F",
     title: "Rural Power",
     royalty_status: false,
@@ -1787,6 +1798,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Izana",
+    path: "Conquest",
     gender: "M",
     title: "Lord of Leisure",
     royalty_status: false,
@@ -1950,6 +1962,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Gunter",
+    path: "Conquest",
     gender: "M",
     title: "Inveterate Soldier",
     royalty_status: false,
@@ -2113,6 +2126,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Elise",
+    path: "Conquest",
     gender: "F",
     title: "Budding Flower",
     royalty_status: true,
@@ -2272,6 +2286,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Arthur",
+    path: "Conquest",
     gender: "M",
     title: "Hapless Hero",
     royalty_status: false,
@@ -2431,6 +2446,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Effie",
+    path: "Conquest",
     gender: "F",
     title: "Army of One",
     royalty_status: false,
@@ -2590,6 +2606,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Odin",
+    path: "Conquest",
     gender: "M",
     title: "Aching Blood",
     royalty_status: false,
@@ -2749,6 +2766,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Niles",
+    path: "Conquest",
     gender: "M",
     title: "Cruel to Be Kind",
     royalty_status: false,
@@ -2908,6 +2926,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Nyx",
+    path: "Conquest",
     gender: "F",
     title: "Cursed by Youth",
     royalty_status: false,
@@ -3067,6 +3086,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Camilla",
+    path: "Conquest",
     gender: "F",
     title: "Bewitching Beauty",
     royalty_status: true,
@@ -3226,6 +3246,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Selena",
+    path: "Conquest",
     gender: "F",
     title: "Cutting Wit",
     royalty_status: false,
@@ -3385,6 +3406,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Beruka",
+    path: "Conquest",
     gender: "F",
     title: "Quiet Assassin",
     royalty_status: false,
@@ -3544,6 +3566,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Laslow",
+    path: "Conquest",
     gender: "M",
     title: "Dancing Duelist",
     royalty_status: false,
@@ -3703,6 +3726,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Peri",
+    path: "Conquest",
     gender: "F",
     title: "Childish Killer",
     royalty_status: false,
@@ -3862,6 +3886,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Benny",
+    path: "Conquest",
     gender: "M",
     title: "Gentle Giant",
     royalty_status: false,
@@ -4021,6 +4046,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Charlotte",
+    path: "Conquest",
     gender: "F",
     title: "Wily Warrior",
     royalty_status: false,
@@ -4180,6 +4206,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Leo",
+    path: "Conquest",
     gender: "M",
     title: "Sorcerous Prince",
     royalty_status: true,
@@ -4339,6 +4366,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Xander",
+    path: "Conquest",
     gender: "M",
     title: "Paragon Knight",
     royalty_status: true,
@@ -4498,6 +4526,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Keaton",
+    path: "Conquest",
     gender: "M",
     title: "Lupine Collector",
     royalty_status: false,
@@ -4657,6 +4686,7 @@ export const defaultCharactersConquest: BaseCharacter[] = [
   },
   {
     name: "Flora",
+    path: "Conquest",
     gender: "F",
     title: "Cold as Ice",
     royalty_status: false,
@@ -4988,28 +5018,31 @@ const partnerPairs: { [key: string]: string[] } = {
 };
 
 // Helper function to find a character by name
-export const findCharacter = (name: string): BaseCharacter => {
+export const findCharacter = (name: string): BaseCharacter | null => {
   const character = defaultCharactersConquest.find(
     (char) => char.name === name,
   );
-  if (!character) throw new Error(`Character ${name} not found`);
-  return character;
+  if (!character) {
+    return null
+  } else {
+    return character;
+  }
 };
 
-// Populate the friendship_seal_partners and partner_seal_partners
 defaultCharactersConquest.forEach((character) => {
   // Populate friendship_seal_partners (same-gender friendships)
   const friends = friendshipPairs[character.name] || [];
-  character.base_class_set.friendship_seal_partners = friends.map(
-    (friendName) => findCharacter(friendName),
-  );
+  character.base_class_set.friendship_seal_partners = friends
+    .map((friendName) => findCharacter(friendName))
+    .filter((char): char is BaseCharacter => char !== null); // 👈 type guard
 
   // Populate partner_seal_partners (opposite-gender S-rank supports)
   const partners = partnerPairs[character.name] || [];
-  character.base_class_set.partner_seal_partners = partners.map((partnerName) =>
-    findCharacter(partnerName),
-  );
+  character.base_class_set.partner_seal_partners = partners
+    .map((partnerName) => findCharacter(partnerName))
+    .filter((char): char is BaseCharacter => char !== null); // 👈 type guard
 });
+
 
 // console.log(defaultCharactersConquest[0]);
 //unit template

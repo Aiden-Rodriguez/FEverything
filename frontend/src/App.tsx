@@ -10,9 +10,12 @@ import About from "./pages/About.tsx";
 import AuthForm from "./pages/AuthForm.tsx";
 import { ValidRoutes } from "../../backend/src/shared/validRoutes.ts";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getTokenExpiration } from "./helper/jwtUtils.tsx";
+import { fetchUnits, setUserUnit } from "./helper/apiCalls.tsx";
+import { parseUnitData } from "./helper/parseUnits.tsx";
+import { BaseCharacter } from "./types/Fire Emblem Fates/UnitStruct.tsx";
 
 function useAutoLogout() {
   const navigate = useNavigate();
@@ -35,13 +38,65 @@ function useAutoLogout() {
   
     const interval = setInterval(check, 10000); // check every 10 seconds
     return () => clearInterval(interval);
-  }, []);
-  
+  }, []); 
 }
 
 function AppRoutes() {
-  useAutoLogout();
+  const [units, setUnits] = useState<BaseCharacter[]>([]);
 
+  async function getUserUnits(gameId: string): Promise<any[] | null> {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("No auth token found");
+      return null;
+    }
+
+    const data = await fetchUnits(gameId, token);
+    if (data === null) {
+      console.log("Failed to fetch units or no units exist for user");
+      return null;
+    }
+    return data;
+  }
+
+  useEffect(() => {
+    async function loadUnits() {
+      const fetchedUnits = await getUserUnits("Fire Emblem Fates");
+      if (fetchedUnits) {
+        const parsedUnits = parseUnitData(fetchedUnits);
+        setUnits(parsedUnits);
+        console.log(parsedUnits)
+      }
+    }
+    loadUnits();
+  }, []);
+
+  // async function setUserUnits(
+  //   gameId: string,
+  // ) {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     console.log("No auth token found");
+  //     return;
+  //   }
+  
+  //   const data = await setUserUnit(gameId, token);
+
+  //   if (data === null) {
+  //     console.log("Failed to fetch units or no units exist for user");
+  //   } else {
+  //     console.log(data);
+  //   }
+  // }
+
+  async function setUserUnit(
+    gameId: string
+  ) {
+    return;
+  }
+  
+
+  useAutoLogout();
   return (
     <>
       <NavBar />
@@ -56,7 +111,7 @@ function AppRoutes() {
           path={ValidRoutes.AVERAGES}
           element={
             <ProtectedRoute>
-              <Averages />
+              <Averages unitss={units}/>
             </ProtectedRoute>
           }
         />
@@ -64,7 +119,7 @@ function AppRoutes() {
           path={ValidRoutes.UNITS}
           element={
             <ProtectedRoute>
-              <Units />
+              <Units units={units}/>
             </ProtectedRoute>
           }
         />
@@ -72,7 +127,7 @@ function AppRoutes() {
           path={ValidRoutes.COMBATSIMULATOR}
           element={
             <ProtectedRoute>
-              <CombatSimulator />
+              <CombatSimulator units={units}/>
             </ProtectedRoute>
           }
         />

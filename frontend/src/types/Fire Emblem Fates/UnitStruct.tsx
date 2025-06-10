@@ -46,6 +46,7 @@ export type StatBlock = {
 
 export interface BaseCharacter {
   name: string;
+  path?: string;
   nickname?: string;
   gender: string;
   title: string;
@@ -83,7 +84,6 @@ export interface BaseCharacter {
     WeaponRankStone: WeaponRank;
   };
   starting_weapons: String[];
-
   base_growths: {
     hp: number;
     strength: number;
