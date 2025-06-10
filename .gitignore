@@ -26,3 +26,4 @@ dist-ssr
 .env
 .http
 backend/requests.http
+backend/src/req.http

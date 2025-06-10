@@ -547,6 +547,10 @@ const UnitGrid: React.FC<UnitGridProps> = ({ unit, gameId, updateUnit }) => {
         minStat = maxStat;
       } else {
         const baseCharacter = structuredClone(findCharacter(unit.name));
+        if (!baseCharacter) {
+          console.error("Base character clone issue.")
+          return false
+        }
         if (unit.name !== "Corrin (M)" && unit.name !== "Corrin (F)") {
           minStat =
             baseCharacter.stats[statField] -
