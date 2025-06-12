@@ -13,7 +13,6 @@ import { findCharacter } from "../defaultData/Fire Emblem Fates/defaultCharacter
 import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments.ts";
 import { defaultSkills } from "../defaultData/Fire Emblem Fates/defaultSkills.tsx";
 import { getAllySealClass } from "../utils/Fire Emblem Fates/getAllyClass.ts";
-import { deleteUnitByName } from "../helper/apiCalls.tsx";
 
 interface UnitGridProps {
   unit: BaseCharacter;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { parse } from "flatted";
 import { BaseCharacter } from "../types/Fire Emblem Fates/UnitStruct";
 import { Class } from "../types/Fire Emblem Fates/ClassStruct";
 import { StatBlock } from "../types/Fire Emblem Fates/UnitStruct";

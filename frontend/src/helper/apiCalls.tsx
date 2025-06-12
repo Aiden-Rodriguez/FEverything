@@ -3,7 +3,6 @@ import {
   UniqueCharacterData,
   StatBlock,
 } from "../types/Fire Emblem Fates/UnitStruct";
-import { applyBoonBaneAdjustments } from "../utils/Fire Emblem Fates/characterAdjustments";
 
 export async function fetchUnits(
   gameId: string,

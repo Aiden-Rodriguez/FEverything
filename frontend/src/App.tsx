@@ -69,7 +69,7 @@ function AppRoutes() {
 
   async function loadUnits() {
     setIsLoading(true);
-    const fetchedUnits = await getUserUnits("Fire Emblem Fates");
+    const fetchedUnits = await getUserUnits("Fire Emblem Fates");  
     if (fetchedUnits) {
       const parsedUnits = parseUnitData(fetchedUnits);
       setUnits(parsedUnits);

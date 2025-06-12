@@ -5,11 +5,20 @@ interface LoadingOverlayProps {
   isDBError: boolean;
 }
 
+
 const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ isLoading, isDBError }) => {
-    if (!isLoading) return null;
   
-    const displayText = isDBError ? "Failed to fetch data. Please reload or try again later." : "Loading user data...";
+
   
+    const token = localStorage.getItem("token");
+    let hasToken = false
+    if (token) {
+      hasToken = true;
+    }
+
+    const displayText = isDBError && !hasToken ? "Failed to fetch data. Please reload or try again later." : "Loading user data...";
+    
+    if (!isLoading || !hasToken) return null;
     return (
       <div style={overlayStyle}>
         <div style={textStyle}>{displayText}</div>
